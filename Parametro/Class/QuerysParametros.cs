@@ -310,6 +310,36 @@ namespace Parametro.Class
         }
         #endregion
 
+        #region Verificar Cafeteria Rappi
+        public bool RappiCafeActivo()
+        {
+            ConexionDB conexionDB = new ConexionDB();
+
+            string query = $"SELECT COUNT(*) FROM BACKOFFICE.DBO.PARAMETROS WHERE PARA_CODIGO IN ('RAP_CLI_I2', 'RAP_CLI_S2')";
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
+                {
+                    sqlConnection.Open();
+
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        int count = (int)sqlCommand.ExecuteScalar();
+                        return (count > 1);
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Log.Error (ex.ToString());
+                return false;
+            }
+        }
+        #endregion
+
         #region Configurar Comprobantes_E
         public void ConfigurarComprobantesE()
         {

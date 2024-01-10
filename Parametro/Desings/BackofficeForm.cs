@@ -26,6 +26,7 @@ namespace Parametro.Desings
             InitializeComponent();
             CargarDatos();
             CargarDatosTxt();
+            ValidarActivoCafe();
 
             this.Text = conexionDB.TraerDatosEquipo(this.Text, ConexionDB.baseDatos, ConexionDB.equipoLinkedServer);
 
@@ -117,6 +118,18 @@ namespace Parametro.Desings
             else
             {
                 ParametrosModels.UsaCafe = "N";
+            }
+        }
+
+        private void ValidarActivoCafe()
+        {
+            if(querysParametros.RappiCafeActivo() is true)
+            {
+                CheckTiendaCafe.Checked = true;
+            }
+            else
+            {
+                CheckTiendaCafe.Checked = false;
             }
         }
 
