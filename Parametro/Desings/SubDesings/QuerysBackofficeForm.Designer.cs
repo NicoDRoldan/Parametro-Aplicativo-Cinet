@@ -313,7 +313,7 @@
             MaximizeBox = false;
             Name = "QuerysBackofficeForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "QuerysBackofficeForm";
+            Text = "Querys - Backoffice";
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             panelMesa.ResumeLayout(false);

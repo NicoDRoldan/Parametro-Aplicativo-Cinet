@@ -712,7 +712,7 @@
             MaximizeBox = false;
             Name = "QuerysForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Querys";
+            Text = "Querys - PDV";
             panelMesa.ResumeLayout(false);
             panelMesa.PerformLayout();
             panel2.ResumeLayout(false);

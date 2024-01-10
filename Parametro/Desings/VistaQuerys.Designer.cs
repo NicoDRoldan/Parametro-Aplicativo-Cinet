@@ -84,7 +84,7 @@
             MinimizeBox = false;
             Name = "VistaQuerys";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "VistaQuerys";
+            Text = "Querys";
             ((System.ComponentModel.ISupportInitialize)dataGridResultadosQuery).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridResultadosQuery2).EndInit();
             ResumeLayout(false);

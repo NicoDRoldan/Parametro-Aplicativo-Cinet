@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using Parametro.Desings;
 using Serilog;
 using System;
@@ -317,7 +318,42 @@ namespace Parametro.Class
         #region Traer Datos de Equipo
         public string TraerDatosEquipo(string form, string nombreBaseDatos, string nombreEquipo)
         {
-            return form + " - " + nombreBaseDatos + " - " + nombreEquipo;
+            string query = $"SELECT PARA_VALOR FROM {VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'NOMLOCAL'";
+
+            string codLocal = "" ;
+
+            try
+            {
+                using (SqlConnection sqlConnection =new SqlConnection(StringConexion())) 
+                {
+                    sqlConnection.Open();
+
+                    using (SqlCommand sqlCommand = new SqlCommand (query, sqlConnection))
+                    {
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader()) {
+                            while (reader.Read())
+                            {
+                                codLocal = reader["PARA_VALOR"].ToString();
+                            }
+                        }
+                    }
+                    sqlConnection.Close();
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                Log.Error(ex.ToString());
+                
+            }
+
+
+            if (!nombreEquipo.IsNullOrEmpty())
+            {
+                return form + " - " + nombreEquipo.ToUpper() + " - " + codLocal.ToUpper();
+            }
+
+            return form + " - " + codLocal.ToUpper();
         }
         #endregion
     }

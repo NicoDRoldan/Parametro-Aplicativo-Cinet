@@ -509,7 +509,7 @@
             MaximizeBox = false;
             Name = "BackofficeForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "BackofficeForm";
+            Text = "Backoffice";
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
