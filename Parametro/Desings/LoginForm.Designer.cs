@@ -43,6 +43,7 @@
             btnConnectLinkedServer = new Button();
             textBoxEquipoLinkedServer = new TextBox();
             btnQueryActivate = new Button();
+            cbEquipoLinkedServer = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -207,10 +208,11 @@
             // 
             // textBoxEquipoLinkedServer
             // 
-            textBoxEquipoLinkedServer.Location = new Point(22, 304);
+            textBoxEquipoLinkedServer.Location = new Point(262, 9);
             textBoxEquipoLinkedServer.Name = "textBoxEquipoLinkedServer";
             textBoxEquipoLinkedServer.Size = new Size(69, 23);
             textBoxEquipoLinkedServer.TabIndex = 7;
+            textBoxEquipoLinkedServer.Visible = false;
             textBoxEquipoLinkedServer.TextChanged += textBoxEquipoLinkedServer_TextChanged;
             // 
             // btnQueryActivate
@@ -226,12 +228,22 @@
             btnQueryActivate.UseVisualStyleBackColor = false;
             btnQueryActivate.Click += btnQueryActivate_Click;
             // 
+            // cbEquipoLinkedServer
+            // 
+            cbEquipoLinkedServer.Enabled = false;
+            cbEquipoLinkedServer.FormattingEnabled = true;
+            cbEquipoLinkedServer.Location = new Point(22, 304);
+            cbEquipoLinkedServer.Name = "cbEquipoLinkedServer";
+            cbEquipoLinkedServer.Size = new Size(69, 23);
+            cbEquipoLinkedServer.TabIndex = 19;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(231, 418);
+            ClientSize = new Size(238, 418);
+            Controls.Add(cbEquipoLinkedServer);
             Controls.Add(btnQueryActivate);
             Controls.Add(textBoxEquipoLinkedServer);
             Controls.Add(btnConnectLinkedServer);
@@ -280,5 +292,6 @@
         public TextBox textBoxPortLS;
         public TextBox textBoxEquipoLinkedServer;
         private Button btnQueryActivate;
+        private ComboBox cbEquipoLinkedServer;
     }
 }

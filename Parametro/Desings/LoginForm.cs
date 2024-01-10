@@ -23,7 +23,6 @@ namespace Parametro.Desings
         public LoginForm()
         {
             InitializeComponent();
-            textBoxEquipoLinkedServer.Enabled = false;
             textBoxPortLS.Enabled = false;
             btnConnectLinkedServer.Enabled = false;
             checkBoxLinkedServer.Enabled = false;
@@ -73,7 +72,11 @@ namespace Parametro.Desings
             ConexionDB.direccionIP = textBoxIp.Text;
             ConexionDB.puertoSql = textBoxPort.Text;
 
+            cbEquipoLinkedServer.Items.Clear();
+
             conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase);
+            conexionDB.CargarEquiposLinkedServer(cbEquipoLinkedServer);
+
         }
 
         private void traerBasesLinkedServer()
@@ -83,10 +86,10 @@ namespace Parametro.Desings
             ConexionDB.direccionIP = textBoxIp.Text;
             ConexionDB.puertoSql = textBoxPort.Text;
 
-            ConexionDB.equipoLinkedServer = textBoxEquipoLinkedServer.Text;
+            ConexionDB.equipoLinkedServer = cbEquipoLinkedServer.Text;
             ConexionDB.puertoLinkedServer = textBoxPortLS.Text;
 
-            conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase, textBoxEquipoLinkedServer.Text, textBoxPortLS.Text);
+            conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase, cbEquipoLinkedServer.Text, textBoxPortLS.Text);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -153,15 +156,18 @@ namespace Parametro.Desings
         {
             if (checkBoxLinkedServer.Checked is true && isSuccess == true)
             {
-                textBoxEquipoLinkedServer.Enabled = true;
+                cbEquipoLinkedServer.Enabled = true;
                 textBoxPortLS.Enabled = true;
                 btnConnectLinkedServer.Enabled = true;
             }
             else
             {
-                textBoxEquipoLinkedServer.Enabled = false;
+                cbEquipoLinkedServer.Enabled = false;
                 textBoxPortLS.Enabled = false;
                 btnConnectLinkedServer.Enabled = false;
+                cbEquipoLinkedServer.Text = string.Empty;
+                comboBoxDataBase.Text = string.Empty;
+                comboBoxDataBase.Items.Clear();
             }
         }
 
