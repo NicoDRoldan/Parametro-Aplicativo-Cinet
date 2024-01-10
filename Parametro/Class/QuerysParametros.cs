@@ -508,7 +508,7 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = @SUC_FISCAL WHERE PARA_CODIGO IN ('CDEFSUC','NUMSUCFIJO','PTOVTAFIS','VTAPUNTO','PTOVTAMAN');";
+            string Query = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = @SUC_FISCAL WHERE PARA_CODIGO IN ('CDEFSUC','NUMSUCFIJO','PTOVTAFIS','VTAPUNTO');";
 
             try
             {
