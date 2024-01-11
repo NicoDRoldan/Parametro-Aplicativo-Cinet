@@ -75,8 +75,6 @@ namespace Parametro.Desings
             cbEquipoLinkedServer.Items.Clear();
 
             conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase);
-            conexionDB.CargarEquiposLinkedServer(cbEquipoLinkedServer);
-
         }
 
         private void traerBasesLinkedServer()
@@ -156,6 +154,7 @@ namespace Parametro.Desings
         {
             if (checkBoxLinkedServer.Checked is true && isSuccess == true)
             {
+                conexionDB.CargarEquiposLinkedServer(cbEquipoLinkedServer);
                 cbEquipoLinkedServer.Enabled = true;
                 textBoxPortLS.Enabled = true;
                 btnConnectLinkedServer.Enabled = true;

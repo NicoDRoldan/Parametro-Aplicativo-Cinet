@@ -14,6 +14,8 @@ namespace Parametro.Class
 {
     internal class QuerysParametros
     {
+        ConexionDB connectDB = new ConexionDB();
+
         #region Habilitar Parametro
         public void HabilitarParametro(string para_codigo, string para_descripcion, string valorParametro)
         {
@@ -336,6 +338,34 @@ namespace Parametro.Class
             {
                 Log.Error (ex.ToString());
                 return false;
+            }
+        }
+        #endregion
+
+        #region Configurar Mercado Pago
+        public void ConfigurarMercadoPago()
+        {
+            string query = $"DECLARE @VARIABLEEXTERNAL VARCHAR(50); SET @VARIABLEEXTERNAL = (SELECT PARA_VALOR FROM {connectDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'NOMLOCAL') + (SELECT PARA_VALOR FROM {connectDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'PTOVTAFIS'); UPDATE {connectDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = @VARIABLEEXTERNAL WHERE PARA_CODIGO = 'EXTERIDMP';";
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connectDB.StringConexion()))
+                {
+                    sqlConnection.Open ();
+
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        sqlCommand.ExecuteNonQuery();
+                    }
+
+                    sqlConnection.Close();
+
+                    Log.Information(query);
+                }
+            }
+            catch (SqlException ex)
+            {
+                Log.Error (ex.ToString());
             }
         }
         #endregion

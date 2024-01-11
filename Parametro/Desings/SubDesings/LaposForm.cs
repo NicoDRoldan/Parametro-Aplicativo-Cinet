@@ -31,7 +31,6 @@ namespace Parametro.Desings.SubDesings
 
         public void btnGuardarNrosComercio_Click(object sender, EventArgs e)
         {
-
             ConfigurarComercios();
         }
 
@@ -70,11 +69,13 @@ namespace Parametro.Desings.SubDesings
         private void ConfigurarComercios()
         {
             querys = new Querys();
-            string[,] nombreTarjetas = { { "AMEX", AMEX.Text},
+            string[,] nombreTarjetas = {
+                { "AMEX", AMEX.Text},
                 { "VISA", Visa.Text},
                 { "MASTER", MASTER.Text},
                 { "CABALDEB", CABALDEB.Text},
-                { "TNARANJA", TNARANJA.Text} };
+                { "TNARANJA", TNARANJA.Text}
+            };
 
             int tarjetas = nombreTarjetas.GetLength(0);
             int columnas = nombreTarjetas.GetLength(0);

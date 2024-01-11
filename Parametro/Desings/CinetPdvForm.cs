@@ -167,12 +167,16 @@ namespace Parametro.Desings
         {
             ParametrosModels.sucFiscal = VTAPUNTO.Text;
             querysParametros.ConfigurarPuntoDeVenta();
+
+            querysParametros.ConfigurarMercadoPago();
         }
 
         private void btnCodLocal_Click(object sender, EventArgs e)
         {
             btnCodLocal.Tag = NOMLOCAL;
             EventoClickTxt(sender, e);
+
+            querysParametros.ConfigurarMercadoPago();
         }
 
         private void btnNumCaja_Click(object sender, EventArgs e)
