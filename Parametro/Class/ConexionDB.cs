@@ -216,7 +216,7 @@ namespace Parametro.Class
                         {
                             while (reader.Read())
                             {
-                                comboBox.Items.Add(reader["equipo"].ToString().ToUpper());
+                                comboBox.Items.Add(reader["equipo"].ToString().ToUpper().Trim());
                             }
                         }
                     }

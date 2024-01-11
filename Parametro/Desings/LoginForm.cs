@@ -62,7 +62,7 @@ namespace Parametro.Desings
         private void btnConnectLinkedServer_Click(object sender, EventArgs e)
         {
             traerBasesLinkedServer();
-            checkLinkedServer = true;
+            //checkLinkedServer = true;
         }
 
         private void traerBases()
@@ -94,6 +94,15 @@ namespace Parametro.Desings
         {
             ConexionDB.baseDatos = comboBoxDataBase.Text.Trim();
             baseDatosLinkedServer = comboBoxDataBase.Text.Trim();
+
+            if(checkBoxLinkedServer.Checked )
+            {
+                checkLinkedServer = true;
+            }
+            else
+            {
+                checkLinkedServer = false;
+            }
 
             ValidarBaseDeDatos();
         }
