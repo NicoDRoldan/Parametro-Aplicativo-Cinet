@@ -581,6 +581,50 @@ namespace Parametro.Class
         }
         #endregion
 
+        #region VerificarVersionAplicativos
+        public DataTable VerificarVersionLocal()
+        {
+            DataTable dataTable = new DataTable();
+
+            string query = "DECLARE @NOMLOCAL VARCHAR (10) = (SELECT PARA_VALOR FROM PARAMETROS WHERE PARA_CODIGO = 'NOMLOCAL')" +
+                "SELECT TRIM(@NOMLOCAL) [LOCAL], TRIM(PARAMETRO) [APLICATIVO], TRIM(VALOR) [VERSION]\r\n" +
+                "FROM (\r\n    " +
+                "SELECT \r\n        " +
+                "LOCAL, PARAMETRO, VALOR, FECHATRANS,\r\n        " +
+                "ROW_NUMBER() OVER (PARTITION BY LOCAL, PARAMETRO ORDER BY FECHATRANS DESC) AS rn\r\n    " +
+                "FROM HPARAMLOC\r\n" +
+                ") subquery\r\n" +
+                "WHERE rn = 1 AND LOCAL = @NOMLOCAL\r\n" +
+                "AND PARAMETRO NOT IN ('Backup','SO','TareaProgramada|VERSION','FECHADB','HD_SPACE','IncorporaSync|VERSION'," +
+                "\r\n\t\t\t\t\t\t'SQL_DATASPACE','EQU_USU','ULTDIFZ','DBVERSION','SQL_LOGSPACE','REPLICAREG','CTRALIZPOSBKO'," +
+                "\r\n\t\t\t\t\t\t'CLASEVBNET','ACTIVEXNET','ZonaEntrega|SO','DataSync|VERSION')";
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            // Agregar los datos al DataTable con Trim en cada columna:
+                            sqlDataAdapter.Fill(dataTable);
+                        }
+                    }
+                    sqlConnection.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Log.Error("ERROR QUERY: n" + ex.ToString());
+                MessageBox.Show($"Error, leer la excepción completa en el Log. \n" + ex.Message);
+            }
+
+            return dataTable;
+        }
+        #endregion
+
         #region ReducirLogs
         public DataSet ReducirLogs()
         {

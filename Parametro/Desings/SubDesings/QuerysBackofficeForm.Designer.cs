@@ -46,10 +46,19 @@
             panel3 = new Panel();
             panel4 = new Panel();
             btnVerificarCaja = new Button();
-            btnReducirLogs = new Button();
             btnConsultaConexion = new Button();
             panel6 = new Panel();
             label5 = new Label();
+            btnReducirLogs = new Button();
+            btnVerificarVersionCaja = new Button();
+            panel7 = new Panel();
+            panel8 = new Panel();
+            btnVerificarVersionLocal = new Button();
+            label7 = new Label();
+            comboBox1 = new ComboBox();
+            label6 = new Label();
+            panel9 = new Panel();
+            label1 = new Label();
             panel5.SuspendLayout();
             panelMesa.SuspendLayout();
             panel1.SuspendLayout();
@@ -57,6 +66,9 @@
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             panel6.SuspendLayout();
+            panel7.SuspendLayout();
+            panel8.SuspendLayout();
+            panel9.SuspendLayout();
             SuspendLayout();
             // 
             // panel5
@@ -72,7 +84,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(415, 68);
+            panel5.Size = new Size(440, 68);
             panel5.TabIndex = 34;
             // 
             // txtPassBotones
@@ -87,7 +99,7 @@
             // btnAceptarPassBtn
             // 
             btnAceptarPassBtn.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAceptarPassBtn.Location = new Point(339, 31);
+            btnAceptarPassBtn.Location = new Point(338, 31);
             btnAceptarPassBtn.Name = "btnAceptarPassBtn";
             btnAceptarPassBtn.Size = new Size(68, 23);
             btnAceptarPassBtn.TabIndex = 29;
@@ -231,42 +243,29 @@
             panel3.Controls.Add(panel6);
             panel3.Location = new Point(12, 191);
             panel3.Name = "panel3";
-            panel3.Size = new Size(391, 104);
+            panel3.Size = new Size(206, 104);
             panel3.TabIndex = 33;
             // 
             // panel4
             // 
             panel4.Controls.Add(btnVerificarCaja);
-            panel4.Controls.Add(btnReducirLogs);
             panel4.Controls.Add(btnConsultaConexion);
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(0, 25);
             panel4.Name = "panel4";
-            panel4.Size = new Size(391, 79);
+            panel4.Size = new Size(206, 79);
             panel4.TabIndex = 1;
             // 
             // btnVerificarCaja
             // 
             btnVerificarCaja.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnVerificarCaja.Location = new Point(204, 17);
+            btnVerificarCaja.Location = new Point(106, 17);
             btnVerificarCaja.Name = "btnVerificarCaja";
             btnVerificarCaja.Size = new Size(92, 44);
             btnVerificarCaja.TabIndex = 29;
             btnVerificarCaja.Text = "Verificar Caja";
             btnVerificarCaja.UseVisualStyleBackColor = true;
             btnVerificarCaja.Click += btnVerificarCaja_Click;
-            // 
-            // btnReducirLogs
-            // 
-            btnReducirLogs.Enabled = false;
-            btnReducirLogs.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnReducirLogs.Location = new Point(106, 17);
-            btnReducirLogs.Name = "btnReducirLogs";
-            btnReducirLogs.Size = new Size(92, 44);
-            btnReducirLogs.TabIndex = 28;
-            btnReducirLogs.Text = "Reducir Log's";
-            btnReducirLogs.UseVisualStyleBackColor = true;
-            btnReducirLogs.Click += btnReducirLogs_Click;
             // 
             // btnConsultaConexion
             // 
@@ -286,7 +285,7 @@
             panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(0, 0);
             panel6.Name = "panel6";
-            panel6.Size = new Size(391, 25);
+            panel6.Size = new Size(206, 25);
             panel6.TabIndex = 0;
             // 
             // label5
@@ -300,14 +299,124 @@
             label5.TabIndex = 1;
             label5.Text = "MANTENIMIENTO";
             // 
+            // btnReducirLogs
+            // 
+            btnReducirLogs.Enabled = false;
+            btnReducirLogs.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnReducirLogs.Location = new Point(12, 301);
+            btnReducirLogs.Name = "btnReducirLogs";
+            btnReducirLogs.Size = new Size(92, 44);
+            btnReducirLogs.TabIndex = 28;
+            btnReducirLogs.Text = "Reducir Log's";
+            btnReducirLogs.UseVisualStyleBackColor = true;
+            btnReducirLogs.Visible = false;
+            btnReducirLogs.Click += btnReducirLogs_Click;
+            // 
+            // btnVerificarVersionCaja
+            // 
+            btnVerificarVersionCaja.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnVerificarVersionCaja.Location = new Point(107, 25);
+            btnVerificarVersionCaja.Name = "btnVerificarVersionCaja";
+            btnVerificarVersionCaja.Size = new Size(92, 23);
+            btnVerificarVersionCaja.TabIndex = 31;
+            btnVerificarVersionCaja.Text = "Aceptar";
+            btnVerificarVersionCaja.UseVisualStyleBackColor = true;
+            // 
+            // panel7
+            // 
+            panel7.BackColor = Color.White;
+            panel7.Controls.Add(panel8);
+            panel7.Controls.Add(panel9);
+            panel7.Location = new Point(224, 81);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(206, 135);
+            panel7.TabIndex = 34;
+            // 
+            // panel8
+            // 
+            panel8.Controls.Add(btnVerificarVersionLocal);
+            panel8.Controls.Add(label7);
+            panel8.Controls.Add(comboBox1);
+            panel8.Controls.Add(btnVerificarVersionCaja);
+            panel8.Controls.Add(label6);
+            panel8.Dock = DockStyle.Fill;
+            panel8.Location = new Point(0, 25);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(206, 110);
+            panel8.TabIndex = 1;
+            // 
+            // btnVerificarVersionLocal
+            // 
+            btnVerificarVersionLocal.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnVerificarVersionLocal.Location = new Point(107, 59);
+            btnVerificarVersionLocal.Name = "btnVerificarVersionLocal";
+            btnVerificarVersionLocal.Size = new Size(92, 23);
+            btnVerificarVersionLocal.TabIndex = 37;
+            btnVerificarVersionLocal.Text = "Aceptar";
+            btnVerificarVersionLocal.UseVisualStyleBackColor = true;
+            btnVerificarVersionLocal.Click += btnVerificarVersionLocal_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.ForeColor = SystemColors.ActiveCaptionText;
+            label7.Location = new Point(3, 62);
+            label7.Name = "label7";
+            label7.Size = new Size(101, 17);
+            label7.TabIndex = 36;
+            label7.Text = "Versión - Local";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(3, 26);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(98, 23);
+            comboBox1.TabIndex = 35;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.ForeColor = SystemColors.ActiveCaptionText;
+            label6.Location = new Point(3, 6);
+            label6.Name = "label6";
+            label6.Size = new Size(98, 17);
+            label6.TabIndex = 34;
+            label6.Text = "Versión - Caja\r\n";
+            // 
+            // panel9
+            // 
+            panel9.BackColor = SystemColors.MenuHighlight;
+            panel9.Controls.Add(label1);
+            panel9.Dock = DockStyle.Top;
+            panel9.Location = new Point(0, 0);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(206, 25);
+            panel9.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(67, 4);
+            label1.Name = "label1";
+            label1.Size = new Size(72, 17);
+            label1.TabIndex = 1;
+            label1.Text = "VERSIONES";
+            // 
             // QuerysBackofficeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(415, 305);
+            ClientSize = new Size(440, 300);
+            Controls.Add(panel7);
             Controls.Add(panel3);
+            Controls.Add(btnReducirLogs);
             Controls.Add(panel5);
             Controls.Add(panelMesa);
             MaximizeBox = false;
@@ -325,6 +434,11 @@
             panel4.ResumeLayout(false);
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
+            panel7.ResumeLayout(false);
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
+            panel9.ResumeLayout(false);
+            panel9.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -352,5 +466,14 @@
         private Panel panel6;
         private Label label5;
         private Button btnVerificarCaja;
+        private Button btnVerificarVersionCaja;
+        private Panel panel7;
+        private Panel panel8;
+        private Label label7;
+        private ComboBox comboBox1;
+        private Label label6;
+        private Panel panel9;
+        private Label label1;
+        private Button btnVerificarVersionLocal;
     }
 }

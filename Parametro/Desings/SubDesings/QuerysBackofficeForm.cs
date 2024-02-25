@@ -124,5 +124,31 @@ namespace Parametro.Desings.SubDesings
             vistaQuerys.Show();
         }
 
+        private void btnVerificarVersionLocal_Click(object sender, EventArgs e)
+        {
+            if(vistaQuerys != null && vistaQuerys.Visible)
+            {
+                vistaQuerys.Close();
+            }
+
+            vistaQuerys = new VistaQuerys();
+
+            DataTable resultados = querys.VerificarVersionLocal();
+
+            vistaQuerys.dataGridResultadosQuery.DataSource = resultados;
+
+            vistaQuerys.dataGridResultadosQuery2.Visible = false;
+            vistaQuerys.dataGridResultadosQuery2.Enabled = false;
+
+            // Establecer el alto de la tabla:
+            vistaQuerys.dataGridResultadosQuery.Height = 400;
+
+            vistaQuerys.Size = new Size(430, 400);
+
+            // Establecer que la ventana vistaQuerys no se pueda agrandar ni achicar:
+            vistaQuerys.FormBorderStyle = FormBorderStyle.FixedDialog;
+
+            vistaQuerys.Show();
+        }
     }
 }
