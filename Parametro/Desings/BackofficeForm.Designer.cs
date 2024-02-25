@@ -45,11 +45,11 @@
             panel5 = new Panel();
             label7 = new Label();
             label4 = new Label();
-            UNAME_MTZ = new TextBox();
+            PASS_MTZ = new TextBox();
             btnUNAME_MTZ = new Button();
             label3 = new Label();
             btnPASS_MTZ = new Button();
-            PASS_MTZ = new TextBox();
+            UNAME_MTZ = new TextBox();
             panel6 = new Panel();
             label2 = new Label();
             panel9 = new Panel();
@@ -233,11 +233,11 @@
             panel5.BackColor = Color.White;
             panel5.Controls.Add(label7);
             panel5.Controls.Add(label4);
-            panel5.Controls.Add(UNAME_MTZ);
+            panel5.Controls.Add(PASS_MTZ);
             panel5.Controls.Add(btnUNAME_MTZ);
             panel5.Controls.Add(label3);
             panel5.Controls.Add(btnPASS_MTZ);
-            panel5.Controls.Add(PASS_MTZ);
+            panel5.Controls.Add(UNAME_MTZ);
             panel5.Controls.Add(panel6);
             panel5.Location = new Point(12, 227);
             panel5.Name = "panel5";
@@ -266,12 +266,12 @@
             label4.TabIndex = 38;
             label4.Text = "Password MTZ";
             // 
-            // UNAME_MTZ
+            // PASS_MTZ
             // 
-            UNAME_MTZ.Location = new Point(3, 131);
-            UNAME_MTZ.Name = "UNAME_MTZ";
-            UNAME_MTZ.Size = new Size(100, 23);
-            UNAME_MTZ.TabIndex = 36;
+            PASS_MTZ.Location = new Point(3, 131);
+            PASS_MTZ.Name = "PASS_MTZ";
+            PASS_MTZ.Size = new Size(100, 23);
+            PASS_MTZ.TabIndex = 36;
             // 
             // btnUNAME_MTZ
             // 
@@ -304,12 +304,12 @@
             btnPASS_MTZ.UseVisualStyleBackColor = true;
             btnPASS_MTZ.Click += btnPASS_MTZ_Click;
             // 
-            // PASS_MTZ
+            // UNAME_MTZ
             // 
-            PASS_MTZ.Location = new Point(3, 82);
-            PASS_MTZ.Name = "PASS_MTZ";
-            PASS_MTZ.Size = new Size(100, 23);
-            PASS_MTZ.TabIndex = 33;
+            UNAME_MTZ.Location = new Point(3, 82);
+            UNAME_MTZ.Name = "UNAME_MTZ";
+            UNAME_MTZ.Size = new Size(100, 23);
+            UNAME_MTZ.TabIndex = 33;
             // 
             // panel6
             // 
@@ -548,10 +548,10 @@
         private Panel panel6;
         private Label label2;
         private Label label4;
-        private TextBox UNAME_MTZ;
+        private TextBox PASS_MTZ;
         private Button btnUNAME_MTZ;
         private Label label3;
-        private TextBox PASS_MTZ;
+        private TextBox UNAME_MTZ;
         private Button btnPASS_MTZ;
         private Label label6;
         private Label label7;

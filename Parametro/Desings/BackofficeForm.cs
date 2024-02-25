@@ -64,7 +64,7 @@ namespace Parametro.Desings
         public void CargarDatosTxt()
         {
             string[] nombreParametros = {NOMLOCAL.Name, FAMAXVALOR.Name, MAXARQUEOF.Name,
-                                            UPDRUTA.Name, EQUIPOUPD.Name, UNAME_MTZ.Name, PASS_MTZ.Name};
+                                            UPDRUTA.Name, EQUIPOUPD.Name, PASS_MTZ.Name, UNAME_MTZ.Name};
 
             foreach (string nombreParametro in nombreParametros)
             {
@@ -123,7 +123,7 @@ namespace Parametro.Desings
 
         private void ValidarActivoCafe()
         {
-            if(querysParametros.RappiCafeActivo() is true)
+            if (querysParametros.RappiCafeActivo() is true)
             {
                 CheckTiendaCafe.Checked = true;
             }
