@@ -126,7 +126,7 @@ namespace Parametro.Desings.SubDesings
 
         private void btnVerificarVersionLocal_Click(object sender, EventArgs e)
         {
-            if(vistaQuerys != null && vistaQuerys.Visible)
+            if (vistaQuerys != null && vistaQuerys.Visible)
             {
                 vistaQuerys.Close();
             }
@@ -144,6 +144,68 @@ namespace Parametro.Desings.SubDesings
             vistaQuerys.dataGridResultadosQuery.Height = 400;
 
             vistaQuerys.Size = new Size(430, 400);
+
+            // Establecer que la ventana vistaQuerys no se pueda agrandar ni achicar:
+            vistaQuerys.FormBorderStyle = FormBorderStyle.FixedDialog;
+
+            vistaQuerys.Show();
+        }
+
+        private void btnVerificarVersionCaja_Click(object sender, EventArgs e)
+        {
+            if (vistaQuerys != null && vistaQuerys.Visible)
+            {
+                vistaQuerys.Close();
+            }
+
+            vistaQuerys = new VistaQuerys();
+
+            string aplicativo = "";
+
+            switch (comboBoxAplicativo.Text)
+            {
+                case "ActualizaDatos":
+                    aplicativo = "ActualizaDatos|VERSION";
+                    break;
+                case "Centralizador":
+                    aplicativo = "Centralizador";
+                    break;
+                case "CentralizadorComanda":
+                    aplicativo = "CentralizadorComanda|Version";
+                    break;
+                case "Costos":
+                    aplicativo = "COSTOS";
+                    break;
+                case "DescargaLocal":
+                    aplicativo = "DescargaLocal|VERSION";
+                    break;
+                case "Informes":
+                    aplicativo = "Informes";
+                    break;
+                case "Informes|Version":
+                    aplicativo = "Informes|Version";
+                    break;
+                case "Profit":
+                    aplicativo = "VERSION";
+                    break;
+                case "ZonaEntrega":
+                    aplicativo = "ZonaEntrega|Version";
+                    break;
+                case "ZonaLlamador":
+                    aplicativo = "ZonaLlamador|Version";
+                    break;
+            }
+
+            DataTable resultados = querys.VerificarVersionPorCaja(aplicativo);
+
+            vistaQuerys.dataGridResultadosQuery.DataSource = resultados;
+
+            vistaQuerys.dataGridResultadosQuery2.Visible = false;
+            vistaQuerys.dataGridResultadosQuery2.Enabled = false;
+
+            // Establecer el alto de la tabla:
+
+            vistaQuerys.Width = 350;
 
             // Establecer que la ventana vistaQuerys no se pueda agrandar ni achicar:
             vistaQuerys.FormBorderStyle = FormBorderStyle.FixedDialog;

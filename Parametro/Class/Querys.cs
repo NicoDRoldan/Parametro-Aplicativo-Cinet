@@ -625,6 +625,48 @@ namespace Parametro.Class
         }
         #endregion
 
+        #region VerificarVersionPorCaja
+        public DataTable VerificarVersionPorCaja(string aplicativo)
+        {
+            DataTable dataTable = new DataTable();
+
+            string query = 
+                "\r\nSELECT TRIM(CAJA) [CAJA], TRIM(PARAMETRO) [APLICATIVO], TRIM(VALOR) [VERSIÓN]\r\n" +
+                "FROM (\r\n" +
+                "    SELECT \r\n" +
+                "        CAJA, PARAMETRO, VALOR, FECHATRANS,\r\n" +
+                "        ROW_NUMBER() OVER (PARTITION BY CAJA, PARAMETRO ORDER BY FECHATRANS DESC) AS rn\r\n" +
+                "    FROM HPARAMLOC\r\n" +
+                ") subquery\r\n" +
+                "WHERE rn = 1\r\n" +
+                "AND PARAMETRO = @APLICATIVO;";
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@APLICATIVO", aplicativo);
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            sqlDataAdapter.Fill(dataTable);
+                        }
+                    }
+                    sqlConnection.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Log.Error("ERROR QUERY: n" + ex.ToString());
+                MessageBox.Show($"Error, leer la excepción completa en el Log. \n" + ex.Message);
+            }
+
+            return dataTable;
+        }
+        #endregion
+
         #region ReducirLogs
         public DataSet ReducirLogs()
         {

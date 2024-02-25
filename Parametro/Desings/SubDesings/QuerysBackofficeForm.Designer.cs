@@ -55,7 +55,7 @@
             panel8 = new Panel();
             btnVerificarVersionLocal = new Button();
             label7 = new Label();
-            comboBox1 = new ComboBox();
+            comboBoxAplicativo = new ComboBox();
             label6 = new Label();
             panel9 = new Panel();
             label1 = new Label();
@@ -321,6 +321,7 @@
             btnVerificarVersionCaja.TabIndex = 31;
             btnVerificarVersionCaja.Text = "Aceptar";
             btnVerificarVersionCaja.UseVisualStyleBackColor = true;
+            btnVerificarVersionCaja.Click += btnVerificarVersionCaja_Click;
             // 
             // panel7
             // 
@@ -336,7 +337,7 @@
             // 
             panel8.Controls.Add(btnVerificarVersionLocal);
             panel8.Controls.Add(label7);
-            panel8.Controls.Add(comboBox1);
+            panel8.Controls.Add(comboBoxAplicativo);
             panel8.Controls.Add(btnVerificarVersionCaja);
             panel8.Controls.Add(label6);
             panel8.Dock = DockStyle.Fill;
@@ -367,13 +368,14 @@
             label7.TabIndex = 36;
             label7.Text = "Versión - Local";
             // 
-            // comboBox1
+            // comboBoxAplicativo
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(3, 26);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(98, 23);
-            comboBox1.TabIndex = 35;
+            comboBoxAplicativo.FormattingEnabled = true;
+            comboBoxAplicativo.Items.AddRange(new object[] { "ActualizaDatos", "Centralizador", "CentralizadorComanda", "Costos", "DescargaLocal", "Informes", "Informes|Version", "Profit", "ZonaEntrega", "ZonaLlamador" });
+            comboBoxAplicativo.Location = new Point(3, 26);
+            comboBoxAplicativo.Name = "comboBoxAplicativo";
+            comboBoxAplicativo.Size = new Size(98, 23);
+            comboBoxAplicativo.TabIndex = 35;
             // 
             // label6
             // 
@@ -470,7 +472,7 @@
         private Panel panel7;
         private Panel panel8;
         private Label label7;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxAplicativo;
         private Label label6;
         private Panel panel9;
         private Label label1;
