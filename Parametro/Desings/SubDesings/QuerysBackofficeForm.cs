@@ -194,6 +194,9 @@ namespace Parametro.Desings.SubDesings
                 case "ZonaLlamador":
                     aplicativo = "ZonaLlamador|Version";
                     break;
+                default:
+                    aplicativo = comboBoxAplicativo.Text;
+                    break;
             }
 
             DataTable resultados = querys.VerificarVersionPorCaja(aplicativo);

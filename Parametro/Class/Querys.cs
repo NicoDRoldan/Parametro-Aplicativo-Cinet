@@ -630,8 +630,8 @@ namespace Parametro.Class
         {
             DataTable dataTable = new DataTable();
 
-            string query = 
-                "\r\nSELECT TRIM(CAJA) [CAJA], TRIM(PARAMETRO) [APLICATIVO], TRIM(VALOR) [VERSIÓN]\r\n" +
+            string query =
+                "\r\nSELECT TRIM(CAJA) [CAJA], RTRIM(LTRIM(PARAMETRO)) [APLICATIVO], TRIM(VALOR) [VERSIÓN]\r\n" +
                 "FROM (\r\n" +
                 "    SELECT \r\n" +
                 "        CAJA, PARAMETRO, VALOR, FECHATRANS,\r\n" +
