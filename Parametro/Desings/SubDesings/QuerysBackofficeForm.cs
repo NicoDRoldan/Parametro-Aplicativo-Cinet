@@ -36,7 +36,7 @@ namespace Parametro.Desings.SubDesings
 
         private void HabilitarBotones()
         {
-            if (ValidarPassBotones() || !string.IsNullOrEmpty(txtPassBotones.Text))
+            if (ValidarPassBotones() && !string.IsNullOrEmpty(txtPassBotones.Text))
             {
                 panelMesa.Enabled = true;
             }

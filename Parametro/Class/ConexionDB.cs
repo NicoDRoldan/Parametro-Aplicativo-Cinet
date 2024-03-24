@@ -203,19 +203,30 @@ namespace Parametro.Class
         #region Traer Equipos Linked Server
         public void CargarEquiposLinkedServer(ComboBox comboBox)
         {
-            string query = "USE[Backoffice]; DECLARE @infoCaja TABLE([caja] varchar(10), [equipo] varchar(50), [version] varchar(50) );\r\n\r\nINSERT INTO @infoCaja\r\nSELECT DISTINCT caja, EQUIPO, valor \r\nFROM (\r\n    SELECT RANK() OVER (\r\n        PARTITION BY caja, parametro\r\n        ORDER BY fechatrans DESC) rango, *\r\n    FROM hparamloc\r\n    WHERE parametro = 'VERSION') pinga\r\nWHERE rango = 1\r\nORDER BY equipo;\r\n\r\nSELECT LEFT(equipo, CHARINDEX('#', equipo + '#') - 1) AS equipo\r\nFROM (\r\n    SELECT \r\n        ROW_NUMBER() OVER (PARTITION BY v.vene_caja ORDER BY v.vene_fecha DESC) AS rn,\r\n        v.vene_caja,\r\n        v.suc_codigo,\r\n        i.equipo\r\n    FROM VENTAS_E v\r\n    INNER JOIN @infoCaja i ON v.vene_caja = i.caja COLLATE SQL_Latin1_General_CP1_CI_AS\r\n    WHERE v.vene_caja != ''\r\n) AS subquery\r\nWHERE rn = 1\r\nORDER BY equipo;";
+            // Consulta para obtener los equipos asociados a la base de datos del servidor principal.
+            string query = "USE[Backoffice]; " +
+                "DECLARE @infoCaja TABLE([caja] varchar(10), [equipo] varchar(50), [version] varchar(50) );" +
+                "\r\n\r\nINSERT INTO @infoCaja\r\nSELECT DISTINCT caja, EQUIPO, valor \r\nFROM (\r\n    SELECT RANK() OVER " +
+                "(\r\n        PARTITION BY caja, parametro\r\n        ORDER BY fechatrans DESC) rango, *\r\n    " +
+                "FROM hparamloc\r\n    WHERE parametro = 'VERSION') pinga\r\nWHERE rango = 1\r\nORDER BY equipo;\r\n\r\n" +
+                "SELECT LEFT(equipo, CHARINDEX('#', equipo + '#') - 1) AS equipo\r\nFROM (\r\n    " +
+                "SELECT \r\n        ROW_NUMBER() OVER (PARTITION BY v.vene_caja ORDER BY v.vene_fecha DESC) " +
+                "AS rn,\r\n        v.vene_caja,\r\n        v.suc_codigo,\r\n        i.equipo\r\n    FROM VENTAS_E v\r\n    " +
+                "INNER JOIN @infoCaja i ON v.vene_caja = i.caja COLLATE SQL_Latin1_General_CP1_CI_AS\r\n    " +
+                "WHERE v.vene_caja != ''\r\n) AS subquery\r\nWHERE rn = 1\r\nORDER BY equipo;";
             try
             {
-                using(SqlConnection sqlConnection = new SqlConnection(StringConexion()))
+                using(SqlConnection sqlConnection = new SqlConnection(StringConexion())) // Establece la conexión
                 {
-                    sqlConnection.Open();
+                    sqlConnection.Open(); // Abre la conexión
 
-                    using(SqlCommand sqlCommand =  new SqlCommand(query, sqlConnection))
+                    using(SqlCommand sqlCommand =  new SqlCommand(query, sqlConnection)) // Ejecuta la query
                     {
-                        using(SqlDataReader reader = sqlCommand.ExecuteReader())
+                        using(SqlDataReader reader = sqlCommand.ExecuteReader()) // Lee los resultados
                         {
                             while (reader.Read())
                             {
+                                // Agrega los resultados en el ComboBox de Equipos
                                 comboBox.Items.Add(reader["equipo"].ToString().ToUpper().Trim());
                             }
                         }
@@ -346,7 +357,6 @@ namespace Parametro.Class
                 Log.Error(ex.ToString());
                 
             }
-
 
             if (!nombreEquipo.IsNullOrEmpty())
             {

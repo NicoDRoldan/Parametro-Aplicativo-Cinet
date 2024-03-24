@@ -586,13 +586,13 @@ namespace Parametro.Class
         {
             DataTable dataTable = new DataTable();
 
-            string query = "DECLARE @NOMLOCAL VARCHAR (10) = (SELECT PARA_VALOR FROM PARAMETROS WHERE PARA_CODIGO = 'NOMLOCAL')" +
-                "SELECT TRIM(@NOMLOCAL) [LOCAL], TRIM(PARAMETRO) [APLICATIVO], TRIM(VALOR) [VERSION]\r\n" +
+            string query = $"DECLARE @NOMLOCAL VARCHAR (10) = (SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'NOMLOCAL')" +
+                "SELECT RTRIM(LTRIM(@NOMLOCAL)) [LOCAL], RTRIM(LTRIM(PARAMETRO)) [APLICATIVO], RTRIM(LTRIM(VALOR)) [VERSION]\r\n" +
                 "FROM (\r\n    " +
                 "SELECT \r\n        " +
                 "LOCAL, PARAMETRO, VALOR, FECHATRANS,\r\n        " +
                 "ROW_NUMBER() OVER (PARTITION BY LOCAL, PARAMETRO ORDER BY FECHATRANS DESC) AS rn\r\n    " +
-                "FROM HPARAMLOC\r\n" +
+                $"FROM {conexionDB.VerificarLinkedServer()}HPARAMLOC\r\n" +
                 ") subquery\r\n" +
                 "WHERE rn = 1 AND LOCAL = @NOMLOCAL\r\n" +
                 "AND PARAMETRO NOT IN ('Backup','SO','TareaProgramada|VERSION','FECHADB','HD_SPACE','IncorporaSync|VERSION'," +
@@ -631,12 +631,12 @@ namespace Parametro.Class
             DataTable dataTable = new DataTable();
 
             string query =
-                "\r\nSELECT TRIM(CAJA) [CAJA], RTRIM(LTRIM(PARAMETRO)) [APLICATIVO], TRIM(VALOR) [VERSIÓN]\r\n" +
+                "\r\nSELECT RTRIM(LTRIM(CAJA)) [CAJA], RTRIM(LTRIM(PARAMETRO)) [APLICATIVO], RTRIM(LTRIM(VALOR)) [VERSIÓN]\r\n" +
                 "FROM (\r\n" +
                 "    SELECT \r\n" +
                 "        CAJA, PARAMETRO, VALOR, FECHATRANS,\r\n" +
                 "        ROW_NUMBER() OVER (PARTITION BY CAJA, PARAMETRO ORDER BY FECHATRANS DESC) AS rn\r\n" +
-                "    FROM HPARAMLOC\r\n" +
+                $"    FROM {conexionDB.VerificarLinkedServer()}HPARAMLOC\r\n" +
                 ") subquery\r\n" +
                 "WHERE rn = 1\r\n" +
                 "AND PARAMETRO = @APLICATIVO;";

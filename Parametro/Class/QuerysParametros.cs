@@ -492,11 +492,6 @@ namespace Parametro.Class
 
                     if (!SucBackofficeExiste(sqlConnection) || !CbeteinSucBackofficeExiste(sqlConnection))
                     {
-                        //using (SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection))
-                        //{
-                        //    sqlCommand.ExecuteNonQuery();
-                        //    MessageBox.Show("Se configuró la sucursal en Backoffice");
-                        //}
                         try
                         {
                             using (SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection))
@@ -536,7 +531,7 @@ namespace Parametro.Class
             catch (SqlException ex)
             {
                 Log.Error("ERROR QUERY: n" + ex.ToString());
-                MessageBox.Show("No se agregó sucursal a Backoffice, corroborar conexión. \n\n(EL APLICATIVO DEBE SER ABIERTO SIN LINKEDSERVER O HACIENDO LINKEDSERVER DESDE EL SERVIDOR).\n\n" + "Error: " + ex.Message);
+                MessageBox.Show("No se agregó sucursal a Backoffice, corroborar conexión. \n\n(EL APLICATIVO DEBE SER ABIERTO HACIENDO LINKEDSERVER DESDE EL SERVIDOR).\n\n" + "Error: " + ex.Message);
             }
         }
 
@@ -595,16 +590,36 @@ namespace Parametro.Class
             ConexionDB conexionDB = new ConexionDB();
 
             string Query = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_INGRESOS_N VALUES('REA', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA'), ('REC', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA');";
+            string QueryCBTE_EGRESOS_N = $"DECLARE @ULTIMOEGRESO VARCHAR(10); IF EXISTS (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E ORDER BY EGRE_NUMERO DESC) SET @ULTIMOEGRESO = (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E ORDER BY EGRE_NUMERO DESC) ELSE SET @ULTIMOEGRESO = '1'; DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_EGRESOS_N VALUES ('CIE','01',@SUC_FISCAL,@ULTIMOEGRESO,'','','','0'), ('OPC','01',@SUC_FISCAL,'17','opc','','','2')";
 
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
                 {
                     sqlConnection.Open();
-                    using (SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection))
+                    try
                     {
-                        sqlCommand.ExecuteNonQuery();
+                        using (SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection))
+                        {
+                            sqlCommand.ExecuteNonQuery();
+                        }
                     }
+                    catch(SqlException ex)
+                    {
+                        Log.Error (ex.ToString());
+                    }
+                    try
+                    {
+                        using (SqlCommand sqlCommand = new SqlCommand(QueryCBTE_EGRESOS_N, sqlConnection))
+                        {
+                            sqlCommand.ExecuteNonQuery();
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        Log.Error (ex.ToString());
+                    }
+                    
                     sqlConnection.Close();
                 }
             }
@@ -622,8 +637,6 @@ namespace Parametro.Class
 
             string QueryCbteeg = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEEG_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL',NULL);";
             string QueryCbtein = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEIN_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL');";
-            //string QueryCBTE_EGRESOS_N = $"DECLARE @ULTIMOEGRESO VARCHAR(10); IF EXISTS (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E ORDER BY EGRE_NUMERO DESC) SET @ULTIMOEGRESO = (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E ORDER BY EGRE_NUMERO DESC) ELSE SET @ULTIMOEGRESO = '1'; DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_EGRESOS_N VALUES ('CIE','01',@SUC_FISCAL,@ULTIMOEGRESO,'','','','0'), ('OPC','01',@SUC_FISCAL,'17','opc','','','2')";
-            string QueryCBTE_INGRESOS_N = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_INGRESOS_N VALUES ('REA','01',@SUC_FISCAL,1,'rea','','','1','VISTA'), ('REC','01',@SUC_FISCAL,1,'REA','','','1','VISTA');";
 
             try
             {
@@ -653,30 +666,6 @@ namespace Parametro.Class
                     catch (SqlException ex)
                     {
                         Log.Error("ERROR QUERY 2: n" + ex.ToString());
-                    }
-
-                    //try
-                    //{
-                    //    using (SqlCommand sqlCommand = new SqlCommand(QueryCBTE_EGRESOS_N, sqlConnection))
-                    //    {
-                    //        sqlCommand.ExecuteNonQuery();
-                    //    }
-                    //}
-                    //catch (SqlException ex)
-                    //{
-                    //    Log.Error("ERROR QUERY 3: n" + ex.ToString());
-                    //}
-
-                    try
-                    {
-                        using (SqlCommand sqlCommand = new SqlCommand(QueryCBTE_INGRESOS_N, sqlConnection))
-                        {
-                            sqlCommand.ExecuteNonQuery();
-                        }
-                    }
-                    catch (SqlException ex)
-                    {
-                        Log.Error("ERROR QUERY 4: n" + ex.ToString());
                     }
                     
                     sqlConnection.Close();

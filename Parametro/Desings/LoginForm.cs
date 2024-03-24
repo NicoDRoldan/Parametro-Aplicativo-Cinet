@@ -51,34 +51,38 @@ namespace Parametro.Desings
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            traerBases();
+            traerBases(); // Llama a método para mostrar base de datos al usuario.
+
+            // Si los items del ComboBox son mayor a 0, se cumple:
             if (comboBoxDataBase.Items.Count > 0)
             {
-                isSuccess = true;
-                checkBoxLinkedServer.Enabled = true;
+                isSuccess = true; // Boolean en true para confirmar la conexión.
+                checkBoxLinkedServer.Enabled = true; // Se habilita Cheack Box para el usuario.
             }
         }
 
         private void btnConnectLinkedServer_Click(object sender, EventArgs e)
         {
             traerBasesLinkedServer();
-            //checkLinkedServer = true;
         }
 
         private void traerBases()
         {
+            // Las propiedades toman valor del texto escrito por el usuario.
             ConexionDB.usuarioBase = textBoxUser.Text;
             ConexionDB.connectionPass = textBoxPass.Text;
             ConexionDB.direccionIP = textBoxIp.Text;
             ConexionDB.puertoSql = textBoxPort.Text;
 
-            cbEquipoLinkedServer.Items.Clear();
+            cbEquipoLinkedServer.Items.Clear(); // Se limpia ComboBox.
 
-            conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase);
+            // Se llama al metodo para mostrar las bases de datos en el ComboBox correspondiente.
+            conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase); 
         }
 
         private void traerBasesLinkedServer()
         {
+            // Las propiedades toman valor del texto escrito por el usuario.
             ConexionDB.usuarioBase = textBoxUser.Text;
             ConexionDB.connectionPass = textBoxPass.Text;
             ConexionDB.direccionIP = textBoxIp.Text;
@@ -86,7 +90,7 @@ namespace Parametro.Desings
 
             ConexionDB.equipoLinkedServer = cbEquipoLinkedServer.Text;
             ConexionDB.puertoLinkedServer = textBoxPortLS.Text;
-
+            // Se llama al metodo para mostrar las bases de datos en el ComboBox correspondiente.
             conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase, cbEquipoLinkedServer.Text, textBoxPortLS.Text);
         }
 
@@ -96,13 +100,9 @@ namespace Parametro.Desings
             baseDatosLinkedServer = comboBoxDataBase.Text.Trim();
 
             if(checkBoxLinkedServer.Checked )
-            {
                 checkLinkedServer = true;
-            }
             else
-            {
                 checkLinkedServer = false;
-            }
 
             ValidarBaseDeDatos();
         }
@@ -161,15 +161,19 @@ namespace Parametro.Desings
 
         public void checkBoxLinkedServer_CheckedChanged(object sender, EventArgs e)
         {
+            // Si el Check Box es true y la conexión fue exitosa.
             if (checkBoxLinkedServer.Checked is true && isSuccess == true)
             {
+                // Se traen las bases de datos del servidor "Linkeado".
                 conexionDB.CargarEquiposLinkedServer(cbEquipoLinkedServer);
+                // Se habilitan opciones del diseño.
                 cbEquipoLinkedServer.Enabled = true;
                 textBoxPortLS.Enabled = true;
                 btnConnectLinkedServer.Enabled = true;
             }
             else
             {
+                // Se deshabilitan opciones y se limpia el Combo Box correspondiente.
                 cbEquipoLinkedServer.Enabled = false;
                 textBoxPortLS.Enabled = false;
                 btnConnectLinkedServer.Enabled = false;
