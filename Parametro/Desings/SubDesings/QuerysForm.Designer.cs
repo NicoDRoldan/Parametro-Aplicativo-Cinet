@@ -81,6 +81,10 @@
             CorregirCbtBo = new Button();
             panel8 = new Panel();
             label8 = new Label();
+            panel1 = new Panel();
+            panel9 = new Panel();
+            label7 = new Label();
+            btnBackup = new Button();
             panelMesa.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -92,6 +96,8 @@
             panelUruguay.SuspendLayout();
             panelBolivia.SuspendLayout();
             panel8.SuspendLayout();
+            panel1.SuspendLayout();
+            panel9.SuspendLayout();
             SuspendLayout();
             // 
             // panelMesa
@@ -695,6 +701,48 @@
             label8.TabIndex = 1;
             label8.Text = "BOLIVIA";
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(panel9);
+            panel1.Controls.Add(btnBackup);
+            panel1.Location = new Point(275, 260);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(132, 105);
+            panel1.TabIndex = 31;
+            // 
+            // panel9
+            // 
+            panel9.BackColor = SystemColors.MenuHighlight;
+            panel9.Controls.Add(label7);
+            panel9.Dock = DockStyle.Top;
+            panel9.Location = new Point(0, 0);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(132, 25);
+            panel9.TabIndex = 0;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.ForeColor = SystemColors.ButtonHighlight;
+            label7.Location = new Point(37, 4);
+            label7.Name = "label7";
+            label7.Size = new Size(55, 17);
+            label7.TabIndex = 1;
+            label7.Text = "BACKUP";
+            // 
+            // btnBackup
+            // 
+            btnBackup.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnBackup.Location = new Point(19, 39);
+            btnBackup.Name = "btnBackup";
+            btnBackup.Size = new Size(95, 52);
+            btnBackup.TabIndex = 2;
+            btnBackup.Text = "BACKUP PDV";
+            btnBackup.UseVisualStyleBackColor = true;
+            btnBackup.Click += btnBackup_Click;
+            // 
             // QuerysForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -703,6 +751,7 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(816, 472);
+            Controls.Add(panel1);
             Controls.Add(panelBolivia);
             Controls.Add(panelParaguay);
             Controls.Add(panelUruguay);
@@ -733,6 +782,9 @@
             panelBolivia.ResumeLayout(false);
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel9.ResumeLayout(false);
+            panel9.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -791,5 +843,9 @@
         private Label label8;
         private Button btnFEAutoBo;
         private Button CorregirCbtBo;
+        private Panel panel1;
+        private Panel panel9;
+        private Label label7;
+        private Button btnBackup;
     }
 }

@@ -631,10 +631,10 @@ namespace Parametro.Class
             DataTable dataTable = new DataTable();
 
             string query =
-                "\r\nSELECT RTRIM(LTRIM(CAJA)) [CAJA], RTRIM(LTRIM(PARAMETRO)) [APLICATIVO], RTRIM(LTRIM(VALOR)) [VERSIÓN]\r\n" +
+                "\r\nSELECT RTRIM(LTRIM(EQUIPO)) [EQUIPO], RTRIM(LTRIM(CAJA)) [CAJA], RTRIM(LTRIM(PARAMETRO)) [APLICATIVO], RTRIM(LTRIM(VALOR)) [VERSIÓN]\r\n" +
                 "FROM (\r\n" +
                 "    SELECT \r\n" +
-                "        CAJA, PARAMETRO, VALOR, FECHATRANS,\r\n" +
+                "        EQUIPO, CAJA, PARAMETRO, VALOR, FECHATRANS,\r\n" +
                 "        ROW_NUMBER() OVER (PARTITION BY CAJA, PARAMETRO ORDER BY FECHATRANS DESC) AS rn\r\n" +
                 $"    FROM {conexionDB.VerificarLinkedServer()}HPARAMLOC\r\n" +
                 ") subquery\r\n" +

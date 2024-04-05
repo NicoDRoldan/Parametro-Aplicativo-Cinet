@@ -77,7 +77,7 @@ namespace Parametro.Desings
             cbEquipoLinkedServer.Items.Clear(); // Se limpia ComboBox.
 
             // Se llama al metodo para mostrar las bases de datos en el ComboBox correspondiente.
-            conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase); 
+            conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase);
         }
 
         private void traerBasesLinkedServer()
@@ -99,7 +99,7 @@ namespace Parametro.Desings
             ConexionDB.baseDatos = comboBoxDataBase.Text.Trim();
             baseDatosLinkedServer = comboBoxDataBase.Text.Trim();
 
-            if(checkBoxLinkedServer.Checked )
+            if (checkBoxLinkedServer.Checked)
                 checkLinkedServer = true;
             else
                 checkLinkedServer = false;
@@ -196,5 +196,9 @@ namespace Parametro.Desings
             }
         }
 
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

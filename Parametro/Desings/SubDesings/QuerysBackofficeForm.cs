@@ -194,6 +194,24 @@ namespace Parametro.Desings.SubDesings
                 case "ZonaLlamador":
                     aplicativo = "ZonaLlamador|Version";
                     break;
+                case "TotemAPI":
+                    aplicativo = "TOTEM_VERSION";
+                    break;
+                case "InterfaceTotem":
+                    aplicativo = "InterfaceTotem|Version";
+                    break;
+                case "Totem.EXE":
+                    aplicativo = "VERSIONT";
+                    break;
+                case "PanelDVY":
+                    aplicativo = "PanelDVY|VERSION";
+                    break;
+                case "PanelMTZ":
+                    aplicativo = "PanelMTZ|VERSION";
+                    break;
+                case "PanelRappi":
+                    aplicativo = "PanelRappi|VERSION";
+                    break;
                 default:
                     aplicativo = comboBoxAplicativo.Text;
                     break;
@@ -214,6 +232,11 @@ namespace Parametro.Desings.SubDesings
             vistaQuerys.FormBorderStyle = FormBorderStyle.FixedDialog;
 
             vistaQuerys.Show();
+        }
+
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            Functions.HacerBackup();
         }
     }
 }

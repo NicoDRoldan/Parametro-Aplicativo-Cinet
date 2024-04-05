@@ -59,6 +59,10 @@
             label6 = new Label();
             panel9 = new Panel();
             label1 = new Label();
+            panel10 = new Panel();
+            panel11 = new Panel();
+            label8 = new Label();
+            btnBackup = new Button();
             panel5.SuspendLayout();
             panelMesa.SuspendLayout();
             panel1.SuspendLayout();
@@ -69,6 +73,8 @@
             panel7.SuspendLayout();
             panel8.SuspendLayout();
             panel9.SuspendLayout();
+            panel10.SuspendLayout();
+            panel11.SuspendLayout();
             SuspendLayout();
             // 
             // panel5
@@ -243,7 +249,7 @@
             panel3.Controls.Add(panel6);
             panel3.Location = new Point(12, 191);
             panel3.Name = "panel3";
-            panel3.Size = new Size(206, 104);
+            panel3.Size = new Size(206, 136);
             panel3.TabIndex = 33;
             // 
             // panel4
@@ -253,7 +259,7 @@
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(0, 25);
             panel4.Name = "panel4";
-            panel4.Size = new Size(206, 79);
+            panel4.Size = new Size(206, 111);
             panel4.TabIndex = 1;
             // 
             // btnVerificarCaja
@@ -303,7 +309,7 @@
             // 
             btnReducirLogs.Enabled = false;
             btnReducirLogs.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnReducirLogs.Location = new Point(12, 301);
+            btnReducirLogs.Location = new Point(12, 333);
             btnReducirLogs.Name = "btnReducirLogs";
             btnReducirLogs.Size = new Size(92, 44);
             btnReducirLogs.TabIndex = 28;
@@ -371,7 +377,7 @@
             // comboBoxAplicativo
             // 
             comboBoxAplicativo.FormattingEnabled = true;
-            comboBoxAplicativo.Items.AddRange(new object[] { "ActualizaDatos", "Centralizador", "CentralizadorComanda", "Costos", "DescargaLocal", "Informes", "Informes|Version", "Profit", "ZonaEntrega", "ZonaLlamador" });
+            comboBoxAplicativo.Items.AddRange(new object[] { "ActualizaDatos", "Centralizador", "CentralizadorComanda", "Costos", "DescargaLocal", "Informes", "Informes|Version", "Profit", "ZonaEntrega", "ZonaLlamador", "TotemAPI", "InterfaceTotem", "Totem.EXE", "PanelDVY", "PanelMTZ", "PanelRappi" });
             comboBoxAplicativo.Location = new Point(3, 26);
             comboBoxAplicativo.Name = "comboBoxAplicativo";
             comboBoxAplicativo.Size = new Size(98, 23);
@@ -409,13 +415,56 @@
             label1.TabIndex = 1;
             label1.Text = "VERSIONES";
             // 
+            // panel10
+            // 
+            panel10.BackColor = Color.White;
+            panel10.Controls.Add(panel11);
+            panel10.Controls.Add(btnBackup);
+            panel10.Location = new Point(227, 222);
+            panel10.Name = "panel10";
+            panel10.Size = new Size(106, 105);
+            panel10.TabIndex = 35;
+            // 
+            // panel11
+            // 
+            panel11.BackColor = SystemColors.MenuHighlight;
+            panel11.Controls.Add(label8);
+            panel11.Dock = DockStyle.Top;
+            panel11.Location = new Point(0, 0);
+            panel11.Name = "panel11";
+            panel11.Size = new Size(106, 25);
+            panel11.TabIndex = 0;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.ForeColor = SystemColors.ButtonHighlight;
+            label8.Location = new Point(26, 4);
+            label8.Name = "label8";
+            label8.Size = new Size(55, 17);
+            label8.TabIndex = 1;
+            label8.Text = "BACKUP";
+            // 
+            // btnBackup
+            // 
+            btnBackup.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnBackup.Location = new Point(6, 39);
+            btnBackup.Name = "btnBackup";
+            btnBackup.Size = new Size(95, 52);
+            btnBackup.TabIndex = 2;
+            btnBackup.Text = "BACKUP BACKOFFICE";
+            btnBackup.UseVisualStyleBackColor = true;
+            btnBackup.Click += btnBackup_Click;
+            // 
             // QuerysBackofficeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(440, 300);
+            ClientSize = new Size(440, 333);
+            Controls.Add(panel10);
             Controls.Add(panel7);
             Controls.Add(panel3);
             Controls.Add(btnReducirLogs);
@@ -441,6 +490,9 @@
             panel8.PerformLayout();
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
+            panel10.ResumeLayout(false);
+            panel11.ResumeLayout(false);
+            panel11.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -477,5 +529,9 @@
         private Panel panel9;
         private Label label1;
         private Button btnVerificarVersionLocal;
+        private Panel panel10;
+        private Panel panel11;
+        private Label label8;
+        private Button btnBackup;
     }
 }

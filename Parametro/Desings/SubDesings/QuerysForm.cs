@@ -17,6 +17,7 @@ namespace Parametro.Desings.SubDesings
         Querys querys = new Querys();
         VistaQuerys vistaQuerys = new VistaQuerys();
         QuerysParametros querysParametros = new QuerysParametros();
+        Functions functions = new Functions();
 
         public static string numVentaRut { get; set; }
         public static string numRutCorrecto { get; set; }
@@ -274,5 +275,9 @@ namespace Parametro.Desings.SubDesings
             querys.CorregirNumeracion(txtTipoCBTEE.Text, txtUltimoNroCorrelativo.Text);
         }
 
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            Functions.HacerBackup();
+        }
     }
 }

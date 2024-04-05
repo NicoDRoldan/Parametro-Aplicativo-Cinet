@@ -44,6 +44,7 @@
             textBoxEquipoLinkedServer = new TextBox();
             btnQueryActivate = new Button();
             cbEquipoLinkedServer = new ComboBox();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -220,7 +221,7 @@
             btnQueryActivate.BackColor = Color.FromArgb(49, 117, 162);
             btnQueryActivate.FlatStyle = FlatStyle.Flat;
             btnQueryActivate.ForeColor = Color.FromArgb(49, 117, 162);
-            btnQueryActivate.Location = new Point(222, 9);
+            btnQueryActivate.Location = new Point(314, 38);
             btnQueryActivate.Name = "btnQueryActivate";
             btnQueryActivate.Size = new Size(17, 29);
             btnQueryActivate.TabIndex = 18;
@@ -237,12 +238,26 @@
             cbEquipoLinkedServer.Size = new Size(69, 23);
             cbEquipoLinkedServer.TabIndex = 19;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.FromArgb(49, 117, 162);
+            label6.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(186, 9);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 13);
+            label6.TabIndex = 20;
+            label6.Text = "5.1.0.0";
+            label6.Click += label6_Click;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(238, 418);
+            ClientSize = new Size(236, 418);
+            Controls.Add(label6);
             Controls.Add(cbEquipoLinkedServer);
             Controls.Add(btnQueryActivate);
             Controls.Add(textBoxEquipoLinkedServer);
@@ -293,5 +308,6 @@
         public TextBox textBoxEquipoLinkedServer;
         private Button btnQueryActivate;
         private ComboBox cbEquipoLinkedServer;
+        private Label label6;
     }
 }
