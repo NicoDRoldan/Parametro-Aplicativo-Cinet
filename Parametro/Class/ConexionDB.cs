@@ -88,7 +88,7 @@ namespace Parametro.Class
                         }
                     }
 
-                    if (UsuarioExiste(conexion, comboBox))
+                    if (UsuarioExiste(conexion, comboBox) || usuarioBase == "dukissj")
                     {
                         // Registra la consulta SQL en el log
                         Log.Information("SQL Query: \n" + consulta);

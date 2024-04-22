@@ -246,9 +246,9 @@
             label6.ForeColor = Color.White;
             label6.Location = new Point(186, 9);
             label6.Name = "label6";
-            label6.Size = new Size(38, 13);
+            label6.Size = new Size(36, 13);
             label6.TabIndex = 20;
-            label6.Text = "5.1.0.0";
+            label6.Text = "5.1.0.1";
             label6.Click += label6_Click;
             // 
             // LoginForm
