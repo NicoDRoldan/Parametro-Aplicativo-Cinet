@@ -48,7 +48,7 @@ namespace Parametro.Desings
                 RAPPI.Name, APP_MTZ.Name, BANDEJAS.Name, MARCHA.Name,
                 DUALPOINT.Name, DNFCOPFI.Name, USATURNO1.Name, ELIGECOMA.Name,
                 QRCupon.Name, SINBANDA.Name, TOTEM.Name, ZONALOCAL.Name,
-                USAREMOTO.Name};
+                USAREMOTO.Name, ZONACAFE.Name};
 
             foreach (string nombreParametro in nombreParametros)
             {
@@ -272,5 +272,10 @@ namespace Parametro.Desings
             EventoClickTxt(sender, e);
         }
         #endregion
+
+        private void ZONACAFE_Click(object sender, EventArgs e)
+        {
+            EventoClick(sender, e);
+        }
     }
 }

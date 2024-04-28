@@ -78,6 +78,8 @@
             panel6 = new Panel();
             label22 = new Label();
             panel7 = new Panel();
+            label16 = new Label();
+            ZONACAFE = new Button();
             label21 = new Label();
             ZONALOCAL = new Button();
             panel8 = new Panel();
@@ -193,7 +195,7 @@
             // MARCHA
             // 
             MARCHA.AutoSize = true;
-            MARCHA.Location = new Point(192, 31);
+            MARCHA.Location = new Point(146, 62);
             MARCHA.Name = "MARCHA";
             MARCHA.Size = new Size(25, 25);
             MARCHA.TabIndex = 22;
@@ -205,7 +207,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ActiveCaptionText;
-            label8.Location = new Point(122, 35);
+            label8.Location = new Point(10, 67);
             label8.Name = "label8";
             label8.Size = new Size(68, 20);
             label8.TabIndex = 23;
@@ -214,7 +216,7 @@
             // BANDEJAS
             // 
             BANDEJAS.AutoSize = true;
-            BANDEJAS.Location = new Point(91, 31);
+            BANDEJAS.Location = new Point(146, 34);
             BANDEJAS.Name = "BANDEJAS";
             BANDEJAS.Size = new Size(25, 25);
             BANDEJAS.TabIndex = 8;
@@ -252,7 +254,7 @@
             // SINBANDA
             // 
             SINBANDA.AutoSize = true;
-            SINBANDA.Location = new Point(166, 76);
+            SINBANDA.Location = new Point(179, 76);
             SINBANDA.Name = "SINBANDA";
             SINBANDA.Size = new Size(25, 25);
             SINBANDA.TabIndex = 28;
@@ -272,7 +274,7 @@
             // QRCupon
             // 
             QRCupon.AutoSize = true;
-            QRCupon.Location = new Point(166, 44);
+            QRCupon.Location = new Point(179, 44);
             QRCupon.Name = "QRCupon";
             QRCupon.Size = new Size(25, 25);
             QRCupon.TabIndex = 26;
@@ -292,7 +294,7 @@
             // TOTEM
             // 
             TOTEM.AutoSize = true;
-            TOTEM.Location = new Point(166, 13);
+            TOTEM.Location = new Point(179, 13);
             TOTEM.Name = "TOTEM";
             TOTEM.Size = new Size(25, 25);
             TOTEM.TabIndex = 24;
@@ -313,7 +315,7 @@
             // 
             btnMerPago.BackgroundImage = Properties.Resources.Mercado_Pago_Logo;
             btnMerPago.BackgroundImageLayout = ImageLayout.Stretch;
-            btnMerPago.Location = new Point(241, 164);
+            btnMerPago.Location = new Point(215, 164);
             btnMerPago.Name = "btnMerPago";
             btnMerPago.Size = new Size(75, 65);
             btnMerPago.TabIndex = 26;
@@ -324,7 +326,7 @@
             // 
             btnPayWay.BackgroundImage = Properties.Resources.paywayLogo;
             btnPayWay.BackgroundImageLayout = ImageLayout.Zoom;
-            btnPayWay.Location = new Point(316, 164);
+            btnPayWay.Location = new Point(302, 164);
             btnPayWay.Name = "btnPayWay";
             btnPayWay.Size = new Size(75, 65);
             btnPayWay.TabIndex = 27;
@@ -336,7 +338,7 @@
             label11.AutoSize = true;
             label11.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = SystemColors.ActiveCaptionText;
-            label11.Location = new Point(31, 28);
+            label11.Location = new Point(10, 28);
             label11.Name = "label11";
             label11.Size = new Size(58, 20);
             label11.TabIndex = 21;
@@ -345,7 +347,7 @@
             // DUALPOINT
             // 
             DUALPOINT.AutoSize = true;
-            DUALPOINT.Location = new Point(167, 28);
+            DUALPOINT.Location = new Point(146, 28);
             DUALPOINT.Name = "DUALPOINT";
             DUALPOINT.Size = new Size(25, 25);
             DUALPOINT.TabIndex = 8;
@@ -357,7 +359,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = SystemColors.ActiveCaptionText;
-            label9.Location = new Point(31, 90);
+            label9.Location = new Point(10, 90);
             label9.Name = "label9";
             label9.Size = new Size(105, 20);
             label9.TabIndex = 23;
@@ -366,7 +368,7 @@
             // DNFCOPFI
             // 
             DNFCOPFI.AutoSize = true;
-            DNFCOPFI.Location = new Point(167, 90);
+            DNFCOPFI.Location = new Point(146, 90);
             DNFCOPFI.Name = "DNFCOPFI";
             DNFCOPFI.Size = new Size(25, 25);
             DNFCOPFI.TabIndex = 22;
@@ -378,7 +380,7 @@
             label14.AutoSize = true;
             label14.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label14.ForeColor = SystemColors.ActiveCaptionText;
-            label14.Location = new Point(31, 59);
+            label14.Location = new Point(10, 185);
             label14.Name = "label14";
             label14.Size = new Size(106, 20);
             label14.TabIndex = 27;
@@ -387,7 +389,7 @@
             // USATURNO1
             // 
             USATURNO1.AutoSize = true;
-            USATURNO1.Location = new Point(167, 59);
+            USATURNO1.Location = new Point(146, 185);
             USATURNO1.Name = "USATURNO1";
             USATURNO1.Size = new Size(25, 25);
             USATURNO1.TabIndex = 26;
@@ -399,7 +401,7 @@
             label13.AutoSize = true;
             label13.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = SystemColors.ActiveCaptionText;
-            label13.Location = new Point(31, 121);
+            label13.Location = new Point(10, 121);
             label13.Name = "label13";
             label13.Size = new Size(107, 20);
             label13.TabIndex = 29;
@@ -408,7 +410,7 @@
             // ELIGECOMA
             // 
             ELIGECOMA.AutoSize = true;
-            ELIGECOMA.Location = new Point(167, 121);
+            ELIGECOMA.Location = new Point(146, 121);
             ELIGECOMA.Name = "ELIGECOMA";
             ELIGECOMA.Size = new Size(25, 25);
             ELIGECOMA.TabIndex = 28;
@@ -417,7 +419,7 @@
             // 
             // NOMLOCAL
             // 
-            NOMLOCAL.Location = new Point(138, 32);
+            NOMLOCAL.Location = new Point(138, 33);
             NOMLOCAL.Name = "NOMLOCAL";
             NOMLOCAL.Size = new Size(54, 23);
             NOMLOCAL.TabIndex = 11;
@@ -435,7 +437,7 @@
             // 
             // VTAPUNTO
             // 
-            VTAPUNTO.Location = new Point(138, 90);
+            VTAPUNTO.Location = new Point(138, 91);
             VTAPUNTO.Name = "VTAPUNTO";
             VTAPUNTO.Size = new Size(54, 23);
             VTAPUNTO.TabIndex = 15;
@@ -465,7 +467,7 @@
             // 
             // btnSucFiscal
             // 
-            btnSucFiscal.Location = new Point(198, 88);
+            btnSucFiscal.Location = new Point(194, 91);
             btnSucFiscal.Name = "btnSucFiscal";
             btnSucFiscal.Size = new Size(63, 23);
             btnSucFiscal.TabIndex = 16;
@@ -475,7 +477,7 @@
             // 
             // btnNumCaja
             // 
-            btnNumCaja.Location = new Point(198, 59);
+            btnNumCaja.Location = new Point(194, 62);
             btnNumCaja.Name = "btnNumCaja";
             btnNumCaja.Size = new Size(63, 23);
             btnNumCaja.TabIndex = 18;
@@ -485,7 +487,7 @@
             // 
             // btnCodLocal
             // 
-            btnCodLocal.Location = new Point(198, 32);
+            btnCodLocal.Location = new Point(194, 35);
             btnCodLocal.Name = "btnCodLocal";
             btnCodLocal.Size = new Size(63, 23);
             btnCodLocal.TabIndex = 19;
@@ -495,7 +497,7 @@
             // 
             // NUMCAJA
             // 
-            NUMCAJA.Location = new Point(138, 60);
+            NUMCAJA.Location = new Point(138, 61);
             NUMCAJA.Name = "NUMCAJA";
             NUMCAJA.Size = new Size(54, 23);
             NUMCAJA.TabIndex = 20;
@@ -515,7 +517,7 @@
             panel1.Controls.Add(btnNumCaja);
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(268, 147);
+            panel1.Size = new Size(263, 147);
             panel1.TabIndex = 28;
             // 
             // panel2
@@ -525,7 +527,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(268, 25);
+            panel2.Size = new Size(263, 25);
             panel2.TabIndex = 0;
             // 
             // label20
@@ -533,7 +535,7 @@
             label20.AutoSize = true;
             label20.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label20.ForeColor = SystemColors.ButtonHighlight;
-            label20.Location = new Point(127, 4);
+            label20.Location = new Point(115, 4);
             label20.Name = "label20";
             label20.Size = new Size(32, 17);
             label20.TabIndex = 1;
@@ -551,9 +553,9 @@
             panel3.Controls.Add(label3);
             panel3.Controls.Add(label2);
             panel3.Controls.Add(PEDIDOSYA);
-            panel3.Location = new Point(286, 12);
+            panel3.Location = new Point(281, 12);
             panel3.Name = "panel3";
-            panel3.Size = new Size(181, 147);
+            panel3.Size = new Size(183, 147);
             panel3.TabIndex = 29;
             // 
             // panel4
@@ -563,7 +565,7 @@
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 0);
             panel4.Name = "panel4";
-            panel4.Size = new Size(181, 25);
+            panel4.Size = new Size(183, 25);
             panel4.TabIndex = 0;
             // 
             // label19
@@ -571,7 +573,7 @@
             label19.AutoSize = true;
             label19.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label19.ForeColor = SystemColors.ButtonHighlight;
-            label19.Location = new Point(48, 4);
+            label19.Location = new Point(61, 4);
             label19.Name = "label19";
             label19.Size = new Size(61, 17);
             label19.TabIndex = 1;
@@ -585,9 +587,9 @@
             panel5.Controls.Add(label8);
             panel5.Controls.Add(BANDEJAS);
             panel5.Controls.Add(label10);
-            panel5.Location = new Point(12, 362);
+            panel5.Location = new Point(12, 353);
             panel5.Name = "panel5";
-            panel5.Size = new Size(223, 81);
+            panel5.Size = new Size(192, 90);
             panel5.TabIndex = 29;
             // 
             // panel6
@@ -597,7 +599,7 @@
             panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(0, 0);
             panel6.Name = "panel6";
-            panel6.Size = new Size(223, 25);
+            panel6.Size = new Size(192, 25);
             panel6.TabIndex = 0;
             // 
             // label22
@@ -605,7 +607,7 @@
             label22.AutoSize = true;
             label22.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label22.ForeColor = SystemColors.ButtonHighlight;
-            label22.Location = new Point(74, 4);
+            label22.Location = new Point(59, 4);
             label22.Name = "label22";
             label22.Size = new Size(74, 17);
             label22.TabIndex = 1;
@@ -613,7 +615,10 @@
             // 
             // panel7
             // 
+            panel7.AutoScroll = true;
             panel7.BackColor = Color.White;
+            panel7.Controls.Add(label16);
+            panel7.Controls.Add(ZONACAFE);
             panel7.Controls.Add(label21);
             panel7.Controls.Add(ZONALOCAL);
             panel7.Controls.Add(ELIGECOMA);
@@ -627,15 +632,36 @@
             panel7.Controls.Add(DNFCOPFI);
             panel7.Location = new Point(12, 165);
             panel7.Name = "panel7";
-            panel7.Size = new Size(223, 191);
+            panel7.Size = new Size(192, 182);
             panel7.TabIndex = 30;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label16.ForeColor = SystemColors.ActiveCaptionText;
+            label16.Location = new Point(10, 59);
+            label16.Name = "label16";
+            label16.Size = new Size(129, 20);
+            label16.TabIndex = 33;
+            label16.Text = "Zona Cafetería";
+            // 
+            // ZONACAFE
+            // 
+            ZONACAFE.AutoSize = true;
+            ZONACAFE.Location = new Point(146, 59);
+            ZONACAFE.Name = "ZONACAFE";
+            ZONACAFE.Size = new Size(25, 25);
+            ZONACAFE.TabIndex = 32;
+            ZONACAFE.UseVisualStyleBackColor = true;
+            ZONACAFE.Click += ZONACAFE_Click;
             // 
             // label21
             // 
             label21.AutoSize = true;
             label21.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label21.ForeColor = SystemColors.ActiveCaptionText;
-            label21.Location = new Point(31, 152);
+            label21.Location = new Point(10, 152);
             label21.Name = "label21";
             label21.Size = new Size(130, 20);
             label21.TabIndex = 31;
@@ -644,7 +670,7 @@
             // ZONALOCAL
             // 
             ZONALOCAL.AutoSize = true;
-            ZONALOCAL.Location = new Point(167, 152);
+            ZONALOCAL.Location = new Point(146, 152);
             ZONALOCAL.Name = "ZONALOCAL";
             ZONALOCAL.Size = new Size(25, 25);
             ZONALOCAL.TabIndex = 30;
@@ -658,7 +684,7 @@
             panel8.Dock = DockStyle.Top;
             panel8.Location = new Point(0, 0);
             panel8.Name = "panel8";
-            panel8.Size = new Size(223, 25);
+            panel8.Size = new Size(175, 25);
             panel8.TabIndex = 0;
             // 
             // label23
@@ -666,7 +692,7 @@
             label23.AutoSize = true;
             label23.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label23.ForeColor = SystemColors.ButtonHighlight;
-            label23.Location = new Point(74, 4);
+            label23.Location = new Point(50, 4);
             label23.Name = "label23";
             label23.Size = new Size(74, 17);
             label23.TabIndex = 1;
@@ -678,9 +704,9 @@
             panel9.BackColor = Color.White;
             panel9.Controls.Add(panel11);
             panel9.Controls.Add(panel10);
-            panel9.Location = new Point(241, 235);
+            panel9.Location = new Point(210, 235);
             panel9.Name = "panel9";
-            panel9.Size = new Size(226, 208);
+            panel9.Size = new Size(254, 208);
             panel9.TabIndex = 30;
             // 
             // panel11
@@ -704,12 +730,12 @@
             panel11.Dock = DockStyle.Fill;
             panel11.Location = new Point(0, 25);
             panel11.Name = "panel11";
-            panel11.Size = new Size(226, 183);
+            panel11.Size = new Size(254, 183);
             panel11.TabIndex = 1;
             // 
             // btnFAMAXVALOR
             // 
-            btnFAMAXVALOR.Location = new Point(128, 212);
+            btnFAMAXVALOR.Location = new Point(141, 211);
             btnFAMAXVALOR.Name = "btnFAMAXVALOR";
             btnFAMAXVALOR.Size = new Size(63, 23);
             btnFAMAXVALOR.TabIndex = 32;
@@ -737,7 +763,7 @@
             // USAREMOTO
             // 
             USAREMOTO.AutoSize = true;
-            USAREMOTO.Location = new Point(166, 106);
+            USAREMOTO.Location = new Point(179, 106);
             USAREMOTO.Name = "USAREMOTO";
             USAREMOTO.Size = new Size(25, 25);
             USAREMOTO.TabIndex = 30;
@@ -756,7 +782,7 @@
             // 
             // btnCODPUERTA
             // 
-            btnCODPUERTA.Location = new Point(128, 161);
+            btnCODPUERTA.Location = new Point(141, 161);
             btnCODPUERTA.Name = "btnCODPUERTA";
             btnCODPUERTA.Size = new Size(63, 23);
             btnCODPUERTA.TabIndex = 21;
@@ -771,7 +797,7 @@
             panel10.Dock = DockStyle.Top;
             panel10.Location = new Point(0, 0);
             panel10.Name = "panel10";
-            panel10.Size = new Size(226, 25);
+            panel10.Size = new Size(254, 25);
             panel10.TabIndex = 0;
             // 
             // label24
@@ -779,7 +805,7 @@
             label24.AutoSize = true;
             label24.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label24.ForeColor = SystemColors.ButtonHighlight;
-            label24.Location = new Point(87, 4);
+            label24.Location = new Point(101, 4);
             label24.Name = "label24";
             label24.Size = new Size(53, 17);
             label24.TabIndex = 1;
@@ -790,7 +816,7 @@
             btnQuerys.BackgroundImage = Properties.Resources.SqlServerLogo;
             btnQuerys.BackgroundImageLayout = ImageLayout.Zoom;
             btnQuerys.Enabled = false;
-            btnQuerys.Location = new Point(392, 164);
+            btnQuerys.Location = new Point(389, 164);
             btnQuerys.Name = "btnQuerys";
             btnQuerys.Size = new Size(75, 65);
             btnQuerys.TabIndex = 31;
@@ -803,7 +829,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(476, 452);
+            ClientSize = new Size(476, 449);
             Controls.Add(btnQuerys);
             Controls.Add(panel9);
             Controls.Add(panel7);
@@ -910,5 +936,7 @@
         private Label label26;
         private TextBox FAMAXVALOR;
         private Panel panel11;
+        private Label label16;
+        public Button ZONACAFE;
     }
 }

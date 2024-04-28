@@ -54,7 +54,7 @@
             textBoxUser.Name = "textBoxUser";
             textBoxUser.Size = new Size(118, 23);
             textBoxUser.TabIndex = 1;
-            textBoxUser.Text = "10";
+            textBoxUser.Text = "dukissj";
             textBoxUser.TextChanged += textBoxUser_TextChanged;
             // 
             // btnConnect
@@ -236,7 +236,7 @@
             cbEquipoLinkedServer.Location = new Point(22, 304);
             cbEquipoLinkedServer.Name = "cbEquipoLinkedServer";
             cbEquipoLinkedServer.Size = new Size(69, 23);
-            cbEquipoLinkedServer.TabIndex = 19;
+            cbEquipoLinkedServer.TabIndex = 7;
             // 
             // label6
             // 
@@ -246,9 +246,9 @@
             label6.ForeColor = Color.White;
             label6.Location = new Point(186, 9);
             label6.Name = "label6";
-            label6.Size = new Size(36, 13);
+            label6.Size = new Size(51, 13);
             label6.TabIndex = 20;
-            label6.Text = "5.1.0.1";
+            label6.Text = "5.1.0.1(B)";
             label6.Click += label6_Click;
             // 
             // LoginForm

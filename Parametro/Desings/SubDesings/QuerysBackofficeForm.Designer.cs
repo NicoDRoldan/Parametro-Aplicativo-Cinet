@@ -99,7 +99,7 @@
             txtPassBotones.Name = "txtPassBotones";
             txtPassBotones.PasswordChar = '#';
             txtPassBotones.Size = new Size(95, 23);
-            txtPassBotones.TabIndex = 33;
+            txtPassBotones.TabIndex = 3;
             txtPassBotones.UseSystemPasswordChar = true;
             // 
             // btnAceptarPassBtn
@@ -108,7 +108,7 @@
             btnAceptarPassBtn.Location = new Point(338, 31);
             btnAceptarPassBtn.Name = "btnAceptarPassBtn";
             btnAceptarPassBtn.Size = new Size(68, 23);
-            btnAceptarPassBtn.TabIndex = 29;
+            btnAceptarPassBtn.TabIndex = 4;
             btnAceptarPassBtn.Text = "ACEPTAR";
             btnAceptarPassBtn.UseVisualStyleBackColor = true;
             btnAceptarPassBtn.Click += btnAceptarPassBtn_Click;
@@ -120,7 +120,7 @@
             fechaHasta.Location = new Point(99, 29);
             fechaHasta.Name = "fechaHasta";
             fechaHasta.Size = new Size(81, 23);
-            fechaHasta.TabIndex = 32;
+            fechaHasta.TabIndex = 2;
             fechaHasta.Value = new DateTime(2023, 12, 12, 0, 0, 0, 0);
             // 
             // fechaDesde
@@ -130,7 +130,7 @@
             fechaDesde.Location = new Point(12, 29);
             fechaDesde.Name = "fechaDesde";
             fechaDesde.Size = new Size(81, 23);
-            fechaDesde.TabIndex = 31;
+            fechaDesde.TabIndex = 1;
             fechaDesde.Value = new DateTime(2023, 12, 11, 0, 0, 0, 0);
             // 
             // labelPass
@@ -190,13 +190,15 @@
             // 
             // btnCorregirZetasEnCero
             // 
+            btnCorregirZetasEnCero.Enabled = false;
             btnCorregirZetasEnCero.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btnCorregirZetasEnCero.Location = new Point(106, 27);
             btnCorregirZetasEnCero.Name = "btnCorregirZetasEnCero";
             btnCorregirZetasEnCero.Size = new Size(92, 44);
-            btnCorregirZetasEnCero.TabIndex = 28;
+            btnCorregirZetasEnCero.TabIndex = 6;
             btnCorregirZetasEnCero.Text = "CORREGIR Z's en 0";
             btnCorregirZetasEnCero.UseVisualStyleBackColor = true;
+            btnCorregirZetasEnCero.Visible = false;
             btnCorregirZetasEnCero.Click += btnCorregirZetasEnCero_Click;
             // 
             // label2
@@ -216,7 +218,7 @@
             btnVerZetasEnCero.Location = new Point(8, 27);
             btnVerZetasEnCero.Name = "btnVerZetasEnCero";
             btnVerZetasEnCero.Size = new Size(92, 44);
-            btnVerZetasEnCero.TabIndex = 22;
+            btnVerZetasEnCero.TabIndex = 5;
             btnVerZetasEnCero.Text = "VER Z's EN 0";
             btnVerZetasEnCero.UseVisualStyleBackColor = true;
             btnVerZetasEnCero.Click += btnVerZetasEnCero_Click;
@@ -268,7 +270,7 @@
             btnVerificarCaja.Location = new Point(106, 17);
             btnVerificarCaja.Name = "btnVerificarCaja";
             btnVerificarCaja.Size = new Size(92, 44);
-            btnVerificarCaja.TabIndex = 29;
+            btnVerificarCaja.TabIndex = 8;
             btnVerificarCaja.Text = "Verificar Caja";
             btnVerificarCaja.UseVisualStyleBackColor = true;
             btnVerificarCaja.Click += btnVerificarCaja_Click;
@@ -279,7 +281,7 @@
             btnConsultaConexion.Location = new Point(8, 17);
             btnConsultaConexion.Name = "btnConsultaConexion";
             btnConsultaConexion.Size = new Size(92, 44);
-            btnConsultaConexion.TabIndex = 22;
+            btnConsultaConexion.TabIndex = 7;
             btnConsultaConexion.Text = "Consulta Conexiones";
             btnConsultaConexion.UseVisualStyleBackColor = true;
             btnConsultaConexion.Click += btnConsultaConexion_Click;
@@ -324,7 +326,7 @@
             btnVerificarVersionCaja.Location = new Point(107, 25);
             btnVerificarVersionCaja.Name = "btnVerificarVersionCaja";
             btnVerificarVersionCaja.Size = new Size(92, 23);
-            btnVerificarVersionCaja.TabIndex = 31;
+            btnVerificarVersionCaja.TabIndex = 10;
             btnVerificarVersionCaja.Text = "Aceptar";
             btnVerificarVersionCaja.UseVisualStyleBackColor = true;
             btnVerificarVersionCaja.Click += btnVerificarVersionCaja_Click;
@@ -358,7 +360,7 @@
             btnVerificarVersionLocal.Location = new Point(107, 59);
             btnVerificarVersionLocal.Name = "btnVerificarVersionLocal";
             btnVerificarVersionLocal.Size = new Size(92, 23);
-            btnVerificarVersionLocal.TabIndex = 37;
+            btnVerificarVersionLocal.TabIndex = 12;
             btnVerificarVersionLocal.Text = "Aceptar";
             btnVerificarVersionLocal.UseVisualStyleBackColor = true;
             btnVerificarVersionLocal.Click += btnVerificarVersionLocal_Click;
@@ -371,7 +373,7 @@
             label7.Location = new Point(3, 62);
             label7.Name = "label7";
             label7.Size = new Size(101, 17);
-            label7.TabIndex = 36;
+            label7.TabIndex = 11;
             label7.Text = "Versión - Local";
             // 
             // comboBoxAplicativo
@@ -381,7 +383,7 @@
             comboBoxAplicativo.Location = new Point(3, 26);
             comboBoxAplicativo.Name = "comboBoxAplicativo";
             comboBoxAplicativo.Size = new Size(98, 23);
-            comboBoxAplicativo.TabIndex = 35;
+            comboBoxAplicativo.TabIndex = 9;
             // 
             // label6
             // 
@@ -452,7 +454,7 @@
             btnBackup.Location = new Point(6, 39);
             btnBackup.Name = "btnBackup";
             btnBackup.Size = new Size(95, 52);
-            btnBackup.TabIndex = 2;
+            btnBackup.TabIndex = 13;
             btnBackup.Text = "BACKUP BACKOFFICE";
             btnBackup.UseVisualStyleBackColor = true;
             btnBackup.Click += btnBackup_Click;

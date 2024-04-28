@@ -149,7 +149,7 @@
             btnTERMINAL.Location = new Point(306, 110);
             btnTERMINAL.Name = "btnTERMINAL";
             btnTERMINAL.Size = new Size(63, 21);
-            btnTERMINAL.TabIndex = 33;
+            btnTERMINAL.TabIndex = 7;
             btnTERMINAL.Text = "Cambiar";
             btnTERMINAL.UseVisualStyleBackColor = true;
             btnTERMINAL.Click += btnTERMINAL_Click;
@@ -159,7 +159,7 @@
             btnLPoPuerto.Location = new Point(128, 108);
             btnLPoPuerto.Name = "btnLPoPuerto";
             btnLPoPuerto.Size = new Size(63, 21);
-            btnLPoPuerto.TabIndex = 32;
+            btnLPoPuerto.TabIndex = 3;
             btnLPoPuerto.Text = "Cambiar";
             btnLPoPuerto.UseVisualStyleBackColor = true;
             btnLPoPuerto.Click += btnLPoPuerto_Click;
@@ -169,21 +169,21 @@
             TERMINAL.Location = new Point(194, 108);
             TERMINAL.Name = "TERMINAL";
             TERMINAL.Size = new Size(106, 23);
-            TERMINAL.TabIndex = 31;
+            TERMINAL.TabIndex = 6;
             // 
             // LPoPuerto
             // 
             LPoPuerto.Location = new Point(14, 108);
             LPoPuerto.Name = "LPoPuerto";
             LPoPuerto.Size = new Size(108, 23);
-            LPoPuerto.TabIndex = 28;
+            LPoPuerto.TabIndex = 2;
             // 
             // btnTACOCUIT
             // 
             btnTACOCUIT.Location = new Point(306, 58);
             btnTACOCUIT.Name = "btnTACOCUIT";
             btnTACOCUIT.Size = new Size(63, 21);
-            btnTACOCUIT.TabIndex = 26;
+            btnTACOCUIT.TabIndex = 5;
             btnTACOCUIT.Text = "Cambiar";
             btnTACOCUIT.UseVisualStyleBackColor = true;
             btnTACOCUIT.Click += btnTACOCUIT_Click;
@@ -193,7 +193,7 @@
             TACOCUIT.Location = new Point(194, 56);
             TACOCUIT.Name = "TACOCUIT";
             TACOCUIT.Size = new Size(106, 23);
-            TACOCUIT.TabIndex = 25;
+            TACOCUIT.TabIndex = 4;
             // 
             // LAPOSNET
             // 
@@ -201,7 +201,7 @@
             LAPOSNET.Location = new Point(14, 54);
             LAPOSNET.Name = "LAPOSNET";
             LAPOSNET.Size = new Size(108, 25);
-            LAPOSNET.TabIndex = 22;
+            LAPOSNET.TabIndex = 1;
             LAPOSNET.UseVisualStyleBackColor = true;
             LAPOSNET.Click += LAPOSNET_Click;
             // 
@@ -260,7 +260,7 @@
             panel13.Location = new Point(0, 125);
             panel13.Name = "panel13";
             panel13.Size = new Size(383, 25);
-            panel13.TabIndex = 39;
+            panel13.TabIndex = 12;
             // 
             // label11
             // 
@@ -282,7 +282,7 @@
             MASTER.Location = new Point(137, 0);
             MASTER.Name = "MASTER";
             MASTER.Size = new Size(246, 23);
-            MASTER.TabIndex = 0;
+            MASTER.TabIndex = 12;
             MASTER.TextChanged += txtMaster_TextChanged;
             // 
             // panel12
@@ -294,7 +294,7 @@
             panel12.Location = new Point(0, 100);
             panel12.Name = "panel12";
             panel12.Size = new Size(383, 25);
-            panel12.TabIndex = 40;
+            panel12.TabIndex = 11;
             // 
             // label10
             // 
@@ -316,7 +316,7 @@
             TNARANJA.Location = new Point(137, 0);
             TNARANJA.Name = "TNARANJA";
             TNARANJA.Size = new Size(246, 23);
-            TNARANJA.TabIndex = 0;
+            TNARANJA.TabIndex = 11;
             TNARANJA.TextChanged += txtNaranja_TextChanged;
             // 
             // panel11
@@ -327,7 +327,7 @@
             panel11.Location = new Point(0, 75);
             panel11.Name = "panel11";
             panel11.Size = new Size(383, 25);
-            panel11.TabIndex = 40;
+            panel11.TabIndex = 10;
             // 
             // label9
             // 
@@ -349,7 +349,7 @@
             CABALDEB.Location = new Point(137, 0);
             CABALDEB.Name = "CABALDEB";
             CABALDEB.Size = new Size(246, 23);
-            CABALDEB.TabIndex = 0;
+            CABALDEB.TabIndex = 10;
             CABALDEB.TextChanged += txtCabal_TextChanged;
             // 
             // panel10
@@ -361,7 +361,7 @@
             panel10.Location = new Point(0, 50);
             panel10.Name = "panel10";
             panel10.Size = new Size(383, 25);
-            panel10.TabIndex = 40;
+            panel10.TabIndex = 9;
             // 
             // label8
             // 
@@ -383,7 +383,7 @@
             AMEX.Location = new Point(137, 0);
             AMEX.Name = "AMEX";
             AMEX.Size = new Size(246, 23);
-            AMEX.TabIndex = 0;
+            AMEX.TabIndex = 9;
             AMEX.TextChanged += txtAmex_TextChanged;
             // 
             // panel9
@@ -394,7 +394,7 @@
             panel9.Location = new Point(0, 25);
             panel9.Name = "panel9";
             panel9.Size = new Size(383, 25);
-            panel9.TabIndex = 39;
+            panel9.TabIndex = 8;
             // 
             // label7
             // 
@@ -416,7 +416,7 @@
             Visa.Location = new Point(137, 0);
             Visa.Name = "Visa";
             Visa.Size = new Size(246, 23);
-            Visa.TabIndex = 0;
+            Visa.TabIndex = 8;
             Visa.TextChanged += txtVisa_TextChanged;
             // 
             // panel5
@@ -474,7 +474,7 @@
             btnGuardarNrosComercio.Location = new Point(0, 0);
             btnGuardarNrosComercio.Name = "btnGuardarNrosComercio";
             btnGuardarNrosComercio.Size = new Size(383, 38);
-            btnGuardarNrosComercio.TabIndex = 0;
+            btnGuardarNrosComercio.TabIndex = 13;
             btnGuardarNrosComercio.Text = "Guardar Comercios";
             btnGuardarNrosComercio.UseVisualStyleBackColor = false;
             btnGuardarNrosComercio.Click += btnGuardarNrosComercio_Click;

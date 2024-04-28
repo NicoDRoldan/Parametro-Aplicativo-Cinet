@@ -141,7 +141,7 @@
             txtNumCbteeAnt.Name = "txtNumCbteeAnt";
             txtNumCbteeAnt.ReadOnly = true;
             txtNumCbteeAnt.Size = new Size(68, 23);
-            txtNumCbteeAnt.TabIndex = 43;
+            txtNumCbteeAnt.TabIndex = 11;
             txtNumCbteeAnt.Visible = false;
             // 
             // labelUltimoNroVta
@@ -161,7 +161,7 @@
             txtUltimoNroCorrelativo.Name = "txtUltimoNroCorrelativo";
             txtUltimoNroCorrelativo.PlaceholderText = "EJ: 00000053";
             txtUltimoNroCorrelativo.Size = new Size(68, 23);
-            txtUltimoNroCorrelativo.TabIndex = 41;
+            txtUltimoNroCorrelativo.TabIndex = 10;
             // 
             // labelTipoCbtee
             // 
@@ -180,7 +180,7 @@
             btnCorregirNracion.Location = new Point(178, 333);
             btnCorregirNracion.Name = "btnCorregirNracion";
             btnCorregirNracion.Size = new Size(68, 23);
-            btnCorregirNracion.TabIndex = 40;
+            btnCorregirNracion.TabIndex = 12;
             btnCorregirNracion.Text = "ACEPTAR";
             btnCorregirNracion.UseVisualStyleBackColor = true;
             btnCorregirNracion.Click += btnCorregirNracion_Click;
@@ -202,17 +202,19 @@
             txtTipoCBTEE.Name = "txtTipoCBTEE";
             txtTipoCBTEE.PlaceholderText = "EJ: FAB";
             txtTipoCBTEE.Size = new Size(68, 23);
-            txtTipoCBTEE.TabIndex = 40;
+            txtTipoCBTEE.TabIndex = 9;
             // 
             // btnCorregirZetasEnCero
             // 
+            btnCorregirZetasEnCero.Enabled = false;
             btnCorregirZetasEnCero.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btnCorregirZetasEnCero.Location = new Point(132, 121);
             btnCorregirZetasEnCero.Name = "btnCorregirZetasEnCero";
             btnCorregirZetasEnCero.Size = new Size(114, 44);
-            btnCorregirZetasEnCero.TabIndex = 28;
+            btnCorregirZetasEnCero.TabIndex = 8;
             btnCorregirZetasEnCero.Text = "CORREGIR Z's en 0";
             btnCorregirZetasEnCero.UseVisualStyleBackColor = true;
+            btnCorregirZetasEnCero.Visible = false;
             btnCorregirZetasEnCero.Click += btnCorregirZetasEnCero_Click;
             // 
             // label2
@@ -232,7 +234,7 @@
             btnVerZetasEnCero.Location = new Point(11, 121);
             btnVerZetasEnCero.Name = "btnVerZetasEnCero";
             btnVerZetasEnCero.Size = new Size(114, 44);
-            btnVerZetasEnCero.TabIndex = 22;
+            btnVerZetasEnCero.TabIndex = 7;
             btnVerZetasEnCero.Text = "VER Z's EN 0";
             btnVerZetasEnCero.UseVisualStyleBackColor = true;
             btnVerZetasEnCero.Click += btnVerZetasEnCero_Click;
@@ -253,7 +255,7 @@
             NumCierre.Location = new Point(11, 52);
             NumCierre.Name = "NumCierre";
             NumCierre.Size = new Size(161, 23);
-            NumCierre.TabIndex = 21;
+            NumCierre.TabIndex = 5;
             // 
             // btnRegCierre
             // 
@@ -261,7 +263,7 @@
             btnRegCierre.Location = new Point(178, 52);
             btnRegCierre.Name = "btnRegCierre";
             btnRegCierre.Size = new Size(68, 23);
-            btnRegCierre.TabIndex = 1;
+            btnRegCierre.TabIndex = 6;
             btnRegCierre.Text = "ACEPTAR";
             btnRegCierre.UseVisualStyleBackColor = true;
             btnRegCierre.Click += btnRegCierre_Click;
@@ -304,7 +306,7 @@
             btnTestConito.Location = new Point(19, 97);
             btnTestConito.Name = "btnTestConito";
             btnTestConito.Size = new Size(95, 52);
-            btnTestConito.TabIndex = 3;
+            btnTestConito.TabIndex = 14;
             btnTestConito.Text = "TEST CONITO";
             btnTestConito.UseVisualStyleBackColor = true;
             btnTestConito.Click += btnTestConito_Click;
@@ -336,7 +338,7 @@
             btnArtPrueba.Location = new Point(19, 39);
             btnArtPrueba.Name = "btnArtPrueba";
             btnArtPrueba.Size = new Size(95, 52);
-            btnArtPrueba.TabIndex = 2;
+            btnArtPrueba.TabIndex = 13;
             btnArtPrueba.Text = "ARTÍCULO PRUEBA";
             btnArtPrueba.UseVisualStyleBackColor = true;
             btnArtPrueba.Click += btnArtPrueba_Click;
@@ -385,7 +387,7 @@
             txtPassBotones.Name = "txtPassBotones";
             txtPassBotones.PasswordChar = '#';
             txtPassBotones.Size = new Size(95, 23);
-            txtPassBotones.TabIndex = 33;
+            txtPassBotones.TabIndex = 3;
             txtPassBotones.UseSystemPasswordChar = true;
             // 
             // btnAceptarPassBtn
@@ -394,7 +396,7 @@
             btnAceptarPassBtn.Location = new Point(339, 31);
             btnAceptarPassBtn.Name = "btnAceptarPassBtn";
             btnAceptarPassBtn.Size = new Size(68, 23);
-            btnAceptarPassBtn.TabIndex = 29;
+            btnAceptarPassBtn.TabIndex = 4;
             btnAceptarPassBtn.Text = "ACEPTAR";
             btnAceptarPassBtn.UseVisualStyleBackColor = true;
             btnAceptarPassBtn.Click += btnAceptarPassBtn_Click;
@@ -406,7 +408,7 @@
             fechaHasta.Location = new Point(99, 29);
             fechaHasta.Name = "fechaHasta";
             fechaHasta.Size = new Size(81, 23);
-            fechaHasta.TabIndex = 32;
+            fechaHasta.TabIndex = 2;
             fechaHasta.Value = new DateTime(2023, 12, 11, 0, 0, 0, 0);
             fechaHasta.ValueChanged += fechaHasta_ValueChanged;
             // 
@@ -417,7 +419,7 @@
             fechaDesde.Location = new Point(12, 29);
             fechaDesde.Name = "fechaDesde";
             fechaDesde.Size = new Size(81, 23);
-            fechaDesde.TabIndex = 31;
+            fechaDesde.TabIndex = 1;
             fechaDesde.Value = new DateTime(2023, 12, 11, 0, 0, 0, 0);
             fechaDesde.ValueChanged += fechaDesde_ValueChanged;
             // 
@@ -478,7 +480,7 @@
             txtTimCaja.Name = "txtTimCaja";
             txtTimCaja.PlaceholderText = "EJ: 005";
             txtTimCaja.Size = new Size(42, 23);
-            txtTimCaja.TabIndex = 37;
+            txtTimCaja.TabIndex = 22;
             txtTimCaja.Visible = false;
             // 
             // panel7
@@ -520,7 +522,7 @@
             txtTimLocal.Name = "txtTimLocal";
             txtTimLocal.PlaceholderText = "EJ: 007";
             txtTimLocal.Size = new Size(41, 23);
-            txtTimLocal.TabIndex = 36;
+            txtTimLocal.TabIndex = 21;
             txtTimLocal.Visible = false;
             // 
             // btnConfigTim
@@ -529,7 +531,7 @@
             btnConfigTim.Location = new Point(301, 90);
             btnConfigTim.Name = "btnConfigTim";
             btnConfigTim.Size = new Size(72, 23);
-            btnConfigTim.TabIndex = 34;
+            btnConfigTim.TabIndex = 23;
             btnConfigTim.Text = "ACEPTAR";
             btnConfigTim.UseVisualStyleBackColor = true;
             btnConfigTim.Visible = false;
@@ -541,7 +543,7 @@
             btnFEAuto.Location = new Point(268, 39);
             btnFEAuto.Name = "btnFEAuto";
             btnFEAuto.Size = new Size(114, 52);
-            btnFEAuto.TabIndex = 2;
+            btnFEAuto.TabIndex = 20;
             btnFEAuto.Text = "FE AUTOMATICO";
             btnFEAuto.UseVisualStyleBackColor = true;
             btnFEAuto.Visible = false;
@@ -575,7 +577,7 @@
             btnCorregirClienteRut.Location = new Point(11, 149);
             btnCorregirClienteRut.Name = "btnCorregirClienteRut";
             btnCorregirClienteRut.Size = new Size(112, 23);
-            btnCorregirClienteRut.TabIndex = 29;
+            btnCorregirClienteRut.TabIndex = 19;
             btnCorregirClienteRut.Text = "ACEPTAR";
             btnCorregirClienteRut.UseVisualStyleBackColor = true;
             btnCorregirClienteRut.Visible = false;
@@ -587,7 +589,7 @@
             txtVeneNumeroRut.Name = "txtVeneNumeroRut";
             txtVeneNumeroRut.PlaceholderText = "NÚMERO DE VENTA";
             txtVeneNumeroRut.Size = new Size(113, 23);
-            txtVeneNumeroRut.TabIndex = 31;
+            txtVeneNumeroRut.TabIndex = 17;
             txtVeneNumeroRut.Visible = false;
             // 
             // labelCorregirRut
@@ -611,7 +613,7 @@
             checkConsumidorFinal.Location = new Point(11, 62);
             checkConsumidorFinal.Name = "checkConsumidorFinal";
             checkConsumidorFinal.Size = new Size(178, 22);
-            checkConsumidorFinal.TabIndex = 32;
+            checkConsumidorFinal.TabIndex = 16;
             checkConsumidorFinal.Text = "¿Consumidor Final?";
             checkConsumidorFinal.UseVisualStyleBackColor = false;
             checkConsumidorFinal.Visible = false;
@@ -623,7 +625,7 @@
             txtRutCorrecto.Name = "txtRutCorrecto";
             txtRutCorrecto.PlaceholderText = "RUT CORRECTO";
             txtRutCorrecto.Size = new Size(113, 23);
-            txtRutCorrecto.TabIndex = 33;
+            txtRutCorrecto.TabIndex = 18;
             txtRutCorrecto.Visible = false;
             txtRutCorrecto.TextChanged += txtRutCorrecto_TextChanged;
             // 
@@ -738,7 +740,7 @@
             btnBackup.Location = new Point(19, 39);
             btnBackup.Name = "btnBackup";
             btnBackup.Size = new Size(95, 52);
-            btnBackup.TabIndex = 2;
+            btnBackup.TabIndex = 15;
             btnBackup.Text = "BACKUP PDV";
             btnBackup.UseVisualStyleBackColor = true;
             btnBackup.Click += btnBackup_Click;

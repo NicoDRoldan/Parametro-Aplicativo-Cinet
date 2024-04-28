@@ -83,7 +83,7 @@
             CASHOUT.Location = new Point(182, 32);
             CASHOUT.Name = "CASHOUT";
             CASHOUT.Size = new Size(25, 25);
-            CASHOUT.TabIndex = 24;
+            CASHOUT.TabIndex = 2;
             CASHOUT.UseVisualStyleBackColor = true;
             CASHOUT.Click += CASHOUT_Click;
             // 
@@ -104,7 +104,7 @@
             MERPAGO.Location = new Point(75, 32);
             MERPAGO.Name = "MERPAGO";
             MERPAGO.Size = new Size(25, 25);
-            MERPAGO.TabIndex = 22;
+            MERPAGO.TabIndex = 1;
             MERPAGO.UseVisualStyleBackColor = true;
             MERPAGO.Click += MERPAGO_Click;
             // 
@@ -124,7 +124,7 @@
             TOKENMP.Location = new Point(12, 138);
             TOKENMP.Name = "TOKENMP";
             TOKENMP.Size = new Size(431, 23);
-            TOKENMP.TabIndex = 20;
+            TOKENMP.TabIndex = 5;
             // 
             // panel2
             // 
@@ -152,7 +152,7 @@
             btnEXTERIDMP.Location = new Point(449, 87);
             btnEXTERIDMP.Name = "btnEXTERIDMP";
             btnEXTERIDMP.Size = new Size(63, 23);
-            btnEXTERIDMP.TabIndex = 19;
+            btnEXTERIDMP.TabIndex = 4;
             btnEXTERIDMP.Text = "Cambiar";
             btnEXTERIDMP.UseVisualStyleBackColor = true;
             btnEXTERIDMP.Click += btnEXTERIDMP_Click;
@@ -173,14 +173,14 @@
             EXTERIDMP.Location = new Point(12, 88);
             EXTERIDMP.Name = "EXTERIDMP";
             EXTERIDMP.Size = new Size(431, 23);
-            EXTERIDMP.TabIndex = 11;
+            EXTERIDMP.TabIndex = 3;
             // 
             // btnTOKENMP
             // 
             btnTOKENMP.Location = new Point(449, 138);
             btnTOKENMP.Name = "btnTOKENMP";
             btnTOKENMP.Size = new Size(63, 23);
-            btnTOKENMP.TabIndex = 18;
+            btnTOKENMP.TabIndex = 6;
             btnTOKENMP.Text = "Cambiar";
             btnTOKENMP.UseVisualStyleBackColor = true;
             btnTOKENMP.Click += btnTOKENMP_Click;
