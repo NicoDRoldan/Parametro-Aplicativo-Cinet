@@ -16,16 +16,27 @@ namespace Parametro.Desings.SubDesings
         ConexionDB conexionDB = new ConexionDB();
         CinetPdvForm cinetPdvForm = new CinetPdvForm();
 
+        ToolTip toolTip = new ToolTip();
+
         public MercadoPagoForm()
         {
             InitializeComponent();
             CargarDatosBtn();
             CargarDatosTxt();
+
+            if (ConexionDB.usuarioBase == "dukissj")
+            {
+                IPN.Enabled = true;
+            }
+
+            toolTip.SetToolTip(this.labelIPNMp, "URL IPN: " + 
+                conexionDB.ObtenerValorDesdeBD($"SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS " +
+                                                $"WHERE PARA_CODIGO = 'MP_URL_IPN'"));
         }
 
         private void CargarDatosBtn()
         {
-            string[] nombreParametros = { MERPAGO.Name, CASHOUT.Name };
+            string[] nombreParametros = { MERPAGO.Name, CASHOUT.Name, IPN.Name };
 
             foreach (string nombreParametro in nombreParametros)
             {
@@ -92,5 +103,11 @@ namespace Parametro.Desings.SubDesings
             btnTOKENMP.Tag = TOKENMP;
             cinetPdvForm.EventoClickTxt(sender, e);
         }
+
+        private void IPN_Click(object sender, EventArgs e)
+        {
+            cinetPdvForm.EventoClick(sender, e);
+        }
+
     }
 }

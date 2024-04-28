@@ -54,7 +54,7 @@
             textBoxUser.Name = "textBoxUser";
             textBoxUser.Size = new Size(118, 23);
             textBoxUser.TabIndex = 1;
-            textBoxUser.Text = "dukissj";
+            textBoxUser.Text = "10";
             textBoxUser.TextChanged += textBoxUser_TextChanged;
             // 
             // btnConnect
@@ -246,9 +246,9 @@
             label6.ForeColor = Color.White;
             label6.Location = new Point(186, 9);
             label6.Name = "label6";
-            label6.Size = new Size(51, 13);
+            label6.Size = new Size(40, 13);
             label6.TabIndex = 20;
-            label6.Text = "5.1.0.1(B)";
+            label6.Text = "5.2.0.0";
             label6.Click += label6_Click;
             // 
             // LoginForm

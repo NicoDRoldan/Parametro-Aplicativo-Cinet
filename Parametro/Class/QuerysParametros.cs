@@ -719,5 +719,43 @@ namespace Parametro.Class
             }
         }
         #endregion
+
+        #region Verificar OMNICANAL
+
+        public bool VerificarOmnicanal()
+        {
+            ConexionDB conexionDB = new ConexionDB();
+
+            bool act = false;
+
+            string query = $"DECLARE @NOMLOCAL VARCHAR(10) = (SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'NOMLOCAL'); " +
+                $"SELECT COUNT(*) FROM {conexionDB.VerificarLinkedServer()}PARAMETROS " +
+                $"WHERE PARA_CODIGO = 'WSMARPATH' AND PARA_VALOR LIKE '%' + @NOMLOCAL + '%';";
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
+                {
+                    sqlConnection.Open();
+
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        int count = (int)sqlCommand.ExecuteScalar();
+                        if (count > 0 )
+                            act = true;
+
+                        return act;
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Log.Error(ex.ToString());
+                return act;
+            }
+        }
+        #endregion
     }
 }

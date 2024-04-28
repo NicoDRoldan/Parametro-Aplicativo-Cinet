@@ -76,13 +76,12 @@
             label19 = new Label();
             panel5 = new Panel();
             panel6 = new Panel();
+            lblOmnicanalCheck = new Label();
             label22 = new Label();
-            panel7 = new Panel();
             label16 = new Label();
             ZONACAFE = new Button();
             label21 = new Label();
             ZONALOCAL = new Button();
-            panel8 = new Panel();
             label23 = new Label();
             panel9 = new Panel();
             panel11 = new Panel();
@@ -95,17 +94,21 @@
             panel10 = new Panel();
             label24 = new Label();
             btnQuerys = new Button();
+            panel12 = new Panel();
+            panel13 = new Panel();
+            panel14 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             panel5.SuspendLayout();
             panel6.SuspendLayout();
-            panel7.SuspendLayout();
-            panel8.SuspendLayout();
             panel9.SuspendLayout();
             panel11.SuspendLayout();
             panel10.SuspendLayout();
+            panel12.SuspendLayout();
+            panel13.SuspendLayout();
+            panel14.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -338,7 +341,7 @@
             label11.AutoSize = true;
             label11.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = SystemColors.ActiveCaptionText;
-            label11.Location = new Point(10, 28);
+            label11.Location = new Point(3, 3);
             label11.Name = "label11";
             label11.Size = new Size(58, 20);
             label11.TabIndex = 21;
@@ -347,7 +350,7 @@
             // DUALPOINT
             // 
             DUALPOINT.AutoSize = true;
-            DUALPOINT.Location = new Point(146, 28);
+            DUALPOINT.Location = new Point(139, 3);
             DUALPOINT.Name = "DUALPOINT";
             DUALPOINT.Size = new Size(25, 25);
             DUALPOINT.TabIndex = 8;
@@ -359,7 +362,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = SystemColors.ActiveCaptionText;
-            label9.Location = new Point(10, 90);
+            label9.Location = new Point(3, 65);
             label9.Name = "label9";
             label9.Size = new Size(105, 20);
             label9.TabIndex = 23;
@@ -368,7 +371,7 @@
             // DNFCOPFI
             // 
             DNFCOPFI.AutoSize = true;
-            DNFCOPFI.Location = new Point(146, 90);
+            DNFCOPFI.Location = new Point(139, 65);
             DNFCOPFI.Name = "DNFCOPFI";
             DNFCOPFI.Size = new Size(25, 25);
             DNFCOPFI.TabIndex = 22;
@@ -380,7 +383,7 @@
             label14.AutoSize = true;
             label14.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label14.ForeColor = SystemColors.ActiveCaptionText;
-            label14.Location = new Point(10, 185);
+            label14.Location = new Point(3, 160);
             label14.Name = "label14";
             label14.Size = new Size(106, 20);
             label14.TabIndex = 27;
@@ -389,7 +392,7 @@
             // USATURNO1
             // 
             USATURNO1.AutoSize = true;
-            USATURNO1.Location = new Point(146, 185);
+            USATURNO1.Location = new Point(139, 160);
             USATURNO1.Name = "USATURNO1";
             USATURNO1.Size = new Size(25, 25);
             USATURNO1.TabIndex = 26;
@@ -401,7 +404,7 @@
             label13.AutoSize = true;
             label13.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = SystemColors.ActiveCaptionText;
-            label13.Location = new Point(10, 121);
+            label13.Location = new Point(3, 96);
             label13.Name = "label13";
             label13.Size = new Size(107, 20);
             label13.TabIndex = 29;
@@ -410,7 +413,7 @@
             // ELIGECOMA
             // 
             ELIGECOMA.AutoSize = true;
-            ELIGECOMA.Location = new Point(146, 121);
+            ELIGECOMA.Location = new Point(139, 96);
             ELIGECOMA.Name = "ELIGECOMA";
             ELIGECOMA.Size = new Size(25, 25);
             ELIGECOMA.TabIndex = 28;
@@ -595,6 +598,7 @@
             // panel6
             // 
             panel6.BackColor = SystemColors.MenuHighlight;
+            panel6.Controls.Add(lblOmnicanalCheck);
             panel6.Controls.Add(label22);
             panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(0, 0);
@@ -602,45 +606,34 @@
             panel6.Size = new Size(192, 25);
             panel6.TabIndex = 0;
             // 
+            // lblOmnicanalCheck
+            // 
+            lblOmnicanalCheck.AutoSize = true;
+            lblOmnicanalCheck.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOmnicanalCheck.ForeColor = Color.White;
+            lblOmnicanalCheck.Location = new Point(99, 3);
+            lblOmnicanalCheck.Name = "lblOmnicanalCheck";
+            lblOmnicanalCheck.Size = new Size(90, 16);
+            lblOmnicanalCheck.TabIndex = 2;
+            lblOmnicanalCheck.Text = "OMNICANAL";
+            // 
             // label22
             // 
             label22.AutoSize = true;
             label22.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label22.ForeColor = SystemColors.ButtonHighlight;
-            label22.Location = new Point(59, 4);
+            label22.Location = new Point(0, 3);
             label22.Name = "label22";
             label22.Size = new Size(74, 17);
             label22.TabIndex = 1;
             label22.Text = "COMANDA";
-            // 
-            // panel7
-            // 
-            panel7.AutoScroll = true;
-            panel7.BackColor = Color.White;
-            panel7.Controls.Add(label16);
-            panel7.Controls.Add(ZONACAFE);
-            panel7.Controls.Add(label21);
-            panel7.Controls.Add(ZONALOCAL);
-            panel7.Controls.Add(ELIGECOMA);
-            panel7.Controls.Add(panel8);
-            panel7.Controls.Add(label13);
-            panel7.Controls.Add(label11);
-            panel7.Controls.Add(USATURNO1);
-            panel7.Controls.Add(DUALPOINT);
-            panel7.Controls.Add(label14);
-            panel7.Controls.Add(label9);
-            panel7.Controls.Add(DNFCOPFI);
-            panel7.Location = new Point(12, 165);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(192, 182);
-            panel7.TabIndex = 30;
             // 
             // label16
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label16.ForeColor = SystemColors.ActiveCaptionText;
-            label16.Location = new Point(10, 59);
+            label16.Location = new Point(3, 34);
             label16.Name = "label16";
             label16.Size = new Size(129, 20);
             label16.TabIndex = 33;
@@ -649,7 +642,7 @@
             // ZONACAFE
             // 
             ZONACAFE.AutoSize = true;
-            ZONACAFE.Location = new Point(146, 59);
+            ZONACAFE.Location = new Point(139, 34);
             ZONACAFE.Name = "ZONACAFE";
             ZONACAFE.Size = new Size(25, 25);
             ZONACAFE.TabIndex = 32;
@@ -661,7 +654,7 @@
             label21.AutoSize = true;
             label21.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label21.ForeColor = SystemColors.ActiveCaptionText;
-            label21.Location = new Point(10, 152);
+            label21.Location = new Point(3, 127);
             label21.Name = "label21";
             label21.Size = new Size(130, 20);
             label21.TabIndex = 31;
@@ -670,29 +663,19 @@
             // ZONALOCAL
             // 
             ZONALOCAL.AutoSize = true;
-            ZONALOCAL.Location = new Point(146, 152);
+            ZONALOCAL.Location = new Point(139, 127);
             ZONALOCAL.Name = "ZONALOCAL";
             ZONALOCAL.Size = new Size(25, 25);
             ZONALOCAL.TabIndex = 30;
             ZONALOCAL.UseVisualStyleBackColor = true;
             ZONALOCAL.Click += ZONALOCAL_Click;
             // 
-            // panel8
-            // 
-            panel8.BackColor = SystemColors.MenuHighlight;
-            panel8.Controls.Add(label23);
-            panel8.Dock = DockStyle.Top;
-            panel8.Location = new Point(0, 0);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(175, 25);
-            panel8.TabIndex = 0;
-            // 
             // label23
             // 
             label23.AutoSize = true;
             label23.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label23.ForeColor = SystemColors.ButtonHighlight;
-            label23.Location = new Point(50, 4);
+            label23.Location = new Point(59, 5);
             label23.Name = "label23";
             label23.Size = new Size(74, 17);
             label23.TabIndex = 1;
@@ -823,16 +806,59 @@
             btnQuerys.UseVisualStyleBackColor = true;
             btnQuerys.Click += btnQuerys_Click;
             // 
+            // panel12
+            // 
+            panel12.AutoScrollMargin = new Size(0, 10);
+            panel12.BackColor = Color.White;
+            panel12.Controls.Add(panel13);
+            panel12.Controls.Add(panel14);
+            panel12.Location = new Point(12, 167);
+            panel12.Name = "panel12";
+            panel12.Size = new Size(192, 180);
+            panel12.TabIndex = 31;
+            // 
+            // panel13
+            // 
+            panel13.AutoScroll = true;
+            panel13.AutoScrollMargin = new Size(0, 10);
+            panel13.Controls.Add(label16);
+            panel13.Controls.Add(label11);
+            panel13.Controls.Add(ZONACAFE);
+            panel13.Controls.Add(DNFCOPFI);
+            panel13.Controls.Add(label21);
+            panel13.Controls.Add(label9);
+            panel13.Controls.Add(ZONALOCAL);
+            panel13.Controls.Add(label14);
+            panel13.Controls.Add(ELIGECOMA);
+            panel13.Controls.Add(DUALPOINT);
+            panel13.Controls.Add(USATURNO1);
+            panel13.Controls.Add(label13);
+            panel13.Dock = DockStyle.Fill;
+            panel13.Location = new Point(0, 25);
+            panel13.Name = "panel13";
+            panel13.Size = new Size(192, 155);
+            panel13.TabIndex = 1;
+            // 
+            // panel14
+            // 
+            panel14.BackColor = SystemColors.MenuHighlight;
+            panel14.Controls.Add(label23);
+            panel14.Dock = DockStyle.Top;
+            panel14.Location = new Point(0, 0);
+            panel14.Name = "panel14";
+            panel14.Size = new Size(192, 25);
+            panel14.TabIndex = 0;
+            // 
             // CinetPdvForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(476, 449);
+            ClientSize = new Size(473, 450);
+            Controls.Add(panel12);
             Controls.Add(btnQuerys);
             Controls.Add(panel9);
-            Controls.Add(panel7);
             Controls.Add(panel5);
             Controls.Add(panel3);
             Controls.Add(panel1);
@@ -856,15 +882,16 @@
             panel5.PerformLayout();
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
             panel9.ResumeLayout(false);
             panel11.ResumeLayout(false);
             panel11.PerformLayout();
             panel10.ResumeLayout(false);
             panel10.PerformLayout();
+            panel12.ResumeLayout(false);
+            panel13.ResumeLayout(false);
+            panel13.PerformLayout();
+            panel14.ResumeLayout(false);
+            panel14.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -920,8 +947,6 @@
         private Panel panel5;
         private Panel panel6;
         private Label label22;
-        private Panel panel7;
-        private Panel panel8;
         private Label label23;
         private Panel panel9;
         private Panel panel10;
@@ -938,5 +963,9 @@
         private Panel panel11;
         private Label label16;
         public Button ZONACAFE;
+        private Panel panel12;
+        private Panel panel13;
+        private Panel panel14;
+        private Label lblOmnicanalCheck;
     }
 }

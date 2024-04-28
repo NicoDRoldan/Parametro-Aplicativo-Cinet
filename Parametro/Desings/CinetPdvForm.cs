@@ -19,6 +19,7 @@ namespace Parametro.Desings
     {
         ConexionDB conexionDB = new ConexionDB();
         QuerysParametros querysParametros = new QuerysParametros();
+        ToolTip toolTip = new ToolTip();
 
         public CinetPdvForm()
         {
@@ -30,6 +31,17 @@ namespace Parametro.Desings
 
             this.FormClosed += MainForm_FormClosed;
             btnQuerys.Enabled = LoginForm.queryActivate;
+
+            if (querysParametros.VerificarOmnicanal())
+            {
+                lblOmnicanalCheck.ForeColor = Color.Chartreuse;
+                toolTip.SetToolTip(this.lblOmnicanalCheck, "OMNICANAL ACTIVADO");
+            }
+            else
+            {
+                lblOmnicanalCheck.ForeColor = Color.Red;
+                toolTip.SetToolTip(this.lblOmnicanalCheck, "OMNICANAL DESACTIVADO");
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

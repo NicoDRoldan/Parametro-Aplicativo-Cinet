@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MercadoPagoForm));
             panel1 = new Panel();
+            labelIPNMp = new Label();
+            IPN = new Button();
             label2 = new Label();
             CASHOUT = new Button();
             label1 = new Label();
@@ -49,6 +51,8 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(labelIPNMp);
+            panel1.Controls.Add(IPN);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(CASHOUT);
             panel1.Controls.Add(label1);
@@ -65,6 +69,28 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(528, 181);
             panel1.TabIndex = 29;
+            // 
+            // labelIPNMp
+            // 
+            labelIPNMp.AutoSize = true;
+            labelIPNMp.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            labelIPNMp.ForeColor = SystemColors.ActiveCaptionText;
+            labelIPNMp.Location = new Point(213, 32);
+            labelIPNMp.Name = "labelIPNMp";
+            labelIPNMp.Size = new Size(65, 21);
+            labelIPNMp.TabIndex = 25;
+            labelIPNMp.Text = "Usa IPN";
+            // 
+            // IPN
+            // 
+            IPN.AutoSize = true;
+            IPN.Enabled = false;
+            IPN.Location = new Point(284, 32);
+            IPN.Name = "IPN";
+            IPN.Size = new Size(25, 25);
+            IPN.TabIndex = 24;
+            IPN.UseVisualStyleBackColor = true;
+            IPN.Click += IPN_Click;
             // 
             // label2
             // 
@@ -219,5 +245,7 @@
         public Button CASHOUT;
         private Label label1;
         public Button MERPAGO;
+        private Label labelIPNMp;
+        public Button IPN;
     }
 }
