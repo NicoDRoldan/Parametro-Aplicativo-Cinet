@@ -97,18 +97,25 @@
             panel12 = new Panel();
             panel13 = new Panel();
             panel14 = new Panel();
+            RECOMANDA = new Button();
+            label27 = new Label();
+            panel7 = new Panel();
+            panel8 = new Panel();
+            panel15 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             panel5.SuspendLayout();
-            panel6.SuspendLayout();
             panel9.SuspendLayout();
             panel11.SuspendLayout();
             panel10.SuspendLayout();
             panel12.SuspendLayout();
             panel13.SuspendLayout();
             panel14.SuspendLayout();
+            panel7.SuspendLayout();
+            panel8.SuspendLayout();
+            panel15.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -198,7 +205,7 @@
             // MARCHA
             // 
             MARCHA.AutoSize = true;
-            MARCHA.Location = new Point(146, 62);
+            MARCHA.Location = new Point(139, 38);
             MARCHA.Name = "MARCHA";
             MARCHA.Size = new Size(25, 25);
             MARCHA.TabIndex = 22;
@@ -210,7 +217,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ActiveCaptionText;
-            label8.Location = new Point(10, 67);
+            label8.Location = new Point(12, 42);
             label8.Name = "label8";
             label8.Size = new Size(68, 20);
             label8.TabIndex = 23;
@@ -219,7 +226,7 @@
             // BANDEJAS
             // 
             BANDEJAS.AutoSize = true;
-            BANDEJAS.Location = new Point(146, 34);
+            BANDEJAS.Location = new Point(139, 10);
             BANDEJAS.Name = "BANDEJAS";
             BANDEJAS.Size = new Size(25, 25);
             BANDEJAS.TabIndex = 8;
@@ -231,7 +238,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label10.ForeColor = SystemColors.ActiveCaptionText;
-            label10.Location = new Point(10, 35);
+            label10.Location = new Point(12, 10);
             label10.Name = "label10";
             label10.Size = new Size(84, 20);
             label10.TabIndex = 21;
@@ -585,21 +592,15 @@
             // panel5
             // 
             panel5.BackColor = Color.White;
-            panel5.Controls.Add(MARCHA);
             panel5.Controls.Add(panel6);
-            panel5.Controls.Add(label8);
-            panel5.Controls.Add(BANDEJAS);
-            panel5.Controls.Add(label10);
-            panel5.Location = new Point(12, 353);
+            panel5.Location = new Point(500, 12);
             panel5.Name = "panel5";
-            panel5.Size = new Size(192, 90);
+            panel5.Size = new Size(192, 142);
             panel5.TabIndex = 29;
             // 
             // panel6
             // 
             panel6.BackColor = SystemColors.MenuHighlight;
-            panel6.Controls.Add(lblOmnicanalCheck);
-            panel6.Controls.Add(label22);
             panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(0, 0);
             panel6.Name = "panel6";
@@ -611,7 +612,7 @@
             lblOmnicanalCheck.AutoSize = true;
             lblOmnicanalCheck.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblOmnicanalCheck.ForeColor = Color.White;
-            lblOmnicanalCheck.Location = new Point(99, 3);
+            lblOmnicanalCheck.Location = new Point(95, 5);
             lblOmnicanalCheck.Name = "lblOmnicanalCheck";
             lblOmnicanalCheck.Size = new Size(90, 16);
             lblOmnicanalCheck.TabIndex = 2;
@@ -622,7 +623,7 @@
             label22.AutoSize = true;
             label22.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label22.ForeColor = SystemColors.ButtonHighlight;
-            label22.Location = new Point(0, 3);
+            label22.Location = new Point(6, 4);
             label22.Name = "label22";
             label22.Size = new Size(74, 17);
             label22.TabIndex = 1;
@@ -689,7 +690,7 @@
             panel9.Controls.Add(panel10);
             panel9.Location = new Point(210, 235);
             panel9.Name = "panel9";
-            panel9.Size = new Size(254, 208);
+            panel9.Size = new Size(254, 260);
             panel9.TabIndex = 30;
             // 
             // panel11
@@ -713,7 +714,7 @@
             panel11.Dock = DockStyle.Fill;
             panel11.Location = new Point(0, 25);
             panel11.Name = "panel11";
-            panel11.Size = new Size(254, 183);
+            panel11.Size = new Size(254, 235);
             panel11.TabIndex = 1;
             // 
             // btnFAMAXVALOR
@@ -849,13 +850,73 @@
             panel14.Size = new Size(192, 25);
             panel14.TabIndex = 0;
             // 
+            // RECOMANDA
+            // 
+            RECOMANDA.AutoSize = true;
+            RECOMANDA.Location = new Point(139, 69);
+            RECOMANDA.Name = "RECOMANDA";
+            RECOMANDA.Size = new Size(25, 25);
+            RECOMANDA.TabIndex = 24;
+            RECOMANDA.UseVisualStyleBackColor = true;
+            RECOMANDA.Click += RECOMANDA_Click;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label27.ForeColor = SystemColors.ActiveCaptionText;
+            label27.Location = new Point(12, 73);
+            label27.Name = "label27";
+            label27.Size = new Size(123, 20);
+            label27.TabIndex = 25;
+            label27.Text = "Reintenta Mar";
+            // 
+            // panel7
+            // 
+            panel7.AutoScrollMargin = new Size(0, 10);
+            panel7.BackColor = Color.White;
+            panel7.Controls.Add(panel8);
+            panel7.Controls.Add(panel15);
+            panel7.Location = new Point(12, 353);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(192, 142);
+            panel7.TabIndex = 31;
+            // 
+            // panel8
+            // 
+            panel8.AutoScroll = true;
+            panel8.AutoScrollMargin = new Size(0, 10);
+            panel8.Controls.Add(RECOMANDA);
+            panel8.Controls.Add(label10);
+            panel8.Controls.Add(label27);
+            panel8.Controls.Add(BANDEJAS);
+            panel8.Controls.Add(MARCHA);
+            panel8.Controls.Add(label8);
+            panel8.Dock = DockStyle.Fill;
+            panel8.Location = new Point(0, 25);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(192, 117);
+            panel8.TabIndex = 1;
+            // 
+            // panel15
+            // 
+            panel15.BackColor = SystemColors.MenuHighlight;
+            panel15.Controls.Add(lblOmnicanalCheck);
+            panel15.Controls.Add(label22);
+            panel15.Dock = DockStyle.Top;
+            panel15.Location = new Point(0, 0);
+            panel15.Name = "panel15";
+            panel15.Size = new Size(192, 25);
+            panel15.TabIndex = 0;
+            // 
             // CinetPdvForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(473, 450);
+            ClientSize = new Size(475, 500);
+            Controls.Add(panel7);
             Controls.Add(panel12);
             Controls.Add(btnQuerys);
             Controls.Add(panel9);
@@ -879,9 +940,6 @@
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
             panel9.ResumeLayout(false);
             panel11.ResumeLayout(false);
             panel11.PerformLayout();
@@ -892,6 +950,11 @@
             panel13.PerformLayout();
             panel14.ResumeLayout(false);
             panel14.PerformLayout();
+            panel7.ResumeLayout(false);
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
+            panel15.ResumeLayout(false);
+            panel15.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -967,5 +1030,10 @@
         private Panel panel13;
         private Panel panel14;
         private Label lblOmnicanalCheck;
+        public Button RECOMANDA;
+        private Label label27;
+        private Panel panel7;
+        private Panel panel8;
+        private Panel panel15;
     }
 }

@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackofficeForm));
             CheckTiendaCafe = new CheckBox();
             STOREIDRAP = new TextBox();
             BtnConfigurarRap = new Button();
             panel3 = new Panel();
+            labelIdCafeteria = new Label();
+            STOREIDRP2 = new TextBox();
+            label8 = new Label();
             label6 = new Label();
             panel4 = new Panel();
             label19 = new Label();
@@ -85,16 +89,17 @@
             CheckTiendaCafe.BackColor = Color.FromArgb(0, 0, 192);
             CheckTiendaCafe.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             CheckTiendaCafe.ForeColor = SystemColors.ControlLightLight;
-            CheckTiendaCafe.Location = new Point(3, 54);
+            CheckTiendaCafe.Location = new Point(7, 64);
             CheckTiendaCafe.Name = "CheckTiendaCafe";
             CheckTiendaCafe.Size = new Size(194, 22);
             CheckTiendaCafe.TabIndex = 2;
             CheckTiendaCafe.Text = "Usa Tienda Cafetería?";
             CheckTiendaCafe.UseVisualStyleBackColor = false;
+            CheckTiendaCafe.CheckedChanged += CheckTiendaCafe_CheckedChanged;
             // 
             // STOREIDRAP
             // 
-            STOREIDRAP.Location = new Point(3, 85);
+            STOREIDRAP.Location = new Point(7, 168);
             STOREIDRAP.Name = "STOREIDRAP";
             STOREIDRAP.Size = new Size(100, 23);
             STOREIDRAP.TabIndex = 3;
@@ -102,7 +107,7 @@
             // 
             // BtnConfigurarRap
             // 
-            BtnConfigurarRap.Location = new Point(110, 85);
+            BtnConfigurarRap.Location = new Point(113, 169);
             BtnConfigurarRap.Name = "BtnConfigurarRap";
             BtnConfigurarRap.Size = new Size(75, 23);
             BtnConfigurarRap.TabIndex = 4;
@@ -113,22 +118,56 @@
             // panel3
             // 
             panel3.BackColor = Color.White;
+            panel3.Controls.Add(labelIdCafeteria);
+            panel3.Controls.Add(STOREIDRP2);
+            panel3.Controls.Add(label8);
             panel3.Controls.Add(label6);
             panel3.Controls.Add(CheckTiendaCafe);
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(STOREIDRAP);
             panel3.Controls.Add(BtnConfigurarRap);
-            panel3.Location = new Point(12, 104);
+            panel3.Location = new Point(5, 10);
             panel3.Name = "panel3";
-            panel3.Size = new Size(216, 117);
+            panel3.Size = new Size(216, 202);
             panel3.TabIndex = 30;
+            // 
+            // labelIdCafeteria
+            // 
+            labelIdCafeteria.AutoSize = true;
+            labelIdCafeteria.Enabled = false;
+            labelIdCafeteria.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            labelIdCafeteria.ForeColor = SystemColors.ActiveCaptionText;
+            labelIdCafeteria.Location = new Point(7, 97);
+            labelIdCafeteria.Name = "labelIdCafeteria";
+            labelIdCafeteria.Size = new Size(107, 20);
+            labelIdCafeteria.TabIndex = 41;
+            labelIdCafeteria.Text = "ID Cafetería";
+            // 
+            // STOREIDRP2
+            // 
+            STOREIDRP2.Enabled = false;
+            STOREIDRP2.Location = new Point(7, 120);
+            STOREIDRP2.Name = "STOREIDRP2";
+            STOREIDRP2.Size = new Size(100, 23);
+            STOREIDRP2.TabIndex = 40;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = SystemColors.ActiveCaptionText;
+            label8.Location = new Point(7, 145);
+            label8.Name = "label8";
+            label8.Size = new Size(80, 20);
+            label8.TabIndex = 39;
+            label8.Text = "ID Rappi";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = SystemColors.ActiveCaptionText;
-            label6.Location = new Point(3, 28);
+            label6.Location = new Point(22, 28);
             label6.Name = "label6";
             label6.Size = new Size(172, 20);
             label6.TabIndex = 23;
@@ -160,7 +199,7 @@
             btnQuerysBko.BackgroundImage = Properties.Resources.SqlServerLogo;
             btnQuerysBko.BackgroundImageLayout = ImageLayout.Zoom;
             btnQuerysBko.Enabled = false;
-            btnQuerysBko.Location = new Point(385, 324);
+            btnQuerysBko.Location = new Point(373, 332);
             btnQuerysBko.Name = "btnQuerysBko";
             btnQuerysBko.Size = new Size(75, 65);
             btnQuerysBko.TabIndex = 32;
@@ -174,9 +213,9 @@
             panel1.Controls.Add(btnCodLocal);
             panel1.Controls.Add(NOMLOCAL);
             panel1.Controls.Add(panel2);
-            panel1.Location = new Point(12, 12);
+            panel1.Location = new Point(227, 10);
             panel1.Name = "panel1";
-            panel1.Size = new Size(216, 86);
+            panel1.Size = new Size(226, 86);
             panel1.TabIndex = 31;
             // 
             // label5
@@ -214,7 +253,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(216, 25);
+            panel2.Size = new Size(226, 25);
             panel2.TabIndex = 0;
             // 
             // label1
@@ -239,9 +278,9 @@
             panel5.Controls.Add(btnPASS_MTZ);
             panel5.Controls.Add(UNAME_MTZ);
             panel5.Controls.Add(panel6);
-            panel5.Location = new Point(12, 227);
+            panel5.Location = new Point(5, 218);
             panel5.Name = "panel5";
-            panel5.Size = new Size(216, 162);
+            panel5.Size = new Size(216, 179);
             panel5.TabIndex = 31;
             // 
             // label7
@@ -249,7 +288,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = SystemColors.ActiveCaptionText;
-            label7.Location = new Point(3, 28);
+            label7.Location = new Point(12, 28);
             label7.Name = "label7";
             label7.Size = new Size(192, 20);
             label7.TabIndex = 24;
@@ -260,7 +299,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(3, 108);
+            label4.Location = new Point(7, 117);
             label4.Name = "label4";
             label4.Size = new Size(126, 20);
             label4.TabIndex = 38;
@@ -268,14 +307,14 @@
             // 
             // PASS_MTZ
             // 
-            PASS_MTZ.Location = new Point(3, 131);
+            PASS_MTZ.Location = new Point(7, 140);
             PASS_MTZ.Name = "PASS_MTZ";
             PASS_MTZ.Size = new Size(100, 23);
             PASS_MTZ.TabIndex = 36;
             // 
             // btnUNAME_MTZ
             // 
-            btnUNAME_MTZ.Location = new Point(110, 82);
+            btnUNAME_MTZ.Location = new Point(114, 91);
             btnUNAME_MTZ.Name = "btnUNAME_MTZ";
             btnUNAME_MTZ.Size = new Size(75, 23);
             btnUNAME_MTZ.TabIndex = 37;
@@ -288,7 +327,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ActiveCaptionText;
-            label3.Location = new Point(3, 59);
+            label3.Location = new Point(7, 68);
             label3.Name = "label3";
             label3.Size = new Size(87, 20);
             label3.TabIndex = 35;
@@ -296,7 +335,7 @@
             // 
             // btnPASS_MTZ
             // 
-            btnPASS_MTZ.Location = new Point(110, 130);
+            btnPASS_MTZ.Location = new Point(114, 139);
             btnPASS_MTZ.Name = "btnPASS_MTZ";
             btnPASS_MTZ.Size = new Size(75, 23);
             btnPASS_MTZ.TabIndex = 34;
@@ -306,7 +345,7 @@
             // 
             // UNAME_MTZ
             // 
-            UNAME_MTZ.Location = new Point(3, 82);
+            UNAME_MTZ.Location = new Point(7, 91);
             UNAME_MTZ.Name = "UNAME_MTZ";
             UNAME_MTZ.Size = new Size(100, 23);
             UNAME_MTZ.TabIndex = 33;
@@ -338,7 +377,7 @@
             panel9.BackColor = Color.White;
             panel9.Controls.Add(panel11);
             panel9.Controls.Add(panel10);
-            panel9.Location = new Point(234, 12);
+            panel9.Location = new Point(227, 102);
             panel9.Name = "panel9";
             panel9.Size = new Size(226, 209);
             panel9.TabIndex = 33;
@@ -500,12 +539,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(470, 396);
+            ClientSize = new Size(460, 409);
             Controls.Add(panel9);
             Controls.Add(panel5);
             Controls.Add(panel1);
             Controls.Add(btnQuerysBko);
             Controls.Add(panel3);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "BackofficeForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -573,5 +613,8 @@
         private Label label9;
         private TextBox FAMAXVALOR;
         private Button btnMAXARQUEOF;
+        private Label labelIdCafeteria;
+        private TextBox STOREIDRP2;
+        private Label label8;
     }
 }

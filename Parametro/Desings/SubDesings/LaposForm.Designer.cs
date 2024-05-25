@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LaposForm));
             panel1 = new Panel();
             label4 = new Label();
             label3 = new Label();
@@ -488,6 +489,7 @@
             Controls.Add(panel7);
             Controls.Add(panel4);
             Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "LaposForm";
             StartPosition = FormStartPosition.CenterScreen;

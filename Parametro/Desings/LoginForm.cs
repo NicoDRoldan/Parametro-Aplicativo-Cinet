@@ -101,7 +101,10 @@ namespace Parametro.Desings
             baseDatosLinkedServer = comboBoxDataBase.Text.Trim();
 
             if (checkBoxLinkedServer.Checked)
+            {
+                ConexionDB.baseDatos = "master";
                 checkLinkedServer = true;
+            }
             else
                 checkLinkedServer = false;
 
@@ -181,6 +184,7 @@ namespace Parametro.Desings
                 cbEquipoLinkedServer.Text = string.Empty;
                 comboBoxDataBase.Text = string.Empty;
                 comboBoxDataBase.Items.Clear();
+                cbEquipoLinkedServer.Items.Clear ();
             }
         }
 

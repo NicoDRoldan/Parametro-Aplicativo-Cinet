@@ -24,6 +24,7 @@ namespace Parametro.Class
         public static string puertoLinkedServer { get; set; }
         public static string usuarioBase { get; set; }
         public static string baseLikedServer { get; set; }
+        public static string pais { get; set; }
 
         bool isSucess = false;
 
@@ -65,7 +66,8 @@ namespace Parametro.Class
             // Consulta para obtener los nombres de bases de datos específicas en estado 'ONLINE'
             string consulta = "SELECT name FROM sys.databases " +
                 "WHERE state_desc = 'ONLINE' " +
-                "AND name IN('Backoffice','Comanda','Empresa','Cinet_PDV','Cinet_PDV_Totem','Cinet_PDV_Auto') OR name LIKE '%PDV%'";
+                "AND name IN('Backoffice','Comanda','Empresa','Cinet_PDV','Cinet_PDV_Totem','Cinet_PDV_Auto') OR (name LIKE '%PDV%'" +
+                "and state_desc = 'ONLINE')";
 
             try
             {

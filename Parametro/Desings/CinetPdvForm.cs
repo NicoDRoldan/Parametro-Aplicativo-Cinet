@@ -20,12 +20,31 @@ namespace Parametro.Desings
         ConexionDB conexionDB = new ConexionDB();
         QuerysParametros querysParametros = new QuerysParametros();
         ToolTip toolTip = new ToolTip();
+        Querys querys = new Querys();
 
         public CinetPdvForm()
         {
             InitializeComponent();
-            CargarDatosBtn();
-            CargarDatosTxt();
+
+            ConexionDB.pais = querys.BasePais();
+
+            if(ConexionDB.pais == "PARAGUAY" || ConexionDB.pais == "BOLIVIA")
+            {
+                btnPayWay.Enabled = false;
+                btnPayWay.FlatStyle = FlatStyle.Flat;
+                btnMerPago.Enabled = false;
+                btnMerPago.FlatStyle = FlatStyle.Flat;
+            }
+
+            string[] nombreParametros = { SERV_DVY.Name, PEDIDOSYA.Name,
+                RAPPI.Name, APP_MTZ.Name, BANDEJAS.Name, MARCHA.Name,
+                DUALPOINT.Name, DNFCOPFI.Name, USATURNO1.Name, ELIGECOMA.Name,
+                QRCupon.Name, SINBANDA.Name, TOTEM.Name, ZONALOCAL.Name,
+                USAREMOTO.Name, ZONACAFE.Name, NOMLOCAL.Name, NUMCAJA.Name, VTAPUNTO.Name,
+                CODPUERTA.Name, FAMAXVALOR.Name, RECOMANDA.Name };
+
+            CargarDatosParametros(this, nombreParametros);
+            ImagenPais();
 
             this.Text = conexionDB.TraerDatosEquipo(this.Text, ConexionDB.baseDatos, ConexionDB.equipoLinkedServer);
 
@@ -40,7 +59,7 @@ namespace Parametro.Desings
             else
             {
                 lblOmnicanalCheck.ForeColor = Color.Red;
-                toolTip.SetToolTip(this.lblOmnicanalCheck, "OMNICANAL DESACTIVADO");
+                toolTip.SetToolTip(this.lblOmnicanalCheck, "CORROBORAR CONFIGURACIÓN");
             }
         }
 
@@ -54,55 +73,21 @@ namespace Parametro.Desings
 
         }
 
-        public void CargarDatosBtn()
+        public void CargarDatosParametros(Form form, string[] nombreParametros)
         {
-            string[] nombreParametros = { SERV_DVY.Name, PEDIDOSYA.Name,
-                RAPPI.Name, APP_MTZ.Name, BANDEJAS.Name, MARCHA.Name,
-                DUALPOINT.Name, DNFCOPFI.Name, USATURNO1.Name, ELIGECOMA.Name,
-                QRCupon.Name, SINBANDA.Name, TOTEM.Name, ZONALOCAL.Name,
-                USAREMOTO.Name, ZONACAFE.Name};
-
             foreach (string nombreParametro in nombreParametros)
             {
                 // Buscar el control por nombre.
-                Control control = Controls.Find(nombreParametro, true).FirstOrDefault();
-                // Verificar que se encontró el control y que es un botón.
-                if (control != null && control is Button)
+                Control control = form.Controls.Find(nombreParametro, true).FirstOrDefault();
+                if (control != null && control is Button) // Verificar que se encontró el control y que es un botón.
                 {
-                    if (LoginForm.checkLinkedServer is true)
-                    {
-                        ConexionDB.baseDatos = "master";
-                        (control as Button).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros where para_codigo = '{nombreParametro}'");
-                    }
-                    else
-                    {
-                        (control as Button).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from parametros where para_codigo = '{nombreParametro}'");
-                    }
+                    (control as Button).Text = conexionDB.ObtenerValorDesdeBD
+                            ($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{nombreParametro}'");
                 }
-            }
-        }
-
-        public void CargarDatosTxt()
-        {
-            string[] nombreParametros = {NOMLOCAL.Name, NUMCAJA.Name, VTAPUNTO.Name,
-                CODPUERTA.Name, FAMAXVALOR.Name};
-
-            foreach (string nombreParametro in nombreParametros)
-            {
-                // Buscar el control por nombre.
-                Control control = Controls.Find(nombreParametro, true).FirstOrDefault();
-                // Verificar que se encontró el control y que es un botón.
-                if (control != null && control is TextBox)
+                if (control != null && control is TextBox) // Verificar que se encontró el control y que es un cuadro de texto.
                 {
-                    if (LoginForm.checkLinkedServer is true)
-                    {
-                        ConexionDB.baseDatos = "master";
-                        (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros where para_codigo = '{nombreParametro}'");
-                    }
-                    else
-                    {
-                        (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from parametros where para_codigo = '{nombreParametro}'");
-                    }
+                    (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD
+                            ($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{nombreParametro}'");
                 }
             }
         }
@@ -116,35 +101,36 @@ namespace Parametro.Desings
         {
             Button btn = sender as Button;
 
-            // Llamo al metodo con los párametros
-
-            if (LoginForm.checkLinkedServer is true)
-            {
-                querysParametros.HabilitarParametro(btn.Name, "", btn.Text, ConexionDB.equipoLinkedServer, ConexionDB.puertoLinkedServer, LoginForm.baseDatosLinkedServer);
-                btn.Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros where para_codigo = '{btn.Name}'");
-            }
-            else
-            {
-                querysParametros.HabilitarParametro(btn.Name, "", btn.Text);
-                btn.Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from parametros where para_codigo = '{btn.Name}'");
-            }
+            querysParametros.HabilitarOUpdatearParametro(btn.Name, "", btn.Text);
+            btn.Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{btn.Name}'");
+            MessageBox.Show($"Se actualizó el parametro {btn.Name}");
         }
 
         public void EventoClickTxt(object sender, EventArgs e)
         {
             TextBox txt = (TextBox)((Button)sender).Tag;
 
-            // Llamo al metodo con los párametros
-
-            if (LoginForm.checkLinkedServer is true)
+            if (txt.Text is null || txt.Text.Length == 0)
             {
-                querysParametros.UpdateParametro(txt.Name, "", txt.Text, ConexionDB.equipoLinkedServer, ConexionDB.puertoLinkedServer, LoginForm.baseDatosLinkedServer);
-                txt.Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros where para_codigo = '{txt.Name}'");
+                MessageBox.Show("No puede dejar el campo vacío.");
             }
             else
             {
-                querysParametros.UpdateParametro(txt.Name, "", txt.Text);
-                txt.Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from parametros where para_codigo = '{txt.Name}'");
+                querysParametros.HabilitarOUpdatearParametro(txt.Name, "", txt.Text);
+                txt.Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{txt.Name}'");
+                MessageBox.Show($"Se actualizó el parametro {txt.Name}");
+            }
+        }
+
+        public void ImagenPais()
+        {
+            switch (ConexionDB.pais)
+            {
+                case "URUGUAY":
+                    btnPayWay.BackgroundImage = Properties.Resources.fiservgeocom;
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -177,10 +163,22 @@ namespace Parametro.Desings
 
         private void btnSucFiscal_Click(object sender, EventArgs e)
         {
-            ParametrosModels.sucFiscal = VTAPUNTO.Text;
-            querysParametros.ConfigurarPuntoDeVenta();
 
-            querysParametros.ConfigurarMercadoPago();
+            if (VTAPUNTO.Text is null || VTAPUNTO.Text.Length == 0)
+            {
+                MessageBox.Show("No puede dejar el campo vacío.");
+            }
+            else if (ConexionDB.pais != "PARAGUAY" && VTAPUNTO.Text.Length > 4)
+            {
+                MessageBox.Show("El número de punto de venta no puede ser mayor a 4.");
+            }
+            else
+            {
+                ParametrosModels.sucFiscal = VTAPUNTO.Text;
+                querysParametros.ConfigurarPuntoDeVenta();
+
+                querysParametros.ConfigurarMercadoPago();
+            }
         }
 
         private void btnCodLocal_Click(object sender, EventArgs e)
@@ -250,10 +248,21 @@ namespace Parametro.Desings
             TOTEM.Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{TOTEM.Name}'");
         }
 
+        #region Vistas
+
         private void btnPayWay_Click(object sender, EventArgs e)
         {
-            LaposForm laposForm = new LaposForm();
-            laposForm.Show();
+            switch (ConexionDB.pais)
+            {
+                case "URUGUAY":
+                    LaposUyForm laposUyForm = new LaposUyForm();
+                    laposUyForm.Show();
+                    break;
+                default:
+                    LaposForm laposForm = new LaposForm();
+                    laposForm.Show();
+                    break;
+            }
         }
 
         private void btnMerPago_Click(object sender, EventArgs e)
@@ -262,15 +271,17 @@ namespace Parametro.Desings
             mercadoPagoForm.Show();
         }
 
-        private void ZONALOCAL_Click(object sender, EventArgs e)
-        {
-            EventoClick(sender, e);
-        }
-
         private void btnQuerys_Click(object sender, EventArgs e)
         {
             QuerysForm querysForm = new QuerysForm();
             querysForm.Show();
+        }
+
+        #endregion
+
+        private void ZONALOCAL_Click(object sender, EventArgs e)
+        {
+            EventoClick(sender, e);
         }
 
         private void USAREMOTO_Click(object sender, EventArgs e)
@@ -286,6 +297,11 @@ namespace Parametro.Desings
         #endregion
 
         private void ZONACAFE_Click(object sender, EventArgs e)
+        {
+            EventoClick(sender, e);
+        }
+
+        private void RECOMANDA_Click(object sender, EventArgs e)
         {
             EventoClick(sender, e);
         }

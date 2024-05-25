@@ -25,8 +25,9 @@ namespace Parametro.Desings.SubDesings
         {
             InitializeComponent();
             CargarNumerosComercio();
-            CargarDatosBtn();
-            CargarDatosTxt();
+
+            string[] nombreParametros = { TACOCUIT.Name, LPoPuerto.Name, TERMINAL.Name, LAPOSNET.Name };
+            cinetPdvForm.CargarDatosParametros(this, nombreParametros);
         }
 
         public void btnGuardarNrosComercio_Click(object sender, EventArgs e)
@@ -110,54 +111,6 @@ namespace Parametro.Desings.SubDesings
                 else
                 {
                     (control as TextBox).Text = conexionDB.ObtenerValorComercioDesdeBD($"Select lpo_numcomercio from vallapos where val_codigo = '{tarjeta}'").Trim();
-                }
-            }
-        }
-
-        private void CargarDatosBtn()
-        {
-            string[] nombreParametros = { LAPOSNET.Name };
-
-            foreach (string nombreParametro in nombreParametros)
-            {
-                // Buscar el control por nombre.
-                Control control = Controls.Find(nombreParametro, true).FirstOrDefault();
-                // Verificar que se encontró el control y que es un botón.
-                if (control != null && control is Button)
-                {
-                    if (LoginForm.checkLinkedServer is true)
-                    {
-                        ConexionDB.baseDatos = "master";
-                        (control as Button).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros where para_codigo = '{nombreParametro}'");
-                    }
-                    else
-                    {
-                        (control as Button).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from parametros where para_codigo = '{nombreParametro}'");
-                    }
-                }
-            }
-        }
-
-        private void CargarDatosTxt()
-        {
-            string[] nombreParametros = { TACOCUIT.Name, LPoPuerto.Name, TERMINAL.Name };
-
-            foreach (string nombreParametro in nombreParametros)
-            {
-                // Buscar el control por nombre.
-                Control control = Controls.Find(nombreParametro, true).FirstOrDefault();
-                // Verificar que se encontró el control y que es un botón.
-                if (control != null && control is TextBox)
-                {
-                    if (LoginForm.checkLinkedServer is true)
-                    {
-                        ConexionDB.baseDatos = "master";
-                        (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros where para_codigo = '{nombreParametro}'");
-                    }
-                    else
-                    {
-                        (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from parametros where para_codigo = '{nombreParametro}'");
-                    }
                 }
             }
         }

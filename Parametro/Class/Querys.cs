@@ -68,7 +68,17 @@ namespace Parametro.Class
                 using (SqlConnection conexion = new SqlConnection(cadenaConexion))
                 {
                     conexion.Open();
-                    if (!CierreExiste(conexion, ConexionDB.baseDatos, ConexionDB.numeroCierre))
+                    if(!InicioExiste(conexion, ConexionDB.numeroCierre))
+                    {
+                        Log.Warning("El inicio no existe. No se realizará la inserción.");
+                        MessageBox.Show($"Error, el cierre indicado ({ConexionDB.numeroCierre}) no tiene inicio, no se realizó la inserción.");
+                    }
+                    else if(CierreExiste(conexion, ConexionDB.baseDatos, ConexionDB.numeroCierre))
+                    {
+                        Log.Warning("El registro ya existe. No se realizará la inserción.");
+                        MessageBox.Show($"Error, el cierre indicado ({ConexionDB.numeroCierre}) ya existe, no se realizó la inserción.");
+                    }
+                    else
                     {
                         using (SqlCommand comando = new SqlCommand(consulta, conexion))
                         {
@@ -86,18 +96,6 @@ namespace Parametro.Class
                         }
                         Log.Information("SQL Query: \n" + consulta);
                         MessageBox.Show($"Se insertó el cierre indicado ({ConexionDB.numeroCierre}).");
-                    }
-                    else
-                    {
-                        using (SqlCommand comando = new SqlCommand(consultaCierres, conexion))
-                        {
-                            using (SqlDataAdapter adapter = new SqlDataAdapter(comando))
-                            {
-                                adapter.Fill(table);
-                            }
-                        }
-                        Log.Warning("El registro ya existe. No se realizará la inserción.");
-                        MessageBox.Show($"Error, el cierre indicado ({ConexionDB.numeroCierre}) ya existe, no se realizó la inserción.");
                     }
                     conexion.Close();
                 }
@@ -120,6 +118,19 @@ namespace Parametro.Class
             {
                 int count = (int)comando.ExecuteScalar();
                 return (count > 0);
+            }
+        }
+        #endregion
+
+        #region Inicio Existe
+        public bool InicioExiste(SqlConnection sqlConnection, string numCierre)
+        {
+            string query = $"select count(*) from {conexionDB.VerificarLinkedServer()}LIBROCAJA WHERE LICA_NUMCIERRE = '{numCierre}' AND LICA_DETALLE LIKE '%Inicio%'";
+
+            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            {
+                int count = (int)sqlCommand.ExecuteScalar();
+                return(count > 0);
             }
         }
         #endregion

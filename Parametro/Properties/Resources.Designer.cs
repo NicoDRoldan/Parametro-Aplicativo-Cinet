@@ -73,6 +73,16 @@ namespace Parametro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fiservgeocom {
+            get {
+                object obj = ResourceManager.GetObject("fiservgeocom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Mercado_Pago_Logo {
             get {
                 object obj = ResourceManager.GetObject("Mercado-Pago-Logo", resourceCulture);

@@ -21,8 +21,9 @@ namespace Parametro.Desings.SubDesings
         public MercadoPagoForm()
         {
             InitializeComponent();
-            CargarDatosBtn();
-            CargarDatosTxt();
+
+            string[] nombreParametros = { EXTERIDMP.Name, TOKENMP.Name, MERPAGO.Name, CASHOUT.Name, IPN.Name };
+            cinetPdvForm.CargarDatosParametros(this, nombreParametros);
 
             if (ConexionDB.usuarioBase == "dukissj")
             {
@@ -32,54 +33,6 @@ namespace Parametro.Desings.SubDesings
             toolTip.SetToolTip(this.labelIPNMp, "URL IPN: " + 
                 conexionDB.ObtenerValorDesdeBD($"SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS " +
                                                 $"WHERE PARA_CODIGO = 'MP_URL_IPN'"));
-        }
-
-        private void CargarDatosBtn()
-        {
-            string[] nombreParametros = { MERPAGO.Name, CASHOUT.Name, IPN.Name };
-
-            foreach (string nombreParametro in nombreParametros)
-            {
-                // Buscar el control por nombre.
-                Control control = Controls.Find(nombreParametro, true).FirstOrDefault();
-                // Verificar que se encontró el control y que es un botón.
-                if (control != null && control is Button)
-                {
-                    if (LoginForm.checkLinkedServer is true)
-                    {
-                        ConexionDB.baseDatos = "master";
-                        (control as Button).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros where para_codigo = '{nombreParametro}'");
-                    }
-                    else
-                    {
-                        (control as Button).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from parametros where para_codigo = '{nombreParametro}'");
-                    }
-                }
-            }
-        }
-
-        private void CargarDatosTxt()
-        {
-            string[] nombreParametros = { EXTERIDMP.Name, TOKENMP.Name };
-
-            foreach (string nombreParametro in nombreParametros)
-            {
-                // Buscar el control por nombre.
-                Control control = Controls.Find(nombreParametro, true).FirstOrDefault();
-                // Verificar que se encontró el control y que es un botón.
-                if (control != null && control is TextBox)
-                {
-                    if (LoginForm.checkLinkedServer is true)
-                    {
-                        ConexionDB.baseDatos = "master";
-                        (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros where para_codigo = '{nombreParametro}'");
-                    }
-                    else
-                    {
-                        (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from parametros where para_codigo = '{nombreParametro}'");
-                    }
-                }
-            }
         }
 
         private void MERPAGO_Click(object sender, EventArgs e)

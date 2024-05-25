@@ -24,8 +24,12 @@ namespace Parametro.Desings
         public BackofficeForm()
         {
             InitializeComponent();
-            CargarDatos();
-            CargarDatosTxt();
+
+            string[] nombreParametros = {NOMLOCAL.Name, FAMAXVALOR.Name, MAXARQUEOF.Name,
+                                            UPDRUTA.Name, EQUIPOUPD.Name, PASS_MTZ.Name, UNAME_MTZ.Name,
+                                            STOREIDRAP.Name, STOREIDRP2.Name};
+            cinetPdvForm.CargarDatosParametros(this, nombreParametros);
+
             ValidarActivoCafe();
 
             this.Text = conexionDB.TraerDatosEquipo(this.Text, ConexionDB.baseDatos, ConexionDB.equipoLinkedServer);
@@ -38,42 +42,6 @@ namespace Parametro.Desings
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-        }
-
-        private void CargarDatos()
-        {
-            string[] nombreParametros = { "STOREIDRAP" };
-
-            foreach (string nombreParametro in nombreParametros)
-            {
-                // Buscar el control por nombre.
-                Control control = Controls.Find(nombreParametro, true).FirstOrDefault();
-                // Verificar que se encontró el control y que es un botón.
-                if (LoginForm.checkLinkedServer is true)
-                {
-                    ConexionDB.baseDatos = "master";
-                    (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros where para_codigo = '{nombreParametro}'");
-                }
-                else
-                {
-                    (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from parametros where para_codigo = '{nombreParametro}'");
-                }
-            }
-        }
-
-        public void CargarDatosTxt()
-        {
-            string[] nombreParametros = {NOMLOCAL.Name, FAMAXVALOR.Name, MAXARQUEOF.Name,
-                                            UPDRUTA.Name, EQUIPOUPD.Name, PASS_MTZ.Name, UNAME_MTZ.Name};
-
-            foreach (string nombreParametro in nombreParametros)
-            {
-                Control control = Controls.Find(nombreParametro, true).FirstOrDefault();
-                if (control != null && control is TextBox)
-                {
-                    (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{nombreParametro}'");
-                }
-            }
         }
 
         private void EventoClick(object sender, EventArgs e)
@@ -95,6 +63,7 @@ namespace Parametro.Desings
                 vista = new VistaQuerys();
 
                 ParametrosModels.StoreIdRap = STOREIDRAP.Text;
+                ParametrosModels.StoreIdRapCafe = STOREIDRP2.Text;
 
                 ValidarTiendaCafe();
 
@@ -126,10 +95,28 @@ namespace Parametro.Desings
             if (querysParametros.RappiCafeActivo() is true)
             {
                 CheckTiendaCafe.Checked = true;
+                labelIdCafeteria.Enabled = true;
+                STOREIDRP2.Enabled = true;
             }
             else
             {
                 CheckTiendaCafe.Checked = false;
+                labelIdCafeteria.Enabled = false;
+                STOREIDRP2.Enabled = false;
+            }
+        }
+
+        private void CheckTiendaCafe_CheckedChanged(object sender, EventArgs e)
+        {
+            if(CheckTiendaCafe.Checked == true)
+            {
+                labelIdCafeteria.Enabled = true;
+                STOREIDRP2.Enabled = true;
+            }
+            else
+            {
+                labelIdCafeteria.Enabled = false;
+                STOREIDRP2.Enabled = false;
             }
         }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuerysBackofficeForm));
             panel5 = new Panel();
             txtPassBotones = new TextBox();
             btnAceptarPassBtn = new Button();
@@ -472,6 +473,7 @@
             Controls.Add(btnReducirLogs);
             Controls.Add(panel5);
             Controls.Add(panelMesa);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "QuerysBackofficeForm";
             StartPosition = FormStartPosition.CenterScreen;

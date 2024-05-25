@@ -13,6 +13,7 @@ namespace Parametro.Models
         public static string para_Valor { get; set; }
 
         public static string StoreIdRap { get; set; }
+        public static string StoreIdRapCafe { get; set; }
         public static string UsaCafe { get; set; }
         public static string sucFiscal { get; set; }
     }

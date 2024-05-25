@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,16 +30,16 @@ namespace Parametro.Desings.SubDesings
 
             fechaHasta.Value = DateTime.Today;
 
-            panelMesa.Enabled = false;
-            panelUruguay.Enabled = false;
-            panelParaguay.Enabled = false;
-
             VerificarPais();
         }
-
+        
         private void btnRegCierre_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(NumCierre.Text))
+            if (string.IsNullOrEmpty(NumCierre.Text) || NumCierre.Text.Length == 0 || NumCierre.Text is null)
+            {
+                MessageBox.Show("Ingresar número de cierre correspondiente.");
+            }
+            else
             {
                 if (vistaQuerys != null && vistaQuerys.Visible)
                 {
@@ -49,25 +50,33 @@ namespace Parametro.Desings.SubDesings
                 ConexionDB.numeroCierre = NumCierre.Text.Trim();
                 DataTable resultados = querys.RegenerarCierre();
 
-                vistaQuerys.dataGridResultadosQuery.DataSource = resultados.DefaultView;
-                vistaQuerys.Show();
-            }
-            else
-            {
-                MessageBox.Show("Ingresar número de cierre correspondiente.");
+                if(resultados.Rows.Count > 0)
+                {
+                    vistaQuerys.dataGridResultadosQuery.DataSource = resultados.DefaultView;
+                    vistaQuerys.Show();
+                }
             }
         }
 
         private bool ValidarPassBotones()
         {
-            return (txtPassBotones.Text == "onichanfurry");
+            return (txtPassBotones.Text == "onichanfurry" || txtPassBotones.Text == "comotanmuchacho");
         }
 
         private void HabilitarBotones()
         {
             if (ValidarPassBotones() && !string.IsNullOrEmpty(txtPassBotones.Text))
             {
+                panelMesa.Visible = true;
                 panelMesa.Enabled = true;
+                PanelAdmin.Enabled = true;
+                panelUruguay.Enabled = true;
+                panelParaguay.Enabled = true;
+                panelBolivia.Enabled = true;
+            }
+            else if (ValidarPassBotones() && !string.IsNullOrEmpty(txtPassBotones.Text) && txtPassBotones.Text != "onichanfurry")
+            {
+                panelMesa.Enabled= true;
                 panelUruguay.Enabled = true;
                 panelParaguay.Enabled = true;
                 panelBolivia.Enabled = true;
@@ -75,6 +84,10 @@ namespace Parametro.Desings.SubDesings
             else
             {
                 panelMesa.Enabled = false;
+                PanelAdmin.Enabled = false;
+                panelUruguay.Enabled = false;
+                panelParaguay.Enabled = false;
+                panelBolivia.Enabled = false;
                 MessageBox.Show("Datos incorrectos");
             }
         }
@@ -89,8 +102,6 @@ namespace Parametro.Desings.SubDesings
             vistaQuerys = new VistaQuerys();
 
             DataSet resultados = querys.VerZetasEnCero(fechaDesde.Value.Date.ToString(), fechaHasta.Value.Date.ToString());
-
-            //vistaQuerys.dataGridResultadosQuery.DataSource = resultados.DefaultView;
 
             if (resultados.Tables.Count >= 2)
             {
@@ -117,9 +128,7 @@ namespace Parametro.Desings.SubDesings
         {
             Querys querys = new Querys();
 
-            var pais = querys.BasePais();
-
-            switch (pais)
+            switch (ConexionDB.pais)
             {
                 case "URUGUAY":
                     MostrarDatos();
@@ -142,7 +151,7 @@ namespace Parametro.Desings.SubDesings
 
         private void MostrarDatos()
         {
-            if (querys.BasePais() == "URUGUAY")
+            if (ConexionDB.pais == "URUGUAY")
             {
                 panelUruguay.Visible = true;
                 btnFEAuto.Visible = true;
@@ -152,7 +161,7 @@ namespace Parametro.Desings.SubDesings
                 btnCorregirClienteRut.Visible = true;
                 txtRutCorrecto.Visible = true;
             }
-            else if (querys.BasePais() == "PARAGUAY")
+            else if (ConexionDB.pais == "PARAGUAY")
             {
                 panelParaguay.Visible = true;
                 panelParaguay.Location = new Point(413, 74);
@@ -163,7 +172,7 @@ namespace Parametro.Desings.SubDesings
                 txtTimLocal.Visible = true;
                 btnConfigTim.Visible = true;
             }
-            else if (querys.BasePais() == "BOLIVIA")
+            else if (ConexionDB.pais == "BOLIVIA")
             {
                 panelBolivia.Location = new Point(413, 74);
                 panelBolivia.Visible = true;
@@ -225,7 +234,8 @@ namespace Parametro.Desings.SubDesings
 
         private void btnConfigTim_Click(object sender, EventArgs e)
         {
-            querys.ConfigurarTimbrado(txtTimLocal.Text, txtTimCaja.Text);
+            if (txtTimLocal.Text.Length == 0 || txtTimCaja.Text.Length == 0) MessageBox.Show("Completar los campos.");
+            else querys.ConfigurarTimbrado(txtTimLocal.Text, txtTimCaja.Text);
         }
         private void btnFEAutoBo_Click(object sender, EventArgs e)
         {
@@ -267,12 +277,20 @@ namespace Parametro.Desings.SubDesings
 
         private void btnCorregirNracion_Click(object sender, EventArgs e)
         {
-            labelNroBteAnt.Visible = true;
-            txtNumCbteeAnt.Visible = true;
+            if(txtTipoCBTEE.Text.Length > 0 &&
+                (txtUltimoNroCorrelativo.Text.Length > 0 && Regex.IsMatch(txtUltimoNroCorrelativo.Text, @"^\d+$"))) {
 
-            txtNumCbteeAnt.Text = querys.ConsultarUltimaNumeracion(txtTipoCBTEE.Text);
+                labelNroBteAnt.Visible = true;
+                txtNumCbteeAnt.Visible = true;
 
-            querys.CorregirNumeracion(txtTipoCBTEE.Text, txtUltimoNroCorrelativo.Text);
+                txtNumCbteeAnt.Text = querys.ConsultarUltimaNumeracion(txtTipoCBTEE.Text);
+
+                querys.CorregirNumeracion(txtTipoCBTEE.Text, txtUltimoNroCorrelativo.Text);
+            }
+            else
+            {
+                MessageBox.Show("Verificar los datos ingresados.");
+            }
         }
 
         private void btnBackup_Click(object sender, EventArgs e)

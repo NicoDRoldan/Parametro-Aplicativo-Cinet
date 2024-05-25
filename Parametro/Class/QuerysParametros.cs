@@ -16,176 +16,40 @@ namespace Parametro.Class
     {
         ConexionDB connectDB = new ConexionDB();
 
-        #region Habilitar Parametro
-        public void HabilitarParametro(string para_codigo, string para_descripcion, string valorParametro)
+        #region Habilitar/Crear/Updatear Parametro
+        public void HabilitarOUpdatearParametro(string para_codigo, string para_descripcion, string para_valor)
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string cadenaConexion = conexionDB.StringConexion();
+            string query;
 
-            string queryUpdateS = $"IF NOT EXISTS (SELECT * FROM PARAMETROS WHERE PARA_CODIGO = '{para_codigo}') INSERT INTO PARAMETROS VALUES ('{para_codigo}','{para_descripcion}','S',NULL,NULL) ELSE UPDATE PARAMETROS SET PARA_VALOR = 'S' WHERE PARA_CODIGO = '{para_codigo}'";
-            string queryUpdateN = $"UPDATE PARAMETROS SET PARA_VALOR = 'N' WHERE PARA_CODIGO = '{para_codigo}'";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(cadenaConexion))
-                {
-                    connection.Open();
-
-                    CinetPdvForm cinetPdvForm = new CinetPdvForm();
-
-                    if (valorParametro != "S")
-                    {
-                        using (SqlCommand command = new SqlCommand(queryUpdateS, connection))
-                        {
-                            command.ExecuteNonQuery();
-                        }
-
-                        Log.Information("SQL Query: \n" + queryUpdateS);
-                    }
-                    else if (valorParametro == "S")
-                    {
-                        using (SqlCommand command = new SqlCommand(queryUpdateN, connection))
-                        {
-                            command.ExecuteNonQuery();
-                        }
-
-                        Log.Information("SQL Query: \n" + queryUpdateN);
-                    }
-                    MessageBox.Show($"Se actualizó el parametro {para_codigo}");
-                    connection.Close();
-                }
-            }
-            catch (SqlException ex)
-            {
-                // Registra el error en el log
-                Log.Error("ERROR QUERY: n" + ex.ToString());
-                // Muestra un mensaje de error al usuario
-                MessageBox.Show("No se realizó el cambio. \nVer Error: " + ex.Message);
-            }
-        }
-        #endregion
-
-        #region Habilitar Parametro Linked Server
-        public void HabilitarParametro(string para_codigo, string para_descripcion, string valorParametro, string equipoLinkedServer, string puertoLinkedServer, string baseDatos)
-        {
-            ConexionDB conexionDB = new ConexionDB();
-
-            string cadenaConexion = conexionDB.StringConexion();
-
-            string queryUpdateS = $"IF NOT EXISTS (SELECT * FROM [{equipoLinkedServer},{puertoLinkedServer}].[{baseDatos}].DBO.PARAMETROS WHERE PARA_CODIGO = '{para_codigo}') INSERT INTO [{equipoLinkedServer},{puertoLinkedServer}].[{baseDatos}].DBO.PARAMETROS VALUES ('{para_codigo}','{para_descripcion}','S',NULL,NULL) ELSE UPDATE [{equipoLinkedServer},{puertoLinkedServer}].[{baseDatos}].DBO.PARAMETROS SET PARA_VALOR = 'S' WHERE PARA_CODIGO = '{para_codigo}'";
-            string queryUpdateN = $"UPDATE [{equipoLinkedServer},{puertoLinkedServer}].[{baseDatos}].DBO.PARAMETROS SET PARA_VALOR = 'N' WHERE PARA_CODIGO = '{para_codigo}'";
+            if (para_valor == "N" || para_valor == "NE" || para_valor == "" || para_valor is null) query = $"IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = '{para_codigo}') " +
+                $"INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES ('{para_codigo}','{para_descripcion}','S',NULL,NULL) " +
+                $"ELSE UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = 'S' WHERE PARA_CODIGO = '{para_codigo}'";
+            else if (para_valor == "S") query = $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = 'N' WHERE PARA_CODIGO = '{para_codigo}'";
+            else if (para_valor == "quierodejarestecampovacio") query = $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = '' WHERE PARA_CODIGO = '{para_codigo}'";
+            else query = $"IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = '{para_codigo}') " +
+                $"INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES ('{para_codigo}','{para_descripcion}','{para_valor}',NULL,NULL) " +
+                $"ELSE UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = '{para_valor}' WHERE PARA_CODIGO = '{para_codigo}'";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(cadenaConexion))
+                using (SqlConnection connection = new SqlConnection(conexionDB.StringConexion()))
                 {
                     connection.Open();
 
-                    CinetPdvForm cinetPdvForm = new CinetPdvForm();
-
-                    if (valorParametro != "S")
+                    using (SqlCommand sqlCommand = new SqlCommand(query, connection))
                     {
-                        using (SqlCommand command = new SqlCommand(queryUpdateS, connection))
-                        {
-                            command.ExecuteNonQuery();
-                            cinetPdvForm.SERV_DVY.Text = valorParametro;
-                        }
-
-                        Log.Information("SQL Query: \n" + queryUpdateS);
+                        sqlCommand.ExecuteNonQuery();
                     }
-                    else if (valorParametro == "S")
-                    {
-                        using (SqlCommand command = new SqlCommand(queryUpdateN, connection))
-                        {
-                            command.ExecuteNonQuery();
-                            cinetPdvForm.SERV_DVY.Text = valorParametro;
-                        }
-
-                        Log.Information("SQL Query: \n" + queryUpdateN);
-                    }
-                    MessageBox.Show($"Se actualizó el parametro {para_codigo}");
+                    Log.Information($"Function HabilitarParametro(...)\nQuery\n: {query}");
                     connection.Close();
                 }
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-                // Registra el error en el log
-                Log.Error("ERROR QUERY: n" + ex.ToString());
-                // Muestra un mensaje de error al usuario
-                MessageBox.Show("No se realizó el cambio. \nVer Error: " + ex.Message);
-            }
-        }
-        #endregion
-
-        #region Update Parametro
-        public void UpdateParametro(string para_codigo, string para_descripcion, string para_valor)
-        {
-            ConexionDB conexionDB = new ConexionDB();
-
-            string cadenaConexion = conexionDB.StringConexion();
-
-            string queryUpdate = $"DECLARE @PARACODIGO VARCHAR(100) = '{para_codigo}' DECLARE @PARAVALOR VARCHAR(100) = '{para_valor}' IF NOT EXISTS (SELECT * FROM PARAMETROS WHERE PARA_CODIGO = @PARACODIGO) INSERT INTO PARAMETROS VALUES (@PARACODIGO,'{para_descripcion}',@PARAVALOR,NULL,NULL) ELSE UPDATE PARAMETROS SET PARA_VALOR = @PARAVALOR WHERE PARA_CODIGO = @PARACODIGO";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(cadenaConexion))
-                {
-                    connection.Open();
-
-                    using (SqlCommand command = new SqlCommand(queryUpdate, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-
-                    Log.Information("SQL Query: \n" + queryUpdate);
-
-                    MessageBox.Show($"Se actualizó el parametro {para_codigo}");
-                    connection.Close();
-                }
-            }
-            catch (SqlException ex)
-            {
-                // Registra el error en el log
-                Log.Error("ERROR QUERY: n" + ex.ToString());
-                // Muestra un mensaje de error al usuario
-                MessageBox.Show("No se realizó el cambio. \nVer Error: " + ex.Message);
-            }
-        }
-        #endregion
-
-        #region Update Parametro Linked Server
-        public void UpdateParametro(string para_codigo, string para_descripcion, string para_valor, string equipoLinkedServer, string puertoLinkedServer, string baseDatos)
-        {
-            ConexionDB conexionDB = new ConexionDB();
-
-            string cadenaConexion = conexionDB.StringConexion();
-
-            string queryUpdate = $"DECLARE @PARACODIGO VARCHAR(100) = '{para_codigo}' DECLARE @PARAVALOR VARCHAR(100) = '{para_valor}' IF NOT EXISTS (SELECT * FROM [{equipoLinkedServer},{puertoLinkedServer}].[{baseDatos}].DBO.PARAMETROS WHERE PARA_CODIGO = @PARACODIGO) INSERT INTO [{equipoLinkedServer},{puertoLinkedServer}].[{baseDatos}].DBO.PARAMETROS VALUES (@PARACODIGO,'{para_descripcion}',@PARAVALOR,NULL,NULL) ELSE UPDATE [{equipoLinkedServer},{puertoLinkedServer}].[{baseDatos}].DBO.PARAMETROS SET PARA_VALOR = @PARAVALOR WHERE PARA_CODIGO = @PARACODIGO";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(cadenaConexion))
-                {
-                    connection.Open();
-
-                    using (SqlCommand command = new SqlCommand(queryUpdate, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-
-                    Log.Information("SQL Query: \n" + queryUpdate);
-
-                    MessageBox.Show($"Se actualizó el parametro {para_codigo}");
-                    connection.Close();
-                }
-            }
-            catch (SqlException ex)
-            {
-                // Registra el error en el log
-                Log.Error("ERROR QUERY: n" + ex.ToString());
-                // Muestra un mensaje de error al usuario
-                MessageBox.Show("No se realizó el cambio. \nVer Error: " + ex.Message);
+                Log.Error($"Error - Function HabilitarParametro(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
+                MessageBox.Show($"No se realizó el cambio del parametro {para_valor}");
             }
         }
         #endregion
@@ -249,65 +113,33 @@ namespace Parametro.Class
 
             string stringConnection = conexionDB.StringConexion();
 
-            string sqlQuery = $"DECLARE @storeID varchar(10); set @storeID = '{ParametrosModels.StoreIdRap}' DECLARE @UsaCafeteria varchar(4); set @UsaCafeteria = '{ParametrosModels.UsaCafe}' if not exists (select * from parametros where PARA_CODIGO = 'STOREIDRAP') insert into parametros values ('STOREIDRAP', 'Token Rappi', @storeID, NULL, NULL); else update parametros set PARA_VALOR = @storeID where PARA_CODIGO = 'STOREIDRAP' if ((@UsaCafeteria = 'S') AND (not exists (select * from parametros where PARA_CODIGO = 'RAP_CLI_I2'))) OR ((@UsaCafeteria = 'S') AND (exists (select * from parametros where PARA_CODIGO = 'RAP_CLI_I2'))) if (not exists (select * from parametros where PARA_CODIGO = 'RAP_CLI_I2')) insert into PARAMETROS values('RAP_CLI_I2','ClientId RAPPI API V2.0','g2tfre9tAbEvRN38iz6TKCZ81NidoPD2',NULL,NULL); else print('Nada'); else delete PARAMETROS where PARA_CODIGO in ('RAP_CLI_I2'); if ((@UsaCafeteria = 'S') AND (not exists (select * from parametros where PARA_CODIGO = 'RAP_CLI_S2'))) OR ((@UsaCafeteria = 'S') AND (exists (select * from parametros where PARA_CODIGO = 'RAP_CLI_S2'))) if (not exists (select * from parametros where PARA_CODIGO = 'RAP_CLI_S2')) insert into PARAMETROS values('RAP_CLI_S2','ClientSecret RAPPI API V2.0','f6jtwA2QpWSpr3Z5Ep6aIqDpumotTQVbG7iyZqFTiXqdxiNLSqkmKLLFSY24QiID',NULL,NULL); else print('Nada'); else delete PARAMETROS where PARA_CODIGO in ('RAP_CLI_S2'); update parametros set PARA_VALOR = 'g2tfre9tAbEvRN38iz6TKCZ81NidoPD2' where PARA_CODIGO = 'RAP_CLI_ID' update parametros set PARA_VALOR = 'f6jtwA2QpWSpr3Z5Ep6aIqDpumotTQVbG7iyZqFTiXqdxiNLSqkmKLLFSY24QiID' where PARA_CODIGO = 'RAP_CLI_SE' update parametros set PARA_VALOR = 'S' where PARA_CODIGO = 'RAPPI' update parametros set PARA_VALOR = '172DE6DCABD89246E988FBBB1FB300FB' where PARA_CODIGO = 'TKN_RAPPI' update parametros set PARA_VALOR = 'S' where PARA_CODIGO = 'V_RAPPI2' select PARA_CODIGO, PARA_DESCRIPCION, PARA_VALOR from parametros where PARA_CODIGO IN ('RAP_CLI_I2','RAP_CLI_ID','RAP_CLI_S2','RAP_CLI_SE','RAPPI','STOREIDRAP','TKN_RAPPI','V_RAPPI2')";
-            string sqlQueryLinked = $"DECLARE @storeID varchar(10); SET @storeID = '{ParametrosModels.StoreIdRap}'; DECLARE @UsaCafeteria varchar(4); SET @UsaCafeteria = '{ParametrosModels.UsaCafe}'; IF NOT EXISTS (SELECT * FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros WHERE PARA_CODIGO = 'STOREIDRAP') INSERT INTO [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros VALUES ('STOREIDRAP', 'Token Rappi', @storeID, NULL, NULL); ELSE UPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros SET PARA_VALOR = @storeID WHERE PARA_CODIGO = 'STOREIDRAP' IF ((@UsaCafeteria = 'S') AND (NOT EXISTS (SELECT * FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros WHERE PARA_CODIGO = 'RAP_CLI_I2'))) OR ((@UsaCafeteria = 'S') AND (EXISTS (SELECT * FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros WHERE PARA_CODIGO = 'RAP_CLI_I2'))) BEGIN IF NOT EXISTS (SELECT * FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros WHERE PARA_CODIGO = 'RAP_CLI_I2') INSERT INTO [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.PARAMETROS VALUES('RAP_CLI_I2','ClientId RAPPI API V2.0','g2tfre9tAbEvRN38iz6TKCZ81NidoPD2',NULL,NULL); ELSE PRINT('Nada'); END ELSE DELETE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.PARAMETROS WHERE PARA_CODIGO IN ('RAP_CLI_I2'); IF ((@UsaCafeteria = 'S') AND (NOT EXISTS (SELECT * FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros WHERE PARA_CODIGO = 'RAP_CLI_S2'))) OR ((@UsaCafeteria = 'S') AND (EXISTS (SELECT * FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros WHERE PARA_CODIGO = 'RAP_CLI_S2'))) BEGIN IF NOT EXISTS (SELECT * FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros WHERE PARA_CODIGO = 'RAP_CLI_S2') INSERT INTO [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.PARAMETROS VALUES('RAP_CLI_S2','ClientSecret RAPPI API V2.0','f6jtwA2QpWSpr3Z5Ep6aIqDpumotTQVbG7iyZqFTiXqdxiNLSqkmKLLFSY24QiID',NULL,NULL); ELSE PRINT('Nada'); END ELSE DELETE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.PARAMETROS WHERE PARA_CODIGO IN ('RAP_CLI_S2'); UPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros SET PARA_VALOR = 'g2tfre9tAbEvRN38iz6TKCZ81NidoPD2' WHERE PARA_CODIGO = 'RAP_CLI_ID' UPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros SET PARA_VALOR = 'f6jtwA2QpWSpr3Z5Ep6aIqDpumotTQVbG7iyZqFTiXqdxiNLSqkmKLLFSY24QiID' WHERE PARA_CODIGO = 'RAP_CLI_SE' UPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros SET PARA_VALOR = 'S' WHERE PARA_CODIGO = 'RAPPI' UPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros SET PARA_VALOR = '172DE6DCABD89246E988FBBB1FB300FB' WHERE PARA_CODIGO = 'TKN_RAPPI' UPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros SET PARA_VALOR = 'S' WHERE PARA_CODIGO = 'V_RAPPI2' SELECT PARA_CODIGO, PARA_DESCRIPCION, PARA_VALOR FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.parametros WHERE PARA_CODIGO IN ('RAP_CLI_I2','RAP_CLI_ID','RAP_CLI_S2','RAP_CLI_SE','RAPPI','STOREIDRAP','TKN_RAPPI','V_RAPPI2')";
+            string sqlQuery = $"DECLARE @storeID varchar(10); SET @storeID = '{ParametrosModels.StoreIdRap}'; DECLARE @UsaCafeteria VARCHAR(20); SET @UsaCafeteria = '{ParametrosModels.UsaCafe}'; DECLARE @StoreIDCafe varchar(10); SET @StoreIDCafe = '{ParametrosModels.StoreIdRapCafe}'; IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'STOREIDRAP') INSERT INTO {conexionDB.VerificarLinkedServer()}parametros VALUES ('STOREIDRAP', 'StoreID de tienda para API RAPPI V2', @storeID, NULL, NULL); ELSE UPDATE {conexionDB.VerificarLinkedServer()}parametros SET PARA_VALOR = @storeID, PARA_DESCRIPCION = 'StoreID de tienda para API RAPPI V2' WHERE PARA_CODIGO = 'STOREIDRAP'; IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'RAP_CLI_ID') INSERT INTO {conexionDB.VerificarLinkedServer()}parametros VALUES ('RAP_CLI_ID', 'RAP_CLI_ID', 'g2tfre9tAbEvRN38iz6TKCZ81NidoPD2', NULL, NULL); ELSE UPDATE {conexionDB.VerificarLinkedServer()}parametros SET PARA_VALOR = 'g2tfre9tAbEvRN38iz6TKCZ81NidoPD2' WHERE PARA_CODIGO = 'RAP_CLI_ID'; IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'RAP_CLI_SE') INSERT INTO {conexionDB.VerificarLinkedServer()}parametros VALUES ('RAP_CLI_SE', 'RAP_CLI_SE', 'f6jtwA2QpWSpr3Z5Ep6aIqDpumotTQVbG7iyZqFTiXqdxiNLSqkmKLLFSY24QiID', NULL, NULL); ELSE UPDATE {conexionDB.VerificarLinkedServer()}parametros SET PARA_VALOR = 'f6jtwA2QpWSpr3Z5Ep6aIqDpumotTQVbG7iyZqFTiXqdxiNLSqkmKLLFSY24QiID' WHERE PARA_CODIGO = 'RAP_CLI_SE'; IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'RAPPI') INSERT INTO {conexionDB.VerificarLinkedServer()}parametros VALUES ('RAPPI', 'Activa Rappi', 'S', NULL, NULL); ELSE UPDATE {conexionDB.VerificarLinkedServer()}parametros SET PARA_VALOR = 'S' WHERE PARA_CODIGO = 'RAPPI'; IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'TKN_RAPPI') INSERT INTO {conexionDB.VerificarLinkedServer()}parametros VALUES ('TKN_RAPPI', 'TOKEN RAPPI', '172DE6DCABD89246E988FBBB1FB300FB', NULL, NULL); ELSE UPDATE {conexionDB.VerificarLinkedServer()}parametros SET PARA_VALOR = '172DE6DCABD89246E988FBBB1FB300FB' WHERE PARA_CODIGO = 'TKN_RAPPI'; IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'V_RAPPI2') INSERT INTO {conexionDB.VerificarLinkedServer()}parametros VALUES ('V_RAPPI2', 'UTILIZA RAPPI API V2.0', 'S', NULL, NULL); ELSE UPDATE {conexionDB.VerificarLinkedServer()}parametros SET PARA_VALOR = 'S' WHERE PARA_CODIGO = 'V_RAPPI2'; IF ((@UsaCafeteria = 'S') AND (NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'RAP_CLI_I2'))) OR ((@UsaCafeteria = 'S') AND (EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'RAP_CLI_I2'))) BEGIN IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'RAP_CLI_I2') INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES('RAP_CLI_I2','ClientId RAPPI API V2.0','g2tfre9tAbEvRN38iz6TKCZ81NidoPD2',NULL,NULL); ELSE PRINT('Nada'); END ELSE DELETE {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO IN ('RAP_CLI_I2'); IF ((@UsaCafeteria = 'S') AND (NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'RAP_CLI_S2'))) OR ((@UsaCafeteria = 'S') AND (EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'RAP_CLI_S2'))) BEGIN IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'RAP_CLI_S2') INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES('RAP_CLI_S2','ClientSecret RAPPI API V2.0','f6jtwA2QpWSpr3Z5Ep6aIqDpumotTQVbG7iyZqFTiXqdxiNLSqkmKLLFSY24QiID',NULL,NULL); ELSE PRINT('Nada'); END ELSE DELETE {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO IN ('RAP_CLI_S2'); IF ((@UsaCafeteria = 'S') AND (NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'STOREIDRP2'))) OR ((@UsaCafeteria = 'S') AND (EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'STOREIDRP2'))) BEGIN IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO = 'STOREIDRP2') INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES('STOREIDRP2','StoreID de tienda cafetería para API RAPPI V2', @StoreIDCafe, NULL, NULL); ELSE UPDATE {conexionDB.VerificarLinkedServer()}parametros SET PARA_VALOR = @StoreIDCafe, PARA_DESCRIPCION = 'StoreID de tienda cafetería para API RAPPI V2' WHERE PARA_CODIGO = 'STOREIDRP2'; END ELSE PRINT('Nada'); SELECT PARA_CODIGO, PARA_DESCRIPCION, PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}parametros WHERE PARA_CODIGO IN ('RAP_CLI_I2','RAP_CLI_ID','RAP_CLI_S2','RAP_CLI_SE','RAPPI','STOREIDRAP', 'STOREIDRP2','TKN_RAPPI','V_RAPPI2');";
 
-            if (!LoginForm.checkLinkedServer is true)
+            try
             {
-                try
+                using (SqlConnection sqlConnection = new SqlConnection(stringConnection))
                 {
-                    using (SqlConnection sqlConnection = new SqlConnection(stringConnection))
+                    sqlConnection.Open();
+
+                    using (SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection))
                     {
-                        sqlConnection.Open();
-
-                        using (SqlCommand sqlCommand = new SqlCommand(sqlQuery, sqlConnection))
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand))
                         {
-                            using (SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand))
-                            {
-                                adapter.Fill(table);
-                            }
+                            adapter.Fill(table);
                         }
-                        Log.Information("SQL Query: \n" + sqlQuery);
-                        MessageBox.Show($"Se realizó la configuración de Rappi");
-                        sqlConnection.Close();
                     }
+                    Log.Information("SQL Query: \n" + sqlQuery);
+                    MessageBox.Show($"Se realizó la configuración de Rappi");
+                    sqlConnection.Close();
                 }
-                catch (Exception ex)
-                {
-                    Log.Error("ERROR QUERY: n" + ex.ToString());
-                    MessageBox.Show($"Error, leer la excepción completa en el Log. \n" + ex.Message);
-                }
-
-                return table;
             }
-            else
+            catch (Exception ex)
             {
-                try
-                {
-                    using (SqlConnection sqlConnection = new SqlConnection(stringConnection))
-                    {
-                        sqlConnection.Open();
-
-                        using (SqlCommand sqlCommand = new SqlCommand(sqlQueryLinked, sqlConnection))
-                        {
-                            using (SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand))
-                            {
-                                adapter.Fill(table);
-                            }
-                        }
-                        Log.Information("SQL Query: \n" + sqlQuery);
-                        MessageBox.Show($"Se realizó la configuración de Rappi");
-                        sqlConnection.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("ERROR QUERY: n" + ex.ToString());
-                    MessageBox.Show($"Error, leer la excepción completa en el Log. \n" + ex.Message);
-                }
-
-                return table;
+                Log.Error("ERROR QUERY: n" + ex.ToString());
+                MessageBox.Show($"Error, leer la excepción completa en el Log. \n" + ex.Message);
             }
+
+            return table;
 
         }
         #endregion
@@ -317,7 +149,7 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string query = $"SELECT COUNT(*) FROM BACKOFFICE.DBO.PARAMETROS WHERE PARA_CODIGO IN ('RAP_CLI_I2', 'RAP_CLI_S2')";
+            string query = $"SELECT COUNT(*) FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO IN ('RAP_CLI_I2', 'RAP_CLI_S2')";
 
             try
             {
@@ -423,7 +255,7 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_N (CBTEE_MODULO, CBTEE_CODIGO, SUC_CODIGO, CBTEN_NUMERO, CBTEN_REPORTE, CBTEN_IMPRESORA, CBTEN_NUMERAENCOD, CBTEN_COPIAS, CBTEN_REPAUX, CBTEN_REPAUXN) VALUES ('VTAS','RMD',@SUC_FISCAL,'0','','CF','RMD','0','','0'), ('VTAS','DNF',@SUC_FISCAL,'0','','CF','DNF','0','','0'), ('VTAS','REP',@SUC_FISCAL,'0','VTA_PED','CF','REP','0','','0'), ('VTAS','RMX',@SUC_FISCAL,'0','','CF','RMX','0','','0'), ('VTAS','FAA',@SUC_FISCAL,'0','VTA_FAA','CF','FAA','0','','0'), ('VTAS','FAB',@SUC_FISCAL,'0','VTA_FAB','CF','FAB','0','','0'), ('VTAS','NCA',@SUC_FISCAL,'0','VTA_NCA','CF','NCA','0','','0'), ('VTAS','NCB',@SUC_FISCAL,'0','VTA_NCA','CF','NCB','0','','0'), ('VTAS','NDA',@SUC_FISCAL,'0','VTA_NCA','CF','NDA','0','','0'), ('VTAS','NDB',@SUC_FISCAL,'0','VTA_NCA','CF','NDB','0','','0');";
+            string Query = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_N (CBTEE_MODULO, CBTEE_CODIGO, SUC_CODIGO, CBTEN_NUMERO, CBTEN_REPORTE, CBTEN_IMPRESORA, CBTEN_NUMERAENCOD, CBTEN_COPIAS, CBTEN_REPAUX, CBTEN_REPAUXN) VALUES ('VTAS','RMD',@SUC_FISCAL,'0','','CF','RMD','0','','0'), ('VTAS','DNF',@SUC_FISCAL,'0','','CF','DNF','0','','0'), ('VTAS','REP',@SUC_FISCAL,'0','VTA_PED','CF','REP','0','','0'), ('VTAS','RMX',@SUC_FISCAL,'0','','CF','RMX','0','','0'), ('VTAS','FAA',@SUC_FISCAL,'0','VTA_FAA','CF','FAA','0','','0'), ('VTAS','FAB',@SUC_FISCAL,'0','VTA_FAB','CF','FAB','0','','0'), ('VTAS','NCA',@SUC_FISCAL,'0','VTA_NCA','CF','NCA','0','','0'), ('VTAS','NCB',@SUC_FISCAL,'0','VTA_NCA','CF','NCB','0','','0'), ('VTAS','NDA',@SUC_FISCAL,'0','VTA_NCA','CF','NDA','0','','0'), ('VTAS','NDB',@SUC_FISCAL,'0','VTA_NCA','CF','NDB','0','','0');";
 
             try
             {
@@ -455,7 +287,7 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) VALUES(@SUC_FISCAL,'FISCAL','S','0');";
+            string Query = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) VALUES(@SUC_FISCAL,'FISCAL','S','0');";
 
             try
             {
@@ -481,8 +313,8 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO [Backoffice].DBO.SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) VALUES(@SUC_FISCAL,'FISCAL','S','0');";
-            string QueryCbeinSucursal = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO [Backoffice].DBO.CBTEIN_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL');";
+            string Query = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO [Backoffice].DBO.SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) VALUES(@SUC_FISCAL,'FISCAL','S','0');";
+            string QueryCbeinSucursal = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO [Backoffice].DBO.CBTEIN_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL');";
 
             try
             {
@@ -563,7 +395,7 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = @SUC_FISCAL WHERE PARA_CODIGO IN ('CDEFSUC','NUMSUCFIJO','PTOVTAFIS','VTAPUNTO');";
+            string Query = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = @SUC_FISCAL WHERE PARA_CODIGO IN ('CDEFSUC','NUMSUCFIJO','PTOVTAFIS','VTAPUNTO');";
 
             try
             {
@@ -589,8 +421,8 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_INGRESOS_N VALUES('REA', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA'), ('REC', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA');";
-            string QueryCBTE_EGRESOS_N = $"DECLARE @ULTIMOEGRESO VARCHAR(10); IF EXISTS (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E ORDER BY EGRE_NUMERO DESC) SET @ULTIMOEGRESO = (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E ORDER BY EGRE_NUMERO DESC) ELSE SET @ULTIMOEGRESO = '1'; DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_EGRESOS_N VALUES ('CIE','01',@SUC_FISCAL,@ULTIMOEGRESO,'','','','0'), ('OPC','01',@SUC_FISCAL,'17','opc','','','2')";
+            string Query = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_INGRESOS_N VALUES('REA', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA'), ('REC', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA');";
+            string QueryCBTE_EGRESOS_N = $"DECLARE @ULTIMOEGRESO VARCHAR(10); IF EXISTS (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E ORDER BY EGRE_NUMERO DESC) SET @ULTIMOEGRESO = (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E ORDER BY EGRE_NUMERO DESC) ELSE SET @ULTIMOEGRESO = '1'; DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_EGRESOS_N VALUES ('CIE','01',@SUC_FISCAL,@ULTIMOEGRESO,'','','','0'), ('OPC','01',@SUC_FISCAL,'17','opc','','','2')";
 
             try
             {
@@ -635,8 +467,8 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string QueryCbteeg = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEEG_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL',NULL);";
-            string QueryCbtein = $"DECLARE @SUC_FISCAL VARCHAR(4) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEIN_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL');";
+            string QueryCbteeg = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEEG_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL',NULL);";
+            string QueryCbtein = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEIN_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL');";
 
             try
             {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuerysForm));
             panelMesa = new Panel();
             labelNroBteAnt = new Label();
             txtNumCbteeAnt = new TextBox();
@@ -37,14 +38,14 @@
             btnCorregirNracion = new Button();
             labelCorregirNumeracion = new Label();
             txtTipoCBTEE = new TextBox();
-            btnCorregirZetasEnCero = new Button();
-            label2 = new Label();
-            btnVerZetasEnCero = new Button();
             label5 = new Label();
             NumCierre = new TextBox();
             btnRegCierre = new Button();
             panel2 = new Panel();
             label20 = new Label();
+            btnCorregirZetasEnCero = new Button();
+            label2 = new Label();
+            btnVerZetasEnCero = new Button();
             panel3 = new Panel();
             btnTestConito = new Button();
             panel4 = new Panel();
@@ -85,6 +86,7 @@
             panel9 = new Panel();
             label7 = new Label();
             btnBackup = new Button();
+            PanelAdmin = new Panel();
             panelMesa.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -98,6 +100,7 @@
             panel8.SuspendLayout();
             panel1.SuspendLayout();
             panel9.SuspendLayout();
+            PanelAdmin.SuspendLayout();
             SuspendLayout();
             // 
             // panelMesa
@@ -111,13 +114,11 @@
             panelMesa.Controls.Add(btnCorregirNracion);
             panelMesa.Controls.Add(labelCorregirNumeracion);
             panelMesa.Controls.Add(txtTipoCBTEE);
-            panelMesa.Controls.Add(btnCorregirZetasEnCero);
-            panelMesa.Controls.Add(label2);
-            panelMesa.Controls.Add(btnVerZetasEnCero);
             panelMesa.Controls.Add(label5);
             panelMesa.Controls.Add(NumCierre);
             panelMesa.Controls.Add(btnRegCierre);
             panelMesa.Controls.Add(panel2);
+            panelMesa.Enabled = false;
             panelMesa.Location = new Point(12, 74);
             panelMesa.Name = "panelMesa";
             panelMesa.Size = new Size(257, 366);
@@ -128,7 +129,7 @@
             labelNroBteAnt.AutoSize = true;
             labelNroBteAnt.Font = new Font("Century Gothic", 10.25F, FontStyle.Regular, GraphicsUnit.Point);
             labelNroBteAnt.ForeColor = SystemColors.ActiveCaptionText;
-            labelNroBteAnt.Location = new Point(10, 303);
+            labelNroBteAnt.Location = new Point(10, 203);
             labelNroBteAnt.Name = "labelNroBteAnt";
             labelNroBteAnt.Size = new Size(154, 19);
             labelNroBteAnt.TabIndex = 44;
@@ -137,7 +138,7 @@
             // 
             // txtNumCbteeAnt
             // 
-            txtNumCbteeAnt.Location = new Point(178, 303);
+            txtNumCbteeAnt.Location = new Point(178, 203);
             txtNumCbteeAnt.Name = "txtNumCbteeAnt";
             txtNumCbteeAnt.ReadOnly = true;
             txtNumCbteeAnt.Size = new Size(68, 23);
@@ -149,7 +150,7 @@
             labelUltimoNroVta.AutoSize = true;
             labelUltimoNroVta.Font = new Font("Century Gothic", 10.25F, FontStyle.Regular, GraphicsUnit.Point);
             labelUltimoNroVta.ForeColor = SystemColors.ActiveCaptionText;
-            labelUltimoNroVta.Location = new Point(10, 272);
+            labelUltimoNroVta.Location = new Point(10, 172);
             labelUltimoNroVta.Name = "labelUltimoNroVta";
             labelUltimoNroVta.Size = new Size(140, 19);
             labelUltimoNroVta.TabIndex = 42;
@@ -157,7 +158,7 @@
             // 
             // txtUltimoNroCorrelativo
             // 
-            txtUltimoNroCorrelativo.Location = new Point(178, 272);
+            txtUltimoNroCorrelativo.Location = new Point(178, 172);
             txtUltimoNroCorrelativo.Name = "txtUltimoNroCorrelativo";
             txtUltimoNroCorrelativo.PlaceholderText = "EJ: 00000053";
             txtUltimoNroCorrelativo.Size = new Size(68, 23);
@@ -168,7 +169,7 @@
             labelTipoCbtee.AutoSize = true;
             labelTipoCbtee.Font = new Font("Century Gothic", 10.25F, FontStyle.Regular, GraphicsUnit.Point);
             labelTipoCbtee.ForeColor = SystemColors.ActiveCaptionText;
-            labelTipoCbtee.Location = new Point(11, 241);
+            labelTipoCbtee.Location = new Point(11, 141);
             labelTipoCbtee.Name = "labelTipoCbtee";
             labelTipoCbtee.Size = new Size(166, 19);
             labelTipoCbtee.TabIndex = 41;
@@ -177,7 +178,7 @@
             // btnCorregirNracion
             // 
             btnCorregirNracion.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCorregirNracion.Location = new Point(178, 333);
+            btnCorregirNracion.Location = new Point(178, 233);
             btnCorregirNracion.Name = "btnCorregirNracion";
             btnCorregirNracion.Size = new Size(68, 23);
             btnCorregirNracion.TabIndex = 12;
@@ -190,7 +191,7 @@
             labelCorregirNumeracion.AutoSize = true;
             labelCorregirNumeracion.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             labelCorregirNumeracion.ForeColor = SystemColors.ActiveCaptionText;
-            labelCorregirNumeracion.Location = new Point(11, 190);
+            labelCorregirNumeracion.Location = new Point(11, 90);
             labelCorregirNumeracion.Name = "labelCorregirNumeracion";
             labelCorregirNumeracion.Size = new Size(178, 40);
             labelCorregirNumeracion.TabIndex = 39;
@@ -198,46 +199,11 @@
             // 
             // txtTipoCBTEE
             // 
-            txtTipoCBTEE.Location = new Point(178, 243);
+            txtTipoCBTEE.Location = new Point(178, 143);
             txtTipoCBTEE.Name = "txtTipoCBTEE";
             txtTipoCBTEE.PlaceholderText = "EJ: FAB";
             txtTipoCBTEE.Size = new Size(68, 23);
             txtTipoCBTEE.TabIndex = 9;
-            // 
-            // btnCorregirZetasEnCero
-            // 
-            btnCorregirZetasEnCero.Enabled = false;
-            btnCorregirZetasEnCero.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCorregirZetasEnCero.Location = new Point(132, 121);
-            btnCorregirZetasEnCero.Name = "btnCorregirZetasEnCero";
-            btnCorregirZetasEnCero.Size = new Size(114, 44);
-            btnCorregirZetasEnCero.TabIndex = 8;
-            btnCorregirZetasEnCero.Text = "CORREGIR Z's en 0";
-            btnCorregirZetasEnCero.UseVisualStyleBackColor = true;
-            btnCorregirZetasEnCero.Visible = false;
-            btnCorregirZetasEnCero.Click += btnCorregirZetasEnCero_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(11, 97);
-            label2.Name = "label2";
-            label2.Size = new Size(125, 20);
-            label2.TabIndex = 23;
-            label2.Text = "Z's en 0 (cero)";
-            // 
-            // btnVerZetasEnCero
-            // 
-            btnVerZetasEnCero.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnVerZetasEnCero.Location = new Point(11, 121);
-            btnVerZetasEnCero.Name = "btnVerZetasEnCero";
-            btnVerZetasEnCero.Size = new Size(114, 44);
-            btnVerZetasEnCero.TabIndex = 7;
-            btnVerZetasEnCero.Text = "VER Z's EN 0";
-            btnVerZetasEnCero.UseVisualStyleBackColor = true;
-            btnVerZetasEnCero.Click += btnVerZetasEnCero_Click;
             // 
             // label5
             // 
@@ -288,6 +254,41 @@
             label20.Size = new Size(41, 17);
             label20.TabIndex = 1;
             label20.Text = "MESA";
+            // 
+            // btnCorregirZetasEnCero
+            // 
+            btnCorregirZetasEnCero.Enabled = false;
+            btnCorregirZetasEnCero.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCorregirZetasEnCero.Location = new Point(124, 29);
+            btnCorregirZetasEnCero.Name = "btnCorregirZetasEnCero";
+            btnCorregirZetasEnCero.Size = new Size(114, 44);
+            btnCorregirZetasEnCero.TabIndex = 8;
+            btnCorregirZetasEnCero.Text = "CORREGIR Z's en 0";
+            btnCorregirZetasEnCero.UseVisualStyleBackColor = true;
+            btnCorregirZetasEnCero.Visible = false;
+            btnCorregirZetasEnCero.Click += btnCorregirZetasEnCero_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = SystemColors.ActiveCaptionText;
+            label2.Location = new Point(3, 5);
+            label2.Name = "label2";
+            label2.Size = new Size(125, 20);
+            label2.TabIndex = 23;
+            label2.Text = "Z's en 0 (cero)";
+            // 
+            // btnVerZetasEnCero
+            // 
+            btnVerZetasEnCero.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnVerZetasEnCero.Location = new Point(3, 29);
+            btnVerZetasEnCero.Name = "btnVerZetasEnCero";
+            btnVerZetasEnCero.Size = new Size(114, 44);
+            btnVerZetasEnCero.TabIndex = 7;
+            btnVerZetasEnCero.Text = "VER Z's EN 0";
+            btnVerZetasEnCero.UseVisualStyleBackColor = true;
+            btnVerZetasEnCero.Click += btnVerZetasEnCero_Click;
             // 
             // panel3
             // 
@@ -444,6 +445,7 @@
             panelParaguay.Controls.Add(labelCorregirTimbrado);
             panelParaguay.Controls.Add(txtTimLocal);
             panelParaguay.Controls.Add(btnConfigTim);
+            panelParaguay.Enabled = false;
             panelParaguay.Location = new Point(416, 260);
             panelParaguay.Name = "panelParaguay";
             panelParaguay.Size = new Size(395, 180);
@@ -639,6 +641,7 @@
             panelUruguay.Controls.Add(txtVeneNumeroRut);
             panelUruguay.Controls.Add(btnCorregirClienteRut);
             panelUruguay.Controls.Add(panel6);
+            panelUruguay.Enabled = false;
             panelUruguay.Location = new Point(416, 74);
             panelUruguay.Name = "panelUruguay";
             panelUruguay.Size = new Size(395, 180);
@@ -745,6 +748,19 @@
             btnBackup.UseVisualStyleBackColor = true;
             btnBackup.Click += btnBackup_Click;
             // 
+            // PanelAdmin
+            // 
+            PanelAdmin.BackColor = Color.White;
+            PanelAdmin.Controls.Add(label2);
+            PanelAdmin.Controls.Add(btnVerZetasEnCero);
+            PanelAdmin.Controls.Add(btnCorregirZetasEnCero);
+            PanelAdmin.Enabled = false;
+            PanelAdmin.Location = new Point(817, 260);
+            PanelAdmin.Name = "PanelAdmin";
+            PanelAdmin.Size = new Size(395, 180);
+            PanelAdmin.TabIndex = 35;
+            PanelAdmin.Visible = false;
+            // 
             // QuerysForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -752,7 +768,8 @@
             AutoScroll = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(816, 472);
+            ClientSize = new Size(814, 462);
+            Controls.Add(PanelAdmin);
             Controls.Add(panel1);
             Controls.Add(panelBolivia);
             Controls.Add(panelParaguay);
@@ -760,6 +777,7 @@
             Controls.Add(panel5);
             Controls.Add(panel3);
             Controls.Add(panelMesa);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "QuerysForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -787,6 +805,8 @@
             panel1.ResumeLayout(false);
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
+            PanelAdmin.ResumeLayout(false);
+            PanelAdmin.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -849,5 +869,6 @@
         private Panel panel9;
         private Label label7;
         private Button btnBackup;
+        private Panel PanelAdmin;
     }
 }
