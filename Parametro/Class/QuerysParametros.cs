@@ -9,6 +9,7 @@ using Microsoft.Win32;
 using Parametro.Desings;
 using Parametro.Models;
 using Serilog;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Parametro.Class
 {
@@ -349,7 +350,7 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = 
+            string query = 
                 $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
                 $"INSERT INTO {conexionDB.VerificarLinkedServer()}SUCURSALES " +
                 $"(SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) " +
@@ -360,16 +361,17 @@ namespace Parametro.Class
                 using (SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
                 {
                     sqlConnection.Open();
-                    using (SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection))
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
                         sqlCommand.ExecuteNonQuery();
                     }
                     sqlConnection.Close();
                 }
+                Log.Information($"Function InsertarSucursalesPDV(...)\nQuery\n: {query}");
             }
             catch (SqlException ex)
             {
-                Log.Error("ERROR QUERY: n" + ex.ToString());
+                Log.Error($"Error - Function InsertarSucursalesPDV(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
             }
         }
         #endregion
@@ -379,7 +381,7 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = 
+            string query = 
                 $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
                 $"INSERT INTO [Backoffice].DBO.SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) " +
                 $"VALUES(@SUC_FISCAL,'FISCAL','S','0');";
@@ -395,19 +397,19 @@ namespace Parametro.Class
                 {
                     sqlConnection.Open();
 
-                    if (!SucBackofficeExiste(sqlConnection) || !CbeteinSucBackofficeExiste(sqlConnection))
+                    if (!SucBackofficeExiste(sqlConnection))
                     {
                         try
                         {
-                            using (SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection))
+                            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                             {
                                 sqlCommand.ExecuteNonQuery();
-                                Log.Information("QUERY: " + Query);
+                                Log.Information($"Function InsertarSucursalesBackoffice(...)\nQuery\n: {query}");
                             }
                         }
                         catch (SqlException ex)
                         {
-                            Log.Error("ERROR QUERY 1: n" + ex.ToString());
+                            Log.Error($"Error - Function InsertarSucursalesBackoffice(SucBackofficeExiste)\nQuery\n: {query}\nMessage Error: {ex.Message}");
                         }
 
                         try
@@ -415,18 +417,18 @@ namespace Parametro.Class
                             using (SqlCommand sqlCommand = new SqlCommand(QueryCbeinSucursal, sqlConnection))
                             {
                                 sqlCommand.ExecuteNonQuery();
-                                Log.Information("QUERY: " + QueryCbeinSucursal);
+                                Log.Information($"Function InsertarSucursalesBackoffice(...)\nQuery\n: {QueryCbeinSucursal}");
                             }
                         }
                         catch (SqlException ex)
                         {
-                            Log.Error("ERROR QUERY 2: n" + ex.ToString());
+                            Log.Error($"Error - Function InsertarSucursalesBackoffice(QueryCbeinSucursal)\nQuery\n: {query}\nMessage Error: {ex.Message}");
                         }
                         MessageBox.Show("Se configuró la sucursal en Backoffice");
                     }
                     else
                     {
-                        Log.Error("ERROR QUERY: Ya existe la sucursal.");
+                        Log.Error($"Error - Function InsertarSucursalesBackoffice(...)\nQuery\n: {query}\nMessage Error: Ya existe la sucursal en Backoffice");
                         MessageBox.Show("Ya existe la sucursal en Backoffice");
                     }
 
@@ -435,7 +437,7 @@ namespace Parametro.Class
             }
             catch (SqlException ex)
             {
-                Log.Error("ERROR QUERY: n" + ex.ToString());
+                Log.Error($"Error - Function InsertarSucursalesBackoffice(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
                 MessageBox.Show("No se agregó sucursal a Backoffice, corroborar conexión. \n\n(EL APLICATIVO DEBE SER ABIERTO HACIENDO LINKEDSERVER DESDE EL SERVIDOR).\n\n" + "Error: " + ex.Message);
             }
         }
@@ -473,7 +475,7 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = 
+            string query = 
                 $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
                 $"IF((SELECT PARA_VALOR FROM PARAMETROS WHERE PARA_CODIGO = 'EMPREPAIS') = 'PARAGUAY') " +
                     $"BEGIN " +
@@ -496,16 +498,17 @@ namespace Parametro.Class
                 using (SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
                 {
                     sqlConnection.Open();
-                    using (SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection))
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
                         sqlCommand.ExecuteNonQuery();
+                        Log.Information($"Function ConfigurarSucParametros(...)\nQuery\n: {query}");
                     }
                     sqlConnection.Close();
                 }
             }
             catch (SqlException ex)
             {
-                Log.Error("ERROR QUERY: n" + ex.ToString());
+                Log.Error($"Error - Function ConfigurarSucParametros(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
             }
         }
         #endregion
@@ -516,14 +519,14 @@ namespace Parametro.Class
             ConexionDB conexionDB = new ConexionDB();
 
             // CBTE_INGRESOS_N
-            string Query = 
+            string query = 
                 $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
                 $"INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_INGRESOS_N " +
                 $"VALUES('REA', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA'), " +
                 $"('REC', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA');";
 
             // CBTE_EGRESOS_N
-            string QueryCBTE_EGRESOS_N = 
+            string queryCBTE_EGRESOS_N = 
                 $"DECLARE @ULTIMOEGRESO VARCHAR(10); " +
                 $"IF EXISTS " +
                 $"(SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) " +
@@ -545,25 +548,27 @@ namespace Parametro.Class
                     sqlConnection.Open();
                     try
                     {
-                        using (SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection))
+                        using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                         {
                             sqlCommand.ExecuteNonQuery();
+                            Log.Information($"Function InsertarSucIngresos(...)\nQuery\n: {query}");
                         }
                     }
                     catch(SqlException ex)
                     {
-                        Log.Error (ex.ToString());
+                        Log.Error($"Error - Function InsertarSucIngresos(query)\nQuery\n: {query}\nMessage Error: {ex.Message}");
                     }
                     try
                     {
-                        using (SqlCommand sqlCommand = new SqlCommand(QueryCBTE_EGRESOS_N, sqlConnection))
+                        using (SqlCommand sqlCommand = new SqlCommand(queryCBTE_EGRESOS_N, sqlConnection))
                         {
                             sqlCommand.ExecuteNonQuery();
+                            Log.Information($"Function InsertarSucIngresos(...)\nQuery\n: {query}");
                         }
                     }
                     catch (SqlException ex)
                     {
-                        Log.Error (ex.ToString());
+                        Log.Error($"Error - Function InsertarSucIngresos(queryCBTE_EGRESOS_N)\nQuery\n: {query}\nMessage Error: {ex.Message}");
                     }
                     
                     sqlConnection.Close();
@@ -571,7 +576,7 @@ namespace Parametro.Class
             }
             catch (SqlException ex)
             {
-                Log.Error("ERROR QUERY: n" + ex.ToString());
+                Log.Error($"Error - Function InsertarSucIngresos(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
             }
         }
         #endregion
@@ -602,11 +607,12 @@ namespace Parametro.Class
                         using (SqlCommand sqlCommand = new SqlCommand(QueryCbteeg, sqlConnection))
                         {
                             sqlCommand.ExecuteNonQuery();
+                            Log.Information($"Function InsertarCbteegCbteing(...)\nQuery\n: {QueryCbteeg}");
                         }
                     }
                     catch (SqlException ex)
                     {
-                        Log.Error("ERROR QUERY 1: n" + ex.ToString());
+                        Log.Error($"Error - Function InsertarCbteegCbteing(QueryCbteeg)\nQuery\n: {QueryCbteeg}\nMessage Error: {ex.Message}");
                     }
 
                     try
@@ -614,11 +620,12 @@ namespace Parametro.Class
                         using (SqlCommand sqlCommand = new SqlCommand(QueryCbtein, sqlConnection))
                         {
                             sqlCommand.ExecuteNonQuery();
+                            Log.Information($"Function InsertarCbteegCbteing(...)\nQuery\n: {QueryCbtein}");
                         }
                     }
                     catch (SqlException ex)
                     {
-                        Log.Error("ERROR QUERY 2: n" + ex.ToString());
+                        Log.Error($"Error - Function InsertarCbteegCbteing(QueryCbtein)\nQuery\n: {QueryCbtein}\nMessage Error: {ex.Message}");
                     }
                     
                     sqlConnection.Close();
@@ -626,7 +633,7 @@ namespace Parametro.Class
             }
             catch (SqlException ex)
             {
-                Log.Error("ERROR QUERY: n" + ex.ToString());
+                Log.Error($"Error - Function InsertarCbteegCbteing(...)\nQuery\n:\nMessage Error: {ex.Message}");
             }
         }
         #endregion
