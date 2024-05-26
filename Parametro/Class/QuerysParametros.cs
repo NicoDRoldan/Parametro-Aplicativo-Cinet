@@ -270,20 +270,21 @@ namespace Parametro.Class
                     using (SqlCommand sqlCommand = new SqlCommand(eliminarComprobantesE, sqlConnection))
                     {
                         sqlCommand.ExecuteNonQuery();
+                        Log.Information($"Function ConfigurarComprobantesE(eliminarComprobantesE)\nQuery\n: {eliminarComprobantesE}");
                     }
 
                     using (SqlCommand sqlCommand = new SqlCommand(insertComprobantesE, sqlConnection))
                     {
                         sqlCommand.ExecuteNonQuery();
+                        Log.Information($"Function ConfigurarComprobantesE(insertComprobantesE)\nQuery\n: {insertComprobantesE}");
                     }
 
                     sqlConnection.Close();
-                    Log.Information("Se reincertaron los registros de COMPROBANTES_E");
                 }
             }
             catch (SqlException ex)
             {
-                Log.Error("ERROR QUERY: n" + ex.ToString());
+                Log.Error($"Error - Function ConfigurarComprobantesE(...)\nQuery\n: {insertComprobantesE}\nMessage Error: {ex.Message}");
             }
         }
 
@@ -334,13 +335,14 @@ namespace Parametro.Class
                     using (SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection))
                     {
                         sqlCommand.ExecuteNonQuery();
+                        Log.Information($"Function InsertarSucursalComprobantesN(...)\nQuery\n: {Query}");
                     }
                     sqlConnection.Close();
                 }
             }
             catch (SqlException ex)
             {
-                Log.Error("ERROR QUERY: n" + ex.ToString());
+                Log.Error($"Error - Function InsertarSucursalComprobantesN(...)\nQuery\n: {Query}\nMessage Error: {ex.Message}");
             }
         }
         #endregion
