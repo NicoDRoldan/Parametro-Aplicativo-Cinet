@@ -177,7 +177,13 @@ namespace Parametro.Class
         #region Configurar Mercado Pago
         public void ConfigurarMercadoPago()
         {
-            string query = $"DECLARE @VARIABLEEXTERNAL VARCHAR(50); SET @VARIABLEEXTERNAL = (SELECT PARA_VALOR FROM {connectDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'NOMLOCAL') + (SELECT PARA_VALOR FROM {connectDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'PTOVTAFIS'); UPDATE {connectDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = @VARIABLEEXTERNAL WHERE PARA_CODIGO = 'EXTERIDMP';";
+            string query = 
+                $"DECLARE @VARIABLEEXTERNAL VARCHAR(50); " +
+                $"SET @VARIABLEEXTERNAL = (SELECT PARA_VALOR FROM {connectDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'NOMLOCAL') + " +
+                    $"(SELECT PARA_VALOR FROM {connectDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'PTOVTAFIS'); " +
+                $"UPDATE {connectDB.VerificarLinkedServer()}PARAMETROS " +
+                $"SET PARA_VALOR = @VARIABLEEXTERNAL " +
+                $"WHERE PARA_CODIGO = 'EXTERIDMP';";
 
             try
             {
@@ -208,7 +214,51 @@ namespace Parametro.Class
             ConexionDB conexionDB = new ConexionDB();
 
             string eliminarComprobantesE = $"DELETE {conexionDB.VerificarLinkedServer()}COMPROBANTES_E";
-            string insertComprobantesE = $"INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_E VALUES (N'NDI', N'CPRAS', N'NOTA DE DEBITO', N'', N'S', N'S', N'N', N'11', N'+', N'+', N'+', 3, N'NDI', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' '),(N'OFR', N'PROD', N'ORDEN DE FABRICACION', N' ', N'N', N'N', N'N', N'11', N' ', N' ', N' ', 0, N' ', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', 0, N' '),(N'OFS', N'PROD', N'ORDEN DE FABRICACION', N' ', N'N', N'N', N'N', N'11', N' ', N' ', N' ', 0, N' ', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', 0, N' '),(N'FAA  ', N'VTAS ', N'FACTURA A', N'', N'S', N'N', N'N', N'11', N'+', N'-', N'+', 5, N'FAA  ', N'N', N'N', N'N', N'N', N'S', N' ', N'N', N'N', N'N', 0, N' '),(N'REP', N'VTAS', N'REPROCESAR', N' ', N'N', N'N', N'N', N'33', N'+', N'+', N'-', 3, N'REP', N'N', N'N', N'N', N'N', N'N', N' ', N'N', N'N', N'N', 0, N' '),(N'FAB  ', N'VTAS ', N'FACTURA B', N'', N'S', N'N', N'N', N'14', N'+', N'-', N'+', 5, N'FAB  ', N'N', N'N', N'N', N'N', N'S', N' ', N'S', N'N', N'N', 0, N' '),(N'DNF', N'VTAS', N'PRENDAS X ABONO', N' ', N'N', N'N', N'N', N'11', N'-', N'+', N'-', 9, N'DNF', N'N', N'N', N'N', N'N', N'N', N'S', N'N', N'S', N' ', 0, N' '),(N'RMD', N'VTAS', N'REMITO EGRESO', N' ', N'N', N'N', N'N', N'4', N' ', N' ', N' ', 5, N'RMD', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', 0, N' '),(N'RMX', N'VTAS', N'REMITO', N' ', N'N', N'N', N'N', N'22', N' ', N'-', N' ', 3, N'RMX', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'OFM', N'PROD', N'ORDEN DE FABRICACION', N' ', N'N', N'N', N'N', N'11', N' ', N' ', N' ', 0, N' ', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', 0, N' '),(N'NCA  ', N'VTAS ', N'NOTA DE CREDITO A', N'', N'S', N'N', N'N', N'4 ', N'-', N'+', N'-', 5, N'NCA  ', N'N', N'N', N'N', N'N', N'S', N' ', N'N', N'N', N'N', 0, N' '),(N'PEA  ', N'VTAS ', N'PEDIDO ', N'', N'N', N'N', N'N', N'0 ', N' ', N'-', N'+', 2, N'PEA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'ADU', N'CPRAS', N'DESPACHO ADUANA', N' ', N'S', N'S', N'N', N'45', N'+', N'+', N'+', 5, N'ADU', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'FAC  ', N'CPRAS', N'FACTURA C', N'', N'S', N'S', N'N', N'33', N'+', N'+', N'+', 5, N'FAC  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'NCB  ', N'VTAS ', N'NOTA DE CREDITO  ', N'', N'S', N'N', N'N', N'4 ', N'-', N'+', N'-', 5, N'FAB  ', N'N', N'N', N'N', N'N', N'S', N' ', N'S', N'N', N'N', 0, N' '),(N'PEB  ', N'VTAS ', N'PEDIDO ', N'', N'N', N'N', N'N', N'23', N'+', N'-', N'+', 2, N'PEB', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'OCA  ', N'CPRAS', N'ORDEN DE COMPRA  ', N'', N'N', N'N', N'N', N'11', N'+', N'+', N'+', 1, N'OCA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' '),(N'RMX  ', N'CPRAS', N'REMITO', N'', N'N', N'N', N'N', N'22', N' ', N'+', N' ', 3, N'RMX  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'FAB  ', N'CPRAS', N'FACTURA B', N'', N'S', N'S', N'N', N'1 ', N'+', N'+', N'+', 5, N'FAB  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'FAA  ', N'CPRAS', N'FACTURA A', N'', N'S', N'S', N'N', N'2 ', N'+', N'+', N'+', 5, N'FAA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'NDA  ', N'VTAS ', N'NOTA DE DEBITO', N'', N'S', N'N', N'N', N'12', N'+', N'-', N'+', 5, N'NDA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'N', N'N', N'N', 0, N' '),(N'PYA', N'PAUE', N'PEDIDO YA', N'', N'N', N'N', N'N', N'11', N'+', N'-', N'+', 5, N'FAB', N'N', N'N', N'N', N'N', N'S', N' ', N'S', N'N', N'N', 0, N' '),(N'NDA  ', N'CPRAS', N'NOTA DE DEBITO', N'', N'S', N'S', N'N', N'11', N'+', N'+', N'+', 3, N'NDA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'NCA  ', N'CPRAS', N'NOTA DE CREDITO  ', N'', N'S', N'S', N'N', N'55', N'-', N'-', N'-', 5, N'NCA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'NDB  ', N'CPRAS', N'NDB CPRAS', N'', N'S', N'S', N'N', N'66', N'+', N'+', N' ', 4, N'NDB  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'NDB  ', N'VTAS ', N'NOTA DE DEBITO B ', N'', N'S', N'N', N'N', N'45', N'+', N'-', N'+', 3, N'NDB  ', N'N', N'N', N'N', N'N', N'N', N' ', N'N', N'N', N'N', 0, N' '),(N'NCC  ', N'CPRAS', N'NOTA DE CREDITO C', N'', N'S', N'S', N'N', N'44', N'-', N'-', N'-', 3, N'NCC  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'NCB  ', N'CPRAS', N'NOTA DE CREDITO B', N'', N'S', N'S', N'N', N'45', N'-', N'-', N'-', 3, N'NCB  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'RIB  ', N'CPRAS', N'RETENCION IB', N'', N'S', N'N', N'N', N'5 ', N' ', N' ', N'-', 4, N'RIB  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'REQ', N'CPRAS', N'REQUERIMIENTO COMPRA', N' ', N'N', N'N', N'N', N'66', N' ', N'+', N' ', 5, N'REQ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' '),(N'TRS', N'CPRAS', N'TRANSFERENCIA INTERDEPOSITO - SALIDA', N' ', N'N', N'N', N'N', N'4', N' ', N'-', N' ', 5, N'TRS', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'OCC', N'CPRAS', N'OC COMPLEMENTARIA', N',', N'N', N'N', N'N', N'9', N'-', N'+', N'-', 5, N'OCA', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' '),(N'RMD', N'CPRAS', N'REMITO POR DEVOLUCION', N' ', N'N', N'N', N'N', N'4', N' ', N'-', N' ', 5, N'RMD', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'FAE', N'CPRAS', N'FACTURA EXTERIOR', N' ', N'S', N'S', N'N', N'34', N'+', N'+', N'+', 5, N'FAE', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'TRF', N'CPRAS', N'ENVIO A FORMUL O FRAC', N' ', N'N', N'N', N'N', N'4', N' ', N'-', N' ', 5, N'TRF', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'FAI', N'CPRAS', N'IMPORTACION', N'', N'S', N'S', N'N', N'11', N'+', N'-', N'+', 5, N'FAI', N'N', N'N', N'N', N'N', N'N', N' ', N'N', N'N', N'N', 0, N' '),(N'NCI ', N'CPRAS', N'NOTA DE CREDITO', N'', N'S', N'S', N'N', N'55', N'-', N'-', N'-', 5, N'NCI', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' '),(N'OCI', N'CPRAS', N'ORDEN DE IMPORTACION', N'', N'N', N'N', N'N', N'11', N'+', N'+', N'+', 1, N'OCI ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' '),(N'NDU', N'CPRAS', N'ND INTERNA X DIF COT', N'', N'N', N'S', N'N', N'11', N'+', N'+', N'+', 3, N'NDU', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' '),(N'NCU', N'CPRAS', N'N C INTERNA X DIF COT', N'', N'N', N'S', N'N', N'11', N'-', N'-', N'-', 3, N'NCU', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' '),(N'NDD', N'CPRAS', N'ND INTERNA X DIF COT SOLO UDS', N'', N'N', N'S', N'N', N'11', N'+', N'+', N'+', 3, N'NDD', N'N', N'N', N'N', N'N', N'N', N'N', N'S', N'N', N'S', 0, N'D'),(N'NCD', N'CPRAS', N'NC INTERNA X DIF COT SOLO UDS', N'', N'N', N'S', N'N', N'11', N'-', N'-', N'-', 3, N'NCD', N'N', N'N', N'N', N'N', N'N', N'N', N'S', N'N', N'S', 0, N'D');";
+
+            string insertComprobantesE = 
+                $"INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_E " +
+                $"VALUES (N'NDI', N'CPRAS', N'NOTA DE DEBITO', N'', N'S', N'S', N'N', N'11', N'+', N'+', N'+', 3, N'NDI', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' ')," +
+                $"(N'OFR', N'PROD', N'ORDEN DE FABRICACION', N' ', N'N', N'N', N'N', N'11', N' ', N' ', N' ', 0, N' ', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', 0, N' ')," +
+                $"(N'OFS', N'PROD', N'ORDEN DE FABRICACION', N' ', N'N', N'N', N'N', N'11', N' ', N' ', N' ', 0, N' ', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', 0, N' ')," +
+                $"(N'FAA  ', N'VTAS ', N'FACTURA A', N'', N'S', N'N', N'N', N'11', N'+', N'-', N'+', 5, N'FAA  ', N'N', N'N', N'N', N'N', N'S', N' ', N'N', N'N', N'N', 0, N' ')," +
+                $"(N'REP', N'VTAS', N'REPROCESAR', N' ', N'N', N'N', N'N', N'33', N'+', N'+', N'-', 3, N'REP', N'N', N'N', N'N', N'N', N'N', N' ', N'N', N'N', N'N', 0, N' ')," +
+                $"(N'FAB  ', N'VTAS ', N'FACTURA B', N'', N'S', N'N', N'N', N'14', N'+', N'-', N'+', 5, N'FAB  ', N'N', N'N', N'N', N'N', N'S', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'DNF', N'VTAS', N'PRENDAS X ABONO', N' ', N'N', N'N', N'N', N'11', N'-', N'+', N'-', 9, N'DNF', N'N', N'N', N'N', N'N', N'N', N'S', N'N', N'S', N' ', 0, N' ')," +
+                $"(N'RMD', N'VTAS', N'REMITO EGRESO', N' ', N'N', N'N', N'N', N'4', N' ', N' ', N' ', 5, N'RMD', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', 0, N' ')," +
+                $"(N'RMX', N'VTAS', N'REMITO', N' ', N'N', N'N', N'N', N'22', N' ', N'-', N' ', 3, N'RMX', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'OFM', N'PROD', N'ORDEN DE FABRICACION', N' ', N'N', N'N', N'N', N'11', N' ', N' ', N' ', 0, N' ', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', N'N', 0, N' ')," +
+                $"(N'NCA  ', N'VTAS ', N'NOTA DE CREDITO A', N'', N'S', N'N', N'N', N'4 ', N'-', N'+', N'-', 5, N'NCA  ', N'N', N'N', N'N', N'N', N'S', N' ', N'N', N'N', N'N', 0, N' ')," +
+                $"(N'PEA  ', N'VTAS ', N'PEDIDO ', N'', N'N', N'N', N'N', N'0 ', N' ', N'-', N'+', 2, N'PEA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'ADU', N'CPRAS', N'DESPACHO ADUANA', N' ', N'S', N'S', N'N', N'45', N'+', N'+', N'+', 5, N'ADU', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'FAC  ', N'CPRAS', N'FACTURA C', N'', N'S', N'S', N'N', N'33', N'+', N'+', N'+', 5, N'FAC  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'NCB  ', N'VTAS ', N'NOTA DE CREDITO  ', N'', N'S', N'N', N'N', N'4 ', N'-', N'+', N'-', 5, N'FAB  ', N'N', N'N', N'N', N'N', N'S', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'PEB  ', N'VTAS ', N'PEDIDO ', N'', N'N', N'N', N'N', N'23', N'+', N'-', N'+', 2, N'PEB', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'OCA  ', N'CPRAS', N'ORDEN DE COMPRA  ', N'', N'N', N'N', N'N', N'11', N'+', N'+', N'+', 1, N'OCA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' ')," +
+                $"(N'RMX  ', N'CPRAS', N'REMITO', N'', N'N', N'N', N'N', N'22', N' ', N'+', N' ', 3, N'RMX  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'FAB  ', N'CPRAS', N'FACTURA B', N'', N'S', N'S', N'N', N'1 ', N'+', N'+', N'+', 5, N'FAB  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'FAA  ', N'CPRAS', N'FACTURA A', N'', N'S', N'S', N'N', N'2 ', N'+', N'+', N'+', 5, N'FAA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'NDA  ', N'VTAS ', N'NOTA DE DEBITO', N'', N'S', N'N', N'N', N'12', N'+', N'-', N'+', 5, N'NDA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'N', N'N', N'N', 0, N' ')," +
+                $"(N'PYA', N'PAUE', N'PEDIDO YA', N'', N'N', N'N', N'N', N'11', N'+', N'-', N'+', 5, N'FAB', N'N', N'N', N'N', N'N', N'S', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'NDA  ', N'CPRAS', N'NOTA DE DEBITO', N'', N'S', N'S', N'N', N'11', N'+', N'+', N'+', 3, N'NDA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'NCA  ', N'CPRAS', N'NOTA DE CREDITO  ', N'', N'S', N'S', N'N', N'55', N'-', N'-', N'-', 5, N'NCA  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'NDB  ', N'CPRAS', N'NDB CPRAS', N'', N'S', N'S', N'N', N'66', N'+', N'+', N' ', 4, N'NDB  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'NDB  ', N'VTAS ', N'NOTA DE DEBITO B ', N'', N'S', N'N', N'N', N'45', N'+', N'-', N'+', 3, N'NDB  ', N'N', N'N', N'N', N'N', N'N', N' ', N'N', N'N', N'N', 0, N' ')," +
+                $"(N'NCC  ', N'CPRAS', N'NOTA DE CREDITO C', N'', N'S', N'S', N'N', N'44', N'-', N'-', N'-', 3, N'NCC  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'NCB  ', N'CPRAS', N'NOTA DE CREDITO B', N'', N'S', N'S', N'N', N'45', N'-', N'-', N'-', 3, N'NCB  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'RIB  ', N'CPRAS', N'RETENCION IB', N'', N'S', N'N', N'N', N'5 ', N' ', N' ', N'-', 4, N'RIB  ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'REQ', N'CPRAS', N'REQUERIMIENTO COMPRA', N' ', N'N', N'N', N'N', N'66', N' ', N'+', N' ', 5, N'REQ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' ')," +
+                $"(N'TRS', N'CPRAS', N'TRANSFERENCIA INTERDEPOSITO - SALIDA', N' ', N'N', N'N', N'N', N'4', N' ', N'-', N' ', 5, N'TRS', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'OCC', N'CPRAS', N'OC COMPLEMENTARIA', N',', N'N', N'N', N'N', N'9', N'-', N'+', N'-', 5, N'OCA', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' ')," +
+                $"(N'RMD', N'CPRAS', N'REMITO POR DEVOLUCION', N' ', N'N', N'N', N'N', N'4', N' ', N'-', N' ', 5, N'RMD', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'FAE', N'CPRAS', N'FACTURA EXTERIOR', N' ', N'S', N'S', N'N', N'34', N'+', N'+', N'+', 5, N'FAE', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'TRF', N'CPRAS', N'ENVIO A FORMUL O FRAC', N' ', N'N', N'N', N'N', N'4', N' ', N'-', N' ', 5, N'TRF', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'FAI', N'CPRAS', N'IMPORTACION', N'', N'S', N'S', N'N', N'11', N'+', N'-', N'+', 5, N'FAI', N'N', N'N', N'N', N'N', N'N', N' ', N'N', N'N', N'N', 0, N' ')," +
+                $"(N'NCI ', N'CPRAS', N'NOTA DE CREDITO', N'', N'S', N'S', N'N', N'55', N'-', N'-', N'-', 5, N'NCI', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'N', 0, N' ')," +
+                $"(N'OCI', N'CPRAS', N'ORDEN DE IMPORTACION', N'', N'N', N'N', N'N', N'11', N'+', N'+', N'+', 1, N'OCI ', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' ')," +
+                $"(N'NDU', N'CPRAS', N'ND INTERNA X DIF COT', N'', N'N', N'S', N'N', N'11', N'+', N'+', N'+', 3, N'NDU', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' ')," +
+                $"(N'NCU', N'CPRAS', N'N C INTERNA X DIF COT', N'', N'N', N'S', N'N', N'11', N'-', N'-', N'-', 3, N'NCU', N'N', N'N', N'N', N'N', N'N', N' ', N'S', N'N', N'S', 0, N' ')," +
+                $"(N'NDD', N'CPRAS', N'ND INTERNA X DIF COT SOLO UDS', N'', N'N', N'S', N'N', N'11', N'+', N'+', N'+', 3, N'NDD', N'N', N'N', N'N', N'N', N'N', N'N', N'S', N'N', N'S', 0, N'D')," +
+                $"(N'NCD', N'CPRAS', N'NC INTERNA X DIF COT SOLO UDS', N'', N'N', N'S', N'N', N'11', N'-', N'-', N'-', 3, N'NCD', N'N', N'N', N'N', N'N', N'N', N'N', N'S', N'N', N'S', 0, N'D');";
 
             try
             {
@@ -255,7 +305,19 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_N (CBTEE_MODULO, CBTEE_CODIGO, SUC_CODIGO, CBTEN_NUMERO, CBTEN_REPORTE, CBTEN_IMPRESORA, CBTEN_NUMERAENCOD, CBTEN_COPIAS, CBTEN_REPAUX, CBTEN_REPAUXN) VALUES ('VTAS','RMD',@SUC_FISCAL,'0','','CF','RMD','0','','0'), ('VTAS','DNF',@SUC_FISCAL,'0','','CF','DNF','0','','0'), ('VTAS','REP',@SUC_FISCAL,'0','VTA_PED','CF','REP','0','','0'), ('VTAS','RMX',@SUC_FISCAL,'0','','CF','RMX','0','','0'), ('VTAS','FAA',@SUC_FISCAL,'0','VTA_FAA','CF','FAA','0','','0'), ('VTAS','FAB',@SUC_FISCAL,'0','VTA_FAB','CF','FAB','0','','0'), ('VTAS','NCA',@SUC_FISCAL,'0','VTA_NCA','CF','NCA','0','','0'), ('VTAS','NCB',@SUC_FISCAL,'0','VTA_NCA','CF','NCB','0','','0'), ('VTAS','NDA',@SUC_FISCAL,'0','VTA_NCA','CF','NDA','0','','0'), ('VTAS','NDB',@SUC_FISCAL,'0','VTA_NCA','CF','NDB','0','','0');";
+            string Query = 
+                $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
+                $"INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_N " +
+                $"(CBTEE_MODULO, CBTEE_CODIGO, SUC_CODIGO, CBTEN_NUMERO, CBTEN_REPORTE, CBTEN_IMPRESORA, CBTEN_NUMERAENCOD, CBTEN_COPIAS, CBTEN_REPAUX, CBTEN_REPAUXN) VALUES ('VTAS','RMD',@SUC_FISCAL,'0','','CF','RMD','0','','0'), " +
+                $"('VTAS','DNF',@SUC_FISCAL,'0','','CF','DNF','0','','0'), " +
+                $"('VTAS','REP',@SUC_FISCAL,'0','VTA_PED','CF','REP','0','','0'), " +
+                $"('VTAS','RMX',@SUC_FISCAL,'0','','CF','RMX','0','','0'), " +
+                $"('VTAS','FAA',@SUC_FISCAL,'0','VTA_FAA','CF','FAA','0','','0'), " +
+                $"('VTAS','FAB',@SUC_FISCAL,'0','VTA_FAB','CF','FAB','0','','0'), " +
+                $"('VTAS','NCA',@SUC_FISCAL,'0','VTA_NCA','CF','NCA','0','','0'), " +
+                $"('VTAS','NCB',@SUC_FISCAL,'0','VTA_NCA','CF','NCB','0','','0'), " +
+                $"('VTAS','NDA',@SUC_FISCAL,'0','VTA_NCA','CF','NDA','0','','0'), " +
+                $"('VTAS','NDB',@SUC_FISCAL,'0','VTA_NCA','CF','NDB','0','','0');";
 
             try
             {
@@ -287,7 +349,11 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) VALUES(@SUC_FISCAL,'FISCAL','S','0');";
+            string Query = 
+                $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
+                $"INSERT INTO {conexionDB.VerificarLinkedServer()}SUCURSALES " +
+                $"(SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) " +
+                $"VALUES(@SUC_FISCAL,'FISCAL','S','0');";
 
             try
             {
@@ -313,8 +379,15 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO [Backoffice].DBO.SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) VALUES(@SUC_FISCAL,'FISCAL','S','0');";
-            string QueryCbeinSucursal = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO [Backoffice].DBO.CBTEIN_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL');";
+            string Query = 
+                $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
+                $"INSERT INTO [Backoffice].DBO.SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) " +
+                $"VALUES(@SUC_FISCAL,'FISCAL','S','0');";
+
+            string QueryCbeinSucursal = 
+                $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
+                $"INSERT INTO [Backoffice].DBO.CBTEIN_SUCURSAL " +
+                $"VALUES(@SUC_FISCAL,'FISCAL');";
 
             try
             {
@@ -369,7 +442,10 @@ namespace Parametro.Class
 
         public bool SucBackofficeExiste(SqlConnection sqlConnection)
         {
-            string query = $"SELECT COUNT(*) FROM BACKOFFICE.DBO.SUCURSALES WHERE TRY_CAST(SUC_CODIGO AS INT) = {ParametrosModels.sucFiscal}";
+            string query = 
+                $"SELECT COUNT(*) " +
+                $"FROM BACKOFFICE.DBO.SUCURSALES " +
+                $"WHERE TRY_CAST(SUC_CODIGO AS INT) = {ParametrosModels.sucFiscal}";
 
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
@@ -380,7 +456,9 @@ namespace Parametro.Class
 
         public bool CbeteinSucBackofficeExiste(SqlConnection sqlConnection)
         {
-            string query = $"SELECT COUNT(*) FROM BACKOFFICE.DBO.CBTEIN_SUCURSAL WHERE TRY_CAST(CBTEINSUC_CODIGO AS INT) = {ParametrosModels.sucFiscal}";
+            string query = $"SELECT " +
+                $"COUNT(*) FROM BACKOFFICE.DBO.CBTEIN_SUCURSAL W" +
+                $"HERE TRY_CAST(CBTEINSUC_CODIGO AS INT) = {ParametrosModels.sucFiscal}";
 
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
@@ -395,7 +473,23 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = @SUC_FISCAL WHERE PARA_CODIGO IN ('CDEFSUC','NUMSUCFIJO','PTOVTAFIS','VTAPUNTO');";
+            string Query = 
+                $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
+                $"IF((SELECT PARA_VALOR FROM PARAMETROS WHERE PARA_CODIGO = 'EMPREPAIS') = 'PARAGUAY') " +
+                    $"BEGIN " +
+                    $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS " +
+                    $"SET PARA_VALOR = @SUC_FISCAL " +
+                    $"WHERE PARA_CODIGO IN ('CDEFSUC', 'NUMSUCFIJO', 'PTOVTAFIS', 'VTAPUNTO', 'PTOVTAMAN'); " +
+                    $"END " +
+                $"ELSE " +
+                    $"BEGIN " +
+                    $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS " +
+                    $"SET PARA_VALOR = @SUC_FISCAL " +
+                    $"WHERE PARA_CODIGO IN ('CDEFSUC', 'NUMSUCFIJO', 'PTOVTAFIS', 'VTAPUNTO'); " +
+                    $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS " +
+                    $"SET PARA_VALOR = 9999 " +
+                    $"WHERE PARA_CODIGO = 'PTOVTAMAN'; " +
+                    $"END; ";
 
             try
             {
@@ -421,8 +515,28 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string Query = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_INGRESOS_N VALUES('REA', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA'), ('REC', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA');";
-            string QueryCBTE_EGRESOS_N = $"DECLARE @ULTIMOEGRESO VARCHAR(10); IF EXISTS (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E ORDER BY EGRE_NUMERO DESC) SET @ULTIMOEGRESO = (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E ORDER BY EGRE_NUMERO DESC) ELSE SET @ULTIMOEGRESO = '1'; DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_EGRESOS_N VALUES ('CIE','01',@SUC_FISCAL,@ULTIMOEGRESO,'','','','0'), ('OPC','01',@SUC_FISCAL,'17','opc','','','2')";
+            // CBTE_INGRESOS_N
+            string Query = 
+                $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
+                $"INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_INGRESOS_N " +
+                $"VALUES('REA', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA'), " +
+                $"('REC', '01', @SUC_FISCAL, '1', 'REA', '', '', '1', 'VISTA');";
+
+            // CBTE_EGRESOS_N
+            string QueryCBTE_EGRESOS_N = 
+                $"DECLARE @ULTIMOEGRESO VARCHAR(10); " +
+                $"IF EXISTS " +
+                $"(SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) " +
+                $"FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E " +
+                $"ORDER BY EGRE_NUMERO DESC) " +
+                $"SET @ULTIMOEGRESO = (SELECT TOP 1 SUBSTRING(LTRIM(EGRE_NUMERO), PATINDEX('%[^0]%', LTRIM(EGRE_NUMERO) + ' '), LEN(EGRE_NUMERO)) " +
+                $"FROM {conexionDB.VerificarLinkedServer()}EGRESOS_E " +
+                $"ORDER BY EGRE_NUMERO DESC) " +
+                $"ELSE SET @ULTIMOEGRESO = '1'; " +
+                $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
+                $"INSERT INTO {conexionDB.VerificarLinkedServer()}CBTE_EGRESOS_N " +
+                $"VALUES ('CIE','01',@SUC_FISCAL,@ULTIMOEGRESO,'','','','0'), " +
+                $"('OPC','01',@SUC_FISCAL,'17','opc','','','2')";
 
             try
             {
@@ -467,8 +581,15 @@ namespace Parametro.Class
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string QueryCbteeg = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEEG_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL',NULL);";
-            string QueryCbtein = $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEIN_SUCURSAL VALUES(@SUC_FISCAL,'FISCAL');";
+            string QueryCbteeg = 
+                $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
+                $"INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEEG_SUCURSAL " +
+                $"VALUES(@SUC_FISCAL,'FISCAL',NULL);";
+
+            string QueryCbtein = 
+                $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
+                $"INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEIN_SUCURSAL " +
+                $"VALUES(@SUC_FISCAL,'FISCAL');";
 
             try
             {
@@ -510,16 +631,101 @@ namespace Parametro.Class
         }
         #endregion
 
+        #region Configurar Timbrado
+
+        public void ConfigurarTimbradoConPuntoDeVenta()
+        {
+            ConexionDB conexionDB = new ConexionDB();
+
+            string query =
+                $"DECLARE @SUCURSAL VARCHAR(10) = (SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'VTAPUNTO'); " +
+                $"DECLARE @TIMSUC VARCHAR(4) = SUBSTRING(@SUCURSAL, LEN(@SUCURSAL) - 9, 4); " +
+                $"DECLARE @TIMLOCAL VARCHAR(3) = SUBSTRING(@SUCURSAL, LEN(@SUCURSAL) - 5, 3); " +
+                $"DECLARE @TIMCAJA VARCHAR(3) = SUBSTRING(@SUCURSAL, LEN(@SUCURSAL) - 2, 3); " +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}TIMBRADO " +
+                $"SET TIM_LOCAL = @TIMLOCAL, TIM_CAJA = @TIMCAJA " +
+                $"WHERE TIM_NUMERO LIKE '%' + @TIMSUC + '%'; " +
+                $"PRINT ('Se configuró el timbrado.'); " +
+                $"IF ((SELECT TIM_TKDESDE FROM {conexionDB.VerificarLinkedServer()}TIMBRADO) != '1') " +
+                $"BEGIN " +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}TIMBRADO " +
+                $"SET TIM_TKDESDE = '1'; " +
+                $"PRINT ('Se corrigió el ticket desde.'); " +
+                $"END " +
+                $"ELSE " +
+                $"PRINT ('NADA');";
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
+                {
+                    sqlConnection.Open();
+
+                    if (!ValidarExistenciaTimbrado(sqlConnection))
+                    {
+                        MessageBox.Show("Error al configurar el timbrado, la sucursal no tiene un timbrado asociado.");
+                        Log.Error($"Error - Function ConfigurarTimbradoConPuntoDeVenta(...)\nQuery\n: {query}\nMessage Error: La sucursal no tiene un timbrado asociado.");
+                    }
+                    else
+                    {
+                        using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                        {
+                            sqlCommand.ExecuteNonQuery();
+                        }
+                        sqlConnection.Close();
+                        MessageBox.Show("Timbrado Configurado.");
+                        Log.Information($"Function ConfigurarTimbradoConPuntoDeVenta(...)\nQuery\n: {query}");
+                    }
+                }
+            }
+            catch(SqlException ex)
+            {
+                MessageBox.Show("Error al configurar el timbrado, revisar.");
+                Log.Error($"Error - Function ConfigurarTimbradoConPuntoDeVenta(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
+            }
+        }
+
+        public bool ValidarExistenciaTimbrado(SqlConnection sqlConnection)
+        {
+            ConexionDB conexionDB = new ConexionDB();
+            string query =
+                $"/*Verificar existencia de Timbrado para el punto de Venta.*/ " +
+                $"DECLARE @SUCURSAL VARCHAR (10) = (SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'VTAPUNTO'); /*Punto de venta.*/ " +
+                $"DECLARE @TIMSUC VARCHAR(4) = SUBSTRING(@SUCURSAL, LEN(@SUCURSAL) - 9, 4); /*Número de timbrado en sucursal.*/ " +
+                $"/*Validar que el timbrado existe*/ " +
+                $"SELECT COUNT(*) " +
+                $"FROM {conexionDB.VerificarLinkedServer()}TIMBRADO " +
+                $"WHERE TIM_NUMERO LIKE '%' + @TIMSUC + '%';";
+
+            try
+            {
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                {
+                    int count = (int)sqlCommand.ExecuteScalar();
+                    Log.Information($"Function ValidarExistenciaTimbrado(...)\nQuery\n: {query}");
+                    return (count > 0);
+                }
+            }
+            catch (SqlException ex)
+            {
+                Log.Error($"Error - Function ValidarExistenciaTimbrado(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
+                return false;
+            }
+        }
+
+        #endregion
+
         #region Configurar Punto de Venta
         public void ConfigurarPuntoDeVenta()
         {
-            InsertarSucursalesPDV();
-            InsertarSucursalComprobantesN();
-            InsertarCbteegCbteing();
-            InsertarSucIngresos();
-            ConfigurarSucParametros();
-            MessageBox.Show("Se configuró la sucursal");
-            InsertarSucursalesBackoffice();
+            InsertarSucursalesPDV(); // Sucursales
+            InsertarSucursalComprobantesN(); // Comprobantes N
+            InsertarCbteegCbteing(); // CbteegSucursal && CbteeinSucursal
+            InsertarSucIngresos(); // cbte_ingresos_n && cbte_egresos_n
+            ConfigurarSucParametros(); // Parametros
+            MessageBox.Show("Se configuró la sucursal en PDV");
+            if(ConexionDB.pais == "PARAGUAY") ConfigurarTimbradoConPuntoDeVenta();
+            InsertarSucursalesBackoffice(); // Sucursales -> Backoffice
         }
         #endregion
 

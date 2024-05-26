@@ -465,7 +465,12 @@ namespace Parametro.Class
         #region Configurar Timbrado
         public void ConfigurarTimbrado(string tim_local, string tim_caja)
         {
-            string query = $"UPDATE {conexionDB.VerificarLinkedServer()}TIMBRADO SET TIM_LOCAL = '{tim_local}', TIM_CAJA = '{tim_caja}'; UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = (SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'PTOVTAFIS') WHERE PARA_CODIGO = 'PTOVTAMAN';";
+            string query = $"UPDATE {conexionDB.VerificarLinkedServer()}TIMBRADO" +
+                $" SET TIM_LOCAL = '{tim_local}', TIM_CAJA = '{tim_caja}'; " +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS " +
+                $"SET PARA_VALOR = (SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS " +
+                $"WHERE PARA_CODIGO = 'PTOVTAFIS') " +
+                $"WHERE PARA_CODIGO = 'PTOVTAMAN';";
 
             try
             {
