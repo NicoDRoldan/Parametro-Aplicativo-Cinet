@@ -1,4 +1,5 @@
 ﻿using Parametro.Class;
+using Parametro.Desings.SubDesings.QuerysGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace Parametro.Desings.SubDesings
         ConexionDB conexionDB = new ConexionDB();
         Querys querys = new Querys();
         VistaQuerys vistaQuerys = new VistaQuerys();
+        DataGridBackoffice dataGridBackoffice = new DataGridBackoffice();
 
         public static string numVentaRut { get; set; }
         public static string numRutCorrecto { get; set; }
@@ -73,19 +75,152 @@ namespace Parametro.Desings.SubDesings
 
         private void btnConsultaConexion_Click(object sender, EventArgs e)
         {
+            if (dataGridBackoffice != null && dataGridBackoffice.Visible)
+            {
+                dataGridBackoffice.Close();
+            }
+            dataGridBackoffice = new DataGridBackoffice();
+
+            DataTable resultados = querys.ConsultaConexiones();
+
+            dataGridBackoffice.dataGridBko.DataSource = resultados;
+
+            dataGridBackoffice.Size = new Size(650, 300);
+            dataGridBackoffice.labelResultadoQuery.Text = "Consulta de Conexiones";
+
+            dataGridBackoffice.Show();
+        }
+
+        private void btnVerificarCaja_Click(object sender, EventArgs e)
+        {
+            if (dataGridBackoffice != null && dataGridBackoffice.Visible)
+            {
+                dataGridBackoffice.Close();
+            }
+            dataGridBackoffice = new DataGridBackoffice();
+
+            DataTable resultados = querys.VerificarCaja();
+
+            dataGridBackoffice.dataGridBko.DataSource = resultados;
+            dataGridBackoffice.labelResultadoQuery.Text = "Verificar Caja";
+
+            dataGridBackoffice.Show();
+        }
+
+        private void btnVerificarVersionLocal_Click(object sender, EventArgs e)
+        {
+            if (dataGridBackoffice != null && dataGridBackoffice.Visible)
+            {
+                dataGridBackoffice.Close();
+            }
+            dataGridBackoffice = new DataGridBackoffice();
+
+            DataTable resultados = querys.VerificarVersionLocal();
+
+            dataGridBackoffice.dataGridBko.DataSource = resultados;
+
+            dataGridBackoffice.Size = new Size(430, 400);
+            dataGridBackoffice.labelResultadoQuery.Text = "Versión de Aplicativos";
+
+            dataGridBackoffice.Show();
+        }
+
+        private void btnVerificarVersionCaja_Click(object sender, EventArgs e)
+        {
             if (vistaQuerys != null && vistaQuerys.Visible)
             {
                 vistaQuerys.Close();
             }
 
-            vistaQuerys = new VistaQuerys();
+            if(comboBoxAplicativo.Text.Length == 0)
+            {
+                MessageBox.Show("Seleccionar o escribir un aplicativo.");
+            }
+            else
+            {
+                vistaQuerys = new VistaQuerys();
 
-            DataTable resultados = querys.ConsultaConexiones();
+                string aplicativo = "";
 
-            vistaQuerys.dataGridResultadosQuery.DataSource = resultados;
-            vistaQuerys.Size = new Size(610, 50);
+                switch (comboBoxAplicativo.Text)
+                {
+                    case "ActualizaDatos":
+                        aplicativo = "ActualizaDatos|VERSION";
+                        break;
+                    case "Centralizador":
+                        aplicativo = "Centralizador";
+                        break;
+                    case "CentralizadorComanda":
+                        aplicativo = "CentralizadorComanda|Version";
+                        break;
+                    case "PantallaComanda":
+                        aplicativo = "PantallaComanda|Version";
+                        break;
+                    case "Costos":
+                        aplicativo = "COSTOS";
+                        break;
+                    case "DescargaLocal":
+                        aplicativo = "DescargaLocal|VERSION";
+                        break;
+                    case "Informes":
+                        aplicativo = "Informes";
+                        break;
+                    case "Informes|Version":
+                        aplicativo = "Informes|Version";
+                        break;
+                    case "Profit":
+                        aplicativo = "VERSION";
+                        break;
+                    case "CinetEF-OCX":
+                        aplicativo = "CFOCXVERSI";
+                        break;
+                    case "CinetFiscalManager":
+                        aplicativo = "CinetFiscalManager";
+                        break;
+                    case "ZonaEntrega":
+                        aplicativo = "ZonaEntrega|Version";
+                        break;
+                    case "ZonaLlamador":
+                        aplicativo = "ZonaLlamador|Version";
+                        break;
+                    case "TotemAPI":
+                        aplicativo = "TOTEM_VERSION";
+                        break;
+                    case "InterfaceTotem":
+                        aplicativo = "InterfaceTotem|Version";
+                        break;
+                    case "Totem.EXE":
+                        aplicativo = "VERSIONT";
+                        break;
+                    case "PanelDVY":
+                        aplicativo = "PanelDVY|VERSION";
+                        break;
+                    case "PanelMTZ":
+                        aplicativo = "PanelMTZ|VERSION";
+                        break;
+                    case "PanelRappi":
+                        aplicativo = "PanelRappi|VERSION";
+                        break;
+                    default:
+                        aplicativo = comboBoxAplicativo.Text;
+                        break;
+                }
 
-            vistaQuerys.Show();
+                if (dataGridBackoffice != null && dataGridBackoffice.Visible)
+                {
+                    dataGridBackoffice.Close();
+                }
+                dataGridBackoffice = new DataGridBackoffice();
+
+                DataTable resultados = querys.VerificarVersionPorCaja(aplicativo);
+
+                dataGridBackoffice.dataGridBko.DataSource = resultados;
+
+                dataGridBackoffice.Size = new Size(430, 300);
+                dataGridBackoffice.labelResultadoQuery.Text = $"Versión de {comboBoxAplicativo.Text}";
+
+                dataGridBackoffice.Show();
+            }
         }
 
         private void btnAceptarPassBtn_Click(object sender, EventArgs e)
@@ -105,133 +240,6 @@ namespace Parametro.Desings.SubDesings
 
         private void btnReducirLogs_Click(object sender, EventArgs e)
         {
-        }
-
-        private void btnVerificarCaja_Click(object sender, EventArgs e)
-        {
-            if (vistaQuerys != null && vistaQuerys.Visible)
-            {
-                vistaQuerys.Close();
-            }
-
-            vistaQuerys = new VistaQuerys();
-
-            DataTable resultados = querys.VerificarCaja();
-
-            vistaQuerys.dataGridResultadosQuery.DataSource = resultados;
-            vistaQuerys.Size = new Size(390, 50);
-
-            vistaQuerys.Show();
-        }
-
-        private void btnVerificarVersionLocal_Click(object sender, EventArgs e)
-        {
-            if (vistaQuerys != null && vistaQuerys.Visible)
-            {
-                vistaQuerys.Close();
-            }
-
-            vistaQuerys = new VistaQuerys();
-
-            DataTable resultados = querys.VerificarVersionLocal();
-
-            vistaQuerys.dataGridResultadosQuery.DataSource = resultados;
-
-            vistaQuerys.dataGridResultadosQuery2.Visible = false;
-            vistaQuerys.dataGridResultadosQuery2.Enabled = false;
-
-            // Establecer el alto de la tabla:
-            vistaQuerys.dataGridResultadosQuery.Height = 400;
-
-            vistaQuerys.Size = new Size(430, 400);
-
-            // Establecer que la ventana vistaQuerys no se pueda agrandar ni achicar:
-            vistaQuerys.FormBorderStyle = FormBorderStyle.FixedDialog;
-
-            vistaQuerys.Show();
-        }
-
-        private void btnVerificarVersionCaja_Click(object sender, EventArgs e)
-        {
-            if (vistaQuerys != null && vistaQuerys.Visible)
-            {
-                vistaQuerys.Close();
-            }
-
-            vistaQuerys = new VistaQuerys();
-
-            string aplicativo = "";
-
-            switch (comboBoxAplicativo.Text)
-            {
-                case "ActualizaDatos":
-                    aplicativo = "ActualizaDatos|VERSION";
-                    break;
-                case "Centralizador":
-                    aplicativo = "Centralizador";
-                    break;
-                case "CentralizadorComanda":
-                    aplicativo = "CentralizadorComanda|Version";
-                    break;
-                case "Costos":
-                    aplicativo = "COSTOS";
-                    break;
-                case "DescargaLocal":
-                    aplicativo = "DescargaLocal|VERSION";
-                    break;
-                case "Informes":
-                    aplicativo = "Informes";
-                    break;
-                case "Informes|Version":
-                    aplicativo = "Informes|Version";
-                    break;
-                case "Profit":
-                    aplicativo = "VERSION";
-                    break;
-                case "ZonaEntrega":
-                    aplicativo = "ZonaEntrega|Version";
-                    break;
-                case "ZonaLlamador":
-                    aplicativo = "ZonaLlamador|Version";
-                    break;
-                case "TotemAPI":
-                    aplicativo = "TOTEM_VERSION";
-                    break;
-                case "InterfaceTotem":
-                    aplicativo = "InterfaceTotem|Version";
-                    break;
-                case "Totem.EXE":
-                    aplicativo = "VERSIONT";
-                    break;
-                case "PanelDVY":
-                    aplicativo = "PanelDVY|VERSION";
-                    break;
-                case "PanelMTZ":
-                    aplicativo = "PanelMTZ|VERSION";
-                    break;
-                case "PanelRappi":
-                    aplicativo = "PanelRappi|VERSION";
-                    break;
-                default:
-                    aplicativo = comboBoxAplicativo.Text;
-                    break;
-            }
-
-            DataTable resultados = querys.VerificarVersionPorCaja(aplicativo);
-
-            vistaQuerys.dataGridResultadosQuery.DataSource = resultados;
-
-            vistaQuerys.dataGridResultadosQuery2.Visible = false;
-            vistaQuerys.dataGridResultadosQuery2.Enabled = false;
-
-            // Establecer el alto de la tabla:
-
-            vistaQuerys.Width = 350;
-
-            // Establecer que la ventana vistaQuerys no se pueda agrandar ni achicar:
-            vistaQuerys.FormBorderStyle = FormBorderStyle.FixedDialog;
-
-            vistaQuerys.Show();
         }
 
         private void btnBackup_Click(object sender, EventArgs e)

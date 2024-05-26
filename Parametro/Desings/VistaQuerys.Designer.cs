@@ -64,7 +64,7 @@
             dataGridResultadosQuery2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridResultadosQuery2.Dock = DockStyle.Bottom;
             dataGridResultadosQuery2.Enabled = false;
-            dataGridResultadosQuery2.Location = new Point(0, 91);
+            dataGridResultadosQuery2.Location = new Point(0, 167);
             dataGridResultadosQuery2.Name = "dataGridResultadosQuery2";
             dataGridResultadosQuery2.ReadOnly = true;
             dataGridResultadosQuery2.RowTemplate.Height = 25;
@@ -77,7 +77,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(1094, 167);
+            ClientSize = new Size(1094, 243);
             Controls.Add(dataGridResultadosQuery2);
             Controls.Add(dataGridResultadosQuery);
             MaximizeBox = false;

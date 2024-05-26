@@ -91,7 +91,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(440, 68);
+            panel5.Size = new Size(439, 68);
             panel5.TabIndex = 34;
             // 
             // txtPassBotones
@@ -173,7 +173,7 @@
             panelMesa.Controls.Add(panel1);
             panelMesa.Controls.Add(panel2);
             panelMesa.Enabled = false;
-            panelMesa.Location = new Point(12, 81);
+            panelMesa.Location = new Point(617, 81);
             panelMesa.Name = "panelMesa";
             panelMesa.Size = new Size(206, 104);
             panelMesa.TabIndex = 32;
@@ -250,7 +250,7 @@
             panel3.BackColor = Color.White;
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(panel6);
-            panel3.Location = new Point(12, 191);
+            panel3.Location = new Point(12, 80);
             panel3.Name = "panel3";
             panel3.Size = new Size(206, 136);
             panel3.TabIndex = 33;
@@ -380,7 +380,7 @@
             // comboBoxAplicativo
             // 
             comboBoxAplicativo.FormattingEnabled = true;
-            comboBoxAplicativo.Items.AddRange(new object[] { "ActualizaDatos", "Centralizador", "CentralizadorComanda", "Costos", "DescargaLocal", "Informes", "Informes|Version", "Profit", "ZonaEntrega", "ZonaLlamador", "TotemAPI", "InterfaceTotem", "Totem.EXE", "PanelDVY", "PanelMTZ", "PanelRappi" });
+            comboBoxAplicativo.Items.AddRange(new object[] { "ActualizaDatos", "Centralizador", "CentralizadorComanda", "PantallaComanda", "Costos", "DescargaLocal", "Informes", "Informes|Version", "Profit", "CinetEF-OCX", "CinetFiscalManager", "ZonaEntrega", "ZonaLlamador", "TotemAPI", "InterfaceTotem", "Totem.EXE", "PanelDVY", "PanelMTZ", "PanelRappi" });
             comboBoxAplicativo.Location = new Point(3, 26);
             comboBoxAplicativo.Name = "comboBoxAplicativo";
             comboBoxAplicativo.Size = new Size(98, 23);
@@ -423,7 +423,7 @@
             panel10.BackColor = Color.White;
             panel10.Controls.Add(panel11);
             panel10.Controls.Add(btnBackup);
-            panel10.Location = new Point(227, 222);
+            panel10.Location = new Point(324, 222);
             panel10.Name = "panel10";
             panel10.Size = new Size(106, 105);
             panel10.TabIndex = 35;
@@ -466,7 +466,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(440, 333);
+            ClientSize = new Size(439, 333);
             Controls.Add(panel10);
             Controls.Add(panel7);
             Controls.Add(panel3);
