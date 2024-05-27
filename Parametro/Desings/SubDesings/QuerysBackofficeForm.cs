@@ -26,9 +26,61 @@ namespace Parametro.Desings.SubDesings
         public QuerysBackofficeForm()
         {
             InitializeComponent();
-
+            VerificarPais();
             fechaHasta.Value = DateTime.Today;
 
+        }
+
+        private void VerificarPais()
+        {
+            Querys querys = new Querys();
+
+            switch (ConexionDB.pais)
+            {
+                case "URUGUAY":
+                    MostrarDatos();
+                    break;
+                case "PARAGUAY":
+                    MostrarDatos();
+                    break;
+                case "BOLIVIA":
+                    MostrarDatos();
+                    break;
+                default:
+                    this.Width = 435;
+                    this.Height = 481;
+                    labelPass.Location = new Point(238, 9);
+                    txtPassBotones.Location = new Point(238, 29);
+                    btnAceptarPassBtn.Location = new Point(339, 29);
+                    break;
+            }
+        }
+
+        private void MostrarDatos()
+        {
+            //if (ConexionDB.pais == "URUGUAY")
+            //{
+            //    panelUruguay.Visible = true;
+            //    btnFEAuto.Visible = true;
+            //    checkConsumidorFinal.Visible = true;
+            //    txtVeneNumeroRut.Visible = true;
+            //    labelCorregirRut.Visible = true;
+            //    btnCorregirClienteRut.Visible = true;
+            //    txtRutCorrecto.Visible = true;
+            //}
+            if (ConexionDB.pais == "PARAGUAY")
+            {
+                panelParaguay.Visible = true;
+                corregirPmixBtn.Enabled = true;
+                //panelParaguay.Location = new Point(413, 74);
+            }
+            //else if (ConexionDB.pais == "BOLIVIA")
+            //{
+            //    panelBolivia.Location = new Point(413, 74);
+            //    panelBolivia.Visible = true;
+            //    CorregirCbtBo.Visible = true;
+            //    btnFEAutoBo.Visible = true;
+            //}
         }
 
         private bool ValidarPassBotones()
@@ -132,7 +184,7 @@ namespace Parametro.Desings.SubDesings
                 vistaQuerys.Close();
             }
 
-            if(comboBoxAplicativo.Text.Length == 0)
+            if (comboBoxAplicativo.Text.Length == 0)
             {
                 MessageBox.Show("Seleccionar o escribir un aplicativo.");
             }
@@ -245,6 +297,19 @@ namespace Parametro.Desings.SubDesings
         private void btnBackup_Click(object sender, EventArgs e)
         {
             Functions.HacerBackup();
+        }
+
+        private void corregirPmixBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult confirmResult = MessageBox.Show("¿Seguro de qué querés ejecutar esto? Por favor, verificar antes de hacerlo." 
+                , "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                querys.CorregirGeneracionPmix();
+                MessageBox.Show("Corrección realizada. ¡Regenerar Product Mix!");
+            }
+
         }
     }
 }

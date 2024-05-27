@@ -713,5 +713,39 @@ namespace Parametro.Class
             return dataSet;
         }
         #endregion
+
+        #region CorregirGeneracionPmix
+
+        public void CorregirGeneracionPmix()
+        {
+            string serverConnect = ConexionDB.baseDatos;
+            if (LoginForm.checkLinkedServer) serverConnect = $"{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLikedServer}]";
+            string query = $"DECLARE @newProcedureDefinition NVARCHAR(MAX); SET @newProcedureDefinition = N'ALTER procedure [dbo].[sp_ProductMix2] @dFechaDesde as datetime, @dFechaHasta as datetime as declare @HoraCorte as varchar(2) if exists(select para_valor from parametros where para_codigo = ''HORACORTE'') set @HoraCorte = (select para_valor from parametros where para_codigo = ''HORACORTE'') else set @HoraCorte = ''04'' declare @codigo as varchar(20), @descripcion as varchar(50), @tpr_codigo as varchar(20), @rubro as varchar(20), @importetotal as numeric(18,2) , @cantidadvendida as numeric(10,2), @art_asociado as varchar(20), @art_descorta as varchar(50), @resta_estru as varchar(1), @resta_hijo as varchar(1), @solo as varchar(1), @bRestaEstru as varchar(1), @bRestaHijo as varchar(1), @sAux as varchar(20), @H_Codigo as varchar(20), @H_Descripcion as varchar(50), @descripcion2 as varchar(50) declare @E_ART_CODIGO as varchar(20), @E_ART_DESCORTA as varchar(50), @E_PRM_CANT as numeric(10,2), @art_vtausaestru as char(1) CREATE TABLE #PM (CODIGO VARCHAR(20), DESCRIPCION varchar(50), CANTIDAD NUMERIC(10,4), IMPORTE NUMERIC(18,4)) declare pedro cursor for select d.art_codigo Codigo, vend_comentario Descripcion, ISNULL(a.tpr_codigo,'''') tpr_codigo , a.art_padre Rubro, sum(vend_cant*vend_precio)-(sum(vend_cant*vend_precio)*(isnull ( case when a.art_padre in ('''','''') and d.art_codigo != ''805'' then 0 else t.vent_porcedto end,0)/100)) ImporteTotal, sum(vend_Cant) CantidadVendida, ISNULL(a.art_asociado,'''') art_asociade, a.art_descorta, a.art_vtausaestru from ventas_e e inner join ventas_d d on d.vene_numero = e.vene_numero and e.suc_codigo = d.suc_codigo and e.VTALON_CODIGO = d.VTALON_CODIGO and e.cbtee_codigo = d.cbtee_codigo inner join articulos_e a on a.art_codigo = d.art_codigo left join ventas_t t on t.vene_numero = e.vene_numero and t.suc_codigo = e.suc_codigo and t.VTALON_CODIGO = e.VTALON_CODIGO and t.cbtee_codigo = e.cbtee_codigo and t.vent_concepto=''DTO1'' where (e.vene_fecha > @dFechaDesde or (e.vene_fecha = @dFechaDesde and e.vene_hora >= @HoraCorte)) and ((e.vene_fecha <= @dFechaHasta) or (e.vene_fecha = dateadd(day,1,@dFechaHasta) and e.vene_hora < @HoraCorte)) group by d.art_codigo, d.vend_comentario, a.art_padre, a.tpr_codigo, t.vent_porcedto, a.art_Asociado, a.art_descorta, a.art_vtausaestru order by CAST(d.art_codigo as numeric) open pedro fetch pedro into @codigo , @descripcion , @tpr_codigo, @rubro , @importetotal , @cantidadvendida , @art_asociado , @art_descorta, @art_vtausaestru WHILE (@@FETCH_STATUS = 0 ) BEGIN if @importetotal <> 0 or @art_vtausaestru = ''S'' begin set @H_CODIGO = @codigo set @H_DESCRIPCION = @art_descorta /*descripcion */ if @art_asociado <> '''' begin select @H_CODIGO=art_codigo,@H_DESCRIPCION=art_descorta from articulos_e where art_codigo = @art_asociado end INSERT INTO #PM VALUES (@h_codigo,@h_descripcion, @cantidadvendida,@importetotal ) end fetch pedro into @codigo , @descripcion , @tpr_codigo, @rubro , @importetotal , @cantidadvendida , @art_asociado , @art_descorta, @art_vtausaestru END CLOSE pedro DEALLOCATE pedro select codigo, descripcion, SUM(importe) IMPORTE, SUM(cantidad) CANTIDAD from #pm where codigo <> '''' GROUP BY CODIGO, DESCRIPCION order by cast(codigo as int)' " +
+                $"/* Ejecutar la modificación del stored procedure en el servidor remoto usando OPENQUERY */" +
+                $"EXEC sp_executesql N' " +
+                $"EXEC {serverConnect}.sys.sp_executesql @stmt', " +
+                $"N'@stmt NVARCHAR(MAX)', " +
+                $"@stmt = @newProcedureDefinition;";
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                    sqlConnection.Close();
+                    Log.Information($"Function CorregirGeneracionPmix(...)\nQuery\n: No me muestro :P");
+                }
+            }
+            catch(SqlException ex)
+            {
+                Log.Error($"Error - Function ConfigurarTimbradoConPuntoDeVenta(...)\nQuery\n: No me muestro :P\nMessage Error: {ex.Message}");
+            }
+        }
+
+        #endregion
     }
 }

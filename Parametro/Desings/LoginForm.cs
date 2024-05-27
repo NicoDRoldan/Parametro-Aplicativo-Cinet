@@ -124,6 +124,10 @@ namespace Parametro.Desings
                     backofficeForm.Show();
                     this.Hide();
                     break;
+                case "backofficepy":
+                    backofficeForm.Show();
+                    this.Hide();
+                    break;
                 case "cinet_pdv":
                     cinetPdvForm.Show();
                     this.Hide();

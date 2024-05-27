@@ -46,11 +46,12 @@
             label20 = new Label();
             panel3 = new Panel();
             panel4 = new Panel();
+            button1 = new Button();
             btnVerificarCaja = new Button();
             btnConsultaConexion = new Button();
+            btnReducirLogs = new Button();
             panel6 = new Panel();
             label5 = new Label();
-            btnReducirLogs = new Button();
             btnVerificarVersionCaja = new Button();
             panel7 = new Panel();
             panel8 = new Panel();
@@ -64,6 +65,10 @@
             panel11 = new Panel();
             label8 = new Label();
             btnBackup = new Button();
+            panelParaguay = new Panel();
+            panel13 = new Panel();
+            label9 = new Label();
+            corregirPmixBtn = new Button();
             panel5.SuspendLayout();
             panelMesa.SuspendLayout();
             panel1.SuspendLayout();
@@ -76,6 +81,8 @@
             panel9.SuspendLayout();
             panel10.SuspendLayout();
             panel11.SuspendLayout();
+            panelParaguay.SuspendLayout();
+            panel13.SuspendLayout();
             SuspendLayout();
             // 
             // panel5
@@ -91,7 +98,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(439, 68);
+            panel5.Size = new Size(648, 68);
             panel5.TabIndex = 34;
             // 
             // txtPassBotones
@@ -173,7 +180,7 @@
             panelMesa.Controls.Add(panel1);
             panelMesa.Controls.Add(panel2);
             panelMesa.Enabled = false;
-            panelMesa.Location = new Point(617, 81);
+            panelMesa.Location = new Point(743, 81);
             panelMesa.Name = "panelMesa";
             panelMesa.Size = new Size(206, 104);
             panelMesa.TabIndex = 32;
@@ -252,23 +259,37 @@
             panel3.Controls.Add(panel6);
             panel3.Location = new Point(12, 80);
             panel3.Name = "panel3";
-            panel3.Size = new Size(206, 136);
+            panel3.Size = new Size(206, 247);
             panel3.TabIndex = 33;
             // 
             // panel4
             // 
+            panel4.Controls.Add(button1);
             panel4.Controls.Add(btnVerificarCaja);
             panel4.Controls.Add(btnConsultaConexion);
+            panel4.Controls.Add(btnReducirLogs);
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(0, 25);
             panel4.Name = "panel4";
-            panel4.Size = new Size(206, 111);
+            panel4.Size = new Size(206, 222);
             panel4.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.Enabled = false;
+            button1.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.Location = new Point(106, 57);
+            button1.Name = "button1";
+            button1.Size = new Size(92, 44);
+            button1.TabIndex = 29;
+            button1.Text = "Reorg";
+            button1.UseVisualStyleBackColor = true;
+            button1.Visible = false;
             // 
             // btnVerificarCaja
             // 
             btnVerificarCaja.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnVerificarCaja.Location = new Point(106, 17);
+            btnVerificarCaja.Location = new Point(106, 7);
             btnVerificarCaja.Name = "btnVerificarCaja";
             btnVerificarCaja.Size = new Size(92, 44);
             btnVerificarCaja.TabIndex = 8;
@@ -279,13 +300,26 @@
             // btnConsultaConexion
             // 
             btnConsultaConexion.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnConsultaConexion.Location = new Point(8, 17);
+            btnConsultaConexion.Location = new Point(8, 7);
             btnConsultaConexion.Name = "btnConsultaConexion";
             btnConsultaConexion.Size = new Size(92, 44);
             btnConsultaConexion.TabIndex = 7;
             btnConsultaConexion.Text = "Consulta Conexiones";
             btnConsultaConexion.UseVisualStyleBackColor = true;
             btnConsultaConexion.Click += btnConsultaConexion_Click;
+            // 
+            // btnReducirLogs
+            // 
+            btnReducirLogs.Enabled = false;
+            btnReducirLogs.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnReducirLogs.Location = new Point(8, 57);
+            btnReducirLogs.Name = "btnReducirLogs";
+            btnReducirLogs.Size = new Size(92, 44);
+            btnReducirLogs.TabIndex = 28;
+            btnReducirLogs.Text = "Reducir Log's";
+            btnReducirLogs.UseVisualStyleBackColor = true;
+            btnReducirLogs.Visible = false;
+            btnReducirLogs.Click += btnReducirLogs_Click;
             // 
             // panel6
             // 
@@ -307,19 +341,6 @@
             label5.Size = new Size(104, 17);
             label5.TabIndex = 1;
             label5.Text = "MANTENIMIENTO";
-            // 
-            // btnReducirLogs
-            // 
-            btnReducirLogs.Enabled = false;
-            btnReducirLogs.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnReducirLogs.Location = new Point(12, 333);
-            btnReducirLogs.Name = "btnReducirLogs";
-            btnReducirLogs.Size = new Size(92, 44);
-            btnReducirLogs.TabIndex = 28;
-            btnReducirLogs.Text = "Reducir Log's";
-            btnReducirLogs.UseVisualStyleBackColor = true;
-            btnReducirLogs.Visible = false;
-            btnReducirLogs.Click += btnReducirLogs_Click;
             // 
             // btnVerificarVersionCaja
             // 
@@ -423,7 +444,7 @@
             panel10.BackColor = Color.White;
             panel10.Controls.Add(panel11);
             panel10.Controls.Add(btnBackup);
-            panel10.Location = new Point(324, 222);
+            panel10.Location = new Point(224, 222);
             panel10.Name = "panel10";
             panel10.Size = new Size(106, 105);
             panel10.TabIndex = 35;
@@ -460,17 +481,61 @@
             btnBackup.UseVisualStyleBackColor = true;
             btnBackup.Click += btnBackup_Click;
             // 
+            // panelParaguay
+            // 
+            panelParaguay.BackColor = Color.White;
+            panelParaguay.Controls.Add(panel13);
+            panelParaguay.Controls.Add(corregirPmixBtn);
+            panelParaguay.Location = new Point(436, 81);
+            panelParaguay.Name = "panelParaguay";
+            panelParaguay.Size = new Size(206, 136);
+            panelParaguay.TabIndex = 36;
+            panelParaguay.Visible = false;
+            // 
+            // panel13
+            // 
+            panel13.BackColor = SystemColors.MenuHighlight;
+            panel13.Controls.Add(label9);
+            panel13.Dock = DockStyle.Top;
+            panel13.Location = new Point(0, 0);
+            panel13.Name = "panel13";
+            panel13.Size = new Size(206, 25);
+            panel13.TabIndex = 0;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.ForeColor = SystemColors.ButtonHighlight;
+            label9.Location = new Point(66, 4);
+            label9.Name = "label9";
+            label9.Size = new Size(74, 17);
+            label9.TabIndex = 1;
+            label9.Text = "PARAGUAY";
+            // 
+            // corregirPmixBtn
+            // 
+            corregirPmixBtn.Enabled = false;
+            corregirPmixBtn.Font = new Font("Century Gothic", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            corregirPmixBtn.Location = new Point(12, 31);
+            corregirPmixBtn.Name = "corregirPmixBtn";
+            corregirPmixBtn.Size = new Size(92, 44);
+            corregirPmixBtn.TabIndex = 13;
+            corregirPmixBtn.Text = "Corregir generación PMIX";
+            corregirPmixBtn.UseVisualStyleBackColor = true;
+            corregirPmixBtn.Click += corregirPmixBtn_Click;
+            // 
             // QuerysBackofficeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(439, 333);
+            ClientSize = new Size(648, 334);
+            Controls.Add(panelParaguay);
             Controls.Add(panel10);
             Controls.Add(panel7);
             Controls.Add(panel3);
-            Controls.Add(btnReducirLogs);
             Controls.Add(panel5);
             Controls.Add(panelMesa);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -497,6 +562,9 @@
             panel10.ResumeLayout(false);
             panel11.ResumeLayout(false);
             panel11.PerformLayout();
+            panelParaguay.ResumeLayout(false);
+            panel13.ResumeLayout(false);
+            panel13.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -537,5 +605,10 @@
         private Panel panel11;
         private Label label8;
         private Button btnBackup;
+        private Panel panelParaguay;
+        private Panel panel13;
+        private Label label9;
+        private Button corregirPmixBtn;
+        private Button button1;
     }
 }

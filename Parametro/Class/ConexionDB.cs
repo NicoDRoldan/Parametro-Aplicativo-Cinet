@@ -67,6 +67,7 @@ namespace Parametro.Class
             string consulta = "SELECT name FROM sys.databases " +
                 "WHERE state_desc = 'ONLINE' " +
                 "AND name IN('Backoffice','Comanda','Empresa','Cinet_PDV','Cinet_PDV_Totem','Cinet_PDV_Auto') OR (name LIKE '%PDV%'" +
+                "and state_desc = 'ONLINE') OR (name LIKE '%Backoffice%'" +
                 "and state_desc = 'ONLINE')";
 
             try
