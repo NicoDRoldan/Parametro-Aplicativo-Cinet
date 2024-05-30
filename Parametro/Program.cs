@@ -1,4 +1,5 @@
 using Parametro.Desings;
+using Parametro.Desings.SubDesings;
 using Serilog;
 using Serilog.Events;
 
@@ -23,6 +24,7 @@ namespace Parametro
 
             ApplicationConfiguration.Initialize();
             Application.Run(new LoginForm());
+            //Application.Run(new LinkedQuerysForm());
         }
     }
 }

@@ -400,7 +400,6 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Dock = DockStyle.Left;
             label7.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = SystemColors.ActiveCaptionText;
             label7.Location = new Point(0, 0);

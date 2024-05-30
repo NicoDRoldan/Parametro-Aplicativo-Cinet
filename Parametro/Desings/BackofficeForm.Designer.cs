@@ -72,6 +72,7 @@
             btnEQUIPOUPD = new Button();
             panel10 = new Panel();
             label24 = new Label();
+            btnLinkedQuerys = new Button();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             panel1.SuspendLayout();
@@ -533,6 +534,17 @@
             label24.TabIndex = 1;
             label24.Text = "PARAMETROS VARIOS";
             // 
+            // btnLinkedQuerys
+            // 
+            btnLinkedQuerys.BackgroundImage = Properties.Resources.linkedServer;
+            btnLinkedQuerys.BackgroundImageLayout = ImageLayout.Zoom;
+            btnLinkedQuerys.Enabled = false;
+            btnLinkedQuerys.Location = new Point(292, 332);
+            btnLinkedQuerys.Name = "btnLinkedQuerys";
+            btnLinkedQuerys.Size = new Size(75, 65);
+            btnLinkedQuerys.TabIndex = 34;
+            btnLinkedQuerys.UseVisualStyleBackColor = true;
+            // 
             // BackofficeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -540,6 +552,7 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(460, 409);
+            Controls.Add(btnLinkedQuerys);
             Controls.Add(panel9);
             Controls.Add(panel5);
             Controls.Add(panel1);
@@ -616,5 +629,6 @@
         private Label labelIdCafeteria;
         private TextBox STOREIDRP2;
         private Label label8;
+        private Button btnLinkedQuerys;
     }
 }
