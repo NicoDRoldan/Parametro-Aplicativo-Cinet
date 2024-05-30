@@ -49,10 +49,10 @@
             comboBoxDataBase = new ComboBox();
             label4 = new Label();
             lblOmnicanalCheck = new Label();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
+            radioParametros = new RadioButton();
+            radioLapos = new RadioButton();
             panel2 = new Panel();
-            panel5 = new Panel();
+            panelComercios = new Panel();
             btnGuardarNrosComercio = new Button();
             panel9 = new Panel();
             label7 = new Label();
@@ -71,23 +71,27 @@
             TNARANJA = new TextBox();
             panel4 = new Panel();
             label5 = new Label();
+            panelParametros = new Panel();
+            panelLapos = new Panel();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
-            panel5.SuspendLayout();
+            panelComercios.SuspendLayout();
             panel9.SuspendLayout();
             panel13.SuspendLayout();
             panel10.SuspendLayout();
             panel11.SuspendLayout();
             panel12.SuspendLayout();
             panel4.SuspendLayout();
+            panelParametros.SuspendLayout();
+            panelLapos.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.Window;
             panel1.Controls.Add(panel3);
-            panel1.Location = new Point(323, 8);
+            panel1.Location = new Point(168, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(309, 261);
             panel1.TabIndex = 0;
@@ -118,7 +122,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ActiveCaptionText;
-            label8.Location = new Point(192, 9);
+            label8.Location = new Point(37, 4);
             label8.Name = "label8";
             label8.Size = new Size(92, 20);
             label8.TabIndex = 42;
@@ -126,18 +130,18 @@
             // 
             // STOREIDRAP
             // 
-            STOREIDRAP.Location = new Point(192, 32);
+            STOREIDRAP.Location = new Point(37, 27);
             STOREIDRAP.Name = "STOREIDRAP";
             STOREIDRAP.PlaceholderText = "PARA_CODIGO";
             STOREIDRAP.Size = new Size(125, 23);
-            STOREIDRAP.TabIndex = 40;
+            STOREIDRAP.TabIndex = 8;
             // 
             // BtnConfigurarRap
             // 
-            BtnConfigurarRap.Location = new Point(192, 159);
+            BtnConfigurarRap.Location = new Point(37, 154);
             BtnConfigurarRap.Name = "BtnConfigurarRap";
             BtnConfigurarRap.Size = new Size(125, 23);
-            BtnConfigurarRap.TabIndex = 41;
+            BtnConfigurarRap.TabIndex = 11;
             BtnConfigurarRap.Text = "Buscar Parametro";
             BtnConfigurarRap.TextAlign = ContentAlignment.MiddleLeft;
             BtnConfigurarRap.UseVisualStyleBackColor = true;
@@ -147,7 +151,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(192, 107);
+            label1.Location = new Point(37, 102);
             label1.Name = "label1";
             label1.Size = new Size(51, 20);
             label1.TabIndex = 45;
@@ -155,18 +159,18 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(192, 130);
+            textBox1.Location = new Point(37, 125);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "PARA_VALOR";
             textBox1.Size = new Size(125, 23);
-            textBox1.TabIndex = 43;
+            textBox1.TabIndex = 10;
             // 
             // button1
             // 
-            button1.Location = new Point(192, 188);
+            button1.Location = new Point(37, 183);
             button1.Name = "button1";
             button1.Size = new Size(125, 23);
-            button1.TabIndex = 44;
+            button1.TabIndex = 12;
             button1.Text = "Updatear Parametro";
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.UseVisualStyleBackColor = true;
@@ -176,7 +180,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(192, 58);
+            label2.Location = new Point(37, 53);
             label2.Name = "label2";
             label2.Size = new Size(103, 20);
             label2.TabIndex = 48;
@@ -184,28 +188,28 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(192, 81);
+            textBox2.Location = new Point(37, 76);
             textBox2.Name = "textBox2";
             textBox2.PlaceholderText = "PARA_DESCRIPCION";
             textBox2.Size = new Size(125, 23);
-            textBox2.TabIndex = 46;
+            textBox2.TabIndex = 9;
             // 
             // button2
             // 
-            button2.Location = new Point(192, 217);
+            button2.Location = new Point(37, 212);
             button2.Name = "button2";
             button2.Size = new Size(125, 23);
-            button2.TabIndex = 47;
+            button2.TabIndex = 13;
             button2.Text = "Crear Parametro";
             button2.TextAlign = ContentAlignment.MiddleLeft;
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Location = new Point(192, 246);
+            button3.Location = new Point(37, 241);
             button3.Name = "button3";
             button3.Size = new Size(125, 23);
-            button3.TabIndex = 49;
+            button3.TabIndex = 14;
             button3.Text = "Eliminar Parametro";
             button3.TextAlign = ContentAlignment.MiddleLeft;
             button3.UseVisualStyleBackColor = true;
@@ -217,14 +221,14 @@
             cbEquipoLinkedServer.Location = new Point(12, 33);
             cbEquipoLinkedServer.Name = "cbEquipoLinkedServer";
             cbEquipoLinkedServer.Size = new Size(69, 23);
-            cbEquipoLinkedServer.TabIndex = 50;
+            cbEquipoLinkedServer.TabIndex = 1;
             // 
             // btnConnectLinkedServer
             // 
             btnConnectLinkedServer.Location = new Point(12, 62);
             btnConnectLinkedServer.Name = "btnConnectLinkedServer";
             btnConnectLinkedServer.Size = new Size(118, 23);
-            btnConnectLinkedServer.TabIndex = 52;
+            btnConnectLinkedServer.TabIndex = 3;
             btnConnectLinkedServer.Text = "TRAER BASE";
             btnConnectLinkedServer.UseVisualStyleBackColor = true;
             // 
@@ -233,7 +237,7 @@
             textBoxPortLS.Location = new Point(87, 33);
             textBoxPortLS.Name = "textBoxPortLS";
             textBoxPortLS.Size = new Size(43, 23);
-            textBoxPortLS.TabIndex = 51;
+            textBoxPortLS.TabIndex = 2;
             textBoxPortLS.Text = "1433";
             // 
             // label3
@@ -249,20 +253,22 @@
             // 
             // btnLogin
             // 
+            btnLogin.Enabled = false;
             btnLogin.Location = new Point(12, 140);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(118, 23);
-            btnLogin.TabIndex = 55;
+            btnLogin.TabIndex = 5;
             btnLogin.Text = "CONECTAR";
             btnLogin.UseVisualStyleBackColor = true;
             // 
             // comboBoxDataBase
             // 
+            comboBoxDataBase.Enabled = false;
             comboBoxDataBase.FormattingEnabled = true;
             comboBoxDataBase.Location = new Point(12, 111);
             comboBoxDataBase.Name = "comboBoxDataBase";
             comboBoxDataBase.Size = new Size(118, 23);
-            comboBoxDataBase.TabIndex = 54;
+            comboBoxDataBase.TabIndex = 4;
             // 
             // label4
             // 
@@ -287,51 +293,53 @@
             lblOmnicanalCheck.TabIndex = 57;
             lblOmnicanalCheck.Text = "Desconectado - ";
             // 
-            // radioButton1
+            // radioParametros
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(12, 188);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(85, 19);
-            radioButton1.TabIndex = 58;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Parametros";
-            radioButton1.UseVisualStyleBackColor = true;
+            radioParametros.AutoSize = true;
+            radioParametros.Location = new Point(12, 188);
+            radioParametros.Name = "radioParametros";
+            radioParametros.Size = new Size(85, 19);
+            radioParametros.TabIndex = 6;
+            radioParametros.TabStop = true;
+            radioParametros.Text = "Parametros";
+            radioParametros.UseVisualStyleBackColor = true;
+            radioParametros.CheckedChanged += radioParametros_CheckedChanged;
             // 
-            // radioButton2
+            // radioLapos
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(12, 213);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(56, 19);
-            radioButton2.TabIndex = 59;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Lapos";
-            radioButton2.UseVisualStyleBackColor = true;
+            radioLapos.AutoSize = true;
+            radioLapos.Location = new Point(12, 213);
+            radioLapos.Name = "radioLapos";
+            radioLapos.Size = new Size(56, 19);
+            radioLapos.TabIndex = 7;
+            radioLapos.TabStop = true;
+            radioLapos.Text = "Lapos";
+            radioLapos.UseVisualStyleBackColor = true;
+            radioLapos.CheckedChanged += radioLapos_CheckedChanged;
             // 
             // panel2
             // 
-            panel2.Controls.Add(panel5);
+            panel2.Controls.Add(panelComercios);
             panel2.Controls.Add(panel4);
-            panel2.Location = new Point(638, 8);
+            panel2.Location = new Point(168, 3);
             panel2.Name = "panel2";
             panel2.Size = new Size(309, 261);
             panel2.TabIndex = 4;
             // 
-            // panel5
+            // panelComercios
             // 
-            panel5.BackColor = SystemColors.Window;
-            panel5.Controls.Add(btnGuardarNrosComercio);
-            panel5.Controls.Add(panel9);
-            panel5.Controls.Add(panel13);
-            panel5.Controls.Add(panel10);
-            panel5.Controls.Add(panel11);
-            panel5.Controls.Add(panel12);
-            panel5.Dock = DockStyle.Fill;
-            panel5.Location = new Point(0, 25);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(309, 236);
-            panel5.TabIndex = 4;
+            panelComercios.BackColor = SystemColors.Window;
+            panelComercios.Controls.Add(btnGuardarNrosComercio);
+            panelComercios.Controls.Add(panel9);
+            panelComercios.Controls.Add(panel13);
+            panelComercios.Controls.Add(panel10);
+            panelComercios.Controls.Add(panel11);
+            panelComercios.Controls.Add(panel12);
+            panelComercios.Dock = DockStyle.Fill;
+            panelComercios.Location = new Point(0, 25);
+            panelComercios.Name = "panelComercios";
+            panelComercios.Size = new Size(309, 236);
+            panelComercios.TabIndex = 4;
             // 
             // btnGuardarNrosComercio
             // 
@@ -342,7 +350,7 @@
             btnGuardarNrosComercio.Location = new Point(0, 198);
             btnGuardarNrosComercio.Name = "btnGuardarNrosComercio";
             btnGuardarNrosComercio.Size = new Size(309, 38);
-            btnGuardarNrosComercio.TabIndex = 60;
+            btnGuardarNrosComercio.TabIndex = 20;
             btnGuardarNrosComercio.Text = "Guardar Comercios";
             btnGuardarNrosComercio.UseVisualStyleBackColor = false;
             // 
@@ -376,7 +384,7 @@
             Visa.Location = new Point(134, 0);
             Visa.Name = "Visa";
             Visa.Size = new Size(175, 23);
-            Visa.TabIndex = 8;
+            Visa.TabIndex = 19;
             // 
             // panel13
             // 
@@ -408,7 +416,7 @@
             MASTER.Location = new Point(134, 0);
             MASTER.Name = "MASTER";
             MASTER.Size = new Size(175, 23);
-            MASTER.TabIndex = 12;
+            MASTER.TabIndex = 18;
             // 
             // panel10
             // 
@@ -441,7 +449,7 @@
             AMEX.Location = new Point(134, 0);
             AMEX.Name = "AMEX";
             AMEX.Size = new Size(175, 23);
-            AMEX.TabIndex = 9;
+            AMEX.TabIndex = 17;
             // 
             // panel11
             // 
@@ -473,7 +481,7 @@
             CABALDEB.Location = new Point(134, 0);
             CABALDEB.Name = "CABALDEB";
             CABALDEB.Size = new Size(175, 23);
-            CABALDEB.TabIndex = 10;
+            CABALDEB.TabIndex = 16;
             // 
             // panel12
             // 
@@ -506,7 +514,7 @@
             TNARANJA.Location = new Point(134, 0);
             TNARANJA.Name = "TNARANJA";
             TNARANJA.Size = new Size(175, 23);
-            TNARANJA.TabIndex = 11;
+            TNARANJA.TabIndex = 15;
             // 
             // panel4
             // 
@@ -529,14 +537,45 @@
             label5.TabIndex = 2;
             label5.Text = "Configurar Lapos";
             // 
+            // panelParametros
+            // 
+            panelParametros.Controls.Add(panel1);
+            panelParametros.Controls.Add(BtnConfigurarRap);
+            panelParametros.Controls.Add(STOREIDRAP);
+            panelParametros.Controls.Add(label8);
+            panelParametros.Controls.Add(button1);
+            panelParametros.Controls.Add(textBox1);
+            panelParametros.Controls.Add(label1);
+            panelParametros.Controls.Add(button2);
+            panelParametros.Controls.Add(textBox2);
+            panelParametros.Controls.Add(label2);
+            panelParametros.Controls.Add(button3);
+            panelParametros.Enabled = false;
+            panelParametros.Location = new Point(143, 5);
+            panelParametros.Name = "panelParametros";
+            panelParametros.Size = new Size(497, 274);
+            panelParametros.TabIndex = 58;
+            panelParametros.Visible = false;
+            // 
+            // panelLapos
+            // 
+            panelLapos.Controls.Add(panel2);
+            panelLapos.Enabled = false;
+            panelLapos.Location = new Point(143, 285);
+            panelLapos.Name = "panelLapos";
+            panelLapos.Size = new Size(497, 274);
+            panelLapos.TabIndex = 59;
+            panelLapos.Visible = false;
+            // 
             // LinkedQuerysForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(973, 293);
-            Controls.Add(panel2);
-            Controls.Add(radioButton2);
-            Controls.Add(radioButton1);
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ClientSize = new Size(627, 277);
+            Controls.Add(panelLapos);
+            Controls.Add(radioLapos);
+            Controls.Add(radioParametros);
             Controls.Add(lblOmnicanalCheck);
             Controls.Add(label4);
             Controls.Add(btnLogin);
@@ -545,24 +584,16 @@
             Controls.Add(cbEquipoLinkedServer);
             Controls.Add(btnConnectLinkedServer);
             Controls.Add(textBoxPortLS);
-            Controls.Add(button3);
-            Controls.Add(label2);
-            Controls.Add(textBox2);
-            Controls.Add(button2);
-            Controls.Add(label1);
-            Controls.Add(textBox1);
-            Controls.Add(button1);
-            Controls.Add(label8);
-            Controls.Add(STOREIDRAP);
-            Controls.Add(BtnConfigurarRap);
-            Controls.Add(panel1);
+            Controls.Add(panelParametros);
+            MaximizeBox = false;
             Name = "LinkedQuerysForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LinkedQuerysForm";
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel2.ResumeLayout(false);
-            panel5.ResumeLayout(false);
+            panelComercios.ResumeLayout(false);
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
             panel13.ResumeLayout(false);
@@ -575,6 +606,9 @@
             panel12.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            panelParametros.ResumeLayout(false);
+            panelParametros.PerformLayout();
+            panelLapos.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -600,8 +634,8 @@
         public ComboBox comboBoxDataBase;
         private Label label4;
         private Label lblOmnicanalCheck;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        private RadioButton radioParametros;
+        private RadioButton radioLapos;
         private Panel panel3;
         private Label label20;
         private Panel panel2;
@@ -622,7 +656,9 @@
         private Panel panel10;
         private Label label6;
         private TextBox AMEX;
-        private Panel panel5;
+        private Panel panelComercios;
         private Button btnGuardarNrosComercio;
+        private Panel panelParametros;
+        private Panel panelLapos;
     }
 }
