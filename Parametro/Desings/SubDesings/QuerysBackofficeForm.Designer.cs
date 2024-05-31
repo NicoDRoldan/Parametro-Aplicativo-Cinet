@@ -98,7 +98,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(648, 68);
+            panel5.Size = new Size(440, 68);
             panel5.TabIndex = 34;
             // 
             // txtPassBotones
@@ -531,7 +531,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(648, 334);
+            ClientSize = new Size(440, 334);
             Controls.Add(panelParaguay);
             Controls.Add(panel10);
             Controls.Add(panel7);

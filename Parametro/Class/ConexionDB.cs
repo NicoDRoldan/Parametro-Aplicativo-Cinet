@@ -54,17 +54,14 @@ namespace Parametro.Class
         }
         #endregion
 
-        #region Cargar Nombre de Bases
-        public void CargarNombresBasesDeDatos(ComboBox comboBox)
+        #region Traer bases de datos
+
+        public void TraerBasesDeDatos(ComboBox bases, bool linkedServer)
         {
-            // Obtiene la cadena de conexión maestra
-            string cadenaConexion = StringConexionMaster();
+            // Limpiar elementos existentes
+            bases.Items.Clear();
 
-            // Limpia los elementos existentes en el ComboBox
-            comboBox.Items.Clear();
-
-            // Consulta para obtener los nombres de bases de datos específicas en estado 'ONLINE'
-            string consulta = "SELECT name FROM sys.databases " +
+            string query = "SELECT name FROM sys.databases " +
                 "WHERE state_desc = 'ONLINE' " +
                 "AND name IN('Backoffice','Comanda','Empresa','Cinet_PDV','Cinet_PDV_Totem','Cinet_PDV_Auto') OR (name LIKE '%PDV%'" +
                 "and state_desc = 'ONLINE') OR (name LIKE '%Backoffice%'" +
@@ -72,121 +69,84 @@ namespace Parametro.Class
 
             try
             {
-                // Establece la conexión a la base de datos
-                using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+                using (SqlConnection sqlConnection = new SqlConnection(StringConexionMaster()))
                 {
-                    // Abre la conexión
-                    conexion.Open();
-                    // Ejecuta la consulta SQL
-                    using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                    sqlConnection.Open();
+                    if (linkedServer)
                     {
-                        // Lee los resultados de la consulta
-                        using (SqlDataReader reader = comando.ExecuteReader())
+                        AddLinkedServer();
+                        query = $"SELECT name FROM OPENQUERY([{equipoLinkedServer},{puertoLinkedServer}], 'SELECT name " +
+                        $"FROM sys.databases WHERE state_desc = ''ONLINE'' " +
+                        $"AND name IN (''Backoffice'', ''Comanda'', ''Empresa'', ''Cinet_PDV'', ''Cinet_PDV_Totem'', ''Cinet_PDV_Auto'') OR name LIKE ''%PDV%'' ');";
+                    }
+
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
                         {
-                            while (reader.Read())
+                            while (sqlDataReader.Read())
                             {
-                                // Agrega el nombre de la base de datos al ComboBox en minúsculas
-                                comboBox.Items.Add(reader["name"].ToString().ToLower());
+                                bases.Items.Add(sqlDataReader["name"].ToString().ToLower());
                             }
                         }
                     }
-
-                    if (UsuarioExiste(conexion, comboBox) || usuarioBase == "dukissj")
-                    {
-                        // Registra la consulta SQL en el log
-                        Log.Information("SQL Query: \n" + consulta);
-
-                        // Muestra un mensaje indicando que la conexión fue exitosa
-                        MessageBox.Show("Conexion Exitosa.");
-                    }
-                    else
-                    {
-                        // Manejo en caso de que el usuario no exista
-                        MessageBox.Show("El usuario no existe o no está habilitado.");
-
-                        // Limpia los elementos del ComboBox si el usuario no existe
-                        comboBox.Items.Clear();
-                    }
-
-                    // Cierra la conexión a la base de datos
-                    conexion.Close();
+                    Log.Information($"Function TraerBasesDeDatos(...)\nQuery\n: {query}");
+                    MessageBox.Show("Conexion Exitosa.");
+                    sqlConnection.Close();
                 }
             }
-            // Captura excepciones específicas de SQL Server
-            catch (SqlException ex)
+            catch( SqlException ex)
             {
-                // Registra el error en el log
-                Log.Error("ERROR QUERY: " + ex.Message);
-                // Muestra un mensaje de error al usuario
                 MessageBox.Show("No se logro la conexión con la base de datos, verifique los datos ingresados. \nVer Error: " + ex.Message);
+                Log.Error($"Error - Function TraerBasesDeDatos(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
             }
         }
-        #endregion
 
-        #region Traer Bases de Linked Server
-        public void CargarNombresBasesDeDatos(ComboBox comboBox, string equipoLoginLinkedServer, string puertoLoginLinkedServer)
+        public void AddLinkedServer()
         {
-            // Obtiene la cadena de conexión maestra
-            string cadenaConexion = StringConexionMaster();
-
-            // Limpia los elementos existentes en el ComboBox
-            comboBox.Items.Clear();
-            // Consulta para obtener los nombres de bases de datos específicas en estado 'ONLINE'
-            string queryAddLinkedServer = $"exec sp_addlinkedserver  [{equipoLinkedServer},{puertoLinkedServer}];";
-            string consulta = $"SELECT name FROM OPENQUERY([{equipoLoginLinkedServer},{puertoLoginLinkedServer}], 'SELECT name FROM sys.databases WHERE state_desc = ''ONLINE'' AND name IN (''Backoffice'', ''Comanda'', ''Empresa'', ''Cinet_PDV'', ''Cinet_PDV_Totem'', ''Cinet_PDV_Auto'') OR name LIKE ''%PDV%'' ');";
+            string query = $"exec sp_addlinkedserver [{equipoLinkedServer},{puertoLinkedServer}];";
 
             try
             {
-                // Establece la conexión a la base de datos
-                using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+                using (SqlConnection sqlConnection = new SqlConnection(StringConexionMaster()))
                 {
-                    // Abre la conexión
-                    conexion.Open();
-                    // Ejecuta la consulta SQL
-                    try
-                    {
-                        // Intenta ejecutar el primer SqlCommand para agregar el linked server
-                        using (SqlCommand comandoAddLinkedServer = new SqlCommand(queryAddLinkedServer, conexion))
-                        {
-                            comandoAddLinkedServer.ExecuteNonQuery();
-                        }
-                    }
-                    catch (SqlException ex)
-                    {
-                        // Registra el error en el log y muestra un mensaje de advertencia
-                        Log.Warning("ADVERTENCIA QUERY (Linked Server): \n" + ex.ToString());
-                        MessageBox.Show(ex.Message);
-                    }
-                    using (SqlCommand comando = new SqlCommand(consulta, conexion))
-                    {
-                        // Lee los resultados de la consulta
-                        using (SqlDataReader reader = comando.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                // Agrega el nombre de la base de datos al ComboBox en minúsculas
-                                comboBox.Items.Add(reader["name"].ToString().ToLower());
-                            }
-                        }
-                    }
-                    // Registra la consulta SQL en el log
-                    Log.Information("SQL Query: \n" + consulta);
+                    sqlConnection.Open();
 
-                    // Muestra un mensaje indicando que la conexión fue exitosa
-                    MessageBox.Show("Conexion Exitosa.");
-                    // Cierra la conexión a la base de datos
-                    conexion.Close();
+                    if (!VerificarExistenciaDeLinkedServer(sqlConnection))
+                    {
+                        using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                        {
+                            sqlCommand.ExecuteNonQuery();
+                        }
+                    }
+                    sqlConnection.Close();
                 }
             }
-            // Captura excepciones específicas de SQL Server
             catch (SqlException ex)
             {
-                // Registra el error en el log
-                Log.Error("ERROR QUERY: n" + ex.ToString());
-                // Muestra un mensaje de error al usuario
-                MessageBox.Show("No se logro la conexión con la base de datos, verifique los datos ingresados. \nVer Error: " + ex.Message);
+                Log.Error($"Error - Function VerificarExistenciaDeLinkedServer(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
             }
         }
+
+        public bool VerificarExistenciaDeLinkedServer(SqlConnection sqlConnection)
+        {
+            string query = $"SELECT COUNT(*) FROM sys.servers WHERE is_lined = 1 and name = '{equipoLinkedServer},{puertoLinkedServer}'";
+
+            try
+            {
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                {
+                    int count = (int)sqlCommand.ExecuteScalar();
+                    if (count > 0) return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Log.Error($"Error - Function VerificarExistenciaDeLinkedServer(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
+            }
+            return false;
+        }
+
         #endregion
 
         #region Verificar Linked Server

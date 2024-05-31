@@ -41,9 +41,9 @@
             textBox2 = new TextBox();
             button2 = new Button();
             button3 = new Button();
-            cbEquipoLinkedServer = new ComboBox();
+            lQuerysEquipoLinked = new ComboBox();
             btnConnectLinkedServer = new Button();
-            textBoxPortLS = new TextBox();
+            lQuerysPuertoLinked = new TextBox();
             label3 = new Label();
             btnLogin = new Button();
             comboBoxDataBase = new ComboBox();
@@ -214,14 +214,14 @@
             button3.TextAlign = ContentAlignment.MiddleLeft;
             button3.UseVisualStyleBackColor = true;
             // 
-            // cbEquipoLinkedServer
+            // lQuerysEquipoLinked
             // 
-            cbEquipoLinkedServer.Enabled = false;
-            cbEquipoLinkedServer.FormattingEnabled = true;
-            cbEquipoLinkedServer.Location = new Point(12, 33);
-            cbEquipoLinkedServer.Name = "cbEquipoLinkedServer";
-            cbEquipoLinkedServer.Size = new Size(69, 23);
-            cbEquipoLinkedServer.TabIndex = 1;
+            lQuerysEquipoLinked.Enabled = false;
+            lQuerysEquipoLinked.FormattingEnabled = true;
+            lQuerysEquipoLinked.Location = new Point(12, 33);
+            lQuerysEquipoLinked.Name = "lQuerysEquipoLinked";
+            lQuerysEquipoLinked.Size = new Size(69, 23);
+            lQuerysEquipoLinked.TabIndex = 1;
             // 
             // btnConnectLinkedServer
             // 
@@ -232,13 +232,13 @@
             btnConnectLinkedServer.Text = "TRAER BASE";
             btnConnectLinkedServer.UseVisualStyleBackColor = true;
             // 
-            // textBoxPortLS
+            // lQuerysPuertoLinked
             // 
-            textBoxPortLS.Location = new Point(87, 33);
-            textBoxPortLS.Name = "textBoxPortLS";
-            textBoxPortLS.Size = new Size(43, 23);
-            textBoxPortLS.TabIndex = 2;
-            textBoxPortLS.Text = "1433";
+            lQuerysPuertoLinked.Location = new Point(87, 33);
+            lQuerysPuertoLinked.Name = "lQuerysPuertoLinked";
+            lQuerysPuertoLinked.Size = new Size(43, 23);
+            lQuerysPuertoLinked.TabIndex = 2;
+            lQuerysPuertoLinked.Text = "1433";
             // 
             // label3
             // 
@@ -362,7 +362,7 @@
             panel9.Location = new Point(0, 100);
             panel9.Name = "panel9";
             panel9.Size = new Size(309, 25);
-            panel9.TabIndex = 60;
+            panel9.TabIndex = 19;
             // 
             // label7
             // 
@@ -394,7 +394,7 @@
             panel13.Location = new Point(0, 75);
             panel13.Name = "panel13";
             panel13.Size = new Size(309, 25);
-            panel13.TabIndex = 64;
+            panel13.TabIndex = 18;
             // 
             // label11
             // 
@@ -427,7 +427,7 @@
             panel10.Location = new Point(0, 50);
             panel10.Name = "panel10";
             panel10.Size = new Size(309, 25);
-            panel10.TabIndex = 61;
+            panel10.TabIndex = 17;
             // 
             // label6
             // 
@@ -459,7 +459,7 @@
             panel11.Location = new Point(0, 25);
             panel11.Name = "panel11";
             panel11.Size = new Size(309, 25);
-            panel11.TabIndex = 62;
+            panel11.TabIndex = 16;
             // 
             // label9
             // 
@@ -492,7 +492,7 @@
             panel12.Location = new Point(0, 0);
             panel12.Name = "panel12";
             panel12.Size = new Size(309, 25);
-            panel12.TabIndex = 63;
+            panel12.TabIndex = 15;
             // 
             // label10
             // 
@@ -572,7 +572,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(627, 277);
+            ClientSize = new Size(627, 278);
             Controls.Add(panelLapos);
             Controls.Add(radioLapos);
             Controls.Add(radioParametros);
@@ -581,9 +581,9 @@
             Controls.Add(btnLogin);
             Controls.Add(comboBoxDataBase);
             Controls.Add(label3);
-            Controls.Add(cbEquipoLinkedServer);
+            Controls.Add(lQuerysEquipoLinked);
             Controls.Add(btnConnectLinkedServer);
-            Controls.Add(textBoxPortLS);
+            Controls.Add(lQuerysPuertoLinked);
             Controls.Add(panelParametros);
             MaximizeBox = false;
             Name = "LinkedQuerysForm";
@@ -626,9 +626,9 @@
         private TextBox textBox2;
         private Button button2;
         private Button button3;
-        private ComboBox cbEquipoLinkedServer;
+        private ComboBox lQuerysEquipoLinked;
         private Button btnConnectLinkedServer;
-        public TextBox textBoxPortLS;
+        public TextBox lQuerysPuertoLinked;
         private Label label3;
         private Button btnLogin;
         public ComboBox comboBoxDataBase;

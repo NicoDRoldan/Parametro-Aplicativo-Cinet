@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Parametro.Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,6 +45,12 @@ namespace Parametro.Desings.SubDesings
                 panelLapos.Visible = false;
                 panelLapos.Enabled = false;
             }
+        }
+
+        private void TraerBasesLinkedServer()
+        {
+            ConexionDB.equipoLinkedServer = lQuerysEquipoLinked.Text;
+            ConexionDB.puertoLinkedServer = lQuerysPuertoLinked.Text;
         }
     }
 }

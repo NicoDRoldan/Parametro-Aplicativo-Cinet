@@ -77,7 +77,7 @@ namespace Parametro.Desings
             cbEquipoLinkedServer.Items.Clear(); // Se limpia ComboBox.
 
             // Se llama al metodo para mostrar las bases de datos en el ComboBox correspondiente.
-            conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase);
+            conexionDB.TraerBasesDeDatos(comboBoxDataBase, checkBoxLinkedServer.Checked);
         }
 
         private void traerBasesLinkedServer()
@@ -91,7 +91,8 @@ namespace Parametro.Desings
             ConexionDB.equipoLinkedServer = cbEquipoLinkedServer.Text;
             ConexionDB.puertoLinkedServer = textBoxPortLS.Text;
             // Se llama al metodo para mostrar las bases de datos en el ComboBox correspondiente.
-            conexionDB.CargarNombresBasesDeDatos(comboBoxDataBase, cbEquipoLinkedServer.Text, textBoxPortLS.Text);
+            //conexionDB.CargarNombresBasesDeDatosLinkedServer(comboBoxDataBase); Deprecado pa
+            conexionDB.TraerBasesDeDatos(comboBoxDataBase, checkBoxLinkedServer.Checked);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -178,6 +179,7 @@ namespace Parametro.Desings
                 cbEquipoLinkedServer.Enabled = true;
                 textBoxPortLS.Enabled = true;
                 btnConnectLinkedServer.Enabled = true;
+                btnConnect.Enabled = false;
             }
             else
             {
@@ -189,6 +191,7 @@ namespace Parametro.Desings
                 comboBoxDataBase.Text = string.Empty;
                 comboBoxDataBase.Items.Clear();
                 cbEquipoLinkedServer.Items.Clear ();
+                btnConnect.Enabled = true;
             }
         }
 

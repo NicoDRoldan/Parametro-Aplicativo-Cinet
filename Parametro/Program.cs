@@ -23,8 +23,8 @@ namespace Parametro
                 .CreateLogger();
 
             ApplicationConfiguration.Initialize();
-            //Application.Run(new LoginForm());
-            Application.Run(new LinkedQuerysForm());
+            Application.Run(new LoginForm());
+            //Application.Run(new LinkedQuerysForm());
         }
     }
 }

@@ -47,8 +47,6 @@ namespace Parametro.Desings.SubDesings
                     MostrarDatos();
                     break;
                 default:
-                    this.Width = 435;
-                    this.Height = 481;
                     labelPass.Location = new Point(238, 9);
                     txtPassBotones.Location = new Point(238, 29);
                     btnAceptarPassBtn.Location = new Point(339, 29);
