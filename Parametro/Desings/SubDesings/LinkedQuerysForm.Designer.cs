@@ -45,10 +45,10 @@
             btnConnectLinkedServer = new Button();
             lQuerysPuertoLinked = new TextBox();
             label3 = new Label();
-            btnLogin = new Button();
-            comboBoxDataBase = new ComboBox();
+            btnConnectBase = new Button();
+            lQuerysBaseDatos = new ComboBox();
             label4 = new Label();
-            lblOmnicanalCheck = new Label();
+            lLabelConnectState = new Label();
             radioParametros = new RadioButton();
             radioLapos = new RadioButton();
             panel2 = new Panel();
@@ -216,7 +216,6 @@
             // 
             // lQuerysEquipoLinked
             // 
-            lQuerysEquipoLinked.Enabled = false;
             lQuerysEquipoLinked.FormattingEnabled = true;
             lQuerysEquipoLinked.Location = new Point(12, 33);
             lQuerysEquipoLinked.Name = "lQuerysEquipoLinked";
@@ -231,6 +230,7 @@
             btnConnectLinkedServer.TabIndex = 3;
             btnConnectLinkedServer.Text = "TRAER BASE";
             btnConnectLinkedServer.UseVisualStyleBackColor = true;
+            btnConnectLinkedServer.Click += btnConnectLinkedServer_Click;
             // 
             // lQuerysPuertoLinked
             // 
@@ -251,24 +251,25 @@
             label3.TabIndex = 53;
             label3.Text = "Equipo";
             // 
-            // btnLogin
+            // btnConnectBase
             // 
-            btnLogin.Enabled = false;
-            btnLogin.Location = new Point(12, 140);
-            btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(118, 23);
-            btnLogin.TabIndex = 5;
-            btnLogin.Text = "CONECTAR";
-            btnLogin.UseVisualStyleBackColor = true;
+            btnConnectBase.Enabled = false;
+            btnConnectBase.Location = new Point(12, 140);
+            btnConnectBase.Name = "btnConnectBase";
+            btnConnectBase.Size = new Size(118, 23);
+            btnConnectBase.TabIndex = 5;
+            btnConnectBase.Text = "CONECTAR";
+            btnConnectBase.UseVisualStyleBackColor = true;
+            btnConnectBase.Click += btnConnectBase_Click;
             // 
-            // comboBoxDataBase
+            // lQuerysBaseDatos
             // 
-            comboBoxDataBase.Enabled = false;
-            comboBoxDataBase.FormattingEnabled = true;
-            comboBoxDataBase.Location = new Point(12, 111);
-            comboBoxDataBase.Name = "comboBoxDataBase";
-            comboBoxDataBase.Size = new Size(118, 23);
-            comboBoxDataBase.TabIndex = 4;
+            lQuerysBaseDatos.Enabled = false;
+            lQuerysBaseDatos.FormattingEnabled = true;
+            lQuerysBaseDatos.Location = new Point(12, 111);
+            lQuerysBaseDatos.Name = "lQuerysBaseDatos";
+            lQuerysBaseDatos.Size = new Size(118, 23);
+            lQuerysBaseDatos.TabIndex = 4;
             // 
             // label4
             // 
@@ -281,21 +282,22 @@
             label4.TabIndex = 56;
             label4.Text = "Base de datos";
             // 
-            // lblOmnicanalCheck
+            // lLabelConnectState
             // 
-            lblOmnicanalCheck.AutoSize = true;
-            lblOmnicanalCheck.BackColor = SystemColors.Control;
-            lblOmnicanalCheck.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOmnicanalCheck.ForeColor = Color.Red;
-            lblOmnicanalCheck.Location = new Point(12, 169);
-            lblOmnicanalCheck.Name = "lblOmnicanalCheck";
-            lblOmnicanalCheck.Size = new Size(113, 16);
-            lblOmnicanalCheck.TabIndex = 57;
-            lblOmnicanalCheck.Text = "Desconectado - ";
+            lLabelConnectState.AutoSize = true;
+            lLabelConnectState.BackColor = SystemColors.Control;
+            lLabelConnectState.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lLabelConnectState.ForeColor = Color.Red;
+            lLabelConnectState.Location = new Point(12, 169);
+            lLabelConnectState.Name = "lLabelConnectState";
+            lLabelConnectState.Size = new Size(100, 16);
+            lLabelConnectState.TabIndex = 57;
+            lLabelConnectState.Text = "Desconectado";
             // 
             // radioParametros
             // 
             radioParametros.AutoSize = true;
+            radioParametros.Enabled = false;
             radioParametros.Location = new Point(12, 188);
             radioParametros.Name = "radioParametros";
             radioParametros.Size = new Size(85, 19);
@@ -308,6 +310,7 @@
             // radioLapos
             // 
             radioLapos.AutoSize = true;
+            radioLapos.Enabled = false;
             radioLapos.Location = new Point(12, 213);
             radioLapos.Name = "radioLapos";
             radioLapos.Size = new Size(56, 19);
@@ -353,6 +356,7 @@
             btnGuardarNrosComercio.TabIndex = 20;
             btnGuardarNrosComercio.Text = "Guardar Comercios";
             btnGuardarNrosComercio.UseVisualStyleBackColor = false;
+            btnGuardarNrosComercio.Click += btnGuardarNrosComercio_Click_1;
             // 
             // panel9
             // 
@@ -576,10 +580,10 @@
             Controls.Add(panelLapos);
             Controls.Add(radioLapos);
             Controls.Add(radioParametros);
-            Controls.Add(lblOmnicanalCheck);
+            Controls.Add(lLabelConnectState);
             Controls.Add(label4);
-            Controls.Add(btnLogin);
-            Controls.Add(comboBoxDataBase);
+            Controls.Add(btnConnectBase);
+            Controls.Add(lQuerysBaseDatos);
             Controls.Add(label3);
             Controls.Add(lQuerysEquipoLinked);
             Controls.Add(btnConnectLinkedServer);
@@ -589,6 +593,7 @@
             Name = "LinkedQuerysForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LinkedQuerysForm";
+            Load += LinkedQuerysForm_Load;
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
@@ -630,10 +635,10 @@
         private Button btnConnectLinkedServer;
         public TextBox lQuerysPuertoLinked;
         private Label label3;
-        private Button btnLogin;
-        public ComboBox comboBoxDataBase;
+        private Button btnConnectBase;
+        public ComboBox lQuerysBaseDatos;
         private Label label4;
-        private Label lblOmnicanalCheck;
+        private Label lLabelConnectState;
         private RadioButton radioParametros;
         private RadioButton radioLapos;
         private Panel panel3;

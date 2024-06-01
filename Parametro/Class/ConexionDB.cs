@@ -23,7 +23,7 @@ namespace Parametro.Class
         public static string equipoLinkedServer { get; set; }
         public static string puertoLinkedServer { get; set; }
         public static string usuarioBase { get; set; }
-        public static string baseLikedServer { get; set; }
+        public static string baseLinkedServer { get; set; }
         public static string pais { get; set; }
 
         bool isSucess = false;
@@ -154,7 +154,7 @@ namespace Parametro.Class
         {
             if(LoginForm.checkLinkedServer is true)
             {
-                return $"[{equipoLinkedServer},{puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.";
+                return $"[{equipoLinkedServer},{puertoLinkedServer}].[{baseLinkedServer}].DBO.";
             }
             else
             {

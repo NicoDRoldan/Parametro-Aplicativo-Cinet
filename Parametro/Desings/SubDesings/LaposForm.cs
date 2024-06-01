@@ -24,7 +24,7 @@ namespace Parametro.Desings.SubDesings
         public LaposForm()
         {
             InitializeComponent();
-            CargarNumerosComercio();
+            CargarNumerosComercio(this);
 
             string[] nombreParametros = { TACOCUIT.Name, LPoPuerto.Name, TERMINAL.Name, LAPOSNET.Name };
             cinetPdvForm.CargarDatosParametros(this, nombreParametros);
@@ -32,7 +32,15 @@ namespace Parametro.Desings.SubDesings
 
         public void btnGuardarNrosComercio_Click(object sender, EventArgs e)
         {
-            ConfigurarComercios();
+            string[,] nombreTarjetas = {
+                { "AMEX", AMEX.Text},
+                { "VISA", Visa.Text},
+                { "MASTER", MASTER.Text},
+                { "CABALDEB", CABALDEB.Text},
+                { "TNARANJA", TNARANJA.Text}
+            };
+
+            ConfigurarComercios(nombreTarjetas);
         }
 
         #region basura
@@ -67,19 +75,11 @@ namespace Parametro.Desings.SubDesings
         }
         #endregion
 
-        private void ConfigurarComercios()
+        public void ConfigurarComercios(string[,] nombreTarjetas)
         {
             querys = new Querys();
-            string[,] nombreTarjetas = {
-                { "AMEX", AMEX.Text},
-                { "VISA", Visa.Text},
-                { "MASTER", MASTER.Text},
-                { "CABALDEB", CABALDEB.Text},
-                { "TNARANJA", TNARANJA.Text}
-            };
 
             int tarjetas = nombreTarjetas.GetLength(0);
-            int columnas = nombreTarjetas.GetLength(0);
 
             try
             {
@@ -96,22 +96,14 @@ namespace Parametro.Desings.SubDesings
             }
         }
 
-        public void CargarNumerosComercio()
+        public void CargarNumerosComercio(Form form)
         {
             string[] nombreTarjetas = { "AMEX", "VISA", "MASTER", "CABALDEB", "TNARANJA", };
 
             foreach (string tarjeta in nombreTarjetas)
             {
-                Control control = Controls.Find(tarjeta, true).FirstOrDefault();
-                if (LoginForm.checkLinkedServer is true)
-                {
-                    ConexionDB.baseDatos = "master";
-                    (control as TextBox).Text = conexionDB.ObtenerValorComercioDesdeBD($"Select lpo_numcomercio from [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{LoginForm.baseDatosLinkedServer}].DBO.vallapos where val_codigo = '{tarjeta}'").Trim();
-                }
-                else
-                {
-                    (control as TextBox).Text = conexionDB.ObtenerValorComercioDesdeBD($"Select lpo_numcomercio from vallapos where val_codigo = '{tarjeta}'").Trim();
-                }
+                Control control = form.Controls.Find(tarjeta, true).FirstOrDefault();
+                (control as TextBox).Text = conexionDB.ObtenerValorComercioDesdeBD($"Select lpo_numcomercio from {conexionDB.VerificarLinkedServer()}vallapos where val_codigo = '{tarjeta}'").Trim();
             }
         }
 

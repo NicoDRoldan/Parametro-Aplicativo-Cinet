@@ -21,9 +21,13 @@ namespace Parametro.Desings
         VistaQuerys vista = new VistaQuerys();
         CinetPdvForm cinetPdvForm = new CinetPdvForm();
 
+        public static string BaseMaster;
+
         public BackofficeForm()
         {
             InitializeComponent();
+
+            BaseMaster = ConexionDB.baseDatos;
 
             string[] nombreParametros = {NOMLOCAL.Name, FAMAXVALOR.Name, MAXARQUEOF.Name,
                                             UPDRUTA.Name, EQUIPOUPD.Name, PASS_MTZ.Name, UNAME_MTZ.Name,
@@ -35,6 +39,12 @@ namespace Parametro.Desings
             this.Text = conexionDB.TraerDatosEquipo(this.Text, ConexionDB.baseDatos, ConexionDB.equipoLinkedServer);
 
             btnQuerysBko.Enabled = true;
+
+            if (LoginForm.checkLinkedServer)
+            {
+                btnLinkedQuerys.Enabled = false;
+                btnLinkedQuerys.FlatStyle = FlatStyle.Flat;
+            }
 
             this.FormClosed += MainForm_FormClosed;
         }
@@ -108,7 +118,7 @@ namespace Parametro.Desings
 
         private void CheckTiendaCafe_CheckedChanged(object sender, EventArgs e)
         {
-            if(CheckTiendaCafe.Checked == true)
+            if (CheckTiendaCafe.Checked == true)
             {
                 labelIdCafeteria.Enabled = true;
                 STOREIDRP2.Enabled = true;
@@ -175,6 +185,12 @@ namespace Parametro.Desings
         {
             QuerysBackofficeForm querysBackofficeForm = new QuerysBackofficeForm();
             querysBackofficeForm.Show();
+        }
+
+        private void btnLinkedQuerys_Click(object sender, EventArgs e)
+        {
+            LinkedQuerysForm linkedQuerysForm = new LinkedQuerysForm();
+            linkedQuerysForm.ShowDialog();
         }
     }
 }

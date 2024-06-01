@@ -98,7 +98,7 @@ namespace Parametro.Desings
         private void btnLogin_Click(object sender, EventArgs e)
         {
             ConexionDB.baseDatos = comboBoxDataBase.Text.Trim();
-            ConexionDB.baseLikedServer = comboBoxDataBase.Text.Trim();
+            ConexionDB.baseLinkedServer = comboBoxDataBase.Text.Trim();
             baseDatosLinkedServer = comboBoxDataBase.Text.Trim();
 
             if (checkBoxLinkedServer.Checked)

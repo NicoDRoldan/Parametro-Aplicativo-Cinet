@@ -536,14 +536,14 @@
             // 
             // btnLinkedQuerys
             // 
-            btnLinkedQuerys.BackgroundImage = Properties.Resources.linkedServer;
+            btnLinkedQuerys.BackgroundImage = Properties.Resources.linkedServerImage;
             btnLinkedQuerys.BackgroundImageLayout = ImageLayout.Zoom;
-            btnLinkedQuerys.Enabled = false;
             btnLinkedQuerys.Location = new Point(292, 332);
             btnLinkedQuerys.Name = "btnLinkedQuerys";
             btnLinkedQuerys.Size = new Size(75, 65);
             btnLinkedQuerys.TabIndex = 34;
             btnLinkedQuerys.UseVisualStyleBackColor = true;
+            btnLinkedQuerys.Click += btnLinkedQuerys_Click;
             // 
             // BackofficeForm
             // 

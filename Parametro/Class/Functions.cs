@@ -28,7 +28,7 @@ namespace Parametro.Class
             string backupFileName = ConexionDB.baseDatos + "-" + dateBackup + ".bak";
 
             if (LoginForm.checkLinkedServer is true)
-                backupFileName = ConexionDB.baseLikedServer + "-" + dateBackup + ".bak";
+                backupFileName = ConexionDB.baseLinkedServer + "-" + dateBackup + ".bak";
 
             string backupFile = Path.Combine(backupPath, backupFileName);
 
@@ -37,7 +37,7 @@ namespace Parametro.Class
             string queryBackup = "BACKUP DATABASE @dataBase TO DISK = @backupPath";
 
             if (LoginForm.checkLinkedServer is true) 
-                queryBackup = $"EXEC ('BACKUP DATABASE {ConexionDB.baseLikedServer} TO DISK = ''{backupFile}''') AT [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}]";
+                queryBackup = $"EXEC ('BACKUP DATABASE {ConexionDB.baseLinkedServer} TO DISK = ''{backupFile}''') AT [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}]";
 
             try
             {
