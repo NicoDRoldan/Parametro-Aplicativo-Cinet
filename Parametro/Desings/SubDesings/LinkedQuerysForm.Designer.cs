@@ -28,19 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LinkedQuerysForm));
             panel1 = new Panel();
+            label13 = new Label();
             panel3 = new Panel();
             label20 = new Label();
+            lLabelParaCodigo = new Label();
+            label12 = new Label();
+            ltxtBoxParaDescripcion = new TextBox();
+            ltxtBoxParaCodigo = new TextBox();
+            ltxtBoxParaValor = new TextBox();
             label8 = new Label();
-            STOREIDRAP = new TextBox();
-            BtnConfigurarRap = new Button();
+            ltxtParaCodigo = new TextBox();
+            lBtnBuscarParametro = new Button();
             label1 = new Label();
-            textBox1 = new TextBox();
-            button1 = new Button();
+            ltxtParaValor = new TextBox();
+            lBtnUpdaterParametro = new Button();
             label2 = new Label();
-            textBox2 = new TextBox();
-            button2 = new Button();
-            button3 = new Button();
+            ltxtParaDescripcion = new TextBox();
+            lBtnCreateParametro = new Button();
+            lBtnDeleteParametro = new Button();
             lQuerysEquipoLinked = new ComboBox();
             btnConnectLinkedServer = new Button();
             lQuerysPuertoLinked = new TextBox();
@@ -72,7 +79,9 @@
             panel4 = new Panel();
             label5 = new Label();
             panelParametros = new Panel();
+            checkActiveLike = new CheckBox();
             panelLapos = new Panel();
+            panelLinked = new Panel();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -90,11 +99,28 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.Window;
+            panel1.Controls.Add(label13);
             panel1.Controls.Add(panel3);
-            panel1.Location = new Point(168, 3);
+            panel1.Controls.Add(lLabelParaCodigo);
+            panel1.Controls.Add(label12);
+            panel1.Controls.Add(ltxtBoxParaDescripcion);
+            panel1.Controls.Add(ltxtBoxParaCodigo);
+            panel1.Controls.Add(ltxtBoxParaValor);
+            panel1.Location = new Point(3, 154);
             panel1.Name = "panel1";
-            panel1.Size = new Size(309, 261);
+            panel1.Size = new Size(431, 145);
             panel1.TabIndex = 0;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.ForeColor = SystemColors.ActiveCaptionText;
+            label13.Location = new Point(3, 64);
+            label13.Name = "label13";
+            label13.Size = new Size(194, 20);
+            label13.TabIndex = 61;
+            label13.Text = "PARA_DESCRIPCIÓN:";
             // 
             // panel3
             // 
@@ -103,7 +129,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(309, 25);
+            panel3.Size = new Size(431, 25);
             panel3.TabIndex = 3;
             // 
             // label20
@@ -117,102 +143,153 @@
             label20.TabIndex = 2;
             label20.Text = "Parametro";
             // 
+            // lLabelParaCodigo
+            // 
+            lLabelParaCodigo.AutoSize = true;
+            lLabelParaCodigo.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lLabelParaCodigo.ForeColor = SystemColors.ActiveCaptionText;
+            lLabelParaCodigo.Location = new Point(3, 38);
+            lLabelParaCodigo.Name = "lLabelParaCodigo";
+            lLabelParaCodigo.Size = new Size(143, 20);
+            lLabelParaCodigo.TabIndex = 43;
+            lLabelParaCodigo.Text = "PARA_CODIGO:";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.ForeColor = SystemColors.ActiveCaptionText;
+            label12.Location = new Point(3, 96);
+            label12.Name = "label12";
+            label12.Size = new Size(132, 20);
+            label12.TabIndex = 45;
+            label12.Text = "PARA_VALOR:";
+            // 
+            // ltxtBoxParaDescripcion
+            // 
+            ltxtBoxParaDescripcion.Location = new Point(197, 64);
+            ltxtBoxParaDescripcion.Name = "ltxtBoxParaDescripcion";
+            ltxtBoxParaDescripcion.ReadOnly = true;
+            ltxtBoxParaDescripcion.Size = new Size(223, 23);
+            ltxtBoxParaDescripcion.TabIndex = 44;
+            // 
+            // ltxtBoxParaCodigo
+            // 
+            ltxtBoxParaCodigo.Location = new Point(197, 35);
+            ltxtBoxParaCodigo.Name = "ltxtBoxParaCodigo";
+            ltxtBoxParaCodigo.ReadOnly = true;
+            ltxtBoxParaCodigo.Size = new Size(223, 23);
+            ltxtBoxParaCodigo.TabIndex = 4;
+            // 
+            // ltxtBoxParaValor
+            // 
+            ltxtBoxParaValor.Location = new Point(197, 93);
+            ltxtBoxParaValor.Name = "ltxtBoxParaValor";
+            ltxtBoxParaValor.ReadOnly = true;
+            ltxtBoxParaValor.Size = new Size(223, 23);
+            ltxtBoxParaValor.TabIndex = 60;
+            // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ActiveCaptionText;
-            label8.Location = new Point(37, 4);
+            label8.Location = new Point(3, 4);
             label8.Name = "label8";
             label8.Size = new Size(92, 20);
             label8.TabIndex = 42;
             label8.Text = "Parametro";
             // 
-            // STOREIDRAP
+            // ltxtParaCodigo
             // 
-            STOREIDRAP.Location = new Point(37, 27);
-            STOREIDRAP.Name = "STOREIDRAP";
-            STOREIDRAP.PlaceholderText = "PARA_CODIGO";
-            STOREIDRAP.Size = new Size(125, 23);
-            STOREIDRAP.TabIndex = 8;
+            ltxtParaCodigo.Location = new Point(3, 27);
+            ltxtParaCodigo.MaxLength = 10;
+            ltxtParaCodigo.Name = "ltxtParaCodigo";
+            ltxtParaCodigo.PlaceholderText = "PARA_CODIGO";
+            ltxtParaCodigo.Size = new Size(125, 23);
+            ltxtParaCodigo.TabIndex = 8;
             // 
-            // BtnConfigurarRap
+            // lBtnBuscarParametro
             // 
-            BtnConfigurarRap.Location = new Point(37, 154);
-            BtnConfigurarRap.Name = "BtnConfigurarRap";
-            BtnConfigurarRap.Size = new Size(125, 23);
-            BtnConfigurarRap.TabIndex = 11;
-            BtnConfigurarRap.Text = "Buscar Parametro";
-            BtnConfigurarRap.TextAlign = ContentAlignment.MiddleLeft;
-            BtnConfigurarRap.UseVisualStyleBackColor = true;
+            lBtnBuscarParametro.Location = new Point(233, 7);
+            lBtnBuscarParametro.Name = "lBtnBuscarParametro";
+            lBtnBuscarParametro.Size = new Size(125, 23);
+            lBtnBuscarParametro.TabIndex = 11;
+            lBtnBuscarParametro.Text = "Buscar Parametro";
+            lBtnBuscarParametro.TextAlign = ContentAlignment.MiddleLeft;
+            lBtnBuscarParametro.UseVisualStyleBackColor = true;
+            lBtnBuscarParametro.Click += lBtnBuscarParametro_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(37, 102);
+            label1.Location = new Point(3, 102);
             label1.Name = "label1";
             label1.Size = new Size(51, 20);
             label1.TabIndex = 45;
             label1.Text = "Valor";
             // 
-            // textBox1
+            // ltxtParaValor
             // 
-            textBox1.Location = new Point(37, 125);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "PARA_VALOR";
-            textBox1.Size = new Size(125, 23);
-            textBox1.TabIndex = 10;
+            ltxtParaValor.Location = new Point(3, 125);
+            ltxtParaValor.Name = "ltxtParaValor";
+            ltxtParaValor.PlaceholderText = "PARA_VALOR";
+            ltxtParaValor.Size = new Size(125, 23);
+            ltxtParaValor.TabIndex = 10;
             // 
-            // button1
+            // lBtnUpdaterParametro
             // 
-            button1.Location = new Point(37, 183);
-            button1.Name = "button1";
-            button1.Size = new Size(125, 23);
-            button1.TabIndex = 12;
-            button1.Text = "Updatear Parametro";
-            button1.TextAlign = ContentAlignment.MiddleLeft;
-            button1.UseVisualStyleBackColor = true;
+            lBtnUpdaterParametro.Location = new Point(233, 36);
+            lBtnUpdaterParametro.Name = "lBtnUpdaterParametro";
+            lBtnUpdaterParametro.Size = new Size(125, 23);
+            lBtnUpdaterParametro.TabIndex = 12;
+            lBtnUpdaterParametro.Text = "Updatear Parametro";
+            lBtnUpdaterParametro.TextAlign = ContentAlignment.MiddleLeft;
+            lBtnUpdaterParametro.UseVisualStyleBackColor = true;
+            lBtnUpdaterParametro.Click += lBtnUpdaterParametro_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(37, 53);
+            label2.Location = new Point(3, 53);
             label2.Name = "label2";
             label2.Size = new Size(103, 20);
             label2.TabIndex = 48;
             label2.Text = "Descripción";
             // 
-            // textBox2
+            // ltxtParaDescripcion
             // 
-            textBox2.Location = new Point(37, 76);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "PARA_DESCRIPCION";
-            textBox2.Size = new Size(125, 23);
-            textBox2.TabIndex = 9;
+            ltxtParaDescripcion.Location = new Point(3, 76);
+            ltxtParaDescripcion.Name = "ltxtParaDescripcion";
+            ltxtParaDescripcion.PlaceholderText = "PARA_DESCRIPCION";
+            ltxtParaDescripcion.Size = new Size(125, 23);
+            ltxtParaDescripcion.TabIndex = 9;
             // 
-            // button2
+            // lBtnCreateParametro
             // 
-            button2.Location = new Point(37, 212);
-            button2.Name = "button2";
-            button2.Size = new Size(125, 23);
-            button2.TabIndex = 13;
-            button2.Text = "Crear Parametro";
-            button2.TextAlign = ContentAlignment.MiddleLeft;
-            button2.UseVisualStyleBackColor = true;
+            lBtnCreateParametro.Location = new Point(233, 65);
+            lBtnCreateParametro.Name = "lBtnCreateParametro";
+            lBtnCreateParametro.Size = new Size(125, 23);
+            lBtnCreateParametro.TabIndex = 13;
+            lBtnCreateParametro.Text = "Crear Parametro";
+            lBtnCreateParametro.TextAlign = ContentAlignment.MiddleLeft;
+            lBtnCreateParametro.UseVisualStyleBackColor = true;
+            lBtnCreateParametro.Click += lBtnCreateParametro_Click;
             // 
-            // button3
+            // lBtnDeleteParametro
             // 
-            button3.Location = new Point(37, 241);
-            button3.Name = "button3";
-            button3.Size = new Size(125, 23);
-            button3.TabIndex = 14;
-            button3.Text = "Eliminar Parametro";
-            button3.TextAlign = ContentAlignment.MiddleLeft;
-            button3.UseVisualStyleBackColor = true;
+            lBtnDeleteParametro.Location = new Point(233, 94);
+            lBtnDeleteParametro.Name = "lBtnDeleteParametro";
+            lBtnDeleteParametro.Size = new Size(125, 23);
+            lBtnDeleteParametro.TabIndex = 14;
+            lBtnDeleteParametro.Text = "Eliminar Parametro";
+            lBtnDeleteParametro.TextAlign = ContentAlignment.MiddleLeft;
+            lBtnDeleteParametro.UseVisualStyleBackColor = true;
+            lBtnDeleteParametro.Click += lBtnDeleteParametro_Click;
             // 
             // lQuerysEquipoLinked
             // 
@@ -324,7 +401,7 @@
             // 
             panel2.Controls.Add(panelComercios);
             panel2.Controls.Add(panel4);
-            panel2.Location = new Point(168, 3);
+            panel2.Location = new Point(6, 3);
             panel2.Name = "panel2";
             panel2.Size = new Size(309, 261);
             panel2.TabIndex = 4;
@@ -543,40 +620,61 @@
             // 
             // panelParametros
             // 
+            panelParametros.Controls.Add(checkActiveLike);
             panelParametros.Controls.Add(panel1);
-            panelParametros.Controls.Add(BtnConfigurarRap);
-            panelParametros.Controls.Add(STOREIDRAP);
             panelParametros.Controls.Add(label8);
-            panelParametros.Controls.Add(button1);
-            panelParametros.Controls.Add(textBox1);
-            panelParametros.Controls.Add(label1);
-            panelParametros.Controls.Add(button2);
-            panelParametros.Controls.Add(textBox2);
+            panelParametros.Controls.Add(lBtnDeleteParametro);
+            panelParametros.Controls.Add(lBtnBuscarParametro);
             panelParametros.Controls.Add(label2);
-            panelParametros.Controls.Add(button3);
+            panelParametros.Controls.Add(ltxtParaDescripcion);
+            panelParametros.Controls.Add(ltxtParaCodigo);
+            panelParametros.Controls.Add(lBtnCreateParametro);
+            panelParametros.Controls.Add(label1);
+            panelParametros.Controls.Add(ltxtParaValor);
+            panelParametros.Controls.Add(lBtnUpdaterParametro);
             panelParametros.Enabled = false;
             panelParametros.Location = new Point(143, 5);
             panelParametros.Name = "panelParametros";
-            panelParametros.Size = new Size(497, 274);
+            panelParametros.Size = new Size(440, 302);
             panelParametros.TabIndex = 58;
             panelParametros.Visible = false;
+            // 
+            // checkActiveLike
+            // 
+            checkActiveLike.AutoSize = true;
+            checkActiveLike.Location = new Point(233, 120);
+            checkActiveLike.Name = "checkActiveLike";
+            checkActiveLike.Size = new Size(199, 19);
+            checkActiveLike.TabIndex = 49;
+            checkActiveLike.Text = "Activar Like %% (Solo Busqueda)";
+            checkActiveLike.UseVisualStyleBackColor = true;
             // 
             // panelLapos
             // 
             panelLapos.Controls.Add(panel2);
             panelLapos.Enabled = false;
-            panelLapos.Location = new Point(143, 285);
+            panelLapos.Location = new Point(143, 334);
             panelLapos.Name = "panelLapos";
-            panelLapos.Size = new Size(497, 274);
+            panelLapos.Size = new Size(440, 274);
             panelLapos.TabIndex = 59;
             panelLapos.Visible = false;
             // 
+            // panelLinked
+            // 
+            panelLinked.BackColor = SystemColors.Control;
+            panelLinked.BackgroundImageLayout = ImageLayout.Zoom;
+            panelLinked.BorderStyle = BorderStyle.FixedSingle;
+            panelLinked.ForeColor = SystemColors.ButtonFace;
+            panelLinked.Location = new Point(2, 4);
+            panelLinked.Name = "panelLinked";
+            panelLinked.Size = new Size(138, 303);
+            panelLinked.TabIndex = 60;
+            // 
             // LinkedQuerysForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(627, 278);
+            ClientSize = new Size(585, 309);
             Controls.Add(panelLapos);
             Controls.Add(radioLapos);
             Controls.Add(radioParametros);
@@ -589,12 +687,17 @@
             Controls.Add(btnConnectLinkedServer);
             Controls.Add(lQuerysPuertoLinked);
             Controls.Add(panelParametros);
+            Controls.Add(panelLinked);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "LinkedQuerysForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "LinkedQuerysForm";
+            Text = "Querys - Linked Server";
             Load += LinkedQuerysForm_Load;
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel2.ResumeLayout(false);
@@ -622,15 +725,15 @@
 
         private Panel panel1;
         private Label label8;
-        private TextBox STOREIDRAP;
-        private Button BtnConfigurarRap;
+        private TextBox ltxtParaCodigo;
+        private Button lBtnBuscarParametro;
         private Label label1;
-        private TextBox textBox1;
-        private Button button1;
+        private TextBox ltxtParaValor;
+        private Button lBtnUpdaterParametro;
         private Label label2;
-        private TextBox textBox2;
-        private Button button2;
-        private Button button3;
+        private TextBox ltxtParaDescripcion;
+        private Button lBtnCreateParametro;
+        private Button lBtnDeleteParametro;
         private ComboBox lQuerysEquipoLinked;
         private Button btnConnectLinkedServer;
         public TextBox lQuerysPuertoLinked;
@@ -665,5 +768,13 @@
         private Button btnGuardarNrosComercio;
         private Panel panelParametros;
         private Panel panelLapos;
+        private Label label13;
+        private TextBox ltxtBoxParaValor;
+        private Label lLabelParaCodigo;
+        private Label label12;
+        private TextBox ltxtBoxParaCodigo;
+        private TextBox ltxtBoxParaDescripcion;
+        private CheckBox checkActiveLike;
+        private Panel panelLinked;
     }
 }

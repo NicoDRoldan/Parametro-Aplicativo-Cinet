@@ -28,8 +28,8 @@ namespace Parametro.Desings.SubDesings
 
         private void LaposActivoBtn_Click(object sender, EventArgs e)
         {
-            querysParametros.HabilitarOUpdatearParametro("LAPOSNET", "Usa posnet Integrado", LAPOSUY.Text);
-            querysParametros.HabilitarOUpdatearParametro("LAPOSUY", "Usa posnet Integrado", LAPOSUY.Text);
+            querysParametros.HabilitarOUpdatearParametro("LAPOSNET", "Usa posnet Integrado", LAPOSUY.Text, "UPDATE");
+            querysParametros.HabilitarOUpdatearParametro("LAPOSUY", "Usa posnet Integrado", LAPOSUY.Text, "UPDATE");
             LAPOSUY.Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = 'LAPOSNET'");
         }
 

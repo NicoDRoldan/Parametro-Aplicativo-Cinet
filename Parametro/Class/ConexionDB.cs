@@ -238,17 +238,17 @@ namespace Parametro.Class
 
                     using (SqlCommand comando = new SqlCommand(consulta, sqlConnection))
                     {
-                        SqlDataReader reader = comando.ExecuteReader();
-                        if (reader.Read())
+                        using (SqlDataReader reader = comando.ExecuteReader())
                         {
-                            return reader["para_valor"].ToString();
+                            if (reader.Read())
+                            {
+                                return reader[0].ToString(); 
+                            }
                         }
-                        return "NE";
-
                     }
                     sqlConnection.Close();
                 }
-
+                return "NE";
             }
             catch (Exception ex)
             {
@@ -269,17 +269,17 @@ namespace Parametro.Class
 
                     using (SqlCommand comando = new SqlCommand(consulta, sqlConnection))
                     {
-                        SqlDataReader reader = comando.ExecuteReader();
-                        if (reader.Read())
+                        using (SqlDataReader reader = comando.ExecuteReader())
                         {
-                            return reader["lpo_numcomercio"].ToString();
+                            if (reader.Read())
+                            {
+                                return reader["lpo_numcomercio"].ToString();
+                            }
+                            return "NE";
                         }
-                        return "NE";
-
                     }
                     sqlConnection.Close();
                 }
-
             }
             catch (Exception ex)
             {

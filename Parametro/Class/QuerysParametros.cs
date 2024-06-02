@@ -18,20 +18,13 @@ namespace Parametro.Class
         ConexionDB connectDB = new ConexionDB();
 
         #region Habilitar/Crear/Updatear Parametro
-        public void HabilitarOUpdatearParametro(string para_codigo, string para_descripcion, string para_valor)
+        public void HabilitarOUpdatearParametro(string para_codigo, string para_descripcion, string para_valor, string accion)
         {
             ConexionDB conexionDB = new ConexionDB();
 
-            string query;
+            string query = QuerysAccion(para_codigo, para_descripcion, para_valor, accion, conexionDB);
 
-            if (para_valor == "N" || para_valor == "NE" || para_valor == "" || para_valor is null) query = $"IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = '{para_codigo}') " +
-                $"INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES ('{para_codigo}','{para_descripcion}','S',NULL,NULL) " +
-                $"ELSE UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = 'S' WHERE PARA_CODIGO = '{para_codigo}'";
-            else if (para_valor == "S") query = $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = 'N' WHERE PARA_CODIGO = '{para_codigo}'";
-            else if (para_valor == "quierodejarestecampovacio") query = $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = '' WHERE PARA_CODIGO = '{para_codigo}'";
-            else query = $"IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = '{para_codigo}') " +
-                $"INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES ('{para_codigo}','{para_descripcion}','{para_valor}',NULL,NULL) " +
-                $"ELSE UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = '{para_valor}' WHERE PARA_CODIGO = '{para_codigo}'";
+            if (query == "") return;
 
             try
             {
@@ -53,6 +46,68 @@ namespace Parametro.Class
                 MessageBox.Show($"No se realizó el cambio del parametro {para_valor}");
             }
         }
+
+        public string QuerysAccion(string para_codigo, string para_descripcion, string para_valor, string accion, 
+            ConexionDB conexionDB)
+        {
+            string query = "";
+
+            switch (accion)
+            {
+                case "UPDATE":
+                    if (para_valor == "N" || para_valor == "NE" || para_valor == "" || para_valor is null)
+                        query = $"IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = '{para_codigo}') " +
+                        $"INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES ('{para_codigo}','{para_descripcion}','S',NULL,NULL) " +
+                        $"ELSE UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = 'S' WHERE PARA_CODIGO = '{para_codigo}'";
+                    else if (para_valor == "S")
+                        query = $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = 'N' WHERE PARA_CODIGO = '{para_codigo}'";
+                    else if (para_valor == "quierodejarestecampovacio")
+                        query = $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = '' WHERE PARA_CODIGO = '{para_codigo}'";
+                    else
+                        query = $"IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = '{para_codigo}') " +
+                        $"INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES ('{para_codigo}','{para_descripcion}','{para_valor}',NULL,NULL) " +
+                        $"ELSE UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = '{para_valor}' WHERE PARA_CODIGO = '{para_codigo}'";
+
+                    break;
+
+                case "lUPDATE":
+                    if (para_descripcion == "")
+                    {
+                        query = $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = '{para_valor}' WHERE PARA_CODIGO = '{para_codigo}';";
+                    }
+                    else
+                    {
+                        query = $"UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = '{para_valor}', PARA_DESCRIPCION = '{para_descripcion}' WHERE PARA_CODIGO = '{para_codigo}';";
+                    }
+
+                    break;
+
+                case "lCREATE":
+                    if (para_descripcion == "")
+                    {
+                        query =
+                            $"INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES ('{para_codigo}', '', '{para_valor}', NULL, NULL);";
+                    }
+                    else
+                    {
+                        query =
+                            $"INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES ('{para_codigo}', '{para_descripcion}', '{para_valor}', NULL, NULL);";
+                    }
+
+                    break;
+
+                case "lDELETE":
+                    query =
+                        $"DELETE {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = '{para_codigo}'";
+
+                    break;
+
+                default:
+                    break;
+            }
+            return query;
+        }
+
         #endregion
 
         #region Update Parametros Totem
@@ -791,11 +846,10 @@ namespace Parametro.Class
                         if (count > 0 )
                             act = true;
 
-                        return act;
                     }
-
                     sqlConnection.Close();
                 }
+                return act;
             }
             catch (SqlException ex)
             {

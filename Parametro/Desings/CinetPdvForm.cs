@@ -84,9 +84,14 @@ namespace Parametro.Desings
                     (control as Button).Text = conexionDB.ObtenerValorDesdeBD
                             ($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{nombreParametro}'");
                 }
-                if (control != null && control is TextBox) // Verificar que se encontró el control y que es un cuadro de texto.
+                else if (control != null && control is TextBox) // Verificar que se encontró el control y que es un cuadro de texto.
                 {
                     (control as TextBox).Text = conexionDB.ObtenerValorDesdeBD
+                            ($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{nombreParametro}'");
+                }
+                else if (control != null && control is Label)
+                {
+                    (control as Label).Text = conexionDB.ObtenerValorDesdeBD
                             ($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{nombreParametro}'");
                 }
             }
@@ -101,7 +106,7 @@ namespace Parametro.Desings
         {
             Button btn = sender as Button;
 
-            querysParametros.HabilitarOUpdatearParametro(btn.Name, "", btn.Text);
+            querysParametros.HabilitarOUpdatearParametro(btn.Name, "", btn.Text, "UPDATE");
             btn.Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{btn.Name}'");
             MessageBox.Show($"Se actualizó el parametro {btn.Name}");
         }
@@ -116,7 +121,7 @@ namespace Parametro.Desings
             }
             else
             {
-                querysParametros.HabilitarOUpdatearParametro(txt.Name, "", txt.Text);
+                querysParametros.HabilitarOUpdatearParametro(txt.Name, "", txt.Text, "UPDATE");
                 txt.Text = conexionDB.ObtenerValorDesdeBD($"Select para_valor from {conexionDB.VerificarLinkedServer()}parametros where para_codigo = '{txt.Name}'");
                 MessageBox.Show($"Se actualizó el parametro {txt.Name}");
             }
