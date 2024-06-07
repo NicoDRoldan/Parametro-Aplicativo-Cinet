@@ -173,7 +173,7 @@ namespace Parametro.Desings
             {
                 MessageBox.Show("No puede dejar el campo vacío.");
             }
-            else if (ConexionDB.pais != "PARAGUAY" && VTAPUNTO.Text.Length > 4)
+            else if ((ConexionDB.pais != "PARAGUAY" && ConexionDB.pais != "BOLIVIA") && VTAPUNTO.Text.Length > 4)
             {
                 MessageBox.Show("El número de punto de venta no puede ser mayor a 4.");
             }

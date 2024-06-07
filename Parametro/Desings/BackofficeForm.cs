@@ -189,8 +189,21 @@ namespace Parametro.Desings
 
         private void btnLinkedQuerys_Click(object sender, EventArgs e)
         {
-            LinkedQuerysForm linkedQuerysForm = new LinkedQuerysForm();
-            linkedQuerysForm.ShowDialog();
+            using (PasswordForm pwform = new PasswordForm())
+            {
+                if(pwform.ShowDialog() == DialogResult.OK)
+                {
+                    if(pwform.Password == "comotanmuchacho")
+                    {
+                        LinkedQuerysForm linkedQuerysForm = new LinkedQuerysForm();
+                        linkedQuerysForm.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Contraseña incorrecta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }

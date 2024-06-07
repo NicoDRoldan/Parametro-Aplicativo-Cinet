@@ -416,7 +416,11 @@ namespace Parametro.Class
         #region FE Automatico
         public void FacturaElectronicaAuto()
         {
-            string query = $"UPDATE {conexionDB.VerificarLinkedServer()}SUCURSALES SET SUC_MANUAL = '2' WHERE SUC_CODIGO = (SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'VTAPUNTO');";
+            string query = $"" +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}SUCURSALES " +
+                $"SET SUC_MANUAL = '2' " +
+                $"WHERE SUC_CODIGO = (SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS " +
+                $"WHERE PARA_CODIGO = 'VTAPUNTO');";
 
             try
             {
@@ -443,7 +447,13 @@ namespace Parametro.Class
 
         public void FacturaElectronicaAutoBO()
         {
-            string query = $"DECLARE @SUCURSAL VARCHAR(10) = (SELECT TOP 1 SUC_CODIGO FROM {conexionDB.VerificarLinkedServer()}VENTAS_E ORDER BY VENE_FECHA DESC, VENE_NUMERO DESC); UPDATE {conexionDB.VerificarLinkedServer()}SUCURSALES SET SUC_MANUAL = '0'; UPDATE {conexionDB.VerificarLinkedServer()}SUCURSALES SET SUC_MANUAL = '2' WHERE SUC_CODIGO = @SUCURSAL;";
+            string query = $"" +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}SUCURSALES " +
+                $"SET SUC_MANUAL = '0'; " +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}SUCURSALES " +
+                $"SET SUC_MANUAL = '2' " +
+                $"WHERE SUC_CODIGO = (SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS " +
+                $"WHERE PARA_CODIGO = 'VTAPUNTO');";
 
             try
             {
