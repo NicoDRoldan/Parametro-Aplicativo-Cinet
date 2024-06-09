@@ -193,7 +193,7 @@ namespace Parametro.Desings
             {
                 if(pwform.ShowDialog() == DialogResult.OK)
                 {
-                    if(pwform.Password == "comotanmuchacho")
+                    if(pwform.Password == "1212cinetpassword")
                     {
                         LinkedQuerysForm linkedQuerysForm = new LinkedQuerysForm();
                         linkedQuerysForm.ShowDialog();

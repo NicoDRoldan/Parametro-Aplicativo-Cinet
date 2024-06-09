@@ -737,7 +737,7 @@ namespace Parametro.Class
                 $"SET TIM_LOCAL = @TIMLOCAL, TIM_CAJA = @TIMCAJA " +
                 $"WHERE TIM_NUMERO LIKE '%' + @TIMSUC + '%'; " +
                 $"PRINT ('Se configuró el timbrado.'); " +
-                $"IF ((SELECT TIM_TKDESDE FROM {conexionDB.VerificarLinkedServer()}TIMBRADO) != '1') " +
+                $"IF ((SELECT TIM_TKDESDE FROM {conexionDB.VerificarLinkedServer()}TIMBRADO WHERE TIM_NUMERO LIKE '%' + @TIMSUC + '%') != '1') " +
                 $"BEGIN " +
                 $"UPDATE {conexionDB.VerificarLinkedServer()}TIMBRADO " +
                 $"SET TIM_TKDESDE = '1'; " +
