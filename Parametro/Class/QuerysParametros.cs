@@ -421,6 +421,11 @@ namespace Parametro.Class
                 { "NDB", "VTA_NCA" }
             };
 
+            if(VerificarExistenciaParametro("AUTOMOS") && VerificarExistenciaParametro("BOTOAUTO"))
+            {
+                comprobantes.Add("PAU", "");
+            }
+
             string query = "";
             string cf = "CF";
 
@@ -436,10 +441,12 @@ namespace Parametro.Class
                     {
                         foreach(var comprobante in comprobantes)
                         {
-                            string codigo = comprobante.Key;
-                            string reporte = comprobante.Value;
+                            try
+                            {
+                                string codigo = comprobante.Key;
+                                string reporte = comprobante.Value;
 
-                            query = $@"
+                                query = $@"
                                 IF EXISTS(SELECT CBTEE_CODIGO FROM {conexionDB.VerificarLinkedServer()}COMPROBANTES_E WHERE CBTEE_MODULO = 'VTAS' AND CBTEE_CODIGO = '{codigo}')
                                 BEGIN
                                     INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_N 
@@ -448,10 +455,16 @@ namespace Parametro.Class
                                     ('VTAS', '{codigo}', '{ParametrosModels.sucFiscal}', '0', '{reporte}', '{cf}', '{codigo}', '0', '', '0')
                                 END";
 
-                            sqlCommand.CommandText = query;
-                            sqlCommand.ExecuteNonQuery();
+                                sqlCommand.CommandText = query;
+                                sqlCommand.ExecuteNonQuery();
 
-                            Log.Information($"Function InsertarSucursalComprobantesN(...)\nQuery\n: {query}");
+                                Log.Information($"Function InsertarSucursalComprobantesN(...)\nQuery\n: {query}");
+                            }
+                            catch (SqlException ex)
+                            {
+                                Log.Error($"Error - Function InsertarSucursalComprobantesN(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
+                                
+                            }
                         }
                     }
                     sqlConnection.Close();
@@ -477,11 +490,16 @@ namespace Parametro.Class
 
             if (ConexionDB.pais == "URUGUAY" || ConexionDB.pais == "PARAGUAY" || ConexionDB.pais == "BOLIVIA")
             {
-                query =
-                $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
-                $"INSERT INTO {conexionDB.VerificarLinkedServer()}SUCURSALES " +
-                $"(SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) " +
-                $"VALUES(@SUC_FISCAL,'FISCAL','S','2');";
+                query = 
+                    $"DECLARE @SUC_FISCAL VARCHAR(20) = '{ParametrosModels.sucFiscal}'; " +
+                    $"IF (NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}SUCURSALES WHERE SUC_CODIGO = @SUC_FISCAL)) " +
+                    $"BEGIN " +
+                    $"INSERT INTO {conexionDB.VerificarLinkedServer()}SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL) VALUES (@SUC_FISCAL, 'FISCAL', 'S', '2'); " +
+                    $"END " +
+                    $"ELSE " +
+                    $"BEGIN " +
+                    $"UPDATE {conexionDB.VerificarLinkedServer()}SUCURSALES SET SUC_MANUAL = '0'; UPDATE {conexionDB.VerificarLinkedServer()}SUCURSALES SET SUC_MANUAL = '2' WHERE SUC_CODIGO = @SUC_FISCAL; " +
+                    $"END;";
             }
 
             try
