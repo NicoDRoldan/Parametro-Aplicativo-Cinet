@@ -773,47 +773,18 @@ namespace Parametro.Class
             QuerysParametros querysParametros = new QuerysParametros();
             ConexionDB conexionDB = new ConexionDB();
 
-            // Insert CBTEXCATDGI
-            // Insert COMPROBANTES_E
-            // Insert COMPROBANTES_D
-            // Insert COMPROBANTES_N
-
-            string cbtexcatdgi_query = $"INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEXCATDGI VALUES('*','VTAS','PAU') ";
-            string comprobantes_e_query = $"INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_E VALUES('PAU','VTAS','PEDIDO AUTO','','N','N','N','40','+','-','+','2','PAU','N','N','N','N','N','','S','N','N','0','')" ;
-            string comprobantes_d_query = $"INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_D " +
-                $"SELECT 'PAU', CBTEE_MODULO, CPTO_CODIGO, CBTED_FORMULA, CBTED_ORDEN, CBTED_PIE, CBTED_CONDICION, CBTED_PORCE FROM {conexionDB.VerificarLinkedServer()}COMPROBANTES_D " +
-                $"WHERE CBTEE_CODIGO = 'FAB' AND CBTEE_MODULO = 'VTAS'";
-            string comprobantes_n_query = $"INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_N VALUES('VTAS','PAU','{ParametrosModels.sucFiscal}','0','','','PAU','0','','0','','','','','','')";
-
             try
             {
                 switch (tipoPdv)
                 {
                     case "mostrador":
-                        querysParametros.HabilitarOUpdatearParametro("AUTOMOS", "", "", "lDELETE");
-                        querysParametros.HabilitarOUpdatearParametro("BOTOAUTO", "", "", "lDELETE");
+                        ComprobantesYParametrosAuto(conexionDB, querysParametros, tipoPdv);
                         break;
                     case "facturador":
-                        querysParametros.HabilitarOUpdatearParametro("AUTOMOS", "", "S", "UPDATEORCREATE");
-                        querysParametros.HabilitarOUpdatearParametro("BOTOAUTO", "BOTOAUTO", "2", "UPDATEORCREATE");
-                        querysParametros.HabilitarOUpdatearParametro("TOTEM", "", "N", "lUPDATE");
-                        querysParametros.HabilitarOUpdatearParametro("TOTEMPAU", "", "N", "lUPDATE");
-
-                        EjecutarQuery(cbtexcatdgi_query, conexionDB);
-                        EjecutarQuery(comprobantes_e_query, conexionDB);
-                        EjecutarQuery(comprobantes_d_query, conexionDB);
-                        EjecutarQuery(comprobantes_n_query, conexionDB);
+                        ComprobantesYParametrosAuto(conexionDB, querysParametros, tipoPdv);
                         break;
                     case "tomador":
-                        querysParametros.HabilitarOUpdatearParametro("AUTOMOS", "", "S", "UPDATEORCREATE");
-                        querysParametros.HabilitarOUpdatearParametro("BOTOAUTO", "BOTOAUTO", "1", "UPDATEORCREATE");
-                        querysParametros.HabilitarOUpdatearParametro("TOTEM", "", "N", "lUPDATE");
-                        querysParametros.HabilitarOUpdatearParametro("TOTEMPAU", "", "N", "lUPDATE");
-
-                        EjecutarQuery(cbtexcatdgi_query, conexionDB);
-                        EjecutarQuery(comprobantes_e_query, conexionDB);
-                        EjecutarQuery(comprobantes_d_query, conexionDB);
-                        EjecutarQuery(comprobantes_n_query, conexionDB);
+                        ComprobantesYParametrosAuto(conexionDB, querysParametros, tipoPdv);
                         break;
                     default:
                         break;
@@ -825,6 +796,47 @@ namespace Parametro.Class
             {
                 Log.Error($"Error - Function ConfigurarAuto(...)\nMessage Error: {ex.Message}");
                 MessageBox.Show($"Error al configurar la caja cómo: {tipoPdv}");
+            }
+        }
+
+        public void ComprobantesYParametrosAuto(ConexionDB conexionDB, QuerysParametros querysParametros, string tipoPdv)
+        {
+            string comprobantesDDelete = $"DELETE {conexionDB.VerificarLinkedServer()}COMPROBANTES_D WHERE CBTEE_CODIGO = 'PAU'";
+
+            string cbtexcatdgiInsert = $"INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEXCATDGI VALUES('*','VTAS','PAU') ";
+            string comprobantes_eInsert = $"INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_E VALUES('PAU','VTAS','PEDIDO AUTO','','N','N','N','40','+','-','+','2','PAU','N','N','N','N','N','','S','N','N','0','')";
+            string comprobantes_dInsert = $"INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_D " +
+                $"SELECT 'PAU', CBTEE_MODULO, CPTO_CODIGO, CBTED_FORMULA, CBTED_ORDEN, CBTED_PIE, CBTED_CONDICION, CBTED_PORCE FROM {conexionDB.VerificarLinkedServer()}COMPROBANTES_D " +
+                $"WHERE CBTEE_CODIGO = 'FAB' AND CBTEE_MODULO = 'VTAS'";
+            string comprobantes_nInsert = $"INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_N VALUES('VTAS','PAU','{ParametrosModels.sucFiscal}','0','','','PAU','0','','0','','','','','','')";
+
+            if (tipoPdv == "mostrador")
+            {
+                // Comprobantes
+                EjecutarQuery(comprobantesDDelete, conexionDB);
+
+                // Parametros
+                querysParametros.HabilitarOUpdatearParametro("AUTOMOS", "", "", "lDELETE");
+                querysParametros.HabilitarOUpdatearParametro("BOTOAUTO", "", "", "lDELETE");
+            }
+            else
+            {
+                // Comprobantes
+                EjecutarQuery(comprobantesDDelete, conexionDB);
+                EjecutarQuery(cbtexcatdgiInsert, conexionDB);
+                EjecutarQuery(comprobantes_eInsert, conexionDB);
+                EjecutarQuery(comprobantes_dInsert, conexionDB);
+                EjecutarQuery(comprobantes_nInsert, conexionDB);
+
+                // Parametros
+                if (tipoPdv == "facturador")
+                    querysParametros.HabilitarOUpdatearParametro("BOTOAUTO", "BOTOAUTO", "2", "UPDATEORCREATE");
+                else if (tipoPdv == "tomador")
+                    querysParametros.HabilitarOUpdatearParametro("BOTOAUTO", "BOTOAUTO", "1", "UPDATEORCREATE");
+
+                querysParametros.HabilitarOUpdatearParametro("AUTOMOS", "", "S", "UPDATEORCREATE");
+                querysParametros.HabilitarOUpdatearParametro("TOTEM", "", "N", "lUPDATE");
+                querysParametros.HabilitarOUpdatearParametro("TOTEMPAU", "", "N", "lUPDATE");
             }
         }
 

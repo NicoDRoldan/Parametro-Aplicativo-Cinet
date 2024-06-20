@@ -54,7 +54,7 @@
             textBoxUser.Name = "textBoxUser";
             textBoxUser.Size = new Size(118, 23);
             textBoxUser.TabIndex = 1;
-            textBoxUser.Text = "10";
+            textBoxUser.Text = "dukissj";
             textBoxUser.TextChanged += textBoxUser_TextChanged;
             // 
             // btnConnect
@@ -73,6 +73,7 @@
             textBoxPass.Name = "textBoxPass";
             textBoxPass.Size = new Size(118, 23);
             textBoxPass.TabIndex = 2;
+            textBoxPass.Text = "cinettorcel";
             textBoxPass.UseSystemPasswordChar = true;
             textBoxPass.TextChanged += textBoxPass_TextChanged;
             // 
