@@ -53,8 +53,17 @@ namespace Parametro.Class
         {
             string query = "";
 
+            //(para_codigo == "S" && !VerificarExistenciaParametro(para_codigo))
+
             switch (accion)
             {
+                case "UPDATEORCREATE":
+                    query = $"IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = '{para_codigo}') " +
+                        $"INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS VALUES ('{para_codigo}','{para_descripcion}','{para_valor}',NULL,NULL) " +
+                        $"ELSE UPDATE {conexionDB.VerificarLinkedServer()}PARAMETROS SET PARA_VALOR = '{para_valor}' WHERE PARA_CODIGO = '{para_codigo}'";
+
+                    break;
+
                 case "UPDATE":
                     if (para_valor == "N" || para_valor == "NE" || para_valor == "" || para_valor is null)
                         query = $"IF NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = '{para_codigo}') " +
@@ -107,6 +116,41 @@ namespace Parametro.Class
                     break;
             }
             return query;
+        }
+
+        #endregion
+
+        #region Verificar Existencia de Parametro
+
+        public bool VerificarExistenciaParametro(string para_codigo)
+        {
+            ConexionDB conexionDB = new ConexionDB();
+
+            bool act = false;
+
+            string query = $"SELECT COUNT(*) FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = '{para_codigo}'";
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
+                {
+                    sqlConnection.Open();
+
+                    using(SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        int count = (int)sqlCommand.ExecuteScalar();
+                        if (count > 0) act = true;
+                    }
+
+                    sqlConnection.Close();
+                }
+                return act;
+            }
+            catch(SqlException ex)
+            {
+                Log.Error($"Error - Function HabilitarParametro(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
+                return act;
+            }
         }
 
         #endregion

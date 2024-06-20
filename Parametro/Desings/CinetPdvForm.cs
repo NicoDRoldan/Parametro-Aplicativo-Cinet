@@ -28,7 +28,7 @@ namespace Parametro.Desings
 
             ConexionDB.pais = querys.BasePais();
 
-            if(ConexionDB.pais == "PARAGUAY" || ConexionDB.pais == "BOLIVIA")
+            if (ConexionDB.pais == "PARAGUAY" || ConexionDB.pais == "BOLIVIA")
             {
                 btnPayWay.Enabled = false;
                 btnPayWay.FlatStyle = FlatStyle.Flat;
@@ -61,6 +61,9 @@ namespace Parametro.Desings
                 lblOmnicanalCheck.ForeColor = Color.Red;
                 toolTip.SetToolTip(this.lblOmnicanalCheck, "CORROBORAR CONFIGURACIÓN");
             }
+
+            ParametrosModels.sucFiscal = VTAPUNTO.Text;
+            VerificarTipoPdv();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -133,6 +136,9 @@ namespace Parametro.Desings
             {
                 case "URUGUAY":
                     btnPayWay.BackgroundImage = Properties.Resources.fiservgeocom;
+                    txtConfigAuto.Enabled = true;
+                    cbTipoPdv.Enabled = true;
+                    btnAutoConfig.Enabled = true;
                     break;
                 default:
                     break;
@@ -309,6 +315,53 @@ namespace Parametro.Desings
         private void RECOMANDA_Click(object sender, EventArgs e)
         {
             EventoClick(sender, e);
+        }
+
+        private void btnAutoConfig_Click(object sender, EventArgs e)
+        {
+            string opcion = cbTipoPdv.Text;
+            string tipoPdv;
+
+            switch (opcion)
+            {
+                case "Mostrador":
+                    tipoPdv = "Mostrador";
+                    break;
+                case "Auto - Facturador":
+                    tipoPdv = "Facturador";
+                    break;
+                case "Auto - Tomador":
+                    tipoPdv = "Tomador";
+                    break;
+                default:
+                    MessageBox.Show("¡Seleccionar una opción valida >:L!"
+                        , "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+            }
+            
+            querys.ConfigurarAuto(tipoPdv.ToLower().Trim());
+        }
+
+        private void VerificarTipoPdv()
+        {
+            cbTipoPdv.Text = "Mostrador";
+
+            if (querysParametros.VerificarExistenciaParametro("AUTOMOS")){
+                string query = $"SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'BOTOAUTO'";
+
+                switch (conexionDB.ObtenerValorDesdeBD(query))
+                {
+                    case "1":
+                        cbTipoPdv.Text = "Auto - Tomador";
+                        break;
+                    case "2":
+                        cbTipoPdv.Text = "Auto - Facturador";
+                        break;
+                    default:
+                        cbTipoPdv.Text = "Mostrador";
+                        break;
+                }
+            }
         }
     }
 }

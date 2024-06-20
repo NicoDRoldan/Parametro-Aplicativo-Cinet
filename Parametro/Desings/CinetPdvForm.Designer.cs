@@ -85,7 +85,10 @@
             label23 = new Label();
             panel9 = new Panel();
             panel11 = new Panel();
+            cbTipoPdv = new ComboBox();
+            btnAutoConfig = new Button();
             btnFAMAXVALOR = new Button();
+            txtConfigAuto = new Label();
             label26 = new Label();
             FAMAXVALOR = new TextBox();
             USAREMOTO = new Button();
@@ -258,13 +261,13 @@
             // 
             CODPUERTA.Location = new Point(5, 161);
             CODPUERTA.Name = "CODPUERTA";
-            CODPUERTA.Size = new Size(113, 23);
+            CODPUERTA.Size = new Size(149, 23);
             CODPUERTA.TabIndex = 22;
             // 
             // SINBANDA
             // 
             SINBANDA.AutoSize = true;
-            SINBANDA.Location = new Point(179, 76);
+            SINBANDA.Location = new Point(203, 76);
             SINBANDA.Name = "SINBANDA";
             SINBANDA.Size = new Size(25, 25);
             SINBANDA.TabIndex = 28;
@@ -284,7 +287,7 @@
             // QRCupon
             // 
             QRCupon.AutoSize = true;
-            QRCupon.Location = new Point(179, 44);
+            QRCupon.Location = new Point(203, 44);
             QRCupon.Name = "QRCupon";
             QRCupon.Size = new Size(25, 25);
             QRCupon.TabIndex = 26;
@@ -304,7 +307,7 @@
             // TOTEM
             // 
             TOTEM.AutoSize = true;
-            TOTEM.Location = new Point(179, 13);
+            TOTEM.Location = new Point(203, 13);
             TOTEM.Name = "TOTEM";
             TOTEM.Size = new Size(25, 25);
             TOTEM.TabIndex = 24;
@@ -325,7 +328,7 @@
             // 
             btnMerPago.BackgroundImage = Properties.Resources.Mercado_Pago_Logo;
             btnMerPago.BackgroundImageLayout = ImageLayout.Stretch;
-            btnMerPago.Location = new Point(215, 164);
+            btnMerPago.Location = new Point(215, 168);
             btnMerPago.Name = "btnMerPago";
             btnMerPago.Size = new Size(75, 65);
             btnMerPago.TabIndex = 26;
@@ -336,7 +339,7 @@
             // 
             btnPayWay.BackgroundImage = Properties.Resources.paywayLogo;
             btnPayWay.BackgroundImageLayout = ImageLayout.Zoom;
-            btnPayWay.Location = new Point(302, 164);
+            btnPayWay.Location = new Point(302, 168);
             btnPayWay.Name = "btnPayWay";
             btnPayWay.Size = new Size(75, 65);
             btnPayWay.TabIndex = 27;
@@ -527,7 +530,7 @@
             panel1.Controls.Add(btnNumCaja);
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(263, 147);
+            panel1.Size = new Size(263, 153);
             panel1.TabIndex = 28;
             // 
             // panel2
@@ -565,7 +568,7 @@
             panel3.Controls.Add(PEDIDOSYA);
             panel3.Location = new Point(281, 12);
             panel3.Name = "panel3";
-            panel3.Size = new Size(183, 147);
+            panel3.Size = new Size(183, 153);
             panel3.TabIndex = 29;
             // 
             // panel4
@@ -688,7 +691,7 @@
             panel9.BackColor = Color.White;
             panel9.Controls.Add(panel11);
             panel9.Controls.Add(panel10);
-            panel9.Location = new Point(210, 235);
+            panel9.Location = new Point(210, 239);
             panel9.Name = "panel9";
             panel9.Size = new Size(254, 260);
             panel9.TabIndex = 30;
@@ -697,7 +700,10 @@
             // 
             panel11.AutoScroll = true;
             panel11.AutoScrollMargin = new Size(0, 10);
+            panel11.Controls.Add(cbTipoPdv);
+            panel11.Controls.Add(btnAutoConfig);
             panel11.Controls.Add(btnFAMAXVALOR);
+            panel11.Controls.Add(txtConfigAuto);
             panel11.Controls.Add(label15);
             panel11.Controls.Add(QRCupon);
             panel11.Controls.Add(label26);
@@ -717,15 +723,48 @@
             panel11.Size = new Size(254, 235);
             panel11.TabIndex = 1;
             // 
+            // cbTipoPdv
+            // 
+            cbTipoPdv.Enabled = false;
+            cbTipoPdv.FormattingEnabled = true;
+            cbTipoPdv.Items.AddRange(new object[] { "Mostrador", "Auto - Facturador", "Auto - Tomador" });
+            cbTipoPdv.Location = new Point(7, 261);
+            cbTipoPdv.Name = "cbTipoPdv";
+            cbTipoPdv.Size = new Size(147, 23);
+            cbTipoPdv.TabIndex = 35;
+            // 
+            // btnAutoConfig
+            // 
+            btnAutoConfig.Enabled = false;
+            btnAutoConfig.Location = new Point(165, 261);
+            btnAutoConfig.Name = "btnAutoConfig";
+            btnAutoConfig.Size = new Size(63, 23);
+            btnAutoConfig.TabIndex = 23;
+            btnAutoConfig.Text = "Aceptar";
+            btnAutoConfig.UseVisualStyleBackColor = true;
+            btnAutoConfig.Click += btnAutoConfig_Click;
+            // 
             // btnFAMAXVALOR
             // 
-            btnFAMAXVALOR.Location = new Point(141, 211);
+            btnFAMAXVALOR.Location = new Point(165, 211);
             btnFAMAXVALOR.Name = "btnFAMAXVALOR";
             btnFAMAXVALOR.Size = new Size(63, 23);
             btnFAMAXVALOR.TabIndex = 32;
             btnFAMAXVALOR.Text = "Cambiar";
             btnFAMAXVALOR.UseVisualStyleBackColor = true;
             btnFAMAXVALOR.Click += btnFAMAXVALOR_Click;
+            // 
+            // txtConfigAuto
+            // 
+            txtConfigAuto.AutoSize = true;
+            txtConfigAuto.Enabled = false;
+            txtConfigAuto.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            txtConfigAuto.ForeColor = SystemColors.ActiveCaptionText;
+            txtConfigAuto.Location = new Point(5, 238);
+            txtConfigAuto.Name = "txtConfigAuto";
+            txtConfigAuto.Size = new Size(136, 20);
+            txtConfigAuto.TabIndex = 21;
+            txtConfigAuto.Text = "Configurar Auto";
             // 
             // label26
             // 
@@ -741,13 +780,13 @@
             // 
             FAMAXVALOR.Location = new Point(5, 212);
             FAMAXVALOR.Name = "FAMAXVALOR";
-            FAMAXVALOR.Size = new Size(113, 23);
+            FAMAXVALOR.Size = new Size(149, 23);
             FAMAXVALOR.TabIndex = 34;
             // 
             // USAREMOTO
             // 
             USAREMOTO.AutoSize = true;
-            USAREMOTO.Location = new Point(179, 106);
+            USAREMOTO.Location = new Point(203, 106);
             USAREMOTO.Name = "USAREMOTO";
             USAREMOTO.Size = new Size(25, 25);
             USAREMOTO.TabIndex = 30;
@@ -766,7 +805,7 @@
             // 
             // btnCODPUERTA
             // 
-            btnCODPUERTA.Location = new Point(141, 161);
+            btnCODPUERTA.Location = new Point(165, 161);
             btnCODPUERTA.Name = "btnCODPUERTA";
             btnCODPUERTA.Size = new Size(63, 23);
             btnCODPUERTA.TabIndex = 21;
@@ -800,7 +839,7 @@
             btnQuerys.BackgroundImage = Properties.Resources.SqlServerLogo;
             btnQuerys.BackgroundImageLayout = ImageLayout.Zoom;
             btnQuerys.Enabled = false;
-            btnQuerys.Location = new Point(389, 164);
+            btnQuerys.Location = new Point(389, 168);
             btnQuerys.Name = "btnQuerys";
             btnQuerys.Size = new Size(75, 65);
             btnQuerys.TabIndex = 31;
@@ -813,7 +852,7 @@
             panel12.BackColor = Color.White;
             panel12.Controls.Add(panel13);
             panel12.Controls.Add(panel14);
-            panel12.Location = new Point(12, 167);
+            panel12.Location = new Point(12, 171);
             panel12.Name = "panel12";
             panel12.Size = new Size(192, 180);
             panel12.TabIndex = 31;
@@ -877,7 +916,7 @@
             panel7.BackColor = Color.White;
             panel7.Controls.Add(panel8);
             panel7.Controls.Add(panel15);
-            panel7.Location = new Point(12, 353);
+            panel7.Location = new Point(12, 357);
             panel7.Name = "panel7";
             panel7.Size = new Size(192, 142);
             panel7.TabIndex = 31;
@@ -915,7 +954,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(475, 500);
+            ClientSize = new Size(473, 504);
             Controls.Add(panel7);
             Controls.Add(panel12);
             Controls.Add(btnQuerys);
@@ -1035,5 +1074,8 @@
         private Panel panel7;
         private Panel panel8;
         private Panel panel15;
+        private Button btnAutoConfig;
+        private Label txtConfigAuto;
+        private ComboBox cbTipoPdv;
     }
 }
