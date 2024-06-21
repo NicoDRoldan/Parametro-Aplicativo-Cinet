@@ -244,7 +244,15 @@ namespace Parametro.Desings.SubDesings
 
         private void CorregirCbtBo_Click(object sender, EventArgs e)
         {
-            querysParametros.ConfigurarComprobantesBO();
+            if (txtboxNumSucursalBO.Text.Length == 0)
+            {
+                MessageBox.Show("Ingresar el número de sucursal :)"); return;
+            }
+            else
+            {
+                querysParametros.ConfigurarComprobantesBO(txtboxNumSucursalBO.Text);
+            }
+            
         }
         #endregion
 

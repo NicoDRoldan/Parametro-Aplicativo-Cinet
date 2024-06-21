@@ -895,16 +895,21 @@ namespace Parametro.Class
         #endregion
 
         #region Configurar Comprobantes Bolivia
-        public void ConfigurarComprobantesBO()
+        public void ConfigurarComprobantesBO(string? sucursal = null)
         {
             ConexionDB conexionDB = new ConexionDB();
 
+            if (sucursal == null) sucursal = ParametrosModels.sucFiscal;
+
             string query = $"" +
-                $"DECLARE @SUCURSAL VARCHAR(10) = '{ParametrosModels.sucFiscal}'; " +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}SUCURSALES SET SUC_MANUAL = '0'; " +
+                $"DECLARE @SUCURSAL VARCHAR(10) = '{sucursal}'; " +
                 $"\r\n\r\n-- PDV --\r\n\r\n" +
                 $"IF(NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}SUCURSALES WHERE SUC_CODIGO = @SUCURSAL AND SUC_DESCRIPCION = 'FISCAL'))\r\n" +
                 $"INSERT INTO {conexionDB.VerificarLinkedServer()}SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, SUC_MANUAL)\r\n" +
                 $"VALUES(@SUCURSAL,'FISCAL','S','2');\r\n\r\n" +
+                $"ELSE " +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}SUCURSALES SET SUC_MANUAL = '2' WHERE SUC_CODIGO = @SUCURSAL; " +
                 $"IF(NOT EXISTS (SELECT * FROM {conexionDB.VerificarLinkedServer()}COMPROBANTES_N " +
                 $"WHERE SUC_CODIGO = @SUCURSAL AND CBTEE_CODIGO = 'FAB'))\r\n" +
                 $"INSERT INTO {conexionDB.VerificarLinkedServer()}COMPROBANTES_N\r\n" +

@@ -78,6 +78,9 @@
             txtRutCorrecto = new TextBox();
             panelUruguay = new Panel();
             panelBolivia = new Panel();
+            txtboxNumSucursalBO = new TextBox();
+            label10 = new Label();
+            label9 = new Label();
             btnFEAutoBo = new Button();
             CorregirCbtBo = new Button();
             panel8 = new Panel();
@@ -379,7 +382,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1238, 68);
+            panel5.Size = new Size(1212, 68);
             panel5.TabIndex = 31;
             // 
             // txtPassBotones
@@ -651,6 +654,9 @@
             // panelBolivia
             // 
             panelBolivia.BackColor = Color.White;
+            panelBolivia.Controls.Add(txtboxNumSucursalBO);
+            panelBolivia.Controls.Add(label10);
+            panelBolivia.Controls.Add(label9);
             panelBolivia.Controls.Add(btnFEAutoBo);
             panelBolivia.Controls.Add(CorregirCbtBo);
             panelBolivia.Controls.Add(panel8);
@@ -661,28 +667,56 @@
             panelBolivia.TabIndex = 34;
             panelBolivia.Visible = false;
             // 
+            // txtboxNumSucursalBO
+            // 
+            txtboxNumSucursalBO.Location = new Point(3, 53);
+            txtboxNumSucursalBO.Name = "txtboxNumSucursalBO";
+            txtboxNumSucursalBO.PlaceholderText = "Número de Sucursal";
+            txtboxNumSucursalBO.Size = new Size(195, 23);
+            txtboxNumSucursalBO.TabIndex = 31;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.ForeColor = SystemColors.ActiveCaptionText;
+            label10.Location = new Point(3, 94);
+            label10.Name = "label10";
+            label10.Size = new Size(128, 20);
+            label10.TabIndex = 37;
+            label10.Text = "FE Automatico";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.ForeColor = SystemColors.ActiveCaptionText;
+            label9.Location = new Point(3, 28);
+            label9.Name = "label9";
+            label9.Size = new Size(195, 20);
+            label9.TabIndex = 36;
+            label9.Text = "Corregir Comprobantes";
+            // 
             // btnFEAutoBo
             // 
             btnFEAutoBo.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnFEAutoBo.Location = new Point(200, 39);
+            btnFEAutoBo.Location = new Point(137, 91);
             btnFEAutoBo.Name = "btnFEAutoBo";
-            btnFEAutoBo.Size = new Size(114, 52);
+            btnFEAutoBo.Size = new Size(72, 23);
             btnFEAutoBo.TabIndex = 35;
-            btnFEAutoBo.Text = "FE AUTOMATICO\r\nBOLIVIA\r\n";
+            btnFEAutoBo.Text = "ACEPTAR";
             btnFEAutoBo.UseVisualStyleBackColor = true;
-            btnFEAutoBo.Visible = false;
             btnFEAutoBo.Click += btnFEAutoBo_Click;
             // 
             // CorregirCbtBo
             // 
             CorregirCbtBo.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            CorregirCbtBo.Location = new Point(80, 39);
+            CorregirCbtBo.Location = new Point(204, 52);
             CorregirCbtBo.Name = "CorregirCbtBo";
-            CorregirCbtBo.Size = new Size(114, 52);
+            CorregirCbtBo.Size = new Size(72, 23);
             CorregirCbtBo.TabIndex = 34;
-            CorregirCbtBo.Text = "CORREGIR COMPROBANTES";
+            CorregirCbtBo.Text = "ACEPTAR";
             CorregirCbtBo.UseVisualStyleBackColor = true;
-            CorregirCbtBo.Visible = false;
             CorregirCbtBo.Click += CorregirCbtBo_Click;
             // 
             // panel8
@@ -800,6 +834,7 @@
             panelUruguay.ResumeLayout(false);
             panelUruguay.PerformLayout();
             panelBolivia.ResumeLayout(false);
+            panelBolivia.PerformLayout();
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
             panel1.ResumeLayout(false);
@@ -870,5 +905,8 @@
         private Label label7;
         private Button btnBackup;
         private Panel PanelAdmin;
+        private Label label10;
+        private Label label9;
+        private TextBox txtboxNumSucursalBO;
     }
 }
