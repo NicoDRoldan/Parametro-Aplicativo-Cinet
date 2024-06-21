@@ -732,7 +732,7 @@ namespace Parametro.Class
         }
         #endregion
 
-        #region CorregirGeneracionPmix
+        #region CorregirGeneracionPmix En Paraguay
 
         public void CorregirGeneracionPmix()
         {

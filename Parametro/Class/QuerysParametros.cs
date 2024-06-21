@@ -919,7 +919,7 @@ namespace Parametro.Class
                 $"INSERT INTO {conexionDB.VerificarLinkedServer()}CBTEIN_SUCURSAL\r\n" +
                 $"VALUES(@SUCURSAL,'FISCAL');\r\n\r\n" +
                 $"-- BACKOFFICE --\r\n\r\n" +
-                $"IF(NOT EXISTS (SELECT * FROM [BACKOFFICE].DBO.SUCURSALES WHERE SUC_CODIGO = @SUCURSAL AND SUC_DESCRIPCION = @SUCURSAL))\r\n" +
+                $"IF(NOT EXISTS (SELECT * FROM [BACKOFFICE].DBO.SUCURSALES WHERE SUC_CODIGO = @SUCURSAL))\r\n" +
                 $"INSERT INTO [BACKOFFICE].DBO.SUCURSALES (SUC_CODIGO, SUC_DESCRIPCION, suc_local, ASI_SUCTRANSMITIDO)\r\n" +
                 $"VALUES(@SUCURSAL,@SUCURSAL,'S','S');";
 

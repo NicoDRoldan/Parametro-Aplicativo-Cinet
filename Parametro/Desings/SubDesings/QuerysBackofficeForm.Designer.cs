@@ -98,7 +98,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(440, 68);
+            panel5.Size = new Size(442, 68);
             panel5.TabIndex = 34;
             // 
             // txtPassBotones
