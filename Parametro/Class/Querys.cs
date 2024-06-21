@@ -816,6 +816,7 @@ namespace Parametro.Class
                 EjecutarQuery(comprobantesDDelete, conexionDB);
 
                 // Parametros
+                querysParametros.HabilitarOUpdatearParametro("LETRATURNO", "LETRATURNO", "", "UPDATEORCREATE");
                 querysParametros.HabilitarOUpdatearParametro("AUTOMOS", "", "", "lDELETE");
                 querysParametros.HabilitarOUpdatearParametro("BOTOAUTO", "", "", "lDELETE");
             }
@@ -830,9 +831,15 @@ namespace Parametro.Class
 
                 // Parametros
                 if (tipoPdv == "facturador")
+                {
+                    querysParametros.HabilitarOUpdatearParametro("LETRATURNO", "LETRATURNO", "AU", "UPDATEORCREATE");
                     querysParametros.HabilitarOUpdatearParametro("BOTOAUTO", "BOTOAUTO", "2", "UPDATEORCREATE");
+                }
                 else if (tipoPdv == "tomador")
+                {
+                    querysParametros.HabilitarOUpdatearParametro("LETRATURNO", "LETRATURNO", "AUT", "UPDATEORCREATE");
                     querysParametros.HabilitarOUpdatearParametro("BOTOAUTO", "BOTOAUTO", "1", "UPDATEORCREATE");
+                }
 
                 querysParametros.HabilitarOUpdatearParametro("AUTOMOS", "", "S", "UPDATEORCREATE");
                 querysParametros.HabilitarOUpdatearParametro("TOTEM", "", "N", "lUPDATE");
