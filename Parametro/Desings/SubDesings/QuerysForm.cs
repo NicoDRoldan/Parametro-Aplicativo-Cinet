@@ -1,4 +1,5 @@
-﻿using Parametro.Class;
+﻿using Microsoft.IdentityModel.Tokens;
+using Parametro.Class;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,11 +29,13 @@ namespace Parametro.Desings.SubDesings
         {
             InitializeComponent();
 
+            this.Size = new Size(832, 500);
+
             fechaHasta.Value = DateTime.Today;
 
             VerificarPais();
         }
-        
+
         private void btnRegCierre_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(NumCierre.Text) || NumCierre.Text.Length == 0 || NumCierre.Text is null)
@@ -50,7 +53,7 @@ namespace Parametro.Desings.SubDesings
                 ConexionDB.numeroCierre = NumCierre.Text.Trim();
                 DataTable resultados = querys.RegenerarCierre();
 
-                if(resultados.Rows.Count > 0)
+                if (resultados.Rows.Count > 0)
                 {
                     vistaQuerys.dataGridResultadosQuery.DataSource = resultados.DefaultView;
                     vistaQuerys.Show();
@@ -58,37 +61,47 @@ namespace Parametro.Desings.SubDesings
             }
         }
 
-        private bool ValidarPassBotones()
+        public int ValidarPassBotones(string pass)
         {
-            return (txtPassBotones.Text == "onichanfurry" || txtPassBotones.Text == "comotanmuchacho");
+            int valor = 0;
+
+            switch (pass)
+            {
+                case "cinetpassadmin":
+                    valor = 1;
+                    break;
+                case "cinetpass":
+                    valor = 2;
+                    break;
+                default:
+                    return valor;
+            }
+
+            return valor;
         }
 
         private void HabilitarBotones()
         {
-            if (ValidarPassBotones() && !string.IsNullOrEmpty(txtPassBotones.Text))
+            switch (ValidarPassBotones(txtPassBotones.Text))
             {
-                panelMesa.Visible = true;
-                panelMesa.Enabled = true;
-                PanelAdmin.Enabled = true;
-                panelUruguay.Enabled = true;
-                panelParaguay.Enabled = true;
-                panelBolivia.Enabled = true;
-            }
-            else if (ValidarPassBotones() && !string.IsNullOrEmpty(txtPassBotones.Text) && txtPassBotones.Text != "onichanfurry")
-            {
-                panelMesa.Enabled= true;
-                panelUruguay.Enabled = true;
-                panelParaguay.Enabled = true;
-                panelBolivia.Enabled = true;
-            }
-            else
-            {
-                panelMesa.Enabled = false;
-                PanelAdmin.Enabled = false;
-                panelUruguay.Enabled = false;
-                panelParaguay.Enabled = false;
-                panelBolivia.Enabled = false;
-                MessageBox.Show("Datos incorrectos");
+                case 1:
+                    panelMesa.Enabled = true;
+                    panelUruguay.Enabled = true;
+                    panelParaguay.Enabled = true;
+                    panelBolivia.Enabled = true;
+                    break;
+                case 2:
+                    panelUruguay.Enabled = true;
+                    panelParaguay.Enabled = true;
+                    panelBolivia.Enabled = true;
+                    break;
+                default:
+                    panelMesa.Enabled = false;
+                    panelUruguay.Enabled = false;
+                    panelParaguay.Enabled = false;
+                    panelBolivia.Enabled = false;
+                    MessageBox.Show("¡Datos Incorrectos!");
+                    return;
             }
         }
 
@@ -209,12 +222,43 @@ namespace Parametro.Desings.SubDesings
         }
         private void btnArtPrueba_Click(object sender, EventArgs e)
         {
-            querys.ActivarArticuloPrueba();
+            if (ValidarPrueba(out double precio, out string marchaComanda))
+            {
+                querys.ActivarArticuloPrueba(precio, marchaComanda);
+            }
         }
 
         private void btnTestConito_Click(object sender, EventArgs e)
         {
-            querys.ActivarTestConito();
+            if (ValidarPrueba(out double precio, out string marchaComanda))
+            {
+                querys.ActivarTestConito(precio, marchaComanda);
+            }
+        }
+
+        private bool ValidarPrueba(out double precio, out string marchaComanda)
+        {
+            List<string> marchado = new List<string> { "S", "N", "ESTA" };
+
+            marchaComanda = txtMarchaComanda.Text.ToUpper();
+            precio = 0;
+
+            if (string.IsNullOrEmpty(txtMontoPrueba.Text) ||
+                string.IsNullOrEmpty(marchaComanda) ||
+                !marchado.Contains(marchaComanda))
+            {
+                MessageBox.Show("Completar los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            var precioString = txtMontoPrueba.Text.Replace(".", ",");
+            if (!double.TryParse(precioString, out precio))
+            {
+                MessageBox.Show("Monto inválido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
 
         private void btnAceptarPassBtn_Click(object sender, EventArgs e)
@@ -252,7 +296,7 @@ namespace Parametro.Desings.SubDesings
             {
                 querysParametros.ConfigurarComprobantesBO(txtboxNumSucursalBO.Text);
             }
-            
+
         }
         #endregion
 
@@ -285,8 +329,9 @@ namespace Parametro.Desings.SubDesings
 
         private void btnCorregirNracion_Click(object sender, EventArgs e)
         {
-            if(txtTipoCBTEE.Text.Length > 0 &&
-                (txtUltimoNroCorrelativo.Text.Length > 0 && Regex.IsMatch(txtUltimoNroCorrelativo.Text, @"^\d+$"))) {
+            if (txtTipoCBTEE.Text.Length > 0 &&
+                (txtUltimoNroCorrelativo.Text.Length > 0 && Regex.IsMatch(txtUltimoNroCorrelativo.Text, @"^\d+$")))
+            {
 
                 labelNroBteAnt.Visible = true;
                 txtNumCbteeAnt.Visible = true;
@@ -304,6 +349,25 @@ namespace Parametro.Desings.SubDesings
         private void btnBackup_Click(object sender, EventArgs e)
         {
             Functions.HacerBackup();
+        }
+
+        private void lblHelpFEBO_MouseHover(object sender, EventArgs e)
+        {
+            pbPanelFEBO.Location = new Point(428, 160);
+            pbPanelFEBO.Visible = true;
+        }
+
+        private void lblHelpFEBO_MouseLeave(object sender, EventArgs e)
+        {
+            pbPanelFEBO.Visible = false;
+        }
+
+        private void txtMarchaComanda_Click(object sender, EventArgs e)
+        {
+            if (txtMarchaComanda.Text == "S")
+                txtMarchaComanda.Text = "N";
+            else if (txtMarchaComanda.Text == "N")
+                txtMarchaComanda.Text = "S";
         }
     }
 }

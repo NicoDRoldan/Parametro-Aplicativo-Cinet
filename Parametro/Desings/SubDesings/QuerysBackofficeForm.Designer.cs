@@ -45,7 +45,8 @@
             panel2 = new Panel();
             label20 = new Label();
             panel3 = new Panel();
-            panel4 = new Panel();
+            panelMantenimiento = new Panel();
+            btnVerificarSizeTables = new Button();
             button1 = new Button();
             btnVerificarCaja = new Button();
             btnConsultaConexion = new Button();
@@ -54,18 +55,19 @@
             label5 = new Label();
             btnVerificarVersionCaja = new Button();
             panel7 = new Panel();
-            panel8 = new Panel();
+            panelVersiones = new Panel();
             btnVerificarVersionLocal = new Button();
             label7 = new Label();
             comboBoxAplicativo = new ComboBox();
             label6 = new Label();
             panel9 = new Panel();
             label1 = new Label();
-            panel10 = new Panel();
+            panelBackup = new Panel();
             panel11 = new Panel();
             label8 = new Label();
             btnBackup = new Button();
             panelParaguay = new Panel();
+            label10 = new Label();
             panel13 = new Panel();
             label9 = new Label();
             corregirPmixBtn = new Button();
@@ -74,12 +76,12 @@
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
-            panel4.SuspendLayout();
+            panelMantenimiento.SuspendLayout();
             panel6.SuspendLayout();
             panel7.SuspendLayout();
-            panel8.SuspendLayout();
+            panelVersiones.SuspendLayout();
             panel9.SuspendLayout();
-            panel10.SuspendLayout();
+            panelBackup.SuspendLayout();
             panel11.SuspendLayout();
             panelParaguay.SuspendLayout();
             panel13.SuspendLayout();
@@ -98,7 +100,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(442, 68);
+            panel5.Size = new Size(649, 68);
             panel5.TabIndex = 34;
             // 
             // txtPassBotones
@@ -255,30 +257,42 @@
             // panel3
             // 
             panel3.BackColor = Color.White;
-            panel3.Controls.Add(panel4);
+            panel3.Controls.Add(panelMantenimiento);
             panel3.Controls.Add(panel6);
             panel3.Location = new Point(12, 80);
             panel3.Name = "panel3";
             panel3.Size = new Size(206, 247);
             panel3.TabIndex = 33;
             // 
-            // panel4
+            // panelMantenimiento
             // 
-            panel4.Controls.Add(button1);
-            panel4.Controls.Add(btnVerificarCaja);
-            panel4.Controls.Add(btnConsultaConexion);
-            panel4.Controls.Add(btnReducirLogs);
-            panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(0, 25);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(206, 222);
-            panel4.TabIndex = 1;
+            panelMantenimiento.Controls.Add(btnVerificarSizeTables);
+            panelMantenimiento.Controls.Add(button1);
+            panelMantenimiento.Controls.Add(btnVerificarCaja);
+            panelMantenimiento.Controls.Add(btnConsultaConexion);
+            panelMantenimiento.Controls.Add(btnReducirLogs);
+            panelMantenimiento.Dock = DockStyle.Fill;
+            panelMantenimiento.Location = new Point(0, 25);
+            panelMantenimiento.Name = "panelMantenimiento";
+            panelMantenimiento.Size = new Size(206, 222);
+            panelMantenimiento.TabIndex = 1;
+            // 
+            // btnVerificarSizeTables
+            // 
+            btnVerificarSizeTables.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnVerificarSizeTables.Location = new Point(8, 57);
+            btnVerificarSizeTables.Name = "btnVerificarSizeTables";
+            btnVerificarSizeTables.Size = new Size(92, 44);
+            btnVerificarSizeTables.TabIndex = 30;
+            btnVerificarSizeTables.Text = "Tamaño de Tablas";
+            btnVerificarSizeTables.UseVisualStyleBackColor = true;
+            btnVerificarSizeTables.Click += btnVerificarSizeTables_Click;
             // 
             // button1
             // 
             button1.Enabled = false;
             button1.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(106, 57);
+            button1.Location = new Point(106, 173);
             button1.Name = "button1";
             button1.Size = new Size(92, 44);
             button1.TabIndex = 29;
@@ -312,7 +326,7 @@
             // 
             btnReducirLogs.Enabled = false;
             btnReducirLogs.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnReducirLogs.Location = new Point(8, 57);
+            btnReducirLogs.Location = new Point(8, 173);
             btnReducirLogs.Name = "btnReducirLogs";
             btnReducirLogs.Size = new Size(92, 44);
             btnReducirLogs.TabIndex = 28;
@@ -356,25 +370,25 @@
             // panel7
             // 
             panel7.BackColor = Color.White;
-            panel7.Controls.Add(panel8);
+            panel7.Controls.Add(panelVersiones);
             panel7.Controls.Add(panel9);
             panel7.Location = new Point(224, 81);
             panel7.Name = "panel7";
             panel7.Size = new Size(206, 135);
             panel7.TabIndex = 34;
             // 
-            // panel8
+            // panelVersiones
             // 
-            panel8.Controls.Add(btnVerificarVersionLocal);
-            panel8.Controls.Add(label7);
-            panel8.Controls.Add(comboBoxAplicativo);
-            panel8.Controls.Add(btnVerificarVersionCaja);
-            panel8.Controls.Add(label6);
-            panel8.Dock = DockStyle.Fill;
-            panel8.Location = new Point(0, 25);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(206, 110);
-            panel8.TabIndex = 1;
+            panelVersiones.Controls.Add(btnVerificarVersionLocal);
+            panelVersiones.Controls.Add(label7);
+            panelVersiones.Controls.Add(comboBoxAplicativo);
+            panelVersiones.Controls.Add(btnVerificarVersionCaja);
+            panelVersiones.Controls.Add(label6);
+            panelVersiones.Dock = DockStyle.Fill;
+            panelVersiones.Location = new Point(0, 25);
+            panelVersiones.Name = "panelVersiones";
+            panelVersiones.Size = new Size(206, 110);
+            panelVersiones.TabIndex = 1;
             // 
             // btnVerificarVersionLocal
             // 
@@ -401,7 +415,7 @@
             // comboBoxAplicativo
             // 
             comboBoxAplicativo.FormattingEnabled = true;
-            comboBoxAplicativo.Items.AddRange(new object[] { "ActualizaDatos", "Centralizador", "CentralizadorComanda", "PantallaComanda", "Costos", "DescargaLocal", "Informes", "Informes|Version", "Profit", "CinetEF-OCX", "CinetFiscalManager", "ZonaEntrega", "ZonaLlamador", "TotemAPI", "InterfaceTotem", "Totem.EXE", "PanelDVY", "PanelMTZ", "PanelRappi" });
+            comboBoxAplicativo.Items.AddRange(new object[] { "ActualizaDatos", "Centralizador", "CentralizadorComanda", "PantallaComanda", "Omnicanal", "Costos", "DescargaLocal", "Informes", "Informes|Version", "Profit", "CinetEF-OCX", "CinetFiscalManager", "ZonaEntrega", "ZonaLlamador", "TotemAPI", "InterfaceTotem", "Totem.EXE", "PanelDVY", "PanelMTZ", "PanelRappi" });
             comboBoxAplicativo.Location = new Point(3, 26);
             comboBoxAplicativo.Name = "comboBoxAplicativo";
             comboBoxAplicativo.Size = new Size(98, 23);
@@ -439,15 +453,15 @@
             label1.TabIndex = 1;
             label1.Text = "VERSIONES";
             // 
-            // panel10
+            // panelBackup
             // 
-            panel10.BackColor = Color.White;
-            panel10.Controls.Add(panel11);
-            panel10.Controls.Add(btnBackup);
-            panel10.Location = new Point(224, 222);
-            panel10.Name = "panel10";
-            panel10.Size = new Size(106, 105);
-            panel10.TabIndex = 35;
+            panelBackup.BackColor = Color.White;
+            panelBackup.Controls.Add(panel11);
+            panelBackup.Controls.Add(btnBackup);
+            panelBackup.Location = new Point(224, 222);
+            panelBackup.Name = "panelBackup";
+            panelBackup.Size = new Size(106, 105);
+            panelBackup.TabIndex = 35;
             // 
             // panel11
             // 
@@ -484,13 +498,25 @@
             // panelParaguay
             // 
             panelParaguay.BackColor = Color.White;
+            panelParaguay.Controls.Add(label10);
             panelParaguay.Controls.Add(panel13);
             panelParaguay.Controls.Add(corregirPmixBtn);
             panelParaguay.Location = new Point(436, 81);
             panelParaguay.Name = "panelParaguay";
-            panelParaguay.Size = new Size(206, 136);
+            panelParaguay.Size = new Size(205, 136);
             panelParaguay.TabIndex = 36;
             panelParaguay.Visible = false;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.ForeColor = SystemColors.ActiveCaptionText;
+            label10.Location = new Point(3, 31);
+            label10.Name = "label10";
+            label10.Size = new Size(172, 17);
+            label10.TabIndex = 35;
+            label10.Text = "Corregir generación PMIX";
             // 
             // panel13
             // 
@@ -499,7 +525,7 @@
             panel13.Dock = DockStyle.Top;
             panel13.Location = new Point(0, 0);
             panel13.Name = "panel13";
-            panel13.Size = new Size(206, 25);
+            panel13.Size = new Size(205, 25);
             panel13.TabIndex = 0;
             // 
             // label9
@@ -517,11 +543,11 @@
             // 
             corregirPmixBtn.Enabled = false;
             corregirPmixBtn.Font = new Font("Century Gothic", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            corregirPmixBtn.Location = new Point(12, 31);
+            corregirPmixBtn.Location = new Point(3, 52);
             corregirPmixBtn.Name = "corregirPmixBtn";
-            corregirPmixBtn.Size = new Size(92, 44);
+            corregirPmixBtn.Size = new Size(92, 23);
             corregirPmixBtn.TabIndex = 13;
-            corregirPmixBtn.Text = "Corregir generación PMIX";
+            corregirPmixBtn.Text = "Corregir";
             corregirPmixBtn.UseVisualStyleBackColor = true;
             corregirPmixBtn.Click += corregirPmixBtn_Click;
             // 
@@ -531,9 +557,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(440, 334);
+            ClientSize = new Size(646, 334);
             Controls.Add(panelParaguay);
-            Controls.Add(panel10);
+            Controls.Add(panelBackup);
             Controls.Add(panel7);
             Controls.Add(panel3);
             Controls.Add(panel5);
@@ -551,18 +577,19 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
-            panel4.ResumeLayout(false);
+            panelMantenimiento.ResumeLayout(false);
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
             panel7.ResumeLayout(false);
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
+            panelVersiones.ResumeLayout(false);
+            panelVersiones.PerformLayout();
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
-            panel10.ResumeLayout(false);
+            panelBackup.ResumeLayout(false);
             panel11.ResumeLayout(false);
             panel11.PerformLayout();
             panelParaguay.ResumeLayout(false);
+            panelParaguay.PerformLayout();
             panel13.ResumeLayout(false);
             panel13.PerformLayout();
             ResumeLayout(false);
@@ -586,7 +613,7 @@
         private Label label20;
         private Panel panel1;
         private Panel panel3;
-        private Panel panel4;
+        private Panel panelMantenimiento;
         private Button btnReducirLogs;
         private Button btnConsultaConexion;
         private Panel panel6;
@@ -594,14 +621,14 @@
         private Button btnVerificarCaja;
         private Button btnVerificarVersionCaja;
         private Panel panel7;
-        private Panel panel8;
+        private Panel panelVersiones;
         private Label label7;
         private ComboBox comboBoxAplicativo;
         private Label label6;
         private Panel panel9;
         private Label label1;
         private Button btnVerificarVersionLocal;
-        private Panel panel10;
+        private Panel panelBackup;
         private Panel panel11;
         private Label label8;
         private Button btnBackup;
@@ -610,5 +637,7 @@
         private Label label9;
         private Button corregirPmixBtn;
         private Button button1;
+        private Label label10;
+        private Button btnVerificarSizeTables;
     }
 }

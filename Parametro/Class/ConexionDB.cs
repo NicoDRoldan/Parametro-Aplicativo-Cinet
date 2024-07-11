@@ -48,7 +48,7 @@ namespace Parametro.Class
         public string StringConexionMaster()
         {
             var stringCadenaMaster = $"Data Source={direccionIP},{puertoSql};Initial Catalog=master;" +
-                $"User Id=sa;Password={connectionPass};Connect Timeout = 2;";
+            $"User Id=sa;Password={connectionPass};Connect Timeout = 2;";
 
             return stringCadenaMaster;
         }
@@ -69,7 +69,12 @@ namespace Parametro.Class
 
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(StringConexionMaster()))
+                string stringConnect = StringConexionMaster();
+
+                if (stringConnect.IsNullOrEmpty() || direccionIP.IsNullOrEmpty())
+                    throw new Exception("Completar IP/HOST");
+
+                using (SqlConnection sqlConnection = new SqlConnection(stringConnect))
                 {
                     sqlConnection.Open();
                     if (linkedServer)
@@ -97,8 +102,18 @@ namespace Parametro.Class
             }
             catch( SqlException ex)
             {
-                MessageBox.Show("No se logro la conexión con la base de datos, verifique los datos ingresados. \nVer Error: " + ex.Message);
+                MessageBox.Show("No se logro la conexión con la base de datos, verifique los datos ingresados.");
                 Log.Error($"Error - Function TraerBasesDeDatos(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
+            }
+            catch( ArgumentException ex )
+            {
+                MessageBox.Show("Error totalmente controlado, validar IP/HOST.");
+                Log.Error($"Error: {ex.Message}");
+            }
+            catch( Exception ex )
+            {
+                MessageBox.Show(ex.Message);
+                Log.Error($"Error: {ex.Message}");
             }
         }
 
@@ -167,16 +182,23 @@ namespace Parametro.Class
         public void CargarEquiposLinkedServer(ComboBox comboBox)
         {
             // Consulta para obtener los equipos asociados a la base de datos del servidor principal.
+
+            string filtro = "VERSION";
+
+            if (ConexionDB.pais == "PARAGUAY")
+                filtro = "ACTIVEXNET";
+
             string query = "USE[Backoffice]; " +
                 "DECLARE @infoCaja TABLE([caja] varchar(10), [equipo] varchar(50), [version] varchar(50) );" +
                 "\r\n\r\nINSERT INTO @infoCaja\r\nSELECT DISTINCT caja, EQUIPO, valor \r\nFROM (\r\n    SELECT RANK() OVER " +
                 "(\r\n        PARTITION BY caja, parametro\r\n        ORDER BY fechatrans DESC) rango, *\r\n    " +
-                "FROM hparamloc\r\n    WHERE parametro = 'VERSION') pinga\r\nWHERE rango = 1\r\nORDER BY equipo;\r\n\r\n" +
+                $"FROM hparamloc\r\n    WHERE parametro = '{filtro}') pinga\r\nWHERE rango = 1\r\nORDER BY equipo;\r\n\r\n" +
                 "SELECT LEFT(equipo, CHARINDEX('#', equipo + '#') - 1) AS equipo\r\nFROM (\r\n    " +
                 "SELECT \r\n        ROW_NUMBER() OVER (PARTITION BY v.vene_caja ORDER BY v.vene_fecha DESC) " +
                 "AS rn,\r\n        v.vene_caja,\r\n        v.suc_codigo,\r\n        i.equipo\r\n    FROM VENTAS_E v\r\n    " +
                 "INNER JOIN @infoCaja i ON v.vene_caja = i.caja COLLATE SQL_Latin1_General_CP1_CI_AS\r\n    " +
                 "WHERE v.vene_caja != ''\r\n) AS subquery\r\nWHERE rn = 1\r\nORDER BY equipo;";
+
             try
             {
                 using(SqlConnection sqlConnection = new SqlConnection(StringConexion())) // Establece la conexión

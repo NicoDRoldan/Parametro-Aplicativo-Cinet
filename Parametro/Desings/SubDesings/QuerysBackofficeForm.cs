@@ -28,7 +28,6 @@ namespace Parametro.Desings.SubDesings
             InitializeComponent();
             VerificarPais();
             fechaHasta.Value = DateTime.Today;
-
         }
 
         private void VerificarPais()
@@ -41,12 +40,16 @@ namespace Parametro.Desings.SubDesings
                     MostrarDatos();
                     break;
                 case "PARAGUAY":
+                    this.Width = 666;
+                    this.Height = 373;
                     MostrarDatos();
                     break;
                 case "BOLIVIA":
                     MostrarDatos();
                     break;
                 default:
+                    this.Width = 449;
+                    this.Height = 373;
                     labelPass.Location = new Point(238, 9);
                     txtPassBotones.Location = new Point(238, 29);
                     btnAceptarPassBtn.Location = new Point(339, 29);
@@ -81,21 +84,23 @@ namespace Parametro.Desings.SubDesings
             //}
         }
 
-        private bool ValidarPassBotones()
-        {
-            return (txtPassBotones.Text == "onichanfurry");
-        }
+        //private bool ValidarPassBotones()
+        //{
+        //    return (txtPassBotones.Text == "onichanfurry");
+        //}
 
         private void HabilitarBotones()
         {
-            if (ValidarPassBotones() && !string.IsNullOrEmpty(txtPassBotones.Text))
+            QuerysForm querysForm = new QuerysForm();
+            switch (querysForm.ValidarPassBotones(txtPassBotones.Text))
             {
-                panelMesa.Enabled = true;
-            }
-            else
-            {
-                panelMesa.Enabled = false;
-                MessageBox.Show("Datos incorrectos");
+                case 1:
+                    break;
+                case 2:
+                    break;
+                default:
+                    MessageBox.Show("¡Datos Incorrectos!");
+                    return;
             }
         }
 
@@ -206,6 +211,9 @@ namespace Parametro.Desings.SubDesings
                     case "PantallaComanda":
                         aplicativo = "PantallaComanda|Version";
                         break;
+                    case "Omnicanal":
+                        aplicativo = "WSPVERSION";
+                        break;
                     case "Costos":
                         aplicativo = "COSTOS";
                         break;
@@ -299,7 +307,7 @@ namespace Parametro.Desings.SubDesings
 
         private void corregirPmixBtn_Click(object sender, EventArgs e)
         {
-            DialogResult confirmResult = MessageBox.Show("¿Seguro de qué querés ejecutar esto? Por favor, verificar antes de hacerlo." 
+            DialogResult confirmResult = MessageBox.Show("¿Seguro de qué querés ejecutar esto? Por favor, verificar antes de hacerlo."
                 , "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (confirmResult == DialogResult.Yes)
@@ -308,6 +316,22 @@ namespace Parametro.Desings.SubDesings
                 MessageBox.Show("Corrección realizada. ¡Regenerar Product Mix!");
             }
 
+        }
+
+        private void btnVerificarSizeTables_Click(object sender, EventArgs e)
+        {
+            if (dataGridBackoffice != null && dataGridBackoffice.Visible)
+                dataGridBackoffice.Close();
+
+            dataGridBackoffice = new DataGridBackoffice();
+
+            DataTable resultados = querys.ValidateTablesSize();
+
+            dataGridBackoffice.dataGridBko.DataSource = resultados;
+            dataGridBackoffice.labelResultadoQuery.Text = "Verificar Tamaño de Tablas";
+
+            dataGridBackoffice.Size = new Size(900, 400);
+            dataGridBackoffice.Show();
         }
     }
 }

@@ -144,10 +144,25 @@ namespace Parametro.Class
         #endregion
 
         #region Articulo Prueba
-        public void ActivarArticuloPrueba()
+        public void ActivarArticuloPrueba(double precio, string marchacomanda)
         {
-            string query = "DECLARE @PRECIO VARCHAR(10) = '1.0';\r\n\r\nIF (SELECT ART_FACTURABLE FROM ARTICULOS_E WHERE ART_CODIGO = '999') = 'N'\r\n\tAND (SELECT ART_SEVENDE FROM ARTICULOS_E WHERE ART_CODIGO = '999') = 'N'\r\n\tAND (SELECT ART_ENMENU FROM ARTICULOS_E WHERE ART_CODIGO = '999') = 'N' \r\n\r\n\tUPDATE ARTICULOS_E \r\n\tSET ART_PADRE = 'CAJITAS', ART_ACTIVO = 'S', ART_FACTURABLE = 'S', ART_SEVENDE = 'S', ART_ENMENU = 'S', ART_COMANDA = 'S'\r\n\tWHERE ART_CODIGO = '999'\r\n\r\nELSE \r\n\r\n\tUPDATE ARTICULOS_E \r\n\tSET ART_PADRE = 'CAJITAS', ART_ACTIVO = 'S', ART_FACTURABLE = 'N', ART_SEVENDE = 'N', ART_ENMENU = 'N', ART_COMANDA = 'S'\r\n\tWHERE ART_CODIGO = '999'\r\n;\r\n\r\nIF NOT EXISTS (SELECT TOP 1 * FROM PRECIOS WHERE ART_CODIGO = '999')\r\n\tINSERT INTO PRECIOS(\r\n\tLISP_CODIGO,\tART_CODIGO\t,PRE_PRECIO\t,PRE_FECCAM\t,TU_CODIGO\t,PRE_PRECIOUNIDAD,\tdfecha_desde\t,dfecha_hasta,\tasi_transmitido)\r\n\tvalues (1, 999,0,getdate(),'','.',getdate(),getdate(),null)\r\nELSE\r\n\tUPDATE PRECIOS SET PRE_PRECIO = @PRECIO WHERE ART_CODIGO = '999'\r\n;";
-            string queryLinked = $"DECLARE @PRECIO VARCHAR(10) = '1.0';\r\n\r\nIF (SELECT ART_FACTURABLE FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.ARTICULOS_E WHERE ART_CODIGO = '999') = 'N'\r\n\tAND (SELECT ART_SEVENDE FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.ARTICULOS_E WHERE ART_CODIGO = '999') = 'N'\r\n\tAND (SELECT ART_ENMENU FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.ARTICULOS_E WHERE ART_CODIGO = '999') = 'N' \r\n\r\n\tUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.ARTICULOS_E \r\n\tSET ART_PADRE = 'CAJITAS', ART_ACTIVO = 'S', ART_FACTURABLE = 'S', ART_SEVENDE = 'S', ART_ENMENU = 'S', ART_COMANDA = 'S'\r\n\tWHERE ART_CODIGO = '999'\r\n\r\nELSE \r\n\r\n\tUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.ARTICULOS_E \r\n\tSET ART_PADRE = 'CAJITAS', ART_ACTIVO = 'S', ART_FACTURABLE = 'N', ART_SEVENDE = 'N', ART_ENMENU = 'N', ART_COMANDA = 'S'\r\n\tWHERE ART_CODIGO = '999'\r\n;\r\n\r\nIF NOT EXISTS (SELECT TOP 1 * FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PRECIOS WHERE ART_CODIGO = '999')\r\n\tINSERT INTO [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PRECIOS(\r\n\tLISP_CODIGO,\tART_CODIGO\t,PRE_PRECIO\t,PRE_FECCAM\t,TU_CODIGO\t,PRE_PRECIOUNIDAD,\tdfecha_desde\t,dfecha_hasta,\tasi_transmitido)\r\n\tvalues (1, 999,0,getdate(),'','.',getdate(),getdate(),null)\r\nELSE\r\n\tUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PRECIOS SET PRE_PRECIO = @PRECIO WHERE ART_CODIGO = '999'\r\n;";
+            string query = $"IF (SELECT ART_FACTURABLE FROM {conexionDB.VerificarLinkedServer()}ARTICULOS_E WHERE ART_CODIGO = '999') = 'N' " +
+                $"AND (SELECT ART_SEVENDE FROM {conexionDB.VerificarLinkedServer()}ARTICULOS_E WHERE ART_CODIGO = '999') = 'N' " +
+                $"BEGIN " +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}ARTICULOS_E SET ART_PADRE = 'CAJITAS', ART_ACTIVO = 'S', ART_FACTURABLE = 'S', ART_SEVENDE = 'S', ART_ENMENU = 'S', ART_COMANDA = @MARCHACOMANDA WHERE ART_CODIGO = '999'; " +
+                $"END " +
+                $"ELSE " +
+                $"BEGIN " +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}ARTICULOS_E SET ART_PADRE = 'CAJITAS', ART_ACTIVO = 'N', ART_FACTURABLE = 'N', ART_SEVENDE = 'N', ART_ENMENU = 'N', ART_COMANDA = @MARCHACOMANDA WHERE ART_CODIGO = '999'; " +
+                $"END " +
+                $"IF NOT EXISTS (SELECT TOP 1 * FROM {conexionDB.VerificarLinkedServer()}PRECIOS WHERE ART_CODIGO = '999') " +
+                $"BEGIN " +
+                $"INSERT INTO{conexionDB.VerificarLinkedServer()} PRECIOS (LISP_CODIGO, ART_CODIGO, PRE_PRECIO, PRE_FECCAM, TU_CODIGO, PRE_PRECIOUNIDAD, dfecha_desde, dfecha_hasta, asi_transmitido) VALUES (1, 999, @PRECIO, GETDATE(), '', '.', GETDATE(), GETDATE(), NULL); " +
+                $"END " +
+                $"ELSE " +
+                $"BEGIN " +
+                $"UPDATE {conexionDB.VerificarLinkedServer()}PRECIOS SET PRE_PRECIO = @PRECIO WHERE ART_CODIGO = '999'; " +
+                $"END ";
 
             try
             {
@@ -155,22 +170,15 @@ namespace Parametro.Class
                 {
                     sqlConnection.Open();
 
-                    if(!LoginForm.checkLinkedServer is true)
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
-                        using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
-                        {
-                            sqlCommand.ExecuteNonQuery();
-                        }
-                    }
-                    else
-                    {
-                        using (SqlCommand sqlCommand = new SqlCommand(queryLinked, sqlConnection))
-                        {
-                            sqlCommand.ExecuteNonQuery();
-                        }
+                        sqlCommand.Parameters.AddWithValue("@PRECIO", precio);
+                        sqlCommand.Parameters.AddWithValue("@MARCHACOMANDA", marchacomanda);
+
+                        sqlCommand.ExecuteNonQuery();
                     }
 
-                    if(VerificarPruebaActiva(sqlConnection, "prueba"))
+                    if (VerificarPruebaActiva(sqlConnection, "prueba"))
                     {
                         MessageBox.Show("Se activó la prueba");
                     }
@@ -179,23 +187,38 @@ namespace Parametro.Class
                         MessageBox.Show("Se desactivó la prueba");
                     }
 
-                    Log.Information(query);
+                    Log.Information($"QUERY: {query}");
                     sqlConnection.Close();
                 }
             }
             catch (SqlException ex)
             {
-                Log.Error(ex.Message);
+                Log.Error($"ERROR: {ex.Message}\nQUERY: {query}");
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
         #endregion
 
         # region Test Conito
-        public void ActivarTestConito()
+        public void ActivarTestConito(double precio, string marchacomanda)
         {
-            string query = "if  ISNULL((select para_valor FROM PARAMETROS  where para_codigo = 'TESTCONITO'),'N') = 'N'\r\nBEGIN\r\nINSERT INTO PARAMETROS (PARA_CODIGO,PARA_DESCRIPCION,PARA_VALOR)\r\nVALUES ('TESTCONITO','CONITO MARCHA',(SELECT PRE_PRECIO FROM PRECIOS WHERE ART_CODIGO  ='600'))\r\n\r\n\r\nUPDATE ARTICULOS_E \r\nSET ART_COMANDA = 'S',\r\n ART_DESCORTA = 'PRUEBA CINET CONITO',\r\n\r\n art_deslarga = 'PRUEBA CINET CONITO'\r\nwhere ART_CODIGO = '600'\r\nUPDATE precios \r\nSET PRE_PRECIO = '1.0'\r\nwhere ART_CODIGO = '600'\r\n\r\nPRINT('TEST CONITO ON')\r\n\r\nEND\r\n\r\n\r\nELSE \r\n\r\nBEGIN\r\nUPDATE ARTICULOS_E \r\nSET ART_COMANDA = 'N',\r\n art_descorta = 'CONITO',\r\n art_deslarga = 'CONITO'\r\nwhere ART_CODIGO = '600'\r\nUPDATE precios \r\nSET PRE_PRECIO = (SELECT PARA_VALOR FROM PARAMETROS  where para_codigo = 'TESTCONITO')\r\nwhere ART_CODIGO = '600'\r\n\r\n\r\nDELETE  PARAMETROS  where para_codigo = 'TESTCONITO'\r\n\r\nPRINT('TEST CONITO OFF')\r\nEND";
-            string queryLinked = $"if  ISNULL((select para_valor FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PARAMETROS  where para_codigo = 'TESTCONITO'),'N') = 'N'\r\nBEGIN\r\nINSERT INTO [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PARAMETROS (PARA_CODIGO,PARA_DESCRIPCION,PARA_VALOR)\r\nVALUES ('TESTCONITO','CONITO MARCHA',(SELECT PRE_PRECIO FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PRECIOS WHERE ART_CODIGO  ='600'))\r\n\r\n\r\nUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.ARTICULOS_E \r\nSET ART_COMANDA = 'S',\r\n ART_DESCORTA = 'PRUEBA CINET CONITO',\r\n\r\n art_deslarga = 'PRUEBA CINET CONITO'\r\nwhere ART_CODIGO = '600'\r\nUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.precios \r\nSET PRE_PRECIO = '1.0'\r\nwhere ART_CODIGO = '600'\r\n\r\nPRINT('TEST CONITO ON')\r\n\r\nEND\r\n\r\n\r\nELSE \r\n\r\nBEGIN\r\nUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.ARTICULOS_E \r\nSET ART_COMANDA = 'N',\r\n art_descorta = 'CONITO',\r\n art_deslarga = 'CONITO'\r\nwhere ART_CODIGO = '600'\r\nUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.precios \r\nSET PRE_PRECIO = (SELECT PARA_VALOR FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PARAMETROS  where para_codigo = 'TESTCONITO')\r\nwhere ART_CODIGO = '600'\r\n\r\n\r\nDELETE  [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PARAMETROS  where para_codigo = 'TESTCONITO'\r\n\r\nPRINT('TEST CONITO OFF')\r\nEND";
+            //string query = "if  ISNULL((select para_valor FROM PARAMETROS  where para_codigo = 'TESTCONITO'),'N') = 'N'\r\nBEGIN\r\nINSERT INTO PARAMETROS (PARA_CODIGO,PARA_DESCRIPCION,PARA_VALOR)\r\nVALUES ('TESTCONITO','CONITO MARCHA',(SELECT PRE_PRECIO FROM PRECIOS WHERE ART_CODIGO  ='600'))\r\n\r\n\r\nUPDATE ARTICULOS_E \r\nSET ART_COMANDA = 'S',\r\n ART_DESCORTA = 'PRUEBA CINET CONITO',\r\n\r\n art_deslarga = 'PRUEBA CINET CONITO'\r\nwhere ART_CODIGO = '600'\r\nUPDATE precios \r\nSET PRE_PRECIO = '1.0'\r\nwhere ART_CODIGO = '600'\r\n\r\nPRINT('TEST CONITO ON')\r\n\r\nEND\r\n\r\n\r\nELSE \r\n\r\nBEGIN\r\nUPDATE ARTICULOS_E \r\nSET ART_COMANDA = 'N',\r\n art_descorta = 'CONITO',\r\n art_deslarga = 'CONITO'\r\nwhere ART_CODIGO = '600'\r\nUPDATE precios \r\nSET PRE_PRECIO = (SELECT PARA_VALOR FROM PARAMETROS  where para_codigo = 'TESTCONITO')\r\nwhere ART_CODIGO = '600'\r\n\r\n\r\nDELETE  PARAMETROS  where para_codigo = 'TESTCONITO'\r\n\r\nPRINT('TEST CONITO OFF')\r\nEND";
+            //string queryLinked = $"if  ISNULL((select para_valor FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PARAMETROS  where para_codigo = 'TESTCONITO'),'N') = 'N'\r\nBEGIN\r\nINSERT INTO [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PARAMETROS (PARA_CODIGO,PARA_DESCRIPCION,PARA_VALOR)\r\nVALUES ('TESTCONITO','CONITO MARCHA',(SELECT PRE_PRECIO FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PRECIOS WHERE ART_CODIGO  ='600'))\r\n\r\n\r\nUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.ARTICULOS_E \r\nSET ART_COMANDA = 'S',\r\n ART_DESCORTA = 'PRUEBA CINET CONITO',\r\n\r\n art_deslarga = 'PRUEBA CINET CONITO'\r\nwhere ART_CODIGO = '600'\r\nUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.precios \r\nSET PRE_PRECIO = '1.0'\r\nwhere ART_CODIGO = '600'\r\n\r\nPRINT('TEST CONITO ON')\r\n\r\nEND\r\n\r\n\r\nELSE \r\n\r\nBEGIN\r\nUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.ARTICULOS_E \r\nSET ART_COMANDA = 'N',\r\n art_descorta = 'CONITO',\r\n art_deslarga = 'CONITO'\r\nwhere ART_CODIGO = '600'\r\nUPDATE [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.precios \r\nSET PRE_PRECIO = (SELECT PARA_VALOR FROM [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PARAMETROS  where para_codigo = 'TESTCONITO')\r\nwhere ART_CODIGO = '600'\r\n\r\n\r\nDELETE  [{ConexionDB.equipoLinkedServer},{ConexionDB.puertoLinkedServer}].[{ConexionDB.baseLinkedServer}].DBO.PARAMETROS  where para_codigo = 'TESTCONITO'\r\n\r\nPRINT('TEST CONITO OFF')\r\nEND";
+
+            string query = @$"
+                            IF ISNULL((SELECT para_valor FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE para_codigo = 'TESTCONITO'), 'N') = 'N'
+                            BEGIN
+                                INSERT INTO {conexionDB.VerificarLinkedServer()}PARAMETROS (PARA_CODIGO, PARA_DESCRIPCION, PARA_VALOR) VALUES ('TESTCONITO', 'CONITO MARCHA', (SELECT PRE_PRECIO FROM {conexionDB.VerificarLinkedServer()}PRECIOS WHERE ART_CODIGO = '600'))
+                                UPDATE {conexionDB.VerificarLinkedServer()}ARTICULOS_E SET ART_COMANDA = @MARCHACOMANDA, ART_DESCORTA = 'PRUEBA CINET CONITO', ART_DESLARGA = 'PRUEBA CINET CONITO' WHERE ART_CODIGO = '600'
+                                UPDATE {conexionDB.VerificarLinkedServer()}PRECIOS SET PRE_PRECIO = @PRECIO WHERE ART_CODIGO = '600'
+                            END
+                            ELSE 
+                            BEGIN 
+                                UPDATE {conexionDB.VerificarLinkedServer()}ARTICULOS_E SET ART_COMANDA = 'N', ART_DESCORTA = 'CONITO', ART_DESLARGA = 'CONITO' WHERE ART_CODIGO = '600' 
+                                UPDATE {conexionDB.VerificarLinkedServer()}PRECIOS SET PRE_PRECIO = (SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE para_codigo = 'TESTCONITO') WHERE ART_CODIGO = '600' 
+                                DELETE FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE para_codigo = 'TESTCONITO'
+                            END
+                            ";
 
             try
             {
@@ -203,19 +226,12 @@ namespace Parametro.Class
                 {
                     sqlConnection.Open();
 
-                    if (!LoginForm.checkLinkedServer is true)
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                     {
-                        using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
-                        {
-                            sqlCommand.ExecuteNonQuery();
-                        }
-                    }
-                    else
-                    {
-                        using (SqlCommand sqlCommand = new SqlCommand(queryLinked, sqlConnection))
-                        {
-                            sqlCommand.ExecuteNonQuery();
-                        }
+                        sqlCommand.Parameters.AddWithValue("@PRECIO", precio);
+                        sqlCommand.Parameters.AddWithValue("@MARCHACOMANDA", marchacomanda);
+
+                        sqlCommand.ExecuteNonQuery();
                     }
 
                     if (VerificarPruebaActiva(sqlConnection, "conito"))
@@ -328,6 +344,9 @@ namespace Parametro.Class
             DataTable dataTable = new DataTable();
 
             string query = $"DECLARE @infoCaja TABLE ([caja] VARCHAR(100), [equipo] VARCHAR(100), [version] VARCHAR(100)); INSERT INTO @infoCaja SELECT DISTINCT caja, EQUIPO, valor FROM (SELECT RANK() OVER (PARTITION BY caja, parametro ORDER BY fechatrans DESC) AS rango, * FROM {conexionDB.VerificarLinkedServer()}hparamloc WHERE parametro = 'VERSION') AS pinga WHERE rango = 1 ORDER BY equipo; SELECT RTRIM(vene_caja) [Caja], RTRIM(suc_codigo) [PDV], LEFT(RTRIM(equipo), CHARINDEX('#', RTRIM(equipo)) - 1) AS [Equipo] FROM (SELECT ROW_NUMBER() OVER (PARTITION BY v.vene_caja ORDER BY v.vene_fecha DESC) AS rn, v.vene_caja, v.suc_codigo, i.equipo FROM {conexionDB.VerificarLinkedServer()}VENTAS_E v INNER JOIN @infoCaja i ON v.vene_caja = i.caja COLLATE SQL_Latin1_General_CP1_CI_AS WHERE v.vene_caja != '') AS subquery WHERE rn = 1 ORDER BY equipo;";
+
+            if(ConexionDB.pais == "PARAGUAY")
+                query = $"DECLARE @infoCaja TABLE ([caja] VARCHAR(100), [equipo] VARCHAR(100), [version] VARCHAR(100)); INSERT INTO @infoCaja SELECT DISTINCT caja, EQUIPO, valor FROM (SELECT RANK() OVER (PARTITION BY caja, parametro ORDER BY fechatrans DESC) AS rango, * FROM {conexionDB.VerificarLinkedServer()}hparamloc WHERE parametro = 'ACTIVEXNET') AS pinga WHERE rango = 1 ORDER BY equipo; SELECT RTRIM(vene_caja) [Caja], RTRIM(suc_codigo) [PDV], LEFT(RTRIM(equipo), CHARINDEX('#', RTRIM(equipo)) - 1) AS [Equipo] FROM (SELECT ROW_NUMBER() OVER (PARTITION BY v.vene_caja ORDER BY v.vene_fecha DESC) AS rn, v.vene_caja, v.suc_codigo, i.equipo FROM {conexionDB.VerificarLinkedServer()}VENTAS_E v INNER JOIN @infoCaja i ON v.vene_caja = i.caja COLLATE SQL_Latin1_General_CP1_CI_AS WHERE v.vene_caja != '') AS subquery WHERE rn = 1 ORDER BY equipo;";
 
             try
             {
@@ -603,16 +622,64 @@ namespace Parametro.Class
                             sqlDataAdapter.Fill(dataTable);
                         }
                     }
+                    Log.Information($"Function ConsultaConexiones(...)\nQuery\n: {query}");
                     sqlConnection.Close();
                 }
             }
             catch (SqlException ex)
             {
-                Log.Error("ERROR QUERY: n" + ex.ToString());
+                Log.Error($"Error - Function ConsultaConexiones(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
                 MessageBox.Show($"Error, leer la excepción completa en el Log. \n" + ex.Message);
             }
             return dataTable;
         }
+        #endregion
+
+        #region Verificar Tamaño de Tablas
+
+        public DataTable ValidateTablesSize()
+        {
+            DataTable dataTable = new DataTable();
+
+            string query = @$"SELECT 
+                t.NAME AS Tabla,
+                s.Name AS Esquema,
+                p.rows AS NumeroDeFilas,
+                CAST(ROUND(((SUM(a.total_pages) * 8) / 1024.00), 2) AS NUMERIC(36, 2)) AS TotalEspacio_MB,
+                CAST(ROUND(((SUM(a.used_pages) * 8) / 1024.00), 2) AS NUMERIC(36, 2)) AS EspacioUtilizado_MB, 
+                CAST(ROUND(((SUM(a.total_pages) - SUM(a.used_pages)) * 8) / 1024.00, 2) AS NUMERIC(36, 2)) AS EspacioNoUtilizado_MB
+                FROM
+                sys.tables t
+                INNER JOIN sys.indexes i ON t.OBJECT_ID = i.object_id
+                INNER JOIN sys.partitions p ON i.object_id = p.OBJECT_ID AND i.index_id = p.index_id
+                INNER JOIN sys.allocation_units a ON p.partition_id = a.container_id
+                LEFT OUTER JOIN sys.schemas s ON t.schema_id = s.schema_id
+                GROUP BY t.Name, s.Name, p.Rows
+                ORDER BY TotalEspacio_MB desc";
+
+            try
+            {
+                using(SqlConnection sqlConnection = new SqlConnection(conexionDB.StringConexion()))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                        {
+                            sqlDataAdapter.Fill(dataTable);
+                        }
+                    }
+                    Log.Information($"Function ValidateTablesSize(...)\nQuery\n: {query}");
+                    sqlConnection.Close();
+                }
+            }
+            catch(SqlException ex)
+            {
+                Log.Error($"Error - Function ValidateTablesSize(...)\nQuery\n: {query}\nMessage Error: {ex.Message}");
+            }
+            return dataTable;
+        }
+
         #endregion
 
         #region VerificarVersionAplicativos

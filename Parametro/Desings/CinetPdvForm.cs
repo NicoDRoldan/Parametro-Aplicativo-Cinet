@@ -54,12 +54,14 @@ namespace Parametro.Desings
             if (querysParametros.VerificarOmnicanal())
             {
                 lblOmnicanalCheck.ForeColor = Color.Chartreuse;
-                toolTip.SetToolTip(this.lblOmnicanalCheck, "OMNICANAL ACTIVADO");
+                toolTip.SetToolTip(this.lblOmnicanalCheck, $"ACTIVADO\n" +
+                    $"PARAMETRO: {conexionDB.ObtenerValorDesdeBD($"SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'WSMARPATH';")}");
             }
             else
             {
                 lblOmnicanalCheck.ForeColor = Color.Red;
-                toolTip.SetToolTip(this.lblOmnicanalCheck, "CORROBORAR CONFIGURACIÓN");
+                toolTip.SetToolTip(this.lblOmnicanalCheck, "CORROBORAR CONFIGURACIÓN\n" +
+                    $"PARAMETRO: {conexionDB.ObtenerValorDesdeBD($"SELECT PARA_VALOR FROM {conexionDB.VerificarLinkedServer()}PARAMETROS WHERE PARA_CODIGO = 'WSMARPATH';")}");
             }
 
             ParametrosModels.sucFiscal = VTAPUNTO.Text;

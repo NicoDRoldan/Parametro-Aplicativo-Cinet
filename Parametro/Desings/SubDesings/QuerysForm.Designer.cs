@@ -46,7 +46,10 @@
             btnCorregirZetasEnCero = new Button();
             label2 = new Label();
             btnVerZetasEnCero = new Button();
-            panel3 = new Panel();
+            panelPruebas = new Panel();
+            txtMontoPrueba = new TextBox();
+            label13 = new Label();
+            label12 = new Label();
             btnTestConito = new Button();
             panel4 = new Panel();
             label1 = new Label();
@@ -78,21 +81,24 @@
             txtRutCorrecto = new TextBox();
             panelUruguay = new Panel();
             panelBolivia = new Panel();
+            lblHelpFEBO = new Label();
             txtboxNumSucursalBO = new TextBox();
-            label10 = new Label();
             label9 = new Label();
-            btnFEAutoBo = new Button();
             CorregirCbtBo = new Button();
             panel8 = new Panel();
             label8 = new Label();
-            panel1 = new Panel();
+            label10 = new Label();
+            btnFEAutoBo = new Button();
+            panelBackup = new Panel();
             panel9 = new Panel();
             label7 = new Label();
             btnBackup = new Button();
             PanelAdmin = new Panel();
+            pbPanelFEBO = new PictureBox();
+            txtMarchaComanda = new Button();
             panelMesa.SuspendLayout();
             panel2.SuspendLayout();
-            panel3.SuspendLayout();
+            panelPruebas.SuspendLayout();
             panel4.SuspendLayout();
             panel5.SuspendLayout();
             panelParaguay.SuspendLayout();
@@ -101,9 +107,10 @@
             panelUruguay.SuspendLayout();
             panelBolivia.SuspendLayout();
             panel8.SuspendLayout();
-            panel1.SuspendLayout();
+            panelBackup.SuspendLayout();
             panel9.SuspendLayout();
             PanelAdmin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPanelFEBO).BeginInit();
             SuspendLayout();
             // 
             // panelMesa
@@ -192,11 +199,11 @@
             // labelCorregirNumeracion
             // 
             labelCorregirNumeracion.AutoSize = true;
-            labelCorregirNumeracion.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCorregirNumeracion.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             labelCorregirNumeracion.ForeColor = SystemColors.ActiveCaptionText;
             labelCorregirNumeracion.Location = new Point(11, 90);
             labelCorregirNumeracion.Name = "labelCorregirNumeracion";
-            labelCorregirNumeracion.Size = new Size(178, 40);
+            labelCorregirNumeracion.Size = new Size(168, 38);
             labelCorregirNumeracion.TabIndex = 39;
             labelCorregirNumeracion.Text = "Corregir Numeración \r\nde Comprobante";
             // 
@@ -211,11 +218,11 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = SystemColors.ActiveCaptionText;
             label5.Location = new Point(11, 28);
             label5.Name = "label5";
-            label5.Size = new Size(146, 20);
+            label5.Size = new Size(136, 19);
             label5.TabIndex = 20;
             label5.Text = "Reinsertar Cierre";
             // 
@@ -274,11 +281,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.ActiveCaptionText;
             label2.Location = new Point(3, 5);
             label2.Name = "label2";
-            label2.Size = new Size(125, 20);
+            label2.Size = new Size(111, 19);
             label2.TabIndex = 23;
             label2.Text = "Z's en 0 (cero)";
             // 
@@ -293,21 +300,55 @@
             btnVerZetasEnCero.UseVisualStyleBackColor = true;
             btnVerZetasEnCero.Click += btnVerZetasEnCero_Click;
             // 
-            // panel3
+            // panelPruebas
             // 
-            panel3.BackColor = Color.White;
-            panel3.Controls.Add(btnTestConito);
-            panel3.Controls.Add(panel4);
-            panel3.Controls.Add(btnArtPrueba);
-            panel3.Location = new Point(275, 74);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(132, 180);
-            panel3.TabIndex = 30;
+            panelPruebas.BackColor = Color.White;
+            panelPruebas.Controls.Add(txtMarchaComanda);
+            panelPruebas.Controls.Add(txtMontoPrueba);
+            panelPruebas.Controls.Add(label13);
+            panelPruebas.Controls.Add(label12);
+            panelPruebas.Controls.Add(btnTestConito);
+            panelPruebas.Controls.Add(panel4);
+            panelPruebas.Controls.Add(btnArtPrueba);
+            panelPruebas.Location = new Point(275, 74);
+            panelPruebas.Name = "panelPruebas";
+            panelPruebas.Size = new Size(132, 255);
+            panelPruebas.TabIndex = 30;
+            // 
+            // txtMontoPrueba
+            // 
+            txtMontoPrueba.Location = new Point(75, 33);
+            txtMontoPrueba.Name = "txtMontoPrueba";
+            txtMontoPrueba.Size = new Size(53, 23);
+            txtMontoPrueba.TabIndex = 46;
+            txtMontoPrueba.Text = "1,00";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Century Gothic", 10.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.ForeColor = SystemColors.ActiveCaptionText;
+            label13.Location = new Point(5, 72);
+            label13.Name = "label13";
+            label13.Size = new Size(64, 19);
+            label13.TabIndex = 43;
+            label13.Text = "Marcha";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Century Gothic", 10.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.ForeColor = SystemColors.ActiveCaptionText;
+            label12.Location = new Point(6, 33);
+            label12.Name = "label12";
+            label12.Size = new Size(54, 19);
+            label12.TabIndex = 42;
+            label12.Text = "Monto";
             // 
             // btnTestConito
             // 
             btnTestConito.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnTestConito.Location = new Point(19, 97);
+            btnTestConito.Location = new Point(18, 176);
             btnTestConito.Name = "btnTestConito";
             btnTestConito.Size = new Size(95, 52);
             btnTestConito.TabIndex = 14;
@@ -339,7 +380,7 @@
             // btnArtPrueba
             // 
             btnArtPrueba.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnArtPrueba.Location = new Point(19, 39);
+            btnArtPrueba.Location = new Point(19, 114);
             btnArtPrueba.Name = "btnArtPrueba";
             btnArtPrueba.Size = new Size(95, 52);
             btnArtPrueba.TabIndex = 13;
@@ -382,7 +423,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1212, 68);
+            panel5.Size = new Size(1209, 68);
             panel5.TabIndex = 31;
             // 
             // txtPassBotones
@@ -449,7 +490,7 @@
             panelParaguay.Controls.Add(txtTimLocal);
             panelParaguay.Controls.Add(btnConfigTim);
             panelParaguay.Enabled = false;
-            panelParaguay.Location = new Point(416, 260);
+            panelParaguay.Location = new Point(413, 260);
             panelParaguay.Name = "panelParaguay";
             panelParaguay.Size = new Size(395, 180);
             panelParaguay.TabIndex = 32;
@@ -512,11 +553,11 @@
             // labelCorregirTimbrado
             // 
             labelCorregirTimbrado.AutoSize = true;
-            labelCorregirTimbrado.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCorregirTimbrado.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             labelCorregirTimbrado.ForeColor = SystemColors.ActiveCaptionText;
             labelCorregirTimbrado.Location = new Point(12, 39);
             labelCorregirTimbrado.Name = "labelCorregirTimbrado";
-            labelCorregirTimbrado.Size = new Size(152, 20);
+            labelCorregirTimbrado.Size = new Size(144, 19);
             labelCorregirTimbrado.TabIndex = 35;
             labelCorregirTimbrado.Text = "Corregir Timbrado";
             labelCorregirTimbrado.Visible = false;
@@ -579,7 +620,7 @@
             // btnCorregirClienteRut
             // 
             btnCorregirClienteRut.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCorregirClienteRut.Location = new Point(11, 149);
+            btnCorregirClienteRut.Location = new Point(12, 149);
             btnCorregirClienteRut.Name = "btnCorregirClienteRut";
             btnCorregirClienteRut.Size = new Size(112, 23);
             btnCorregirClienteRut.TabIndex = 19;
@@ -590,7 +631,7 @@
             // 
             // txtVeneNumeroRut
             // 
-            txtVeneNumeroRut.Location = new Point(12, 91);
+            txtVeneNumeroRut.Location = new Point(13, 91);
             txtVeneNumeroRut.Name = "txtVeneNumeroRut";
             txtVeneNumeroRut.PlaceholderText = "NÚMERO DE VENTA";
             txtVeneNumeroRut.Size = new Size(113, 23);
@@ -600,11 +641,11 @@
             // labelCorregirRut
             // 
             labelCorregirRut.AutoSize = true;
-            labelCorregirRut.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCorregirRut.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             labelCorregirRut.ForeColor = SystemColors.ActiveCaptionText;
-            labelCorregirRut.Location = new Point(11, 38);
+            labelCorregirRut.Location = new Point(12, 38);
             labelCorregirRut.Name = "labelCorregirRut";
-            labelCorregirRut.Size = new Size(212, 20);
+            labelCorregirRut.Size = new Size(191, 19);
             labelCorregirRut.TabIndex = 30;
             labelCorregirRut.Text = "Corregir RUT Equivocado";
             labelCorregirRut.Visible = false;
@@ -615,7 +656,7 @@
             checkConsumidorFinal.BackColor = Color.FromArgb(49, 117, 162);
             checkConsumidorFinal.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             checkConsumidorFinal.ForeColor = SystemColors.ControlLightLight;
-            checkConsumidorFinal.Location = new Point(11, 62);
+            checkConsumidorFinal.Location = new Point(12, 62);
             checkConsumidorFinal.Name = "checkConsumidorFinal";
             checkConsumidorFinal.Size = new Size(178, 22);
             checkConsumidorFinal.TabIndex = 16;
@@ -626,7 +667,7 @@
             // 
             // txtRutCorrecto
             // 
-            txtRutCorrecto.Location = new Point(12, 120);
+            txtRutCorrecto.Location = new Point(13, 120);
             txtRutCorrecto.Name = "txtRutCorrecto";
             txtRutCorrecto.PlaceholderText = "RUT CORRECTO";
             txtRutCorrecto.Size = new Size(113, 23);
@@ -645,7 +686,7 @@
             panelUruguay.Controls.Add(btnCorregirClienteRut);
             panelUruguay.Controls.Add(panel6);
             panelUruguay.Enabled = false;
-            panelUruguay.Location = new Point(416, 74);
+            panelUruguay.Location = new Point(413, 74);
             panelUruguay.Name = "panelUruguay";
             panelUruguay.Size = new Size(395, 180);
             panelUruguay.TabIndex = 31;
@@ -654,64 +695,54 @@
             // panelBolivia
             // 
             panelBolivia.BackColor = Color.White;
+            panelBolivia.Controls.Add(lblHelpFEBO);
             panelBolivia.Controls.Add(txtboxNumSucursalBO);
-            panelBolivia.Controls.Add(label10);
             panelBolivia.Controls.Add(label9);
-            panelBolivia.Controls.Add(btnFEAutoBo);
             panelBolivia.Controls.Add(CorregirCbtBo);
             panelBolivia.Controls.Add(panel8);
             panelBolivia.Enabled = false;
-            panelBolivia.Location = new Point(817, 74);
+            panelBolivia.Location = new Point(814, 74);
             panelBolivia.Name = "panelBolivia";
             panelBolivia.Size = new Size(395, 180);
             panelBolivia.TabIndex = 34;
             panelBolivia.Visible = false;
             // 
+            // lblHelpFEBO
+            // 
+            lblHelpFEBO.AutoSize = true;
+            lblHelpFEBO.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblHelpFEBO.ForeColor = SystemColors.ControlLight;
+            lblHelpFEBO.Location = new Point(217, 33);
+            lblHelpFEBO.Name = "lblHelpFEBO";
+            lblHelpFEBO.Size = new Size(20, 25);
+            lblHelpFEBO.TabIndex = 24;
+            lblHelpFEBO.Text = "?";
+            lblHelpFEBO.MouseLeave += lblHelpFEBO_MouseLeave;
+            lblHelpFEBO.MouseHover += lblHelpFEBO_MouseHover;
+            // 
             // txtboxNumSucursalBO
             // 
-            txtboxNumSucursalBO.Location = new Point(3, 53);
+            txtboxNumSucursalBO.Location = new Point(16, 63);
             txtboxNumSucursalBO.Name = "txtboxNumSucursalBO";
             txtboxNumSucursalBO.PlaceholderText = "Número de Sucursal";
             txtboxNumSucursalBO.Size = new Size(195, 23);
             txtboxNumSucursalBO.TabIndex = 31;
             // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.ForeColor = SystemColors.ActiveCaptionText;
-            label10.Location = new Point(3, 94);
-            label10.Name = "label10";
-            label10.Size = new Size(128, 20);
-            label10.TabIndex = 37;
-            label10.Text = "FE Automatico";
-            // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = SystemColors.ActiveCaptionText;
-            label9.Location = new Point(3, 28);
+            label9.Location = new Point(16, 38);
             label9.Name = "label9";
-            label9.Size = new Size(195, 20);
+            label9.Size = new Size(182, 19);
             label9.TabIndex = 36;
             label9.Text = "Corregir Comprobantes";
-            // 
-            // btnFEAutoBo
-            // 
-            btnFEAutoBo.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnFEAutoBo.Location = new Point(137, 91);
-            btnFEAutoBo.Name = "btnFEAutoBo";
-            btnFEAutoBo.Size = new Size(72, 23);
-            btnFEAutoBo.TabIndex = 35;
-            btnFEAutoBo.Text = "ACEPTAR";
-            btnFEAutoBo.UseVisualStyleBackColor = true;
-            btnFEAutoBo.Click += btnFEAutoBo_Click;
             // 
             // CorregirCbtBo
             // 
             CorregirCbtBo.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            CorregirCbtBo.Location = new Point(204, 52);
+            CorregirCbtBo.Location = new Point(217, 62);
             CorregirCbtBo.Name = "CorregirCbtBo";
             CorregirCbtBo.Size = new Size(72, 23);
             CorregirCbtBo.TabIndex = 34;
@@ -740,15 +771,39 @@
             label8.TabIndex = 1;
             label8.Text = "BOLIVIA";
             // 
-            // panel1
+            // label10
             // 
-            panel1.BackColor = Color.White;
-            panel1.Controls.Add(panel9);
-            panel1.Controls.Add(btnBackup);
-            panel1.Location = new Point(275, 260);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(132, 105);
-            panel1.TabIndex = 31;
+            label10.AutoSize = true;
+            label10.Font = new Font("Bahnschrift SemiBold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.ForeColor = SystemColors.ActiveCaptionText;
+            label10.Location = new Point(182, 148);
+            label10.Name = "label10";
+            label10.Size = new Size(114, 19);
+            label10.TabIndex = 37;
+            label10.Text = "FE Automatico";
+            // 
+            // btnFEAutoBo
+            // 
+            btnFEAutoBo.Enabled = false;
+            btnFEAutoBo.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnFEAutoBo.Location = new Point(316, 145);
+            btnFEAutoBo.Name = "btnFEAutoBo";
+            btnFEAutoBo.Size = new Size(72, 23);
+            btnFEAutoBo.TabIndex = 35;
+            btnFEAutoBo.Text = "ACEPTAR";
+            btnFEAutoBo.UseVisualStyleBackColor = true;
+            btnFEAutoBo.Visible = false;
+            btnFEAutoBo.Click += btnFEAutoBo_Click;
+            // 
+            // panelBackup
+            // 
+            panelBackup.BackColor = Color.White;
+            panelBackup.Controls.Add(panel9);
+            panelBackup.Controls.Add(btnBackup);
+            panelBackup.Location = new Point(275, 335);
+            panelBackup.Name = "panelBackup";
+            panelBackup.Size = new Size(132, 105);
+            panelBackup.TabIndex = 31;
             // 
             // panel9
             // 
@@ -787,13 +842,39 @@
             PanelAdmin.BackColor = Color.White;
             PanelAdmin.Controls.Add(label2);
             PanelAdmin.Controls.Add(btnVerZetasEnCero);
+            PanelAdmin.Controls.Add(label10);
             PanelAdmin.Controls.Add(btnCorregirZetasEnCero);
+            PanelAdmin.Controls.Add(btnFEAutoBo);
             PanelAdmin.Enabled = false;
-            PanelAdmin.Location = new Point(817, 260);
+            PanelAdmin.Location = new Point(814, 260);
             PanelAdmin.Name = "PanelAdmin";
             PanelAdmin.Size = new Size(395, 180);
             PanelAdmin.TabIndex = 35;
             PanelAdmin.Visible = false;
+            // 
+            // pbPanelFEBO
+            // 
+            pbPanelFEBO.BackgroundImageLayout = ImageLayout.None;
+            pbPanelFEBO.BorderStyle = BorderStyle.FixedSingle;
+            pbPanelFEBO.Image = Properties.Resources.PanelFEBo;
+            pbPanelFEBO.Location = new Point(425, 446);
+            pbPanelFEBO.Name = "pbPanelFEBO";
+            pbPanelFEBO.Size = new Size(379, 149);
+            pbPanelFEBO.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPanelFEBO.TabIndex = 38;
+            pbPanelFEBO.TabStop = false;
+            pbPanelFEBO.Visible = false;
+            // 
+            // txtMarchaComanda
+            // 
+            txtMarchaComanda.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtMarchaComanda.Location = new Point(75, 72);
+            txtMarchaComanda.Name = "txtMarchaComanda";
+            txtMarchaComanda.Size = new Size(53, 23);
+            txtMarchaComanda.TabIndex = 45;
+            txtMarchaComanda.Text = "S";
+            txtMarchaComanda.UseVisualStyleBackColor = true;
+            txtMarchaComanda.Click += txtMarchaComanda_Click;
             // 
             // QuerysForm
             // 
@@ -802,14 +883,15 @@
             AutoScroll = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(814, 462);
+            ClientSize = new Size(821, 454);
+            Controls.Add(pbPanelFEBO);
             Controls.Add(PanelAdmin);
-            Controls.Add(panel1);
+            Controls.Add(panelBackup);
             Controls.Add(panelBolivia);
             Controls.Add(panelParaguay);
             Controls.Add(panelUruguay);
             Controls.Add(panel5);
-            Controls.Add(panel3);
+            Controls.Add(panelPruebas);
             Controls.Add(panelMesa);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -820,7 +902,8 @@
             panelMesa.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            panel3.ResumeLayout(false);
+            panelPruebas.ResumeLayout(false);
+            panelPruebas.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             panel5.ResumeLayout(false);
@@ -837,11 +920,12 @@
             panelBolivia.PerformLayout();
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
-            panel1.ResumeLayout(false);
+            panelBackup.ResumeLayout(false);
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
             PanelAdmin.ResumeLayout(false);
             PanelAdmin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPanelFEBO).EndInit();
             ResumeLayout(false);
         }
 
@@ -851,7 +935,7 @@
         private Button btnRegCierre;
         private Panel panel2;
         private Label label20;
-        private Panel panel3;
+        private Panel panelPruebas;
         private Button btnArtPrueba;
         private Panel panel4;
         private Label label1;
@@ -900,7 +984,7 @@
         private Label label8;
         private Button btnFEAutoBo;
         private Button CorregirCbtBo;
-        private Panel panel1;
+        private Panel panelBackup;
         private Panel panel9;
         private Label label7;
         private Button btnBackup;
@@ -908,5 +992,11 @@
         private Label label10;
         private Label label9;
         private TextBox txtboxNumSucursalBO;
+        private PictureBox pbPanelFEBO;
+        private Label lblHelpFEBO;
+        private Label label13;
+        private Label label12;
+        private TextBox txtMontoPrueba;
+        private Button txtMarchaComanda;
     }
 }

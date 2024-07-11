@@ -121,11 +121,14 @@
   <data name="Mercado-Pago-Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Desings\Mercado-Pago-Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SqlServerLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SqlServerLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="paywayLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Desings\paywayLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="linkedServerImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\linkedServerImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonBackImg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ButtonBackImg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="fiservgeocom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fiservgeocom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,13 +136,13 @@
   <data name="linkedServer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\linkedServer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="paywayLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Desings\paywayLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtonBackImg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ButtonBackImg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SqlServerLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SqlServerLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Reiplu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Reiplu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PanelFEBo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PanelFEBo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

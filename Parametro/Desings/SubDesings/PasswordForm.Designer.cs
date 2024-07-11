@@ -43,20 +43,20 @@
             // 
             // btnOK
             // 
-            btnOK.Location = new Point(108, 43);
+            btnOK.Location = new Point(27, 43);
             btnOK.Name = "btnOK";
             btnOK.Size = new Size(75, 23);
-            btnOK.TabIndex = 4;
+            btnOK.TabIndex = 1;
             btnOK.Text = "Aceptar";
             btnOK.UseVisualStyleBackColor = true;
             btnOK.Click += btnOK_Click;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(27, 43);
+            btnCancel.Location = new Point(108, 43);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 23);
-            btnCancel.TabIndex = 3;
+            btnCancel.TabIndex = 2;
             btnCancel.Text = "Cancelar";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
