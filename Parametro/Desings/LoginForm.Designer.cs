@@ -248,7 +248,7 @@
             label6.Name = "label6";
             label6.Size = new Size(40, 13);
             label6.TabIndex = 20;
-            label6.Text = "7.5.4.0";
+            label6.Text = "7.5.5.0";
             label6.Click += label6_Click;
             // 
             // LoginForm
